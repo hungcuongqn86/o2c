@@ -1,31 +1,36 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpModule, Http} from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { IndexComponent } from './index/index.component';
+import {AppComponent} from './app.component';
+import {IndexComponent} from './index/index.component';
 
-import {TranslateModule} from "ng2-translate/ng2-translate";
+import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate/ng2-translate";
 
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    IndexComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    TranslateModule.forRoot(),
-    routing
-  ],
-  providers: [
-    appRoutingProviders
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        IndexComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        TranslateModule.forRoot({
+            provide: TranslateLoader,
+            useFactory: (http: Http) => new TranslateStaticLoader(http, '/public/i18n', '.json'),
+            deps: [Http]
+        }),
+        routing
+    ],
+    providers: [
+        appRoutingProviders
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
