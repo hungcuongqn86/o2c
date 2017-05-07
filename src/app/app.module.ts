@@ -6,6 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 
+import {TranslateModule} from "ng2-translate/ng2-translate";
+
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
 
@@ -18,6 +20,7 @@ import {routing, appRoutingProviders}   from './app-routing.module';
     BrowserModule,
     FormsModule,
     HttpModule,
+    TranslateModule.forRoot(),
     routing
   ],
   providers: [
