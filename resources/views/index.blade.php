@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link href="styles.bundle.css" rel="stylesheet"/></head>
-<body>
+<body class="hold-transition skin-blue sidebar-mini">
 <app-root>
     <div class="box" style="width: 100%; height: 100%;">
         <div class="overlay">
