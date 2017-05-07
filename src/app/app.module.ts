@@ -11,6 +11,10 @@ import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-trans
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
 
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, './public/i18n', '.json');
+}
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -22,7 +26,7 @@ import {routing, appRoutingProviders}   from './app-routing.module';
         HttpModule,
         TranslateModule.forRoot({
             provide: TranslateLoader,
-            useFactory: (http: Http) => new TranslateStaticLoader(http, '/public/i18n', '.json'),
+            useFactory: (createTranslateLoader),
             deps: [Http]
         }),
         routing
