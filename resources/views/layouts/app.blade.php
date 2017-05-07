@@ -89,11 +89,5 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    {{--{{ Html::script('scripts.bundle.js') }}
-    {{ Html::script('styles.bundle.js') }}--}}
-    <script src="{{ asset('dist/inline.c484cac564a499bad4f8.bundle.js') }}"></script>
-    <script src="{{ asset('dist/polyfills.b445e9fc396ea1784811.bundle.js') }}"></script>
-    <script src="{{ asset('dist/vendor.fb5e0f38fc8dca20e0ec.bundle.js') }}"></script>
-    <script src="{{ asset('dist/main.a0c8e2c0776ea46118eb.bundle.js') }}"></script>
 </body>
 </html>
