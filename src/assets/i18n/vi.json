@@ -1,0 +1,17 @@
+{
+  "HEADER": {
+    "TITLE": "Trang chủ",
+    "SIGN_OUT": "Thoát"
+  },
+  "SIDEBAR": {
+    "MAIN_NAVIGATION": "CHỨC NĂNG CHÍNH",
+    "DASHBOARD": "Thông tin tổng hợp",
+    "WORK_PROCESS": "Công việc cần xử lý",
+    "WORK_GENERAL": "Tổng hợp chung",
+    "LIST_SYS": "Danh mục"
+  },
+  "LISTTYPE": {
+    "UNIT": "Đơn vị tính",
+    "DEPARTMENT": "Đơn vị tổ chức"
+  }
+}

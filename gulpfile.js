@@ -7,7 +7,7 @@ gulp.task('index', copyIndex);
 function copyFunction ()
 {
     return gulp
-        .src(['./public/dist/.*', './public/dist/*.*', '!./public/dist/index.html'])
+        .src(['./public/dist/*', './public/dist/**/*', './public/dist/**/**/*', '!./public/dist/index.html'])
         .pipe(gulp.dest('public'));
 }
 
