@@ -2,3 +2,7 @@
 .form-horizontal .control-label{
     text-align: left;
 }
+
+.hidebox{
+    display: none;
+}

@@ -21,4 +21,7 @@ Route::get('/menu', 'PublicController@getMenu');
 Route::get('/listtype', 'PublicController@getListType');
 Route::group(['prefix' => 'list'], function () {
     Route::get('/getAll', 'ListController@getAll');
+    Route::get('/getSingle', 'ListController@getSingle');
+    Route::post('/saveList', 'ListController@saveList');
+    Route::delete('/delete/{id}', 'ListController@delete');
 });

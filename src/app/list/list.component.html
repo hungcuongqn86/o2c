@@ -15,7 +15,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-6 form-horizontal">
+            <div class="{{viewmode? 'col-md-6':'col-md-12'}} form-horizontal">
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <div class="form-group">
@@ -24,16 +24,18 @@
                             <div class="col-sm-9">
                                 <select [(ngModel)]="searchparam.listtype_s" (change)="selectListType()" id="listtype_s"
                                         name="listtype_s" class="form-control" title="Loại danh mục">
-                                    <option *ngFor='let item of listtype' value="{{item.code}}">{{item.name | translate }}
+                                    <option *ngFor='let item of listtype' value="{{item.code}}">{{item.name | translate
+                                        }}
                                     </option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="listtype_s" class="col-sm-8 control-label">Tìm thấy <span class="text-red">{{total}}</span> đối tượng danh mục</label>
+                            <label for="listtype_s" class="col-sm-8 control-label">Tìm thấy <span class="text-red">{{total}}</span>
+                                đối tượng danh mục</label>
 
                             <div class="col-sm-4">
-                                <button type="submit" class="btn btn-info pull-right">Thêm</button>
+                                <button type="button" (click)="addList()" class="btn btn-info pull-right">Thêm</button>
                             </div>
                         </div>
                     </div>
@@ -53,7 +55,7 @@
                                 <td>{{item.name}}</td>
                                 <td>{{item.enabled}}</td>
                                 <td class="text-center">
-                                    <button type="submit" class="btn btn-xs btn-info">Sửa</button>
+                                    <button (click)="editList(item.id)" type="submit" class="btn btn-xs btn-info">Sửa</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -86,35 +88,30 @@
                                 </li>
                             </ul>
                         </pagination-template>
-                        <button type="submit" class="btn btn-info pull-right">Thêm</button>
+                        <button type="button" (click)="addList()" class="btn btn-info pull-right">Thêm</button>
                     </div>
                 </div>
                 <!-- /.box -->
             </div>
             <!-- /.col -->
-            <div class="col-md-6">
+            <div class="{{viewmode? 'col-md-6':'hidebox'}}">
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">{{'COMMON.DETAL_LABLE' | translate }} {{'LIST.LIST_LABLE_TITLE' |
                             translate
                             }}</h3>
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
-                                    class="fa fa-times"></i></button>
-                        </div>
+                        <button type="button" (click)="goBack()" class="btn btn-warning pull-right">Quay lại</button>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" #form="ngForm">
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="listtype" class="col-sm-3 control-label">Loại danh mục</label>
+                                <label for="listtype_code" class="col-sm-3 control-label text-red">Loại danh mục</label>
 
                                 <div class="col-sm-9">
-                                    <select class="form-control" id="listtype" name="listtype" title="Loại danh mục">
+                                    <select [(ngModel)]="list.listtype_code" class="form-control" id="listtype_code"
+                                            name="listtype_code" title="Loại danh mục" required>
                                         <option *ngFor='let item of listtype' value="{{item.code}}">{{item.name |
                                             translate }}
                                         </option>
@@ -122,26 +119,39 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="listcode" class="col-sm-3 control-label">Mã danh mục</label>
+                                <label for="code" class="col-sm-3 control-label text-red">Mã danh mục</label>
 
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="listcode" name="listcode"
-                                           placeholder="Mã danh mục">
+                                <div class="col-sm-9" [ngClass]="(code.touched && !code.valid)? 'has-error': ''">
+                                    <input [(ngModel)]="list.code" type="text" class="form-control" #code="ngModel"
+                                           id="code" name="code"
+                                           placeholder="Mã danh mục" required>
+                                    <div [hidden]="code.valid || code.untouched">
+                                            <span *ngIf="code.errors && code.errors.required" class="help-block">
+                                                Phải nhập mã danh mục!
+                                            </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="listname" class="col-sm-3 control-label">Tên danh mục</label>
+                                <label for="name" class="col-sm-3 control-label text-red">Tên danh mục</label>
 
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="listname" name="listname"
-                                           placeholder="Password">
+                                <div class="col-sm-9" [ngClass]="(name.touched && !name.valid)? 'has-error': ''">
+                                    <input [(ngModel)]="list.name" type="text" class="form-control" #name="ngModel"
+                                           id="name" name="name"
+                                           placeholder="Tên danh mục" required>
+                                    <div [hidden]="name.valid || name.untouched">
+                                            <span *ngIf="name.errors && name.errors.required" class="help-block">
+                                                Phải nhập tên danh mục!
+                                            </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <div class="checkbox">
                                         <label>
-                                            <input id="status" name="status" type="checkbox"> Hoạt động
+                                            <input [(ngModel)]="list.enabled" id="enabled" name="enabled"
+                                                   type="checkbox"> Hoạt động
                                         </label>
                                     </div>
                                 </div>
@@ -149,8 +159,10 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-danger">Xóa</button>
-                            <button type="submit" class="btn btn-info pull-right">Cập nhật</button>
+                            <button *ngIf="actionmode=='EDIT'" (click)="deleteList()" type="button" class="btn btn-danger">Xóa</button>
+                            <button type="button" [disabled]="!form.form.valid" (click)="saveList()"
+                                    class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
+                            </button>
                         </div>
                         <!-- /.box-footer -->
                     </form>

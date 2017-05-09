@@ -35,4 +35,59 @@ class ListsService extends CommonService implements IListService {
         $rResult = $query->paginate($limit)->toArray();
 		return $rResult;
 	}
+
+	public function getSingle($input){
+        $id = $input['id'];
+        $query = Lists::where('id', '=', $id);
+        return $query->first();
+    }
+
+	public function savelist($input){
+	    if(isset($input['id'])&&$input['id']>0){
+            $id = $input['id'];
+            DB::beginTransaction();
+            try {
+                $list = Lists::find($id);
+                $list->update($input);
+                DB::commit();
+                return $list;
+            } catch (QueryException $e) {
+                DB::rollBack();
+                throw $e;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }else{
+            $list = new Lists($input);
+            DB::beginTransaction();
+            try {
+                $list->save();
+                DB::commit();
+                return $list;
+            } catch (QueryException $e) {
+                DB::rollBack();
+                throw $e;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }
+    }
+
+    public function delete($id) {
+        DB::beginTransaction();
+        try {
+            $list = Lists::find($id);
+            $list->delete();
+            DB::commit();
+            return array($id);
+        } catch (QueryException $e) {
+            DB::rollBack();
+            throw $e;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
 }
