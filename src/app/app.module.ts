@@ -5,6 +5,8 @@ import {HttpModule, Http} from '@angular/http';
 
 import {AppComponent} from './app.component';
 import {IndexComponent} from './index/index.component';
+import {AppService} from  './app.service'
+import {HttpClient}           from './http-client';
 
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate/ng2-translate";
 
@@ -32,7 +34,9 @@ export function createTranslateLoader(http: Http) {
         routing
     ],
     providers: [
-        appRoutingProviders
+        appRoutingProviders,
+        HttpClient,
+        AppService
     ],
     bootstrap: [AppComponent]
 })
