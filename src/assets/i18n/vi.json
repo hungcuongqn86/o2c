@@ -5,10 +5,12 @@
   },
   "SIDEBAR": {
     "MAIN_NAVIGATION": "CHỨC NĂNG CHÍNH",
-    "DASHBOARD": "Thông tin tổng hợp",
+    "DASHBOARD": "Tổng hợp",
     "WORK_PROCESS": "Công việc cần xử lý",
     "WORK_GENERAL": "Tổng hợp chung",
-    "LIST_SYS": "Danh mục"
+    "LIST_SYS": "Danh mục",
+    "USER": "Người dùng",
+    "RECORD": "Hợp đồng"
   },
   "LISTTYPE": {
     "UNIT": "Đơn vị tính",

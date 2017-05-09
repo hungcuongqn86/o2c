@@ -10,6 +10,7 @@ import {AppService} from  './app.service'
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+    menu:any=[];
     constructor(private translate: TranslateService, private AppService:AppService) {
         translate.addLangs(["vi"]);
         let browserLang: string = translate.getBrowserLang();
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
     getMenu(){
         this.AppService.getMenu().subscribe(
             data => {
-                console.log(data);
+                this.menu = data;
             },
             error => {
                 console.error("Not menu!");
