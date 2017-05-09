@@ -15,5 +15,12 @@
   "LISTTYPE": {
     "UNIT": "Đơn vị tính",
     "DEPARTMENT": "Đơn vị tổ chức"
+  },
+  "LIST": {
+    "LIST_LABLE_TITLE": "danh mục"
+  },
+  "COMMON": {
+    "LIST_LABLE": "Danh sách",
+    "DETAL_LABLE": "Chi tiết"
   }
 }

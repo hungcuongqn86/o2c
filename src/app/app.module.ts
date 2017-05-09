@@ -12,6 +12,10 @@ import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-trans
 
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
+import { RecordComponent } from './record/record.component';
+import { ListComponent } from './list/list.component';
+import { ListService } from './list/list.service';
+import { UserComponent } from './user/user.component';
 
 export function createTranslateLoader(http: Http) {
     return new TranslateStaticLoader(http, '/assets/i18n', '.json');
@@ -20,7 +24,10 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
     declarations: [
         AppComponent,
-        IndexComponent
+        IndexComponent,
+        RecordComponent,
+        ListComponent,
+        UserComponent
     ],
     imports: [
         BrowserModule,
@@ -36,7 +43,8 @@ export function createTranslateLoader(http: Http) {
     providers: [
         appRoutingProviders,
         HttpClient,
-        AppService
+        AppService,
+        ListService
     ],
     bootstrap: [AppComponent]
 })

@@ -24,4 +24,13 @@ class PublicController extends Controller
             return response()->error(trans('messages.MSG_Error'), 400);
         }
     }
+
+    public function getListType()
+    {
+        try {
+            return response()->success(config('const.ARRAY_LISTTYPE'));
+        } catch (\Exception $e) {
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
 }
