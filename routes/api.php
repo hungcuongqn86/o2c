@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/menu', 'PublicController@getMenu');
 Route::get('/listtype', 'PublicController@getListType');
+Route::group(['prefix' => 'list'], function () {
+    Route::get('/getAll', 'ListController@getAll');
+});
