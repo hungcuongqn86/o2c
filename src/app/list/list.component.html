@@ -21,7 +21,7 @@
                         <h3 class="box-title">{{'COMMON.LIST_LABLE' | translate }} {{'LIST.LIST_LABLE_TITLE' | translate
                             }}</h3>
                         <div class="box-tools">
-                            <select class="form-control" title="Loại danh mục">
+                            <select [(ngModel)]="searchparam.listtype_s" (change)="selectListType()" id="listtype_s" name="listtype_s" class="form-control" title="Loại danh mục">
                                 <option *ngFor='let item of listtype' value="{{item.code}}">{{item.name | translate }}</option>
                             </select>
                         </div>
@@ -31,15 +31,13 @@
                         <table class="table table-bordered">
                             <tbody>
                             <tr>
-                                <th style="width: 10px">#</th>
                                 <th>Mã</th>
                                 <th>Tên</th>
                                 <th style="width: 100px">Trạng thái</th>
                                 <th style="width: 60px">Tác vụ</th>
                             </tr>
 
-                            <tr *ngFor="let item of listdata">
-                                <td>1.</td>
+                            <tr *ngFor="let item of listdata | paginate: { itemsPerPage: searchparam.limit, currentPage: searchparam.page, totalItems: total }">
                                 <td>{{item.code}}</td>
                                 <td>{{item.name}}</td>
                                 <td>{{item.enabled}}</td>
@@ -50,13 +48,29 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-left">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
+                        <pagination-template #api="paginationApi"
+                                             (pageChange)="p = getPage($event)">
+                            <ul class="pagination pagination-sm no-margin pull-left">
+                                <li class="paginate_button previous" [class.disabled]="api.isFirstPage()">
+                                    <a *ngIf="!api.isFirstPage()" (click)="api.previous()" href="javascript:void(0);"> {{
+                                        'PAGINATION.PREVIOUS' | translate }} </a>
+                                </li>
+                                <li class="paginate_button" *ngFor="let page of api.pages"
+                                    [class.active]="api.getCurrent() === page.value">
+                                    <a (click)="api.setCurrent(page.value)"
+                                       *ngIf="api.getCurrent() !== page.value" href="javascript:void(0);">
+                                        <span>{{ page.label }}</span>
+                                    </a>
+                                    <a *ngIf="api.getCurrent() === page.value" href="javascript:void(0);">{{
+                                        page.label }}</a>
+                                </li>
+
+                                <li class="paginate_button next" [class.disabled]="api.isLastPage()">
+                                    <a *ngIf="!api.isLastPage()" (click)="api.next()" href="javascript:void(0);"> {{ 'PAGINATION.NEXT'
+                                        | translate }} </a>
+                                </li>
+                            </ul>
+                        </pagination-template>
                         <button type="submit" class="btn btn-info pull-right">Thêm</button>
                     </div>
                 </div>

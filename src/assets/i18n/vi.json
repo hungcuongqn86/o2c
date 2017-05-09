@@ -22,5 +22,9 @@
   "COMMON": {
     "LIST_LABLE": "Danh sách",
     "DETAL_LABLE": "Chi tiết"
+  },
+  "PAGINATION": {
+    "PREVIOUS": "«",
+    "NEXT": "»"
   }
 }

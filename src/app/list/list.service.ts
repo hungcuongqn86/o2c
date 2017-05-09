@@ -16,8 +16,13 @@ export class ListService {
         return this.http.get(url).map((res: Response) => res.json().data);
     }
 
-    getListData(): any {
+    getListData(searchparam: any): any {
         const url = this.apiUrl + '/' + this.module + `/getAll`;
-        return this.http.get(url).map((res: Response) => res.json().data);
+        let params: URLSearchParams = new URLSearchParams();
+
+        let arr = Object.keys(searchparam).map((key)=> {
+            params.set(key, searchparam[key]);
+        });
+        return this.http.get(url,{search: params}).map((res: Response) => res.json().data);
     }
 }

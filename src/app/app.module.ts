@@ -9,6 +9,7 @@ import {AppService} from  './app.service'
 import {HttpClient}           from './http-client';
 
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate/ng2-translate";
+import {Ng2PaginationModule}  from 'ng2-pagination';
 
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
@@ -38,6 +39,7 @@ export function createTranslateLoader(http: Http) {
             useFactory: (createTranslateLoader),
             deps: [Http]
         }),
+        Ng2PaginationModule,
         routing
     ],
     providers: [

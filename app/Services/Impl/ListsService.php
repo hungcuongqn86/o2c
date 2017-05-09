@@ -25,10 +25,14 @@ class ListsService extends CommonService implements IListService {
 	 *
 	 * @throw
 	 */
-	public function getAll() {
+	public function ListGetAll($filter) {
 		$query = Lists::whereRaw("1 = 1");
-		$rResult = $query->get()->toArray();
-		//dd($rResult);
+        $sListtypeCode = isset($filter['listtype_s']) ? trim($filter['listtype_s']) : '';
+        $limit = isset($filter['limit']) ? $filter['limit'] : config('const.LIMIT_PER_PAGE');
+        if ($sListtypeCode != '') {
+            $query->where('listtype_code', '=', $sListtypeCode);
+        }
+        $rResult = $query->paginate($limit)->toArray();
 		return $rResult;
 	}
 }

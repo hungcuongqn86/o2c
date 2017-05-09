@@ -23,5 +23,12 @@ return [
         ['name' => 'SIDEBAR.RECORD', 'icon' => 'fa fa-th', 'uri' => 'record'],
         ['name' => 'SIDEBAR.LIST_SYS', 'icon' => 'fa fa-table', 'uri' => 'list'],
         ['name' => 'SIDEBAR.USER', 'icon' => 'fa fa-user-circle-o', 'uri' => 'user'],
+    ],
+    'LIMIT_PER_PAGE' => 10,
+    'ITEM_PER_PAGE_DEFINE' => [
+        10,
+        25,
+        50,
+        100,
     ]
 ];

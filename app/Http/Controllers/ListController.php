@@ -17,10 +17,11 @@ class ListController extends Controller
         //$this->middleware('auth');
     }
 
-    public function getAll()
+    public function getAll(Request $req)
     {
+        $input = $req->all();
         try {
-            return response()->success(AppServiceFactory::mUsersService()->getAll());
+            return response()->success(AppServiceFactory::mUsersService()->ListGetAll($input));
         } catch (\PDOException $e) {
             //throw $e;
             return response()->error(trans('messages.MSG_PDO_Error'), 400);
