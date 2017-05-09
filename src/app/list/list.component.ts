@@ -11,19 +11,33 @@ declare let $: any;
     styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-    listtype:any=[];
-    constructor(private ListService:ListService) {
+    listtype: any = [];
+    listdata: any = [];
+
+    constructor(private ListService: ListService) {
     }
 
     ngOnInit() {
         this.getListType();
+        this.getListData();
     }
 
-    getListType()
-    {
+    getListType() {
         this.ListService.getListType().subscribe(
             data => {
                 this.listtype = data;
+            },
+            error => {
+                console.error("Not menu!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    getListData() {
+        this.ListService.getListData().subscribe(
+            data => {
+                this.listdata = data;
             },
             error => {
                 console.error("Not menu!");

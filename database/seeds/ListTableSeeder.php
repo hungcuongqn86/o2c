@@ -20,8 +20,8 @@ class ListTableSeeder extends Seeder
                 $listtype_code = 'UNIT';
             }
             App\Entities\Lists::create([
-                'listtype_code' => $faker->text(10),
-                'code' => $listtype_code,
+                'listtype_code' => $listtype_code,
+                'code' => $faker->text(20),
                 'name' => $faker->text(99),
                 'enabled' => rand(0,1)
             ]);
