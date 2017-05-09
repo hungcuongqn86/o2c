@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare let $: any;
+
 @Component({
   selector: 'app-record',
   templateUrl: './record.component.html',
@@ -12,4 +14,7 @@ export class RecordComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+    $.AdminLTE.layout.fix();
+  }
 }
