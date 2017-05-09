@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
     listtype: any = [];
     listdata: any = [];
     total: number = -1;
-    searchparam: any = JSON.parse('{"listtype_s":"","sSortCol":"code","sSortDir":"asc","page":1,"limit":10}');
+    searchparam: any = JSON.parse('{"listtype_s":"DEPARTMENT","sSortCol":"code","sSortDir":"asc","page":1,"limit":10}');
 
     constructor(private ListService: ListService) {
     }
@@ -55,6 +55,7 @@ export class ListComponent implements OnInit {
     }
 
     private selectListType(){
+        this.searchparam.page = 1;
         this.getListData(this.searchparam);
     }
 
