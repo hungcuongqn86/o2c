@@ -14,6 +14,18 @@ class TblListCreate extends Migration
     public function up()
     {
         //
+        Schema::create('tbl_lists', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+
+            $table->bigIncrements('id')->unsigned();
+            $table->string('listtype_code', 20)->nullable();
+            $table->string('code', 20)->nullable();
+            $table->string('name', 100)->nullable();
+            $table->tinyInteger('enabled')->unsigned()->nullable()->default(0);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,5 +36,6 @@ class TblListCreate extends Migration
     public function down()
     {
         //
+        Schema::dropIfExists('tbl_lists');
     }
 }
