@@ -14,7 +14,89 @@
 
     <!-- Main content -->
     <section class="content">
+        <div class="row">
+            <div class="{{viewmode? 'col-md-6':'col-md-12'}} form-horizontal">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <div class="form-group">
+                            <label for="listtype_s" class="col-sm-3 control-label">Bộ phận</label>
 
+                            <div class="col-sm-9">
+                                <select [(ngModel)]="searchparam.listtype_s" (change)="selectListType()" id="listtype_s"
+                                        name="listtype_s" class="form-control" title="Loại danh mục">
+                                    <option id="" value=""></option>
+                                    <option *ngFor='let item of listdata' value="{{item.code}}">{{item.name | translate
+                                        }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="listtype_s" class="col-sm-8 control-label">Tìm thấy <span class="text-red">{{total}}</span>
+                                người sử dụng</label>
+
+                            <div class="col-sm-4">
+                                <button type="button" (click)="addList()" class="btn btn-info pull-right">Thêm</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th>Mã</th>
+                                <th>Tên</th>
+                                <th>Quyền sử dụng</th>
+                                <th style="width: 100px">Trạng thái</th>
+                                <th style="width: 60px">Tác vụ</th>
+                            </tr>
+
+                            <tr *ngFor="let item of listdata | paginate: { itemsPerPage: searchparam.limit, currentPage: searchparam.page, totalItems: total }">
+                                <td>{{item.code}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.enabled}}</td>
+                                <td>{{item.enabled}}</td>
+                                <td class="text-center">
+                                    <button (click)="editList(item.id)" type="submit" class="btn btn-xs btn-info">Sửa</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <pagination-template #api="paginationApi"
+                                             (pageChange)="p = getPage($event)">
+                            <ul class="pagination pagination-sm no-margin pull-left">
+                                <li class="paginate_button previous" [class.disabled]="api.isFirstPage()">
+                                    <a *ngIf="!api.isFirstPage()" (click)="api.previous()" href="javascript:void(0);">
+                                        {{
+                                        'PAGINATION.PREVIOUS' | translate }} </a>
+                                </li>
+                                <li class="paginate_button" *ngFor="let page of api.pages"
+                                    [class.active]="api.getCurrent() === page.value">
+                                    <a (click)="api.setCurrent(page.value)"
+                                       *ngIf="api.getCurrent() !== page.value" href="javascript:void(0);">
+                                        <span>{{ page.label }}</span>
+                                    </a>
+                                    <a *ngIf="api.getCurrent() === page.value" href="javascript:void(0);">{{
+                                        page.label }}</a>
+                                </li>
+
+                                <li class="paginate_button next" [class.disabled]="api.isLastPage()">
+                                    <a *ngIf="!api.isLastPage()" (click)="api.next()" href="javascript:void(0);"> {{
+                                        'PAGINATION.NEXT'
+                                        | translate }} </a>
+                                </li>
+                            </ul>
+                        </pagination-template>
+                        <button type="button" (click)="addList()" class="btn btn-info pull-right">Thêm</button>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
     </section>
     <!-- /.content -->
 </div>

@@ -6,7 +6,7 @@ import {ListComponent} from './list/list.component';
 import {UserComponent} from './user/user.component';
 
 const appRoutes: Routes = [
-    {path: '', redirectTo: 'index', pathMatch: 'full'},
+    {path: '', component: IndexComponent},
     {path: 'index', component: IndexComponent},
     {path: 'record', component: RecordComponent},
     {path: 'list', component: ListComponent},

@@ -15,6 +15,6 @@ export class RecordComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    $.AdminLTE.layout.fix();
+      $.AdminLTE.layout.fix();
   }
 }
