@@ -182,22 +182,15 @@ export class UserComponent implements OnInit {
         );
     }
 
-    showConfirm() {
-        console.log(111);
+    private showConfirm() {
         let disposable = this.dialogService.addDialog(ConfirmComponent, {
             title:'Confirm title',
             message:'Confirm message'})
             .subscribe((isConfirmed)=>{
-                //We get dialog result
                 if(isConfirmed) {
-                    alert('accepted');
-                }
-                else {
-                    alert('declined');
+                    this.deleteRecord();
                 }
             });
-        //We can close dialog calling disposable.unsubscribe();
-        //If dialog was not closed manually close it by timeout
         setTimeout(()=>{
             disposable.unsubscribe();
         },10000);
