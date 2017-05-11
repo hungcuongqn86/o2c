@@ -19,11 +19,11 @@
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <div class="form-group">
-                            <label for="listtype_s" class="col-sm-3 control-label">Bộ phận</label>
+                            <label for="department_s" class="col-sm-3 control-label">Bộ phận</label>
 
                             <div class="col-sm-9">
-                                <select [(ngModel)]="searchparam.listtype_s" (change)="selectListType()" id="listtype_s"
-                                        name="listtype_s" class="form-control" title="Loại danh mục">
+                                <select [(ngModel)]="searchparam.department_s" (change)="selectDepartment()" id="department_s"
+                                        name="department_s" class="form-control" title="Loại danh mục">
                                     <option id="" value=""></option>
                                     <option *ngFor='let item of listdata' value="{{item.code}}">{{item.name | translate
                                         }}
@@ -32,11 +32,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="listtype_s" class="col-sm-8 control-label">Tìm thấy <span class="text-red">{{total}}</span>
+                            <label class="col-sm-8 control-label">Tìm thấy <span class="text-red">{{total}}</span>
                                 người sử dụng</label>
 
                             <div class="col-sm-4">
-                                <button type="button" (click)="addList()" class="btn btn-info pull-right">Thêm</button>
+                                <button type="button" (click)="addUser()" class="btn btn-info pull-right">Thêm</button>
                             </div>
                         </div>
                     </div>
@@ -45,20 +45,20 @@
                         <table class="table table-bordered">
                             <tbody>
                             <tr>
-                                <th>Mã</th>
                                 <th>Tên</th>
-                                <th>Quyền sử dụng</th>
+                                <th>Email</th>
+                                <th>Quyền</th>
                                 <th style="width: 100px">Trạng thái</th>
                                 <th style="width: 60px">Tác vụ</th>
                             </tr>
 
-                            <tr *ngFor="let item of listdata | paginate: { itemsPerPage: searchparam.limit, currentPage: searchparam.page, totalItems: total }">
-                                <td>{{item.code}}</td>
+                            <tr *ngFor="let item of userdata | paginate: { itemsPerPage: searchparam.limit, currentPage: searchparam.page, totalItems: total }">
                                 <td>{{item.name}}</td>
-                                <td>{{item.enabled}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.role}}</td>
                                 <td>{{item.enabled}}</td>
                                 <td class="text-center">
-                                    <button (click)="editList(item.id)" type="submit" class="btn btn-xs btn-info">Sửa</button>
+                                    <button (click)="editUser(item.id)" type="submit" class="btn btn-xs btn-info">Sửa</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -91,11 +91,121 @@
                                 </li>
                             </ul>
                         </pagination-template>
-                        <button type="button" (click)="addList()" class="btn btn-info pull-right">Thêm</button>
+                        <button type="button" (click)="addUser()" class="btn btn-info pull-right">Thêm</button>
                     </div>
                 </div>
                 <!-- /.box -->
             </div>
+
+            <div class="{{viewmode? 'col-md-6':'hidebox'}}">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{'COMMON.DETAL_LABLE' | translate }} {{'USER.USER_LABLE_TITLE' |
+                            translate
+                            }}</h3>
+                        <button type="button" (click)="goBack()" class="btn btn-warning pull-right">Quay lại</button>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" #form="ngForm">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="department_code" class="col-sm-3 control-label text-red">Bộ phận</label>
+
+                                <div class="col-sm-9">
+                                    <select [(ngModel)]="user.department_code" class="form-control" id="department_code"
+                                            name="department_code" title="Bộ phận" required>
+                                        <option *ngFor='let item of listdata' value="{{item.code}}">{{item.name |
+                                            translate }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name" class="col-sm-3 control-label text-red">Họ và tên</label>
+
+                                <div class="col-sm-9" [ngClass]="(name.touched && !name.valid)? 'has-error': ''">
+                                    <input [(ngModel)]="user.name" type="text" class="form-control" #name="ngModel"
+                                           id="name" name="name"
+                                           placeholder="Tên người dùng" required>
+                                    <div [hidden]="name.valid || name.untouched">
+                                            <span *ngIf="name.errors && name.errors.required" class="help-block">
+                                                Phải nhập tên người dùng!
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="col-sm-3 control-label text-red">Email đăng nhập</label>
+
+                                <div class="col-sm-9" [ngClass]="(email.touched && !email.valid)? 'has-error': ''">
+                                    <input [(ngModel)]="user.email" type="text" class="form-control" #email="ngModel"
+                                           id="email" name="email"
+                                           placeholder="Email đăng nhập" required>
+                                    <div [hidden]="email.valid || email.untouched">
+                                            <span *ngIf="email.errors && email.errors.required" class="help-block">
+                                                Phải nhập email dùng để đăng nhập hệ thống!
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="col-sm-3 control-label text-red">Mật khẩu</label>
+
+                                <div class="col-sm-9" [ngClass]="(password.touched && !password.valid)? 'has-error': ''">
+                                    <input [(ngModel)]="user.password" type="password" class="form-control" #password="ngModel"
+                                           id="password" name="password"
+                                           placeholder="Email đăng nhập" required>
+                                    <div [hidden]="password.valid || password.untouched">
+                                            <span *ngIf="password.errors && password.errors.required" class="help-block">
+                                                Phải nhập mật khẩu dùng để đăng nhập hệ thống!
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="col-sm-3 control-label">Quyền</label>
+
+                                <div class="col-sm-9">
+                                    <div class="multiobj">
+                                        <div *ngFor='let item of roles' class="checkbox col-sm-6">
+                                            <label>
+                                                <input id="{{item.code}}" name="{{item.code}}"
+                                                       type="checkbox"> {{item.name | translate }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input [(ngModel)]="user.enabled" id="enabled" name="enabled"
+                                                   type="checkbox"> Hoạt động
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button *ngIf="actionmode=='EDIT'" (click)="deleteList()" type="button" class="btn btn-danger">Xóa</button>
+                            <button type="button" [disabled]="!form.form.valid" (click)="saveList()"
+                                    class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
+                            </button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
         </div>
     </section>
     <!-- /.content -->

@@ -15,7 +15,10 @@ class Users extends BaseEntity
     protected $fillable = [
         'name',
         'email',
-        'role'
+        'password',
+        'role',
+        'department_code',
+        'enabled'
     ];
 
     protected $hidden = [

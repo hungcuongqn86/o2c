@@ -20,9 +20,11 @@ return [
                 ['name' => 'SIDEBAR.WORK_GENERAL', 'icon' => 'fa fa-circle-o', 'uri' => 'dashboard/general'],
             ]
         ],
+        ['name' => 'SIDEBAR.CUSTOMER', 'icon' => 'fa fa-address-card', 'uri' => 'customer'],
         ['name' => 'SIDEBAR.RECORD', 'icon' => 'fa fa-th', 'uri' => 'record'],
         ['name' => 'SIDEBAR.LIST_SYS', 'icon' => 'fa fa-table', 'uri' => 'list'],
         ['name' => 'SIDEBAR.USER', 'icon' => 'fa fa-user-circle-o', 'uri' => 'user'],
+        ['name' => 'SIDEBAR.REPORT', 'icon' => 'fa fa-list-alt', 'uri' => 'report'],
     ],
 
     'LIMIT_PER_PAGE' => 10,

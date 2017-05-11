@@ -6,3 +6,10 @@
 .hidebox{
     display: none;
 }
+
+.multiobj{
+    border: 1px solid #ddd;
+    display: inline-block;
+    padding-bottom: 10px;
+    width: 100%;
+}

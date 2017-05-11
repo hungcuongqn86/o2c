@@ -4,6 +4,7 @@ import {IndexComponent} from './index/index.component';
 import {RecordComponent} from './record/record.component';
 import {ListComponent} from './list/list.component';
 import {UserComponent} from './user/user.component';
+import {CustomerComponent} from  './customer/customer.component'
 
 const appRoutes: Routes = [
     {path: '', component: IndexComponent},
@@ -11,6 +12,7 @@ const appRoutes: Routes = [
     {path: 'record', component: RecordComponent},
     {path: 'list', component: ListComponent},
     {path: 'user', component: UserComponent},
+    {path: 'customer', component: CustomerComponent},
 ];
 
 export const appRoutingProviders: any[] = [];

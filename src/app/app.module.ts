@@ -18,6 +18,8 @@ import {ListComponent} from './list/list.component';
 import {ListService} from './list/list.service';
 import {UserComponent} from './user/user.component';
 import {userService}    from  './user/user.service';
+import {CustomerComponent} from './customer/customer.component';
+import { ReportComponent } from './report/report.component';
 
 export function createTranslateLoader(http: Http) {
     return new TranslateStaticLoader(http, '/assets/i18n', '.json');
@@ -29,7 +31,9 @@ export function createTranslateLoader(http: Http) {
         IndexComponent,
         RecordComponent,
         ListComponent,
-        UserComponent
+        UserComponent,
+        CustomerComponent,
+        ReportComponent
     ],
     imports: [
         BrowserModule,

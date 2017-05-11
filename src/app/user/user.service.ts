@@ -15,4 +15,14 @@ export class userService {
         let url = this.apiUrl + `/roles`;
         return this.http.get(url).map((res: Response) => res.json().data);
     }
+
+    getUsersData(searchparam: any): any {
+        const url = this.apiUrl + '/' + this.module + `/getAll`;
+        let params: URLSearchParams = new URLSearchParams();
+
+        let arr = Object.keys(searchparam).map((key)=> {
+            params.set(key, searchparam[key]);
+        });
+        return this.http.get(url,{search: params}).map((res: Response) => res.json().data);
+    }
 }

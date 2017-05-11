@@ -23,7 +23,9 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->text(15),
                 'email' => $email,
                 'password'  => '$2y$10$IpvybCDn8hlkQUzZ/4KUHOZ49MMqXaYh.LuP6z8f7rp1ChLI3jlbK',
-                'role' => 'ADMIN'
+                'role' => 'ADMIN',
+                'department_code' => '1',
+                'enabled' => rand(0,1)
             ]);
         }
     }

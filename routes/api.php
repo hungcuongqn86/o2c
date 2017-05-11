@@ -27,3 +27,7 @@ Route::group(['prefix' => 'list'], function () {
     Route::post('/saveList', 'ListController@saveList');
     Route::delete('/delete/{id}', 'ListController@delete');
 });
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/getAll', 'UserController@getAll');
+});

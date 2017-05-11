@@ -8,9 +8,11 @@
     "DASHBOARD": "Tổng hợp",
     "WORK_PROCESS": "Công việc cần xử lý",
     "WORK_GENERAL": "Tổng hợp chung",
+    "CUSTOMER": "Khách hàng",
     "LIST_SYS": "Danh mục",
     "USER": "Người sử dụng",
-    "RECORD": "Hợp đồng"
+    "RECORD": "Hợp đồng",
+    "REPORT": "Báo cáo"
   },
   "LISTTYPE": {
     "UNIT": "Đơn vị tính",
@@ -19,6 +21,9 @@
   "LIST": {
     "LIST_LABLE_TITLE": "danh mục"
   },
+  "USER": {
+    "USER_LABLE_TITLE": "người sử dụng"
+  },
   "COMMON": {
     "LIST_LABLE": "Danh sách",
     "DETAL_LABLE": "Chi tiết"
@@ -26,5 +31,13 @@
   "PAGINATION": {
     "PREVIOUS": "«",
     "NEXT": "»"
+  },
+  "ROLE": {
+    "ADMIN": "Admin",
+    "MANAGER1": "Lãnh đạo 1",
+    "MANAGER2": "Lãnh đạo 2",
+    "MANAGER3": "Lãnh đạo 3",
+    "PERSONNEL1": "Nhân viên 1",
+    "PERSONNEL2": "Nhân viên 2"
   }
 }
