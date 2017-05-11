@@ -23,6 +23,7 @@ export class UserComponent implements OnInit {
     viewmode: boolean = false;
     actionmode: string = 'LIST';
     roles:any = [];
+    roleSelected:Array<any> = [];
 
     res: any;
 
@@ -79,14 +80,18 @@ export class UserComponent implements OnInit {
     }
 
     private addUser() {
-        //this.form.reset();
-        /*this.form['controls']['code'].reset();
-        this.form['controls']['name'].reset();*/
+        this.form['controls']['name'].reset();
+        this.form['controls']['email'].reset();
+        this.form['controls']['password'].reset();
         this.viewmode = true;
         this.actionmode = 'ADD';
-        /*this.list.id = 0;
-        this.list.listtype_code = this.searchparam.listtype_s;
-        this.list.enabled = 1;*/
+        this.user.id = 0;
+        if(this.searchparam.department_s!=''){
+            this.user.department_code = this.searchparam.department_s;
+        }else{
+            this.form['controls']['department_code'].reset();
+        }
+        this.user.enabled = 1;
     }
 
     private goBack() {
@@ -106,15 +111,54 @@ export class UserComponent implements OnInit {
     }
 
     private getUser(id:string){
-        /*this.ListService.getList(id).subscribe(
+        this.userService.getSingle(id).subscribe(
             data => {
-                this.list = data;
+                this.user = data;
+                if(this.user.role!=''){
+                    this.roleSelected = this.user.role.split(',');
+                }
             },
             error => {
-                console.error("Not record!");
+                console.error("Not user!");
                 return Observable.throw(error);
             }
-        );*/
+        );
+    }
+
+    private saveRecord() {
+        this.viewmode = false;
+        this.actionmode = 'LIST';
+        if(this.roleSelected.length > 0){
+            this.user.role = this.roleSelected.join(',');
+        }else{
+            this.user.role = '';
+        }
+        this.userService.saveRecord(this.user).subscribe(
+            res => {
+                this.res = res;
+                if (res.error == false) {
+                    this.getUserData(this.searchparam);
+                } else if (res.error == true) {
+                    console.error(res.message[0]);
+                }
+            },
+            error => {
+                console.error("Save Error!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    checkedItems(value:string) {
+        if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
+            this.roleSelected.push(value);
+        }
+        else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
+            let indexx:number = this.roleSelected.indexOf(value);
+            if(indexx>=0){
+                this.roleSelected.splice(indexx, 1);
+            }
+        }
     }
 
     ngAfterViewInit() {

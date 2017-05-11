@@ -112,13 +112,19 @@
                             <div class="form-group">
                                 <label for="department_code" class="col-sm-3 control-label text-red">Bộ phận</label>
 
-                                <div class="col-sm-9">
-                                    <select [(ngModel)]="user.department_code" class="form-control" id="department_code"
+                                <div class="col-sm-9" [ngClass]="(department_code.touched && !department_code.valid)? 'has-error': ''">
+                                    <select [(ngModel)]="user.department_code" class="form-control" id="department_code" #department_code="ngModel"
                                             name="department_code" title="Bộ phận" required>
+                                        <option value=""></option>
                                         <option *ngFor='let item of listdata' value="{{item.code}}">{{item.name |
                                             translate }}
                                         </option>
                                     </select>
+                                    <div [hidden]="department_code.valid || department_code.untouched">
+                                            <span *ngIf="department_code.errors && department_code.errors.required" class="help-block">
+                                                Phải chọn bộ phận quản lý!
+                                            </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -153,17 +159,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password" class="col-sm-3 control-label text-red">Mật khẩu</label>
+                                <label for="password" class="col-sm-3 control-label">Mật khẩu</label>
 
-                                <div class="col-sm-9" [ngClass]="(password.touched && !password.valid)? 'has-error': ''">
-                                    <input [(ngModel)]="user.password" type="password" class="form-control" #password="ngModel"
+                                <div class="col-sm-9">
+                                    <input [(ngModel)]="user.password" type="password" class="form-control"
                                            id="password" name="password"
-                                           placeholder="Email đăng nhập" required>
-                                    <div [hidden]="password.valid || password.untouched">
-                                            <span *ngIf="password.errors && password.errors.required" class="help-block">
-                                                Phải nhập mật khẩu dùng để đăng nhập hệ thống!
-                                            </span>
-                                    </div>
+                                           placeholder="Mật khẩu đăng nhập">
                                 </div>
                             </div>
 
@@ -175,6 +176,8 @@
                                         <div *ngFor='let item of roles' class="checkbox col-sm-6">
                                             <label>
                                                 <input id="{{item.code}}" name="{{item.code}}"
+                                                       [checked]="user.role!='' && user.role.includes(item.code)"
+                                                       (change)="checkedItems(item.code)"
                                                        type="checkbox"> {{item.name | translate }}
                                             </label>
                                         </div>
@@ -196,7 +199,7 @@
                         <!-- /.box-body -->
                         <div class="box-footer">
                             <button *ngIf="actionmode=='EDIT'" (click)="deleteList()" type="button" class="btn btn-danger">Xóa</button>
-                            <button type="button" [disabled]="!form.form.valid" (click)="saveList()"
+                            <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
                                     class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
                             </button>
                         </div>

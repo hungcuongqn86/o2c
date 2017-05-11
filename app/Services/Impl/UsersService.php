@@ -35,4 +35,52 @@ class UsersService extends CommonService implements IUsersService {
         $rResult = $query->paginate($limit)->toArray();
 		return $rResult;
 	}
+
+    public function getSingle($input){
+        $id = $input['id'];
+        $query = Users::where('id', '=', $id);
+        $user = $query->first();
+        $user['password'] = '';
+        return $user;
+    }
+
+    public function saveRecord($input){
+        //Hash code pass
+        if(isset($input['password'])&&($input['password']!='')){
+            $input['password'] = bcrypt($input['password']);
+        }else{
+            unset($input['password']);
+        }
+
+        if(isset($input['id'])&&$input['id']>0){
+            $id = $input['id'];
+            DB::beginTransaction();
+            try {
+                $User = Users::find($id);
+                $User->update($input);
+                DB::commit();
+                return $User;
+            } catch (QueryException $e) {
+                DB::rollBack();
+                throw $e;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }else{
+            $User = new Users($input);
+            DB::beginTransaction();
+            try {
+                $User->save();
+                DB::commit();
+                return $User;
+            } catch (QueryException $e) {
+                DB::rollBack();
+                throw $e;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }
+    }
 }

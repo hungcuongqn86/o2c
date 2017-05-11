@@ -30,4 +30,6 @@ Route::group(['prefix' => 'list'], function () {
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('/getAll', 'UserController@getAll');
+    Route::get('/getSingle', 'UserController@getSingle');
+    Route::post('/saveRecord', 'UserController@saveRecord');
 });

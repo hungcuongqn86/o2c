@@ -34,7 +34,7 @@ class UserController extends Controller
     public function getSingle(Request $req){
         $input = $req->all();
         try {
-            return response()->success(AppServiceFactory::mListsService()->getSingle($input));
+            return response()->success(AppServiceFactory::mUsersService()->getSingle($input));
         } catch (\PDOException $e) {
             //throw $e;
             return response()->error(trans('messages.MSG_PDO_Error'), 400);
@@ -44,10 +44,10 @@ class UserController extends Controller
         }
     }
 
-    public function savelist(Request $request) {
+    public function saveRecord(Request $request) {
         $input = $request->all();
         try {
-            return response()->success(AppServiceFactory::mListsService()->savelist($input));
+            return response()->success(AppServiceFactory::mUsersService()->saveRecord($input));
         } catch (\PDOException $e) {
             DB::rollBack();
             throw $e;
