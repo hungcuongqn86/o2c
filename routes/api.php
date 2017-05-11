@@ -32,4 +32,5 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/getAll', 'UserController@getAll');
     Route::get('/getSingle', 'UserController@getSingle');
     Route::post('/saveRecord', 'UserController@saveRecord');
+    Route::delete('/delete/{id}', 'UserController@delete');
 });

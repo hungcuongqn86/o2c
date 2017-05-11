@@ -61,7 +61,7 @@ class UserController extends Controller
 
     public function delete($id) {
         try {
-            return response()->success(AppServiceFactory::mListsService()->delete($id));
+            return response()->success(AppServiceFactory::mUsersService()->delete($id));
         } catch (\PDOException $e) {
             throw $e;
             return response()->error(trans('messages.MSG_PDO_Error'), 400);

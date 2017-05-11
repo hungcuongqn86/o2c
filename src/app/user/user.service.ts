@@ -39,4 +39,9 @@ export class userService {
         let body = JSON.stringify(list);
         return this.http.post(url, body, headers).map((res: Response) => res.json());
     }
+
+    deleteRecord(id:string){
+        let url = this.apiUrl + '/' + this.module + `/delete/`+id;
+        return this.http.delete(url).map((res: Response) => res.json());
+    }
 }

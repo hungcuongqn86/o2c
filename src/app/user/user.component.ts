@@ -161,6 +161,25 @@ export class UserComponent implements OnInit {
         }
     }
 
+    private deleteRecord(){
+        this.viewmode = false;
+        this.actionmode = 'LIST';
+        this.userService.deleteRecord(this.user.id).subscribe(
+            res => {
+                this.res = res;
+                if (res.error == false) {
+                    this.getUserData(this.searchparam);
+                } else if (res.error == true) {
+                    console.error(res.message[0]);
+                }
+            },
+            error => {
+                console.error("Add Error!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
     ngAfterViewInit() {
         $.AdminLTE.layout.fix();
     }

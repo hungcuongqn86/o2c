@@ -83,4 +83,20 @@ class UsersService extends CommonService implements IUsersService {
             }
         }
     }
+
+    public function delete($id) {
+        DB::beginTransaction();
+        try {
+            $user = Users::find($id);
+            $user->delete();
+            DB::commit();
+            return array($id);
+        } catch (QueryException $e) {
+            DB::rollBack();
+            throw $e;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
 }
