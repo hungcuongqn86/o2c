@@ -184,8 +184,8 @@ export class UserComponent implements OnInit {
 
     private showConfirm() {
         let disposable = this.dialogService.addDialog(ConfirmComponent, {
-            title:'Confirm title',
-            message:'Confirm message'})
+            title:'Xác nhận xóa dữ liệu',
+            message:'Bạn chắc chắn muốn xóa người dùng này!'})
             .subscribe((isConfirmed)=>{
                 if(isConfirmed) {
                     this.deleteRecord();
