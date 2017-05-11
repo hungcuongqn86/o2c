@@ -13,10 +13,11 @@ import {Ng2PaginationModule}  from 'ng2-pagination';
 
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
-import { RecordComponent } from './record/record.component';
-import { ListComponent } from './list/list.component';
-import { ListService } from './list/list.service';
-import { UserComponent } from './user/user.component';
+import {RecordComponent} from './record/record.component';
+import {ListComponent} from './list/list.component';
+import {ListService} from './list/list.service';
+import {UserComponent} from './user/user.component';
+import {userService}    from  './user/user.service';
 
 export function createTranslateLoader(http: Http) {
     return new TranslateStaticLoader(http, '/assets/i18n', '.json');
@@ -46,7 +47,8 @@ export function createTranslateLoader(http: Http) {
         appRoutingProviders,
         HttpClient,
         AppService,
-        ListService
+        ListService,
+        userService
     ],
     bootstrap: [AppComponent]
 })

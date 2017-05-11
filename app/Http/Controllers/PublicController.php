@@ -25,6 +25,15 @@ class PublicController extends Controller
         }
     }
 
+    public function getRoles()
+    {
+        try {
+            return response()->success(config('const.ROLE'));
+        } catch (\Exception $e) {
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
+
     public function getListType()
     {
         try {

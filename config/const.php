@@ -24,11 +24,15 @@ return [
         ['name' => 'SIDEBAR.LIST_SYS', 'icon' => 'fa fa-table', 'uri' => 'list'],
         ['name' => 'SIDEBAR.USER', 'icon' => 'fa fa-user-circle-o', 'uri' => 'user'],
     ],
+
     'LIMIT_PER_PAGE' => 10,
-    'ITEM_PER_PAGE_DEFINE' => [
-        10,
-        25,
-        50,
-        100,
+
+    'ROLE' => [
+        ['code' => 'ADMIN', 'name' => 'ROLE.ADMIN'],
+        ['code' => 'MANAGER1', 'name' => 'ROLE.MANAGER1'],
+        ['code' => 'MANAGER2', 'name' => 'ROLE.MANAGER2'],
+        ['code' => 'MANAGER3', 'name' => 'ROLE.MANAGER3'],
+        ['code' => 'PERSONNEL1', 'name' => 'ROLE.PERSONNEL1'],
+        ['code' => 'PERSONNEL2', 'name' => 'ROLE.PERSONNEL2'],
     ]
 ];
