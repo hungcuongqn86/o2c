@@ -10,6 +10,8 @@ import {HttpClient}           from './http-client';
 
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate/ng2-translate";
 import {Ng2PaginationModule}  from 'ng2-pagination';
+import {BootstrapModalModule} from 'ng2-bootstrap-modal';
+import {ConfirmComponent} from './confirm.component';
 
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
@@ -19,7 +21,7 @@ import {ListService} from './list/list.service';
 import {UserComponent} from './user/user.component';
 import {userService}    from  './user/user.service';
 import {CustomerComponent} from './customer/customer.component';
-import { ReportComponent } from './report/report.component';
+import {ReportComponent} from './report/report.component';
 
 export function createTranslateLoader(http: Http) {
     return new TranslateStaticLoader(http, '/assets/i18n', '.json');
@@ -33,7 +35,8 @@ export function createTranslateLoader(http: Http) {
         ListComponent,
         UserComponent,
         CustomerComponent,
-        ReportComponent
+        ReportComponent,
+        ConfirmComponent
     ],
     imports: [
         BrowserModule,
@@ -45,6 +48,7 @@ export function createTranslateLoader(http: Http) {
             deps: [Http]
         }),
         Ng2PaginationModule,
+        BootstrapModalModule,
         routing
     ],
     providers: [
@@ -53,6 +57,10 @@ export function createTranslateLoader(http: Http) {
         AppService,
         ListService,
         userService
+    ],
+    //Don't forget to add the component to entryComponents section
+    entryComponents: [
+        ConfirmComponent
     ],
     bootstrap: [AppComponent]
 })

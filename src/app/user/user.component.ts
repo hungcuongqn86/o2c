@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgModel} from '@angular/forms'
+import {ConfirmComponent} from '../confirm.component';
+import {DialogService} from "ng2-bootstrap-modal";
 import {Observable} from 'rxjs/Rx';
 
 import {ListService} from '../list/list.service';
@@ -22,12 +24,12 @@ export class UserComponent implements OnInit {
     user: any = JSON.parse('{"id":0,"department_code":"","name":"","email":"","password":"","role":"","enabled":1}');
     viewmode: boolean = false;
     actionmode: string = 'LIST';
-    roles:any = [];
-    roleSelected:Array<any> = [];
+    roles: any = [];
+    roleSelected: Array<any> = [];
 
     res: any;
 
-    constructor(private ListService: ListService, private userService: userService) {
+    constructor(private ListService: ListService, private userService: userService, private dialogService:DialogService) {
     }
 
     ngOnInit() {
@@ -49,7 +51,7 @@ export class UserComponent implements OnInit {
         );
     }
 
-    getRoles(){
+    getRoles() {
         this.userService.getRoles().subscribe(
             data => {
                 this.roles = data;
@@ -86,9 +88,9 @@ export class UserComponent implements OnInit {
         this.viewmode = true;
         this.actionmode = 'ADD';
         this.user.id = 0;
-        if(this.searchparam.department_s!=''){
+        if (this.searchparam.department_s != '') {
             this.user.department_code = this.searchparam.department_s;
-        }else{
+        } else {
             this.form['controls']['department_code'].reset();
         }
         this.user.enabled = 1;
@@ -110,11 +112,11 @@ export class UserComponent implements OnInit {
         this.getUser(id);
     }
 
-    private getUser(id:string){
+    private getUser(id: string) {
         this.userService.getSingle(id).subscribe(
             data => {
                 this.user = data;
-                if(this.user.role!=''){
+                if (this.user.role != '') {
                     this.roleSelected = this.user.role.split(',');
                 }
             },
@@ -128,9 +130,9 @@ export class UserComponent implements OnInit {
     private saveRecord() {
         this.viewmode = false;
         this.actionmode = 'LIST';
-        if(this.roleSelected.length > 0){
+        if (this.roleSelected.length > 0) {
             this.user.role = this.roleSelected.join(',');
-        }else{
+        } else {
             this.user.role = '';
         }
         this.userService.saveRecord(this.user).subscribe(
@@ -149,19 +151,19 @@ export class UserComponent implements OnInit {
         );
     }
 
-    checkedItems(value:string) {
+    checkedItems(value: string) {
         if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
             this.roleSelected.push(value);
         }
         else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
-            let indexx:number = this.roleSelected.indexOf(value);
-            if(indexx>=0){
+            let indexx: number = this.roleSelected.indexOf(value);
+            if (indexx >= 0) {
                 this.roleSelected.splice(indexx, 1);
             }
         }
     }
 
-    private deleteRecord(){
+    private deleteRecord() {
         this.viewmode = false;
         this.actionmode = 'LIST';
         this.userService.deleteRecord(this.user.id).subscribe(
@@ -178,6 +180,27 @@ export class UserComponent implements OnInit {
                 return Observable.throw(error);
             }
         );
+    }
+
+    showConfirm() {
+        console.log(111);
+        let disposable = this.dialogService.addDialog(ConfirmComponent, {
+            title:'Confirm title',
+            message:'Confirm message'})
+            .subscribe((isConfirmed)=>{
+                //We get dialog result
+                if(isConfirmed) {
+                    alert('accepted');
+                }
+                else {
+                    alert('declined');
+                }
+            });
+        //We can close dialog calling disposable.unsubscribe();
+        //If dialog was not closed manually close it by timeout
+        setTimeout(()=>{
+            disposable.unsubscribe();
+        },10000);
     }
 
     ngAfterViewInit() {

@@ -198,7 +198,7 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <button *ngIf="actionmode=='EDIT'" (click)="deleteRecord()" type="button" class="btn btn-danger">Xóa</button>
+                            <button *ngIf="actionmode=='EDIT'" (click)="showConfirm()" type="button" class="btn btn-danger">Xóa</button>
                             <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
                                     class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
                             </button>
