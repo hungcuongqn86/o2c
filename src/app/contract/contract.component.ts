@@ -62,4 +62,37 @@ export class ContractComponent implements OnInit {
         this.searchparam.page = 1;
         this.getContractsData(this.searchparam);
     }
+
+    checklist: Array<any> = [];
+    checkall:boolean=false;
+    checkboxtoggle(){
+        if(this.checkall){
+            this.checkall = false;
+            this.checklist = [];
+            for (let i = 0;  i < this.listdata.length; i++) {
+                let value:number = this.listdata[i].id;
+                (<HTMLInputElement>document.getElementById(value.toString())).checked = false;
+            }
+        }else{
+            this.checkall = true;
+            this.checklist = [];
+            for (let i = 0;  i < this.listdata.length; i++) {
+                let value:number = this.listdata[i].id;
+                (<HTMLInputElement>document.getElementById(value.toString())).checked = true;
+                this.checklist.push(value);
+            }
+        }
+    }
+
+    checkedItems(value: string) {
+        if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
+            this.checklist.push(value);
+        }
+        else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
+            let indexx: number = this.checklist.indexOf(value);
+            if (indexx >= 0) {
+                this.checklist.splice(indexx, 1);
+            }
+        }
+    }
 }
