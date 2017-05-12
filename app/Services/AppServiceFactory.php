@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Services\Impl\ListsService;
 use App\Services\Impl\UsersService;
+use App\Services\Impl\ContractService;
 
 class AppServiceFactory {
 	protected static $mListsService;
@@ -19,5 +20,13 @@ class AppServiceFactory {
             self::$mUsersService = new UsersService();
         }
         return self::$mUsersService;
+    }
+
+    protected static $mContractService;
+    public static function mContractService() {
+        if (self::$mContractService == null) {
+            self::$mContractService = new ContractService();
+        }
+        return self::$mContractService;
     }
 }
