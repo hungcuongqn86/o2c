@@ -21,6 +21,9 @@ return [
             ]
         ],
         ['name' => 'SIDEBAR.CUSTOMER', 'icon' => 'fa fa-address-card', 'uri' => 'customer'],
+        ['name' => 'SIDEBAR.CONTRACT', 'icon' => 'fa fa-th', 'uri' => 'contract'],
+        ['name' => 'SIDEBAR.FOLLOW', 'icon' => 'fa fa-th', 'uri' => 'follow'],
+        ['name' => 'SIDEBAR.WAREHOUSE', 'icon' => 'fa fa-th', 'uri' => 'warehouse'],
         ['name' => 'SIDEBAR.RECORD', 'icon' => 'fa fa-th', 'uri' => 'record'],
         ['name' => 'SIDEBAR.REPORT', 'icon' => 'fa fa-list-alt', 'uri' => 'report'],
         ['name' => 'SIDEBAR.USER', 'icon' => 'fa fa-user-circle-o', 'uri' => 'user'],

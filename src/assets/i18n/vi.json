@@ -11,8 +11,11 @@
     "CUSTOMER": "Khách hàng",
     "LIST_SYS": "Danh mục",
     "USER": "Người sử dụng",
-    "RECORD": "Hợp đồng",
-    "REPORT": "Báo cáo"
+    "CONTRACT": "Hợp đồng",
+    "REPORT": "Báo cáo",
+    "FOLLOW": "Sổ theo dõi sản xuất",
+    "WAREHOUSE": "Kho thành phẩm",
+    "RECORD": "Hồ sơ lưu"
   },
   "LISTTYPE": {
     "UNIT": "Đơn vị tính",

@@ -22,6 +22,7 @@ import {UserComponent} from './user/user.component';
 import {userService}    from  './user/user.service';
 import {CustomerComponent} from './customer/customer.component';
 import {ReportComponent} from './report/report.component';
+import { ContractComponent } from './contract/contract.component';
 
 export function createTranslateLoader(http: Http) {
     return new TranslateStaticLoader(http, '/assets/i18n', '.json');
@@ -36,7 +37,8 @@ export function createTranslateLoader(http: Http) {
         UserComponent,
         CustomerComponent,
         ReportComponent,
-        ConfirmComponent
+        ConfirmComponent,
+        ContractComponent
     ],
     imports: [
         BrowserModule,

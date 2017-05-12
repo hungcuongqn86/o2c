@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgModel} from '@angular/forms'
+import {NgModel} from '@angular/forms';
+import {ConfirmComponent} from '../confirm.component';
+import {DialogService} from "ng2-bootstrap-modal";
 import {Observable} from 'rxjs/Rx';
 
 import {ListService} from './list.service';
@@ -23,7 +25,7 @@ export class ListComponent implements OnInit {
 
     res: any;
 
-    constructor(private ListService: ListService) {
+    constructor(private ListService: ListService, private dialogService:DialogService) {
     }
 
     ngOnInit() {
@@ -112,6 +114,20 @@ export class ListComponent implements OnInit {
                 return Observable.throw(error);
             }
         );
+    }
+
+    private showConfirm() {
+        let disposable = this.dialogService.addDialog(ConfirmComponent, {
+            title:'Xác nhận xóa dữ liệu',
+            message:'Bạn chắc chắn muốn xóa đối tượng này!'})
+            .subscribe((isConfirmed)=>{
+                if(isConfirmed) {
+                    this.deleteList();
+                }
+            });
+        setTimeout(()=>{
+            disposable.unsubscribe();
+        },10000);
     }
 
     private saveList() {
