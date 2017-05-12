@@ -15,8 +15,9 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
+            <form (ngSubmit)="search()">
             <div class="col-md-3">
-                <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Tạo hợp đồng</a>
+                <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Tạo hợp đồng mới</a>
 
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -37,7 +38,7 @@
                             <li><a href="#"><i class="fa fa-filter"></i> Hợp đồng đã bàn giao<span
                                     class="label label-warning pull-right">65</span></a>
                             </li>
-                            <li><a href="#"><i class="fa fa-folder-o"></i> Lưu hợp đồng</a></li>
+                            <li><a href="#"><i class="fa fa-folder-o"></i> Hợp đồng lưu</a></li>
                         </ul>
                     </div>
                     <!-- /.box-body -->
@@ -72,7 +73,7 @@
 
                         <div class="box-tools pull-right">
                             <div class="has-feedback">
-                                <input type="text" class="form-control input-sm" placeholder="Tìm hợp đồng">
+                                <input [(ngModel)]="searchparam.searchInput" id="searchInput" name="searchInput" type="text" class="form-control input-sm" placeholder="Tìm hợp đồng">
                                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
@@ -85,12 +86,10 @@
                             <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i
                                     class="fa fa-square-o"></i>
                             </button>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i>
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i>
-                                </button>
-                            </div>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i>
+                            </button>
                             <!-- /.btn-group -->
                             <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                             <div class="pull-right">
@@ -112,10 +111,9 @@
                                     <td><input type="checkbox"></td>
                                     <td class="mailbox-name">{{item.code}}</td>
                                     <td class="mailbox-date">{{item.signdate}}</td>
-                                    <td class="mailbox-name">{{item.customer_id}}</td>
+                                    <td class="mailbox-name">{{item.customers.name}}</td>
                                     <td class="mailbox-subject">{{item.content}}</td>
                                     <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                    <td class="mailbox-date">{{item.durationdate}}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -130,14 +128,10 @@
                             <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i
                                     class="fa fa-square-o"></i>
                             </button>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i>
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>
-                                </button>
-                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i>
-                                </button>
-                            </div>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i>
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i>
+                            </button>
                             <!-- /.btn-group -->
                             <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                             <div class="pull-right">
@@ -157,6 +151,7 @@
                 <!-- /. box -->
             </div>
             <!-- /.col -->
+            </form>
         </div>
         <!-- /.row -->
     </section>

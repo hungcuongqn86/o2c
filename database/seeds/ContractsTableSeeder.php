@@ -18,7 +18,7 @@ class ContractsTableSeeder extends Seeder
             App\Entities\Contracts::create([
                 'code' => $faker->text(20),
                 'signdate' => $faker->dateTimeBetween($startDate = '-15 day', $endDate = '-1 days')->format('Y-m-d H:i').':00',
-                'customer_id' => rand(0,10),
+                'customer_id' => rand(1,10),
                 'content' => $faker->text(100),
                 'value' => '1000000000',
                 'durationdate' => $faker->dateTimeBetween($startDate = '+15 day', $endDate = '+100 days')->format('Y-m-d H:i').':00'

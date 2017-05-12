@@ -11,7 +11,7 @@ import {Observable} from 'rxjs/Rx';
 export class ContractComponent implements OnInit {
     listdata:any = [];
     total:number = 0;
-    searchparam: any = JSON.parse('{"department_s":"","sSortCol":"code","sSortDir":"asc","page":1,"limit":15}');
+    searchparam: any = JSON.parse('{"searchInput":"","sSortCol":"code","sSortDir":"asc","page":1,"limit":15}');
     
     constructor(private contractService: contractService) {
 
@@ -32,5 +32,10 @@ export class ContractComponent implements OnInit {
                 return Observable.throw(error);
             }
         );
+    }
+
+    search(){
+        this.searchparam.page = 1;
+        this.getContractsData(this.searchparam);
     }
 }

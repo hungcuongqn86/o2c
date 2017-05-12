@@ -26,13 +26,29 @@ class ContractService extends CommonService implements IContractsService {
 	 * @throw
 	 */
 	public function ContractsGetAll($filter) {
-		$query = Contracts::whereRaw("1 = 1");
-        //$sDepartmentCode = isset($filter['department_s']) ? trim($filter['department_s']) : '';
+		$query = Contracts::with('Customers')->whereRaw("1 = 1");
+        $sSearchInput = isset($filter['searchInput']) ? trim($filter['searchInput']) : '';
+        $sSortCol = isset($filter['sSortCol']) ? $filter['sSortCol'] : 'code';
+        $sSortDir = isset($filter['sSortDir']) ? $filter['sSortDir'] : 'desc';
+
         $limit = isset($filter['limit']) ? $filter['limit'] : config('const.LIMIT_PER_PAGE');
-        /*if ($sDepartmentCode != '') {
-            $query->where('department_code', '=', $sDepartmentCode);
-        }*/
+        if ($sSearchInput != '') {
+            $query->where('content', 'LIKE', '%' . $sSearchInput . '%');
+            $query->orWhere('code', 'LIKE', '%' . $sSearchInput . '%');
+            $query->orWhere('value', 'LIKE', '%' . $sSearchInput . '%');
+        }
+
+        if ($sSortCol) {
+            $query->orderBy($sSortCol, $sSortDir);
+        }
+
         $rResult = $query->paginate($limit)->toArray();
+        $arrData = $rResult['data'];
+        foreach ($arrData as $key => $value) {
+            $signdate = date('d/m/Y', strtotime($value['signdate']));
+            $arrData[$key]['signdate'] = $signdate;
+        }
+        $rResult['data'] = $arrData;
 		return $rResult;
 	}
 

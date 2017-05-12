@@ -23,4 +23,8 @@ class Contracts extends BaseEntity
 
     protected $hidden = [
     ];
+
+    public function Customers() {
+        return $this->belongsTo(Customers::class, 'customer_id', 'id');
+    }
 }
