@@ -23,10 +23,10 @@ class ListController extends Controller
         try {
             return response()->success(AppServiceFactory::mListsService()->ListGetAll($input));
         } catch (\PDOException $e) {
-            //throw $e;
+            throw $e;
             return response()->error(trans('messages.MSG_PDO_Error'), 400);
         } catch (\Exception $e) {
-            //throw $e;
+            throw $e;
             return response()->error(trans('messages.MSG_Error'), 400);
         }
     }

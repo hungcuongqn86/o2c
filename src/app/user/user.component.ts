@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
     listdata: any = [];
     userdata: any = [];
     total: number = -1;
-    searchparam: any = JSON.parse('{"department_s":"","sSortCol":"code","sSortDir":"asc","page":1,"limit":10}');
+    searchparam: any = JSON.parse('{"department_s":"","sSortCol":"code","sSortDir":"asc","page":1,"limit":15}');
     user: any = JSON.parse('{"id":0,"department_code":"","name":"","email":"","password":"","role":"","enabled":1}');
     viewmode: boolean = false;
     actionmode: string = 'LIST';

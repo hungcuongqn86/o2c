@@ -22,15 +22,15 @@ return [
         ],
         ['name' => 'SIDEBAR.CUSTOMER', 'icon' => 'fa fa-address-card', 'uri' => 'customer'],
         ['name' => 'SIDEBAR.CONTRACT', 'icon' => 'fa fa-th', 'uri' => 'contract'],
-        ['name' => 'SIDEBAR.FOLLOW', 'icon' => 'fa fa-th', 'uri' => 'follow'],
-        ['name' => 'SIDEBAR.WAREHOUSE', 'icon' => 'fa fa-th', 'uri' => 'warehouse'],
-        ['name' => 'SIDEBAR.RECORD', 'icon' => 'fa fa-th', 'uri' => 'record'],
+        ['name' => 'SIDEBAR.FOLLOW', 'icon' => 'fa fa fa-sliders', 'uri' => 'follow'],
+        ['name' => 'SIDEBAR.WAREHOUSE', 'icon' => 'fa fa fa-th-large', 'uri' => 'warehouse'],
+        ['name' => 'SIDEBAR.RECORD', 'icon' => 'fa fa fa-archive', 'uri' => 'record'],
         ['name' => 'SIDEBAR.REPORT', 'icon' => 'fa fa-list-alt', 'uri' => 'report'],
         ['name' => 'SIDEBAR.USER', 'icon' => 'fa fa-user-circle-o', 'uri' => 'user'],
         ['name' => 'SIDEBAR.LIST_SYS', 'icon' => 'fa fa-table', 'uri' => 'list'],
     ],
 
-    'LIMIT_PER_PAGE' => 10,
+    'LIMIT_PER_PAGE' => 15,
 
     'ROLE' => [
         ['code' => 'ADMIN', 'name' => 'ROLE.ADMIN'],
