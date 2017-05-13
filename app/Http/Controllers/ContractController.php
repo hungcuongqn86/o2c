@@ -59,9 +59,9 @@ class ContractController extends Controller
         }
     }
 
-    public function delete($id) {
+    public function delete($ids) {
         try {
-            return response()->success(AppServiceFactory::mContractService()->delete($id));
+            return response()->success(AppServiceFactory::mContractService()->delete($ids));
         } catch (\PDOException $e) {
             throw $e;
             return response()->error(trans('messages.MSG_PDO_Error'), 400);

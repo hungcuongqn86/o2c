@@ -39,5 +39,5 @@ Route::group(['prefix' => 'contract'], function () {
     Route::get('/getAll', 'ContractController@getAll');
     Route::get('/getSingle', 'ContractController@getSingle');
     Route::post('/saveRecord', 'ContractController@saveRecord');
-    Route::delete('/delete/{id}', 'ContractController@delete');
+    Route::delete('/delete/{ids}', 'ContractController@delete');
 });

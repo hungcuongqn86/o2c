@@ -100,13 +100,13 @@ class ContractService extends CommonService implements IContractsService {
         }
     }
 
-    public function delete($id) {
+    public function delete($ids) {
         DB::beginTransaction();
+        $arrId = explode(',',$ids);
         try {
-            $user = Users::find($id);
-            $user->delete();
+            Contracts::destroy($arrId);
             DB::commit();
-            return array($id);
+            return array($ids);
         } catch (QueryException $e) {
             DB::rollBack();
             throw $e;

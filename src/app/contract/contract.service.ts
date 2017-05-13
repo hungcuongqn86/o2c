@@ -40,8 +40,8 @@ export class contractService {
         return this.http.post(url, body, headers).map((res: Response) => res.json());
     }
 
-    deleteRecord(id:string){
-        let url = this.apiUrl + '/' + this.module + `/delete/`+id;
+    deleteRecord(idlist:string){
+        let url = this.apiUrl + '/' + this.module + `/delete/`+idlist;
         return this.http.delete(url).map((res: Response) => res.json());
     }
 }
