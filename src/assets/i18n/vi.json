@@ -33,7 +33,8 @@
   "COMMON": {
     "LIST_LABLE": "Danh sách",
     "DETAL_LABLE": "Chi tiết",
-    "ADD_LABLE": "Thêm mới"
+    "ADD_LABLE": "Thêm mới",
+    "EDIT_LABLE": "Sửa thông tin"
   },
   "PAGINATION": {
     "PREVIOUS": "«",

@@ -20,6 +20,8 @@ export class ContractAddComponent implements OnInit {
     customer: any = [];
     res: any;
 
+    titleAction:string='COMMON.ADD_LABLE';
+
     constructor(private translate: TranslateService, private contractService: contractService, private router: Router, private route: ActivatedRoute) {
         this.route.params.forEach((params: Params) => {
             if(params['id']&&params['id'].length){
@@ -27,6 +29,7 @@ export class ContractAddComponent implements OnInit {
             }
         });
         if(this.recordId){
+            this.titleAction = 'COMMON.EDIT_LABLE';
             this.getDetail(this.recordId.toString());
         }
     }

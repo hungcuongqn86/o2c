@@ -128,6 +128,12 @@ export class ContractComponent implements OnInit {
         }, 10000);
     }
 
+    private editRecord(){
+        if (this.checklist.length == 1) {
+            this.router.navigate(['/contract/edit',this.checklist[0]]);
+        }
+    }
+
     private deleteRecord() {
         let idlist:string='';
         if (this.checklist.length > 0) {
