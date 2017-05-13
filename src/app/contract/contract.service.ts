@@ -45,13 +45,8 @@ export class contractService {
         return this.http.delete(url).map((res: Response) => res.json());
     }
 
-    getCustomersData(searchparam: any): any {
+    getCustomersData(): any {
         let url = this.apiUrl + `/customer/getAll`;
-        let params: URLSearchParams = new URLSearchParams();
-
-        let arr = Object.keys(searchparam).map((key)=> {
-            params.set(key, searchparam[key]);
-        });
-        return this.http.get(url,{search: params}).map((res: Response) => res.json().data);
+        return this.http.get(url).map((res: Response) => res.json().data);
     }
 }

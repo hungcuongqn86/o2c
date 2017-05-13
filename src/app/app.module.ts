@@ -11,6 +11,7 @@ import {HttpClient}           from './http-client';
 import {TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate/ng2-translate";
 import {Ng2PaginationModule}  from 'ng2-pagination';
 import {BootstrapModalModule} from 'ng2-bootstrap-modal';
+import {DatePickerModule} from 'ng2-datepicker-bootstrap';
 import {ConfirmComponent} from './confirm.component';
 import {AlertComponent} from './alert.component';
 
@@ -42,6 +43,7 @@ export function createTranslateLoader(http: Http) {
     ],
     imports: [
         BrowserModule,
+        DatePickerModule,
         FormsModule,
         HttpModule,
         TranslateModule.forRoot({

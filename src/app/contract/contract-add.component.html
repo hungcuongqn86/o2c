@@ -67,21 +67,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-6">
-                                    <label for="signdate" class="col-sm-3 control-label text-red">Ngày ký</label>
 
-                                    <div class="col-sm-9"
-                                         [ngClass]="(signdate.touched && !signdate.valid)? 'has-error': ''">
-                                        <input [(ngModel)]="detail.signdate" type="text" class="form-control"
-                                               #signdate="ngModel"
-                                               id="signdate" name="signdate"
-                                               placeholder="Ngày ký" required>
-                                        <div [hidden]="signdate.valid || signdate.untouched">
-                                            <span *ngIf="signdate.errors && signdate.errors.required"
-                                                  class="help-block">
-                                                Phải nhập ngày ký!
-                                            </span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="durationdate" class="col-sm-3 control-label text-red">Thời hạn</label>

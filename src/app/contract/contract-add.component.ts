@@ -24,11 +24,11 @@ export class ContractAddComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.getCustomersData();
     }
 
-    getCustomersData(filter: any) {
-        this.contractService.getCustomersData(filter).subscribe(
+    getCustomersData() {
+        this.contractService.getCustomersData().subscribe(
             data => {
                 this.customer = data;
             },
