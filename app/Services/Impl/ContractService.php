@@ -54,10 +54,15 @@ class ContractService extends CommonService implements IContractsService {
 
     public function getSingle($input){
         $id = $input['id'];
-        $query = Users::where('id', '=', $id);
-        $user = $query->first();
-        $user['password'] = '';
-        return $user;
+        $query = Contracts::where('id', '=', $id);
+        $return = $query->first()->toArray();
+        if(isset($return['signdate'])&&($return['signdate']!='')){
+            $return['signdate'] = _YYyymmddToddmmyyyy($return['signdate']);
+        }
+        if(isset($return['durationdate'])&&($return['durationdate']!='')){
+            $return['durationdate'] = _YYyymmddToddmmyyyy($return['durationdate']);
+        }
+        return $return;
     }
 
     public function saveRecord($input){
