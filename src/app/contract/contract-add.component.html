@@ -16,132 +16,432 @@
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">{{'COMMON.DETAL_LABLE' | translate }} {{'CONTRACT.CONTRACT_LABLE_TITLE' |
-                            translate
-                            }}</h3>
-                        <button type="button" (click)="goBack()" class="btn btn-warning pull-right">Quay lại</button>
-                    </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
-                    <form class="form-horizontal" #form="ngForm">
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="form-group col-sm-6">
-                                    <label for="customer_id" class="col-sm-3 control-label text-red">Khách hàng</label>
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#detail" data-toggle="tab">Thông tin chung</a></li>
+                        <li><a href="#product" data-toggle="tab">Thông tin sản phẩm</a></li>
+                        <li><a href="#activity" data-toggle="tab">Lệnh sản xuất</a></li>
+                        <li><a href="#timeline" data-toggle="tab">Tiến độ thực hiện</a></li>
+                        <button type="button" (click)="goBack()" class="btn btn-back-on-tab btn-warning pull-right">Quay lại</button>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="detail">
+                            <!--<div class="box box-info">-->
+                                <!--<div class="box-header with-border">
+                                    <h3 class="box-title">{{'COMMON.DETAL_LABLE' | translate }} {{'CONTRACT.CONTRACT_LABLE_TITLE' |
+                                        translate
+                                        }}</h3>
+                                    <button type="button" (click)="goBack()" class="btn btn-warning pull-right">Quay lại</button>
+                                </div>-->
+                                <!-- /.box-header -->
+                                <!-- form start -->
+                                <form class="form-horizontal" #form="ngForm">
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="customer_id" class="col-sm-3 control-label text-red">Khách hàng</label>
 
-                                    <div class="col-sm-9"
-                                         [ngClass]="(customer_id.touched && !customer_id.valid)? 'has-error': ''">
-                                        <select [(ngModel)]="detail.customer_id" class="form-control" id="customer_id"
-                                                #customer_id="ngModel"
-                                                name="customer_id" title="Bộ phận" required>
-                                            <option value=""></option>
-                                            <option *ngFor='let item of customer' value="{{item.id}}">{{item.name}}
-                                            </option>
-                                        </select>
-                                        <div [hidden]="customer_id.valid || customer_id.untouched">
+                                                <div class="col-sm-9"
+                                                     [ngClass]="(customer_id.touched && !customer_id.valid)? 'has-error': ''">
+                                                    <select [(ngModel)]="detail.customer_id" class="form-control" id="customer_id"
+                                                            #customer_id="ngModel"
+                                                            name="customer_id" title="Bộ phận" required>
+                                                        <option value=""></option>
+                                                        <option *ngFor='let item of customer' value="{{item.id}}">{{item.name}}
+                                                        </option>
+                                                    </select>
+                                                    <div [hidden]="customer_id.valid || customer_id.untouched">
                                             <span *ngIf="customer_id.errors && customer_id.errors.required"
                                                   class="help-block">
                                                 Phải chọn khách hàng!
                                             </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="code" class="col-sm-3 control-label text-red">Mã hợp đồng</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="code" class="col-sm-3 control-label text-red">Mã hợp đồng</label>
 
-                                    <div class="col-sm-9" [ngClass]="(code.touched && !code.valid)? 'has-error': ''">
-                                        <input [(ngModel)]="detail.code" type="text" class="form-control"
-                                               #code="ngModel"
-                                               id="code" name="code"
-                                               placeholder="Mã hợp đồng" required>
-                                        <div [hidden]="code.valid || code.untouched">
+                                                <div class="col-sm-9" [ngClass]="(code.touched && !code.valid)? 'has-error': ''">
+                                                    <input [(ngModel)]="detail.code" type="text" class="form-control"
+                                                           #code="ngModel"
+                                                           id="code" name="code"
+                                                           placeholder="Mã hợp đồng" required>
+                                                    <div [hidden]="code.valid || code.untouched">
                                             <span *ngIf="code.errors && code.errors.required" class="help-block">
                                                 Phải nhập mã hợp đồng!
                                             </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-6">
-                                    <label for="signdate" class="col-sm-3 control-label text-red">Ngày ký</label>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="signdate" class="col-sm-3 control-label text-red">Ngày ký</label>
 
-                                    <div class="col-sm-9"
-                                         [ngClass]="(signdate.touched && !signdate.valid)? 'has-error': ''">
-                                        <input [(ngModel)]="detail.signdate" type="text" class="form-control"
-                                               #signdate="ngModel"
-                                               id="signdate" name="signdate"
-                                               placeholder="Ngày ký" required>
-                                        <div [hidden]="signdate.valid || signdate.untouched">
+                                                <div class="col-sm-9"
+                                                     [ngClass]="(signdate.touched && !signdate.valid)? 'has-error': ''">
+                                                    <input [(ngModel)]="detail.signdate" type="text" class="form-control"
+                                                           #signdate="ngModel"
+                                                           id="signdate" name="signdate"
+                                                           placeholder="Ngày ký" required>
+                                                    <div [hidden]="signdate.valid || signdate.untouched">
                                             <span *ngIf="signdate.errors && signdate.errors.required"
                                                   class="help-block">
                                                 Phải nhập ngày ký!
                                             </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="durationdate" class="col-sm-3 control-label text-red">Thời hạn</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="durationdate" class="col-sm-3 control-label text-red">Thời hạn</label>
 
-                                    <div class="col-sm-9"
-                                         [ngClass]="(durationdate.touched && !durationdate.valid)? 'has-error': ''">
-                                        <input [(ngModel)]="detail.durationdate" type="text" class="form-control"
-                                               #durationdate="ngModel"
-                                               id="durationdate" name="durationdate"
-                                               placeholder="Thời hạn" required>
-                                        <div [hidden]="durationdate.valid || durationdate.untouched">
+                                                <div class="col-sm-9"
+                                                     [ngClass]="(durationdate.touched && !durationdate.valid)? 'has-error': ''">
+                                                    <input [(ngModel)]="detail.durationdate" type="text" class="form-control"
+                                                           #durationdate="ngModel"
+                                                           id="durationdate" name="durationdate"
+                                                           placeholder="Thời hạn" required>
+                                                    <div [hidden]="durationdate.valid || durationdate.untouched">
                                             <span *ngIf="durationdate.errors && durationdate.errors.required"
                                                   class="help-block">
                                                 Phải nhập thời hạn!
                                             </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-sm-6">
-                                    <label for="value" class="col-sm-3 control-label">Giá trị</label>
+                                        <div class="row">
+                                            <div class="form-group col-sm-6">
+                                                <label for="value" class="col-sm-3 control-label">Giá trị</label>
 
-                                    <div class="col-sm-9">
-                                        <input [(ngModel)]="detail.value" type="text" class="form-control"
-                                               id="value" name="value"
-                                               placeholder="Giá trị hợp đồng" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="content" class="col-sm-3 control-label text-red">Nội dung</label>
+                                                <div class="col-sm-9">
+                                                    <input [(ngModel)]="detail.value" type="text" class="form-control"
+                                                           id="value" name="value"
+                                                           placeholder="Giá trị hợp đồng" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label for="content" class="col-sm-3 control-label text-red">Nội dung</label>
 
-                                    <div class="col-sm-9"
-                                         [ngClass]="(content.touched && !content.valid)? 'has-error': ''">
+                                                <div class="col-sm-9"
+                                                     [ngClass]="(content.touched && !content.valid)? 'has-error': ''">
                                         <textarea [(ngModel)]="detail.content" name="content" id="content" class="form-control"
                                                   rows="3"  placeholder="Nội dung hợp đồng"
                                                   maxlength="400" required
                                                   #content="ngModel"></textarea>
-                                        <div [hidden]="content.valid || content.untouched">
+                                                    <div [hidden]="content.valid || content.untouched">
                                             <span *ngIf="content.errors && content.errors.required"
                                                   class="help-block">
                                                 Phải nhập nội dung hợp đồng!
                                             </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <button *ngIf="recordId" (click)="showConfirm()" type="button"
+                                                class="btn btn-danger">Xóa
+                                        </button>
+                                        <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
+                                                class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
+                                        </button>
+                                    </div>
+                                    <!-- /.box-footer -->
+                                </form>
+                            <!--</div>-->
+                        </div>
+
+
+                        <div class="tab-pane" id="product">
+                            <form class="form-horizontal" #form="ngForm">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="product_name" class="col-sm-3 control-label text-red">Tên sản phẩm</label>
+
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(product_name.touched && !product_name.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.product_name" type="text" class="form-control"
+                                                       #product_name="ngModel"
+                                                       id="product_name" name="product_name"
+                                                       placeholder="Tên sản phẩm" required>
+                                                <div [hidden]="product_name.valid || product_name.untouched">
+                                            <span *ngIf="product_name.errors && product_name.errors.required"
+                                                  class="help-block">
+                                                Phải nhập tên sản phẩm!
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="number" class="col-sm-3 control-label text-red">Số lượng</label>
+
+                                            <div class="col-sm-9" [ngClass]="(number.touched && !number.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.number" type="text" class="form-control"
+                                                       #number="ngModel"
+                                                       id="number" name="number"
+                                                       placeholder="Số lượng thành phẩm" required>
+                                                <div [hidden]="number.valid || number.untouched">
+                                            <span *ngIf="number.errors && number.errors.required" class="help-block">
+                                                Phải nhập số lượng thành phẩm!
+                                            </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button *ngIf="recordId" (click)="showConfirm()" type="button"
+                                            class="btn btn-danger">Xóa
+                                    </button>
+                                    <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
+                                            class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
+                                    </button>
+                                </div>
+                                <!-- /.box-footer -->
+                            </form>
+                        </div>
+                        <!-- /.tab-pane -->
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="tab-pane" id="activity">
+                            <!-- Post -->
+                            <div class="post">
+                                <div class="user-block">
+                                    <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg"
+                                         alt="user image">
+                                    <span class="username">
+                          <a href="#">Jonathan Burke Jr.</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                                    <span class="description">Shared publicly - 7:30 PM today</span>
+                                </div>
+                                <!-- /.user-block -->
+                                <p>
+                                    Lorem ipsum represents a long-held tradition for designers,
+                                    typographers and the like. Some people hate it and argue for
+                                    its demise, but others ignore the hate as they create awesome
+                                    tools to help create filler text for everyone from bacon lovers
+                                    to Charlie Sheen fans.
+                                </p>
+                                <ul class="list-inline">
+                                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i>
+                                        Share</a></li>
+                                    <li><a href="#" class="link-black text-sm"><i
+                                            class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                                    </li>
+                                    <li class="pull-right">
+                                        <a href="#" class="link-black text-sm"><i
+                                                class="fa fa-comments-o margin-r-5"></i> Comments
+                                            (5)</a></li>
+                                </ul>
+
+                                <input class="form-control input-sm" type="text" placeholder="Type a comment">
                             </div>
+                            <!-- /.post -->
+
+                            <!-- Post -->
+                            <div class="post clearfix">
+                                <div class="user-block">
+                                    <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg"
+                                         alt="User Image">
+                                    <span class="username">
+                          <a href="#">Sarah Ross</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                                    <span class="description">Sent you a message - 3 days ago</span>
+                                </div>
+                                <!-- /.user-block -->
+                                <p>
+                                    Lorem ipsum represents a long-held tradition for designers,
+                                    typographers and the like. Some people hate it and argue for
+                                    its demise, but others ignore the hate as they create awesome
+                                    tools to help create filler text for everyone from bacon lovers
+                                    to Charlie Sheen fans.
+                                </p>
+
+                                <form class="form-horizontal">
+                                    <div class="form-group margin-bottom-none">
+                                        <div class="col-sm-9">
+                                            <input class="form-control input-sm" placeholder="Response">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">
+                                                Send
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.post -->
+
+                            <!-- Post -->
+                            <div class="post">
+                                <div class="user-block">
+                                    <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg"
+                                         alt="User Image">
+                                    <span class="username">
+                          <a href="#">Adam Jones</a>
+                          <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+                        </span>
+                                    <span class="description">Posted 5 photos - 5 days ago</span>
+                                </div>
+                                <!-- /.user-block -->
+                                <div class="row margin-bottom">
+                                    <div class="col-sm-6">
+                                        <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <img class="img-responsive" src="../../dist/img/photo2.png" alt="Photo">
+                                                <br>
+                                                <img class="img-responsive" src="../../dist/img/photo3.jpg" alt="Photo">
+                                            </div>
+                                            <!-- /.col -->
+                                            <div class="col-sm-6">
+                                                <img class="img-responsive" src="../../dist/img/photo4.jpg" alt="Photo">
+                                                <br>
+                                                <img class="img-responsive" src="../../dist/img/photo1.png" alt="Photo">
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                                <!-- /.row -->
+
+                                <ul class="list-inline">
+                                    <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i>
+                                        Share</a></li>
+                                    <li><a href="#" class="link-black text-sm"><i
+                                            class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>
+                                    </li>
+                                    <li class="pull-right">
+                                        <a href="#" class="link-black text-sm"><i
+                                                class="fa fa-comments-o margin-r-5"></i> Comments
+                                            (5)</a></li>
+                                </ul>
+
+                                <input class="form-control input-sm" type="text" placeholder="Type a comment">
+                            </div>
+                            <!-- /.post -->
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <button *ngIf="actionmode=='EDIT'" (click)="showConfirm()" type="button"
-                                    class="btn btn-danger">Xóa
-                            </button>
-                            <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
-                                    class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
-                            </button>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="timeline">
+                            <!-- The timeline -->
+                            <ul class="timeline timeline-inverse">
+                                <!-- timeline time label -->
+                                <li class="time-label">
+                        <span class="bg-red">
+                          10 Feb. 2014
+                        </span>
+                                </li>
+                                <!-- /.timeline-label -->
+                                <!-- timeline item -->
+                                <li>
+                                    <i class="fa fa-envelope bg-blue"></i>
+
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+
+                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+
+                                        <div class="timeline-body">
+                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                                            quora plaxo ideeli hulu weebly balihoo...
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-xs">Read more</a>
+                                            <a class="btn btn-danger btn-xs">Delete</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                                <!-- timeline item -->
+                                <li>
+                                    <i class="fa fa-user bg-aqua"></i>
+
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+
+                                        <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your
+                                            friend request
+                                        </h3>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                                <!-- timeline item -->
+                                <li>
+                                    <i class="fa fa-comments bg-yellow"></i>
+
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+
+                                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post
+                                        </h3>
+
+                                        <div class="timeline-body">
+                                            Take me to your leader!
+                                            Switzerland is small and neutral!
+                                            We are more like Germany, ambitious and misunderstood!
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                                <!-- timeline time label -->
+                                <li class="time-label">
+                        <span class="bg-green">
+                          3 Jan. 2014
+                        </span>
+                                </li>
+                                <!-- /.timeline-label -->
+                                <!-- timeline item -->
+                                <li>
+                                    <i class="fa fa-camera bg-purple"></i>
+
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+
+                                        <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+
+                                        <div class="timeline-body">
+                                            <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                            <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                            <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                            <img src="http://placehold.it/150x100" alt="..." class="margin">
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- END timeline item -->
+                                <li>
+                                    <i class="fa fa-clock-o bg-gray"></i>
+                                </li>
+                            </ul>
                         </div>
-                        <!-- /.box-footer -->
-                    </form>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
                 </div>
-                <!-- /.box -->
             </div>
         </div>
     </section>
