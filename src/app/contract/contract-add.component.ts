@@ -39,6 +39,23 @@ export class ContractAddComponent implements OnInit {
         );
     }
 
+    private saveRecord() {
+        this.contractService.saveRecord(this.detail).subscribe(
+            res => {
+                this.res = res;
+                if (res.error == false) {
+                    console.log(111);
+                } else if (res.error == true) {
+                    console.error(res.message[0]);
+                }
+            },
+            error => {
+                console.error("Save Error!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
     private goBack() {
         this.router.navigate(['/contract']);
     }

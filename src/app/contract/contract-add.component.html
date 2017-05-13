@@ -37,9 +37,8 @@
                                                 #customer_id="ngModel"
                                                 name="customer_id" title="Bộ phận" required>
                                             <option value=""></option>
-                                            <!--<option *ngFor='let item of listdata' value="{{item.code}}">{{item.name |
-                                                translate }}
-                                            </option>-->
+                                            <option *ngFor='let item of customer' value="{{item.id}}">{{item.name}}
+                                            </option>
                                         </select>
                                         <div [hidden]="customer_id.valid || customer_id.untouched">
                                             <span *ngIf="customer_id.errors && customer_id.errors.required"

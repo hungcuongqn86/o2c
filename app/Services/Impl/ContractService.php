@@ -61,21 +61,26 @@ class ContractService extends CommonService implements IContractsService {
     }
 
     public function saveRecord($input){
-        //Hash code pass
-        if(isset($input['password'])&&($input['password']!='')){
-            $input['password'] = bcrypt($input['password']);
+        if(isset($input['signdate'])&&($input['signdate']!='')){
+            $input['signdate'] = _ddmmyyyyToYYyymmdd($input['signdate']);
         }else{
-            unset($input['password']);
+            unset($input['signdate']);
+        }
+
+        if(isset($input['durationdate'])&&($input['durationdate']!='')){
+            $input['durationdate'] = _ddmmyyyyToYYyymmdd($input['durationdate']);
+        }else{
+            unset($input['durationdate']);
         }
 
         if(isset($input['id'])&&$input['id']>0){
             $id = $input['id'];
             DB::beginTransaction();
             try {
-                $User = Users::find($id);
-                $User->update($input);
+                $record = Contracts::find($id);
+                $record->update($input);
                 DB::commit();
-                return $User;
+                return $record;
             } catch (QueryException $e) {
                 DB::rollBack();
                 throw $e;
@@ -84,12 +89,12 @@ class ContractService extends CommonService implements IContractsService {
                 throw $e;
             }
         }else{
-            $User = new Users($input);
+            $record = new Contracts($input);
             DB::beginTransaction();
             try {
-                $User->save();
+                $record->save();
                 DB::commit();
-                return $User;
+                return $record;
             } catch (QueryException $e) {
                 DB::rollBack();
                 throw $e;
