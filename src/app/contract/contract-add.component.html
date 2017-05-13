@@ -191,6 +191,33 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="success_date" class="col-sm-3 control-label  text-red">Ngày hạn</label>
+
+                                            <div class="col-sm-9" [ngClass]="(success_date.touched && !success_date.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.success_date" type="text" class="form-control"
+                                                       #success_date="ngModel"
+                                                       id="success_date" name="success_date"
+                                                       placeholder="Ngày hoàn thành" required>
+                                                <div [hidden]="success_date.valid || success_date.untouched">
+                                            <span *ngIf="success_date.errors && success_date.errors.required" class="help-block">
+                                                Phải nhập ngày hoàn thành sản phẩm!
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="content" class="col-sm-3 control-label">Ghi chú</label>
+
+                                            <div class="col-sm-9">
+                                                <textarea [(ngModel)]="detail.note" name="note" id="note" class="form-control"
+                                                  rows="3"  placeholder="Ghi chú"
+                                                  maxlength="400" required
+                                                  #content="ngModel"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer">
