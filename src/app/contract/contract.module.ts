@@ -5,13 +5,15 @@ import {HttpModule}          from '@angular/http';
 import {HttpClient}         from '../http-client';
 
 import {ContractComponent}    from './contract.component';
+import {ContractAddComponent}    from './contract-add.component';
 import {ContractRoutingModule}    from './contract-routing.module';
 import {contractService}    from  './contract.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, ContractRoutingModule, HttpModule],
     declarations: [
-        ContractComponent
+        ContractComponent,
+        ContractAddComponent
     ],
     providers: [HttpClient,contractService]
 })

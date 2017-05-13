@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {contractService}    from  './contract.service';
 import {ConfirmComponent} from '../confirm.component';
 import {AlertComponent} from '../alert.component';
@@ -24,7 +25,7 @@ export class ContractComponent implements OnInit {
     checkall: boolean = false;
     res: any;
 
-    constructor(private contractService: contractService, private dialogService: DialogService) {
+    constructor(private contractService: contractService, private dialogService: DialogService,private router: Router) {
 
     }
 
@@ -146,5 +147,9 @@ export class ContractComponent implements OnInit {
                 return Observable.throw(error);
             }
         );
+    }
+
+    private addContract(){
+        this.router.navigate(['/contract/add']);
     }
 }
