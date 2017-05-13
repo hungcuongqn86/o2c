@@ -17,7 +17,7 @@ export class contractService {
     }
 
     getContractsData(searchparam: any): any {
-        const url = this.apiUrl + '/' + this.module + `/getAll`;
+        let url = this.apiUrl + '/' + this.module + `/getAll`;
         let params: URLSearchParams = new URLSearchParams();
 
         let arr = Object.keys(searchparam).map((key)=> {
@@ -43,5 +43,15 @@ export class contractService {
     deleteRecord(idlist:string){
         let url = this.apiUrl + '/' + this.module + `/delete/`+idlist;
         return this.http.delete(url).map((res: Response) => res.json());
+    }
+
+    getCustomersData(searchparam: any): any {
+        let url = this.apiUrl + `/customer/getAll`;
+        let params: URLSearchParams = new URLSearchParams();
+
+        let arr = Object.keys(searchparam).map((key)=> {
+            params.set(key, searchparam[key]);
+        });
+        return this.http.get(url,{search: params}).map((res: Response) => res.json().data);
     }
 }

@@ -27,9 +27,13 @@
   "USER": {
     "USER_LABLE_TITLE": "người sử dụng"
   },
+  "CONTRACT": {
+    "CONTRACT_LABLE_TITLE": "hợp đồng"
+  },
   "COMMON": {
     "LIST_LABLE": "Danh sách",
-    "DETAL_LABLE": "Chi tiết"
+    "DETAL_LABLE": "Chi tiết",
+    "ADD_LABLE": "Thêm mới"
   },
   "PAGINATION": {
     "PREVIOUS": "«",
