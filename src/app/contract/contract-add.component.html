@@ -357,437 +357,289 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="number_page" class="col-sm-3 control-label text-red">Số
+                                            <label for="number_page" class="col-sm-3 control-label">Số
                                                 trang</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(number_page.touched && !number_page.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.number_page" type="text" class="form-control"
-                                                       #number_page="ngModel"
                                                        id="number_page" name="number_page"
-                                                       placeholder="Số trang" required>
-                                                <div [hidden]="number_page.valid || number_page.untouched">
-                                            <span *ngIf="number_page.errors && number_page.errors.required"
-                                                  class="help-block">
-                                                Phải nhập số trang!
-                                            </span>
-                                                </div>
+                                                       placeholder="Số trang">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="size_prod" class="col-sm-3 control-label text-red">Khổ
+                                            <label for="size_prod" class="col-sm-3 control-label">Khổ
                                                 TP</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(size_prod.touched && !size_prod.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.number" type="text" class="form-control"
-                                                       #size_prod="ngModel"
                                                        id="size_prod" name="size_prod"
-                                                       placeholder="Khổ thành phẩm" required>
-                                                <div [hidden]="size_prod.valid || size_prod.untouched">
-                                            <span *ngIf="size_prod.errors && size_prod.errors.required"
-                                                  class="help-block">
-                                                Phải nhập khổ thành phẩm!
-                                            </span>
-                                                </div>
+                                                       placeholder="Khổ thành phẩm">
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="mold" class="col-sm-3 control-label text-red">Bát/ Khuôn
+                                            <label for="mold" class="col-sm-3 control-label">Bát/ Khuôn
                                                 in</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(mold.touched && !mold.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.mold" class="form-control" id="mold"
-                                                        #mold="ngModel"
-                                                        name="mold" title="Bát/ Khuôn in" required>
+                                                        name="mold" title="Bát/ Khuôn in">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="mold.valid || mold.untouched">
-                                            <span *ngIf="mold.errors && mold.errors.required"
-                                                  class="help-block">
-                                                Phải chọn bát/ khuôn in!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="number_hand" class="col-sm-3 control-label text-red">Số
+                                            <label for="number_hand" class="col-sm-3 control-label">Số
                                                 tay</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(number_hand.touched && !number_hand.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.number_hand" class="form-control"
                                                         id="number_hand"
-                                                        #number_hand="ngModel"
-                                                        name="number_hand" title="Số tay" required>
+                                                        name="number_hand" title="Số tay">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="number_hand.valid || number_hand.untouched">
-                                            <span *ngIf="number_hand.errors && number_hand.errors.required"
-                                                  class="help-block">
-                                                Phải chọn số tay!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="print_type" class="col-sm-3 control-label text-red">Cách
+                                            <label for="print_type" class="col-sm-3 control-label">Cách
                                                 in</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(print_type.touched && !print_type.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.print_type" class="form-control"
                                                         id="print_type"
-                                                        #print_type="ngModel"
-                                                        name="print_type" title="Cách in" required>
+                                                        name="print_type" title="Cách in">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="print_type.valid || print_type.untouched">
-                                            <span *ngIf="print_type.errors && print_type.errors.required"
-                                                  class="help-block">
-                                                Phải chọn cách in!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="print_size" class="col-sm-3 control-label text-red">Khổ
+                                            <label for="print_size" class="col-sm-3 control-label">Khổ
                                                 in</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(print_size.touched && !print_size.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.print_size" class="form-control"
                                                         id="print_size"
-                                                        #print_size="ngModel"
-                                                        name="print_size" title="Khổ in" required>
+                                                        name="print_size" title="Khổ in">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="print_size.valid || print_size.untouched">
-                                            <span *ngIf="print_size.errors && print_size.errors.required"
-                                                  class="help-block">
-                                                Phải chọn khổ in!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="print_color" class="col-sm-3 control-label text-red">Màu
+                                            <label for="print_color" class="col-sm-3 control-label">Màu
                                                 in</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(print_color.touched && !print_color.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.print_color" class="form-control"
                                                         id="print_color"
-                                                        #print_color="ngModel"
-                                                        name="print_color" title="Màu in" required>
+                                                        name="print_color" title="Màu in">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="print_color.valid || print_color.untouched">
-                                            <span *ngIf="print_color.errors && print_color.errors.required"
-                                                  class="help-block">
-                                                Phải chọn màu in!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="zinc_type" class="col-sm-3 control-label text-red">Loại
+                                            <label for="zinc_type" class="col-sm-3 control-label">Loại
                                                 kẽm</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(zinc_type.touched && !zinc_type.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.zinc_type" class="form-control"
                                                         id="zinc_type"
-                                                        #zinc_type="ngModel"
-                                                        name="zinc_type" title="Loại kẽm" required>
+                                                        name="zinc_type" title="Loại kẽm">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="zinc_type.valid || zinc_type.untouched">
-                                            <span *ngIf="zinc_type.errors && zinc_type.errors.required"
-                                                  class="help-block">
-                                                Loại kẽm!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="machine" class="col-sm-3 control-label text-red">Máy</label>
+                                            <label for="machine" class="col-sm-3 control-label">Máy</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(machine.touched && !machine.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.machine" class="form-control"
                                                         id="machine"
                                                         #machine="ngModel"
-                                                        name="machine" title="Máy in" required>
+                                                        name="machine" title="Máy in">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="machine.valid || machine.untouched">
-                                            <span *ngIf="machine.errors && machine.errors.required"
-                                                  class="help-block">
-                                                Phải chọn máy in!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label for="zinc_count"
-                                                   class="col-sm-3 control-label  text-red">SL(kẽm-đế)</label>
+                                                   class="col-sm-3 control-label">SL(kẽm-đế)</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(zinc_count.touched && !zinc_count.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.zinc_count" type="text"
                                                        class="form-control"
                                                        #zinc_count="ngModel"
                                                        id="zinc_count" name="zinc_count"
-                                                       placeholder="Số lượng kẽm, đế" required>
-                                                <div [hidden]="zinc_count.valid || zinc_count.untouched">
-                                            <span *ngIf="zinc_count.errors && zinc_count.errors.required"
-                                                  class="help-block">
-                                                Phải nhập số lượng kẽm, đế!
-                                            </span>
-                                                </div>
+                                                       placeholder="Số lượng kẽm, đế">
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="paper_type" class="col-sm-3 control-label">Loại giấy</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(paper_type.touched && !paper_type.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.paper_type" class="form-control"
                                                         id="paper_type"
                                                         #paper_type="ngModel"
-                                                        name="paper_type" title="Loại giấy" required>
+                                                        name="paper_type" title="Loại giấy">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="paper_type.valid || paper_type.untouched">
-                                            <span *ngIf="paper_type.errors && paper_type.errors.required"
-                                                  class="help-block">
-                                                Phải chọn loại giấy!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="size_store" class="col-sm-3 control-label text-red">Khổ
+                                            <label for="size_store" class="col-sm-3 control-label">Khổ
                                                 kho</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(size_store.touched && !size_store.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.size_store" class="form-control"
                                                         id="size_store"
                                                         #size_store="ngModel"
-                                                        name="size_store" title="Khổ kho" required>
+                                                        name="size_store" title="Khổ kho">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="size_store.valid || size_store.untouched">
-                                            <span *ngIf="size_store.errors && size_store.errors.required"
-                                                  class="help-block">
-                                                Phải chọn khổ kho!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="cut_type" class="col-sm-3 control-label text-red">Cắt
+                                            <label for="cut_type" class="col-sm-3 control-label">Cắt
                                                 cách</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(cut_type.touched && !cut_type.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.cut_type" class="form-control"
                                                         id="cut_type"
                                                         #cut_type="ngModel"
-                                                        name="cut_type" title="Cách cắt" required>
+                                                        name="cut_type" title="Cách cắt">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="cut_type.valid || cut_type.untouched">
-                                            <span *ngIf="cut_type.errors && cut_type.errors.required"
-                                                  class="help-block">
-                                                Phải chọn cách cắt!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="paper_count" class="col-sm-3 control-label  text-red">SL giấy
+                                            <label for="paper_count" class="col-sm-3 control-label">SL giấy
                                                 (tờ)</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(paper_count.touched && !paper_count.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.paper_count" type="text"
                                                        class="form-control"
                                                        #paper_count="ngModel"
                                                        id="paper_count" name="paper_count"
-                                                       placeholder="Số lượng giấy theo tờ" required>
-                                                <div [hidden]="paper_count.valid || paper_count.untouched">
-                                            <span *ngIf="paper_count.errors && paper_count.errors.required"
-                                                  class="help-block">
-                                                Phải nhập số lượng giấy theo tờ!
-                                            </span>
-                                                </div>
+                                                       placeholder="Số lượng giấy theo tờ">
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="paper_kg" class="col-sm-3 control-label">SL giấy (kg)</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(paper_kg.touched && !paper_kg.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.paper_kg" type="text"
                                                        class="form-control"
                                                        #paper_kg="ngModel"
                                                        id="paper_kg" name="paper_kg"
-                                                       placeholder="Số lượng giấy theo kg" required>
-                                                <div [hidden]="paper_kg.valid || paper_kg.untouched">
-                                            <span *ngIf="paper_kg.errors && paper_kg.errors.required"
-                                                  class="help-block">
-                                                Phải nhập số lượng giấy theo kg!
-                                            </span>
-                                                </div>
+                                                       placeholder="Số lượng giấy theo kg">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="amortization" class="col-sm-3 control-label  text-red">Bù hao</label>
+                                            <label for="amortization" class="col-sm-3 control-label">Bù hao</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(amortization.touched && !amortization.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.amortization" type="text"
                                                        class="form-control"
                                                        #amortization="ngModel"
                                                        id="amortization" name="amortization"
-                                                       placeholder="Bù hao" required>
-                                                <div [hidden]="amortization.valid || amortization.untouched">
-                                            <span *ngIf="amortization.errors && amortization.errors.required"
-                                                  class="help-block">
-                                                Phải nhập bù hao!
-                                            </span>
-                                                </div>
+                                                       placeholder="Bù hao">
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="un_amortization" class="col-sm-3 control-label">Tờ chưa bù hao</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(un_amortization.touched && !un_amortization.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.un_amortization" type="text"
                                                        class="form-control"
                                                        #un_amortization="ngModel"
                                                        id="un_amortization" name="un_amortization"
-                                                       placeholder="Tờ chưa bù hao" required>
-                                                <div [hidden]="un_amortization.valid || un_amortization.untouched">
-                                            <span *ngIf="un_amortization.errors && un_amortization.errors.required"
-                                                  class="help-block">
-                                                Phải nhập tờ chưa bù hao!
-                                            </span>
-                                                </div>
+                                                       placeholder="Tờ chưa bù hao">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="total_sheet" class="col-sm-3 control-label  text-red">Tổng tờ
+                                            <label for="total_sheet" class="col-sm-3 control-label">Tổng tờ
                                                 in</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(total_sheet.touched && !total_sheet.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.total_sheet" type="text"
                                                        class="form-control"
                                                        #total_sheet="ngModel"
                                                        id="total_sheet" name="total_sheet"
-                                                       placeholder="Tổng tờ in" required>
-                                                <div [hidden]="total_sheet.valid || total_sheet.untouched">
-                                            <span *ngIf="total_sheet.errors && total_sheet.errors.required"
-                                                  class="help-block">
-                                                Phải nhập tổng tờ in!
-                                            </span>
-                                                </div>
+                                                       placeholder="Tổng tờ in">
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="print_count" class="col-sm-3 control-label">Lượt in</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(print_count.touched && !print_count.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.print_count" type="text"
                                                        class="form-control"
                                                        #print_count="ngModel"
                                                        id="print_count" name="print_count"
-                                                       placeholder="Lượt in" required>
-                                                <div [hidden]="print_count.valid || print_count.untouched">
-                                            <span *ngIf="print_count.errors && print_count.errors.required"
-                                                  class="help-block">
-                                                Phải nhập lượt in!
-                                            </span>
-                                                </div>
+                                                       placeholder="Lượt in">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="number_char" class="col-sm-3 control-label text-red">Số vạch</label>
+                                            <label for="number_char" class="col-sm-3 control-label">Số vạch</label>
 
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(number_char.touched && !number_char.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <select [(ngModel)]="detail.number_char" class="form-control"
                                                         id="number_char"
                                                         #number_char="ngModel"
-                                                        name="number_char" title="Số vạch" required>
+                                                        name="number_char" title="Số vạch">
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
-                                                <div [hidden]="number_char.valid || number_char.untouched">
-                                            <span *ngIf="number_char.errors && number_char.errors.required"
-                                                  class="help-block">
-                                                Phải chọn số vạch!
-                                            </span>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
