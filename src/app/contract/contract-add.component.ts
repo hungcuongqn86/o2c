@@ -129,6 +129,20 @@ export class ContractAddComponent implements OnInit {
 
     unitList:any=[];
     standardList:any=[];
+    outsourcingList:any=[];
+    packingList:any=[];
+    moldList:any=[];
+    number_handList:any=[];
+    print_typeList:any=[];
+    print_sizeList:any=[];
+    print_colorList:any=[];
+    zinc_typeList:any=[];
+    machineList:any=[];
+    paper_typeList:any=[];
+    size_storeList:any=[];
+    cut_typeList:any=[];
+    number_charList:any=[];
+
     private genListData(data:any){
         Object.keys(data).map((key)=> {
             if(data[key].listtype_code == 'unit'){
@@ -136,6 +150,45 @@ export class ContractAddComponent implements OnInit {
             }
             if(data[key].listtype_code == 'standard'){
                 this.standardList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'outsourcing'){
+                this.outsourcingList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'packing'){
+                this.packingList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'mold'){
+                this.moldList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'number_hand'){
+                this.number_handList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'print_type'){
+                this.print_typeList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'print_size'){
+                this.print_sizeList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'print_color'){
+                this.print_colorList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'zinc_type'){
+                this.zinc_typeList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'machine'){
+                this.machineList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'paper_type'){
+                this.paper_typeList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'size_store'){
+                this.size_storeList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'cut_type'){
+                this.cut_typeList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'number_char'){
+                this.number_charList.push(data[key]);
             }
         });
     }
