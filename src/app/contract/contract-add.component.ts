@@ -39,6 +39,7 @@ export class ContractAddComponent implements OnInit {
 
     ngOnInit() {
         this.getCustomersData();
+        this.getListData();
     }
 
     private getDetail(id: string) {
@@ -112,6 +113,31 @@ export class ContractAddComponent implements OnInit {
                 return Observable.throw(error);
             }
         );
+    }
+
+    private getListData() {
+        this.contractService.getListData().subscribe(
+            data => {
+                this.genListData(data.data);
+            },
+            error => {
+                console.error("Not menu!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    unitList:any=[];
+    standardList:any=[];
+    private genListData(data:any){
+        Object.keys(data).map((key)=> {
+            if(data[key].listtype_code == 'unit'){
+                this.unitList.push(data[key]);
+            }
+            if(data[key].listtype_code == 'standard'){
+                this.standardList.push(data[key]);
+            }
+        });
     }
 
     private goBack() {

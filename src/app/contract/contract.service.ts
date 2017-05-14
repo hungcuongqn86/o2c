@@ -49,4 +49,12 @@ export class contractService {
         let url = this.apiUrl + `/customer/getAll`;
         return this.http.get(url).map((res: Response) => res.json().data);
     }
+
+    getListData(): any {
+        const url = this.apiUrl + `/list/getAll`;
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('page', '1');
+        params.set('limit', '10000');
+        return this.http.get(url,{search: params}).map((res: Response) => res.json().data);
+    }
 }
