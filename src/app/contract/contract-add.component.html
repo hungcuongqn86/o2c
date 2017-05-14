@@ -22,134 +22,147 @@
                         <li><a href="#product" data-toggle="tab">Thông tin sản phẩm</a></li>
                         <li><a href="#activity" data-toggle="tab">Lệnh sản xuất</a></li>
                         <li><a href="#timeline" data-toggle="tab">Tiến độ thực hiện</a></li>
-                        <button type="button" (click)="goBack()" class="btn btn-back-on-tab btn-warning pull-right">Quay lại</button>
+                        <button type="button" (click)="goBack()" class="btn btn-back-on-tab btn-warning pull-right">Quay
+                            lại
+                        </button>
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="detail">
                             <!--<div class="box box-info">-->
-                                <!--<div class="box-header with-border">
-                                    <h3 class="box-title">{{'COMMON.DETAL_LABLE' | translate }} {{'CONTRACT.CONTRACT_LABLE_TITLE' |
-                                        translate
-                                        }}</h3>
-                                    <button type="button" (click)="goBack()" class="btn btn-warning pull-right">Quay lại</button>
-                                </div>-->
-                                <!-- /.box-header -->
-                                <!-- form start -->
-                                <form class="form-horizontal" #form="ngForm">
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="customer_id" class="col-sm-3 control-label text-red">Khách hàng</label>
+                            <!--<div class="box-header with-border">
+                                <h3 class="box-title">{{'COMMON.DETAL_LABLE' | translate }} {{'CONTRACT.CONTRACT_LABLE_TITLE' |
+                                    translate
+                                    }}</h3>
+                                <button type="button" (click)="goBack()" class="btn btn-warning pull-right">Quay lại</button>
+                            </div>-->
+                            <!-- /.box-header -->
+                            <!-- form start -->
+                            <form class="form-horizontal" #form="ngForm">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="customer_id" class="col-sm-3 control-label text-red">Khách
+                                                hàng</label>
 
-                                                <div class="col-sm-9"
-                                                     [ngClass]="(customer_id.touched && !customer_id.valid)? 'has-error': ''">
-                                                    <select [(ngModel)]="detail.customer_id" class="form-control" id="customer_id"
-                                                            #customer_id="ngModel"
-                                                            name="customer_id" title="Bộ phận" required>
-                                                        <option value=""></option>
-                                                        <option *ngFor='let item of customer' value="{{item.id}}">{{item.name}}
-                                                        </option>
-                                                    </select>
-                                                    <div [hidden]="customer_id.valid || customer_id.untouched">
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(customer_id.touched && !customer_id.valid)? 'has-error': ''">
+                                                <select [(ngModel)]="detail.customer_id" class="form-control"
+                                                        id="customer_id"
+                                                        #customer_id="ngModel"
+                                                        name="customer_id" title="Bộ phận" required>
+                                                    <option value=""></option>
+                                                    <option *ngFor='let item of customer' value="{{item.id}}">
+                                                        {{item.name}}
+                                                    </option>
+                                                </select>
+                                                <div [hidden]="customer_id.valid || customer_id.untouched">
                                             <span *ngIf="customer_id.errors && customer_id.errors.required"
                                                   class="help-block">
                                                 Phải chọn khách hàng!
                                             </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="code" class="col-sm-3 control-label text-red">Mã hợp đồng</label>
-
-                                                <div class="col-sm-9" [ngClass]="(code.touched && !code.valid)? 'has-error': ''">
-                                                    <input [(ngModel)]="detail.code" type="text" class="form-control"
-                                                           #code="ngModel"
-                                                           id="code" name="code"
-                                                           placeholder="Mã hợp đồng" required>
-                                                    <div [hidden]="code.valid || code.untouched">
-                                            <span *ngIf="code.errors && code.errors.required" class="help-block">
-                                                Phải nhập mã hợp đồng!
-                                            </span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="signdate" class="col-sm-3 control-label text-red">Ngày ký</label>
+                                        <div class="form-group col-sm-6">
+                                            <label for="code" class="col-sm-3 control-label text-red">Mã hợp
+                                                đồng</label>
 
-                                                <div class="col-sm-9"
-                                                     [ngClass]="(signdate.touched && !signdate.valid)? 'has-error': ''">
-                                                    <input [(ngModel)]="detail.signdate" type="text" class="form-control"
-                                                           #signdate="ngModel"
-                                                           id="signdate" name="signdate"
-                                                           placeholder="Ngày ký" required>
-                                                    <div [hidden]="signdate.valid || signdate.untouched">
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(code.touched && !code.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.code" type="text" class="form-control"
+                                                       #code="ngModel"
+                                                       id="code" name="code"
+                                                       placeholder="Mã hợp đồng" required>
+                                                <div [hidden]="code.valid || code.untouched">
+                                            <span *ngIf="code.errors && code.errors.required" class="help-block">
+                                                Phải nhập mã hợp đồng!
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="signdate" class="col-sm-3 control-label text-red">Ngày
+                                                ký</label>
+
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(signdate.touched && !signdate.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.signdate" type="text" class="form-control"
+                                                       #signdate="ngModel"
+                                                       id="signdate" name="signdate"
+                                                       placeholder="Ngày ký" required>
+                                                <div [hidden]="signdate.valid || signdate.untouched">
                                             <span *ngIf="signdate.errors && signdate.errors.required"
                                                   class="help-block">
                                                 Phải nhập ngày ký!
                                             </span>
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="durationdate" class="col-sm-3 control-label text-red">Thời hạn</label>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="durationdate" class="col-sm-3 control-label text-red">Thời
+                                                hạn</label>
 
-                                                <div class="col-sm-9"
-                                                     [ngClass]="(durationdate.touched && !durationdate.valid)? 'has-error': ''">
-                                                    <input [(ngModel)]="detail.durationdate" type="text" class="form-control"
-                                                           #durationdate="ngModel"
-                                                           id="durationdate" name="durationdate"
-                                                           placeholder="Thời hạn" required>
-                                                    <div [hidden]="durationdate.valid || durationdate.untouched">
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(durationdate.touched && !durationdate.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.durationdate" type="text"
+                                                       class="form-control"
+                                                       #durationdate="ngModel"
+                                                       id="durationdate" name="durationdate"
+                                                       placeholder="Thời hạn" required>
+                                                <div [hidden]="durationdate.valid || durationdate.untouched">
                                             <span *ngIf="durationdate.errors && durationdate.errors.required"
                                                   class="help-block">
                                                 Phải nhập thời hạn!
                                             </span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-sm-6">
-                                                <label for="value" class="col-sm-3 control-label">Giá trị</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="value" class="col-sm-3 control-label">Giá trị</label>
 
-                                                <div class="col-sm-9">
-                                                    <input [(ngModel)]="detail.value" type="text" class="form-control"
-                                                           id="value" name="value"
-                                                           placeholder="Giá trị hợp đồng" required>
-                                                </div>
+                                            <div class="col-sm-9">
+                                                <input [(ngModel)]="detail.value" type="text" class="form-control"
+                                                       id="value" name="value"
+                                                       placeholder="Giá trị hợp đồng" required>
                                             </div>
-                                            <div class="form-group col-sm-6">
-                                                <label for="content" class="col-sm-3 control-label text-red">Nội dung</label>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="content" class="col-sm-3 control-label text-red">Nội
+                                                dung</label>
 
-                                                <div class="col-sm-9"
-                                                     [ngClass]="(content.touched && !content.valid)? 'has-error': ''">
-                                        <textarea [(ngModel)]="detail.content" name="content" id="content" class="form-control"
-                                                  rows="3"  placeholder="Nội dung hợp đồng"
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(content.touched && !content.valid)? 'has-error': ''">
+                                        <textarea [(ngModel)]="detail.content" name="content" id="content"
+                                                  class="form-control"
+                                                  rows="3" placeholder="Nội dung hợp đồng"
                                                   maxlength="400" required
                                                   #content="ngModel"></textarea>
-                                                    <div [hidden]="content.valid || content.untouched">
+                                                <div [hidden]="content.valid || content.untouched">
                                             <span *ngIf="content.errors && content.errors.required"
                                                   class="help-block">
                                                 Phải nhập nội dung hợp đồng!
                                             </span>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /.box-body -->
-                                    <div class="box-footer">
-                                        <button *ngIf="recordId" (click)="showConfirm()" type="button"
-                                                class="btn btn-danger">Xóa
-                                        </button>
-                                        <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
-                                                class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
-                                        </button>
-                                    </div>
-                                    <!-- /.box-footer -->
-                                </form>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button *ngIf="recordId" (click)="showConfirm()" type="button"
+                                            class="btn btn-danger">Xóa
+                                    </button>
+                                    <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
+                                            class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập
+                                        nhật
+                                    </button>
+                                </div>
+                                <!-- /.box-footer -->
+                            </form>
                             <!--</div>-->
                         </div>
 
@@ -159,11 +172,13 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="product_name" class="col-sm-3 control-label text-red">Tên sản phẩm</label>
+                                            <label for="product_name" class="col-sm-3 control-label text-red">Tên sản
+                                                phẩm</label>
 
                                             <div class="col-sm-9"
                                                  [ngClass]="(product_name.touched && !product_name.valid)? 'has-error': ''">
-                                                <input [(ngModel)]="detail.product_name" type="text" class="form-control"
+                                                <input [(ngModel)]="detail.product_name" type="text"
+                                                       class="form-control"
                                                        #product_name="ngModel"
                                                        id="product_name" name="product_name"
                                                        placeholder="Tên sản phẩm" required>
@@ -178,7 +193,8 @@
                                         <div class="form-group col-sm-6">
                                             <label for="number" class="col-sm-3 control-label text-red">Số lượng</label>
 
-                                            <div class="col-sm-9" [ngClass]="(number.touched && !number.valid)? 'has-error': ''">
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(number.touched && !number.valid)? 'has-error': ''">
                                                 <input [(ngModel)]="detail.number" type="text" class="form-control"
                                                        #number="ngModel"
                                                        id="number" name="number"
@@ -193,15 +209,112 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="success_date" class="col-sm-3 control-label  text-red">Ngày hạn</label>
+                                            <label for="unit" class="col-sm-3 control-label text-red">Đơn vị
+                                                tính</label>
 
-                                            <div class="col-sm-9" [ngClass]="(success_date.touched && !success_date.valid)? 'has-error': ''">
-                                                <input [(ngModel)]="detail.success_date" type="text" class="form-control"
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(unit.touched && !unit.valid)? 'has-error': ''">
+                                                <select [(ngModel)]="detail.unit" class="form-control" id="unit"
+                                                        #unit="ngModel"
+                                                        name="unit" title="Đơn vị tính" required>
+                                                    <option value=""></option>
+                                                    <option *ngFor='let item of customer' value="{{item.id}}">
+                                                        {{item.name}}
+                                                    </option>
+                                                </select>
+                                                <div [hidden]="unit.valid || unit.untouched">
+                                            <span *ngIf="unit.errors && unit.errors.required"
+                                                  class="help-block">
+                                                Phải chọn đơn vị tính!
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="standard" class="col-sm-3 control-label text-red">Quy cách
+                                                đóng</label>
+
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(standard.touched && !standard.valid)? 'has-error': ''">
+                                                <select [(ngModel)]="detail.standard" class="form-control" id="standard"
+                                                        #standard="ngModel"
+                                                        name="standard" title="Quy cách đóng" required>
+                                                    <option value=""></option>
+                                                    <option *ngFor='let item of customer' value="{{item.id}}">
+                                                        {{item.name}}
+                                                    </option>
+                                                </select>
+                                                <div [hidden]="standard.valid || standard.untouched">
+                                            <span *ngIf="standard.errors && standard.errors.required"
+                                                  class="help-block">
+                                                Phải chọn quy cách đóng!
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="product_name" class="col-sm-3 control-label text-red">Cách gia
+                                                công</label>
+
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(outsourcing.touched && !outsourcing.valid)? 'has-error': ''">
+                                                <select [(ngModel)]="detail.outsourcing" class="form-control"
+                                                        id="outsourcing"
+                                                        #outsourcing="ngModel"
+                                                        name="outsourcing" title="Cách gia công" required>
+                                                    <option value=""></option>
+                                                    <option *ngFor='let item of customer' value="{{item.id}}">
+                                                        {{item.name}}
+                                                    </option>
+                                                </select>
+                                                <div [hidden]="outsourcing.valid || outsourcing.untouched">
+                                            <span *ngIf="outsourcing.errors && outsourcing.errors.required"
+                                                  class="help-block">
+                                                Phải chọn cách gia công!
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="packing" class="col-sm-3 control-label text-red">Cách đóng
+                                                gói</label>
+
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(packing.touched && !packing.valid)? 'has-error': ''">
+                                                <select [(ngModel)]="detail.packing" class="form-control"
+                                                        id="packing"
+                                                        #packing="ngModel"
+                                                        name="packing" title="Cách đóng gói" required>
+                                                    <option value=""></option>
+                                                    <option *ngFor='let item of customer' value="{{item.id}}">
+                                                        {{item.name}}
+                                                    </option>
+                                                </select>
+                                                <div [hidden]="packing.valid || packing.untouched">
+                                            <span *ngIf="packing.errors && packing.errors.required" class="help-block">
+                                                Phải chọn cách đóng gói!
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="success_date" class="col-sm-3 control-label  text-red">Ngày
+                                                hạn</label>
+
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(success_date.touched && !success_date.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.success_date" type="text"
+                                                       class="form-control"
                                                        #success_date="ngModel"
                                                        id="success_date" name="success_date"
                                                        placeholder="Ngày hoàn thành" required>
                                                 <div [hidden]="success_date.valid || success_date.untouched">
-                                            <span *ngIf="success_date.errors && success_date.errors.required" class="help-block">
+                                            <span *ngIf="success_date.errors && success_date.errors.required"
+                                                  class="help-block">
                                                 Phải nhập ngày hoàn thành sản phẩm!
                                             </span>
                                                 </div>
@@ -211,10 +324,11 @@
                                             <label for="content" class="col-sm-3 control-label">Ghi chú</label>
 
                                             <div class="col-sm-9">
-                                                <textarea [(ngModel)]="detail.note" name="note" id="note" class="form-control"
-                                                  rows="3"  placeholder="Ghi chú"
-                                                  maxlength="400" required
-                                                  #content="ngModel"></textarea>
+                                                <textarea [(ngModel)]="detail.note" name="note" id="note"
+                                                          class="form-control"
+                                                          rows="3" placeholder="Ghi chú"
+                                                          maxlength="400" required
+                                                          #content="ngModel"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -225,22 +339,14 @@
                                             class="btn btn-danger">Xóa
                                     </button>
                                     <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
-                                            class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
+                                            class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập
+                                        nhật
                                     </button>
                                 </div>
                                 <!-- /.box-footer -->
                             </form>
                         </div>
                         <!-- /.tab-pane -->
-
-
-
-
-
-
-
-
-
 
 
                         <div class="tab-pane" id="activity">
