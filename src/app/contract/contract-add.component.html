@@ -254,7 +254,7 @@
                                                         #outsourcing="ngModel"
                                                         name="outsourcing" title="Cách gia công" required>
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of outsourcingList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -277,7 +277,7 @@
                                                         #packing="ngModel"
                                                         name="packing" title="Cách đóng gói" required>
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of packingList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -386,7 +386,7 @@
                                                 <select [(ngModel)]="detail.mold" class="form-control" id="mold"
                                                         name="mold" title="Bát/ Khuôn in">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of moldList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -403,7 +403,7 @@
                                                         id="number_hand"
                                                         name="number_hand" title="Số tay">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of number_handList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -418,7 +418,7 @@
                                                         id="print_type"
                                                         name="print_type" title="Cách in">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of print_typeList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -435,7 +435,7 @@
                                                         id="print_size"
                                                         name="print_size" title="Khổ in">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of print_sizeList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -450,7 +450,7 @@
                                                         id="print_color"
                                                         name="print_color" title="Màu in">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of print_colorList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -467,7 +467,7 @@
                                                         id="zinc_type"
                                                         name="zinc_type" title="Loại kẽm">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of zinc_typeList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -482,7 +482,7 @@
                                                         #machine="ngModel"
                                                         name="machine" title="Máy in">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of machineList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -511,7 +511,7 @@
                                                         #paper_type="ngModel"
                                                         name="paper_type" title="Loại giấy">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of paper_typeList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -529,7 +529,7 @@
                                                         #size_store="ngModel"
                                                         name="size_store" title="Khổ kho">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of size_storeList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -545,7 +545,7 @@
                                                         #cut_type="ngModel"
                                                         name="cut_type" title="Cách cắt">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of cut_typeList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
@@ -636,7 +636,7 @@
                                                         #number_char="ngModel"
                                                         name="number_char" title="Số vạch">
                                                     <option value=""></option>
-                                                    <option *ngFor='let item of standardList' value="{{item.code}}">
+                                                    <option *ngFor='let item of number_charList' value="{{item.code}}">
                                                         {{item.name}}
                                                     </option>
                                                 </select>
