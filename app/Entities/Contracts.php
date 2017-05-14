@@ -18,7 +18,15 @@ class Contracts extends BaseEntity
         'customer_id',
         'content',
         'value',
-        'durationdate'
+        'durationdate',
+        'product_name',
+        'number',
+        'unit',
+        'standard',
+        'outsourcing',
+        'packing',
+        'success_date',
+        'note'
     ];
 
     protected $hidden = [

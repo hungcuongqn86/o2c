@@ -15,9 +15,9 @@ class ListTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         for($i = 0; $i < 100; $i++) {
-            $listtype_code = 'DEPARTMENT';
+            $listtype_code = 'department';
             if($i>50){
-                $listtype_code = 'UNIT';
+                $listtype_code = 'unit';
             }
             App\Entities\Lists::create([
                 'listtype_code' => $listtype_code,

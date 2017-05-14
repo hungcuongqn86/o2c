@@ -26,6 +26,15 @@ class TblContractCreate extends Migration
             $table->string('content', 500)->nullable();
             $table->string('value', 15)->nullable();
             $table->timestamp('durationdate')->nullable();
+
+            $table->string('product_name', 500)->nullable();
+            $table->integer('number')->nullable();
+            $table->string('unit', 20)->nullable();
+            $table->string('standard', 20)->nullable();
+            $table->string('outsourcing', 20)->nullable();
+            $table->string('packing', 20)->nullable();
+            $table->timestamp('success_date')->nullable();
+            $table->string('note', 500)->nullable();
             $table->timestamps();
         });
     }

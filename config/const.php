@@ -9,8 +9,22 @@
 
 return [
 	'ARRAY_LISTTYPE' => [
-		['code' => 'DEPARTMENT', 'name' => 'LISTTYPE.DEPARTMENT'],
-		['code' => 'UNIT', 'name' => 'LISTTYPE.UNIT'],
+		['code' => 'department', 'name' => 'LISTTYPE.department'],
+		['code' => 'unit', 'name' => 'LISTTYPE.unit'],
+        ['code' => 'standard', 'name' => 'LISTTYPE.standard'],
+        ['code' => 'outsourcing', 'name' => 'LISTTYPE.outsourcing'],
+        ['code' => 'packing', 'name' => 'LISTTYPE.packing'],
+        ['code' => 'mold', 'name' => 'LISTTYPE.mold'],
+        ['code' => 'number_hand', 'name' => 'LISTTYPE.number_hand'],
+        ['code' => 'print_type', 'name' => 'LISTTYPE.print_type'],
+        ['code' => 'print_size', 'name' => 'LISTTYPE.print_size'],
+        ['code' => 'print_color', 'name' => 'LISTTYPE.print_color'],
+        ['code' => 'zinc_type', 'name' => 'LISTTYPE.zinc_type'],
+        ['code' => 'machine', 'name' => 'LISTTYPE.machine'],
+        ['code' => 'paper_type', 'name' => 'LISTTYPE.paper_type'],
+        ['code' => 'size_store', 'name' => 'LISTTYPE.size_store'],
+        ['code' => 'cut_type', 'name' => 'LISTTYPE.cut_type'],
+        ['code' => 'number_char', 'name' => 'LISTTYPE.number_char']
 	],
 
     'ARRAY_MENU' => [
