@@ -18,8 +18,22 @@
     "RECORD": "Hồ sơ lưu"
   },
   "LISTTYPE": {
-    "UNIT": "Đơn vị tính",
-    "DEPARTMENT": "Bộ phận"
+    "department": "Bộ phận",
+    "unit": "Đơn vị tính",
+    "standard": "Quy cách đóng",
+    "outsourcing": "Cách gia công",
+    "packing": "Cách đóng gói",
+    "mold": "Bát/ Khuôn in",
+    "number_hand": "Số tay",
+    "print_type": "Cách in",
+    "print_size": "Khổ in",
+    "print_color": "Màu in",
+    "zinc_type": "Loại kẽm",
+    "machine": "Máy",
+    "paper_type": "Loại giấy",
+    "size_store": "Khổ kho",
+    "cut_type": "Cách cắt",
+    "number_char": "Số vạch"
   },
   "LIST": {
     "LIST_LABLE_TITLE": "danh mục"

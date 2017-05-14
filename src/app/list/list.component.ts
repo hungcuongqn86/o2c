@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
     listtype: any = [];
     listdata: any = [];
     total: number = -1;
-    searchparam: any = JSON.parse('{"listtype_s":"DEPARTMENT","sSortCol":"code","sSortDir":"asc","page":1,"limit":15}');
+    searchparam: any = JSON.parse('{"listtype_s":"department","sSortCol":"code","sSortDir":"asc","page":1,"limit":15}');
     list: any = JSON.parse('{"id":0,"listtype_code":"","code":"","name":"","enabled":1}');
     viewmode: boolean = false;
     actionmode: string = 'LIST';
