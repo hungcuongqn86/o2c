@@ -30,11 +30,11 @@ export class ProducttypeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getContractsData(this.searchparam);
+        this.getProducttypesData(this.searchparam);
     }
 
-    getContractsData(filter: any) {
-        this.producttypeService.getContractsData(filter).subscribe(
+    getProducttypesData(filter: any) {
+        this.producttypeService.getProducttypesData(filter).subscribe(
             data => {
                 this.listdata = data.data;
                 this.total = data.total;
@@ -54,7 +54,7 @@ export class ProducttypeComponent implements OnInit {
         if (this.current_page > 1) {
             this.current_page--;
             this.searchparam.page = this.current_page;
-            this.getContractsData(this.searchparam);
+            this.getProducttypesData(this.searchparam);
         }
     }
 
@@ -62,13 +62,13 @@ export class ProducttypeComponent implements OnInit {
         if (this.current_page < this.last_page) {
             this.current_page++;
             this.searchparam.page = this.current_page;
-            this.getContractsData(this.searchparam);
+            this.getProducttypesData(this.searchparam);
         }
     }
 
     search() {
         this.searchparam.page = 1;
-        this.getContractsData(this.searchparam);
+        this.getProducttypesData(this.searchparam);
     }
 
     checkboxtoggle() {
@@ -143,7 +143,7 @@ export class ProducttypeComponent implements OnInit {
             res => {
                 this.res = res;
                 if (res.error == false) {
-                    this.getContractsData(this.searchparam);
+                    this.getProducttypesData(this.searchparam);
                 } else if (res.error == true) {
                     console.error(res.message[0]);
                 }

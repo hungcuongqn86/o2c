@@ -11,11 +11,6 @@ export class contractService {
     constructor(private http: HttpClient) {
     }
 
-    getRoles(){
-        let url = this.apiUrl + `/roles`;
-        return this.http.get(url).map((res: Response) => res.json().data);
-    }
-
     getContractsData(searchparam: any): any {
         let url = this.apiUrl + '/' + this.module + `/getAll`;
         let params: URLSearchParams = new URLSearchParams();
