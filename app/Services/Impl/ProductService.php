@@ -26,7 +26,7 @@ class ProductService extends CommonService implements IProductService {
 	 * @throw
 	 */
 	public function ProductGetAll($filter) {
-		$query = Products::whereRaw("1 = 1");
+		$query = Products::with('Producttypes')->whereRaw("1 = 1");
         $iContract_id = isset($filter['contract_id']) ? $filter['contract_id'] : 0;
         $sSortCol = isset($filter['sSortCol']) ? $filter['sSortCol'] : 'id';
         $sSortDir = isset($filter['sSortDir']) ? $filter['sSortDir'] : 'asc';

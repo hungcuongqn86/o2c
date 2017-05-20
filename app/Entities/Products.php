@@ -35,4 +35,8 @@ class Products extends BaseEntity
 
     protected $hidden = [
     ];
+
+    public function Producttypes() {
+        return $this->belongsTo(Producttypes::class, 'producttype_code', 'code');
+    }
 }
