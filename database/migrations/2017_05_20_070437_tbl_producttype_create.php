@@ -30,6 +30,7 @@ class TblProducttypeCreate extends Migration
             $table->tinyInteger('annex')->unsigned()->nullable()->default(0);
             $table->tinyInteger('sheet_hung')->unsigned()->nullable()->default(0);
             $table->string('outsource_type_config', 200)->nullable();
+            $table->tinyInteger('enabled')->unsigned()->nullable()->default(0);
             $table->timestamps();
         });
     }
