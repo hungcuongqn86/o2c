@@ -13,6 +13,7 @@ import {Ng2PaginationModule}  from 'ng2-pagination';
 import {BootstrapModalModule} from 'ng2-bootstrap-modal';
 import {ConfirmComponent} from './confirm.component';
 import {AlertComponent} from './alert.component';
+import {ProductDetailComponent} from './contract/product-detail.component';
 
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
@@ -38,7 +39,8 @@ export function createTranslateLoader(http: Http) {
         CustomerComponent,
         ReportComponent,
         ConfirmComponent,
-        AlertComponent
+        AlertComponent,
+        ProductDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -63,7 +65,8 @@ export function createTranslateLoader(http: Http) {
     //Don't forget to add the component to entryComponents section
     entryComponents: [
         ConfirmComponent,
-        AlertComponent
+        AlertComponent,
+        ProductDetailComponent
     ],
     bootstrap: [AppComponent]
 })

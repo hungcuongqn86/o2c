@@ -5,6 +5,7 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
 import {contractService}    from  './contract.service';
 import {ConfirmComponent} from '../confirm.component';
 import {AlertComponent} from '../alert.component';
+import {ProductDetailComponent} from './product-detail.component';
 import {DialogService} from "ng2-bootstrap-modal";
 import {Observable} from 'rxjs/Rx';
 
@@ -154,6 +155,16 @@ export class ContractAddComponent implements OnInit {
                 this.checklist.splice(indexx, 1);
             }
         }
+    }
+
+    public showPrompt() {
+        this.dialogService.addDialog(ProductDetailComponent, {
+            title:'Name dialog',
+            question:'What is your name?: '})
+            .subscribe((message)=>{
+                //We get dialog result
+                console.log(message);
+            });
     }
 
 

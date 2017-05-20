@@ -5,6 +5,7 @@ import {HttpModule}          from '@angular/http';
 import {HttpClient}         from '../http-client';
 import {TranslateModule} from "ng2-translate/ng2-translate";
 
+
 import {ContractComponent}    from './contract.component';
 import {ContractAddComponent}    from './contract-add.component';
 import {ContractRoutingModule}    from './contract-routing.module';
