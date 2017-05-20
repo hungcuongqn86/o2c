@@ -113,12 +113,12 @@ export class ProducttypeComponent implements OnInit {
 
     private showConfirm() {
         if (this.checklist.length == 0) {
-            this.showAlert('Bạn phải chọn hợp đồng muốn xóa!');
+            this.showAlert('Bạn phải chọn loại sản phẩm muốn xóa!');
             return false;
         }
         let disposable = this.dialogService.addDialog(ConfirmComponent, {
             title: 'Xác nhận xóa dữ liệu',
-            message: 'Bạn chắc chắn muốn xóa hợp đồng này!'
+            message: 'Bạn chắc chắn muốn xóa sản phẩm này!'
         })
             .subscribe((isConfirmed) => {
                 if (isConfirmed) {
@@ -132,7 +132,7 @@ export class ProducttypeComponent implements OnInit {
 
     private editRecord(){
         if (this.checklist.length == 1) {
-            this.router.navigate(['/contract/edit',this.checklist[0]]);
+            this.router.navigate(['/producttype/edit',this.checklist[0]]);
         }
     }
 
@@ -151,7 +151,7 @@ export class ProducttypeComponent implements OnInit {
                 }
             },
             error => {
-                console.error("Add Error!");
+                console.error("Delete Error!");
                 return Observable.throw(error);
             }
         );

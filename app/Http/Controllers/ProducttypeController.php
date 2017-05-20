@@ -75,7 +75,7 @@ class ProducttypeController extends Controller
     public function getConfig()
     {
         try {
-            return response()->success(config('const.PRODUCTYPE_CONFIG'));
+            return response()->success(config('const.PRODUCTTYPE_CONFIG'));
         } catch (\Exception $e) {
             return response()->error(trans('messages.MSG_Error'), 400);
         }

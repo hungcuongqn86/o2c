@@ -59,18 +59,6 @@ class ProducttypeService extends CommonService implements IProducttypeService {
     }
 
     public function saveRecord($input){
-        if(isset($input['signdate'])&&($input['signdate']!='')){
-            $input['signdate'] = _ddmmyyyyToYYyymmdd($input['signdate']);
-        }else{
-            unset($input['signdate']);
-        }
-
-        if(isset($input['durationdate'])&&($input['durationdate']!='')){
-            $input['durationdate'] = _ddmmyyyyToYYyymmdd($input['durationdate']);
-        }else{
-            unset($input['durationdate']);
-        }
-
         if(isset($input['id'])&&$input['id']>0){
             $id = $input['id'];
             DB::beginTransaction();

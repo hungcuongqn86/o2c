@@ -11,6 +11,11 @@ export class producttypeService {
     constructor(private http: HttpClient) {
     }
 
+    getConfig() {
+        let url = this.apiUrl + '/' + this.module + `/config`;
+        return this.http.get(url).map((res: Response) => res.json().data);
+    }
+
     getProducttypesData(searchparam: any): any {
         let url = this.apiUrl + '/' + this.module + `/getAll`;
         let params: URLSearchParams = new URLSearchParams();
@@ -20,11 +25,6 @@ export class producttypeService {
         });
         return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
     }
-
-
-
-
-
 
 
     getSingle(id: string) {
@@ -44,18 +44,5 @@ export class producttypeService {
     deleteRecord(idlist: string) {
         let url = this.apiUrl + '/' + this.module + `/delete/` + idlist;
         return this.http.delete(url).map((res: Response) => res.json());
-    }
-
-    getCustomersData(): any {
-        let url = this.apiUrl + `/customer/getAll`;
-        return this.http.get(url).map((res: Response) => res.json().data);
-    }
-
-    getListData(): any {
-        const url = this.apiUrl + `/list/getAll`;
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('page', '1');
-        params.set('limit', '10000');
-        return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
     }
 }

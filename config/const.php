@@ -51,24 +51,24 @@ return [
         ['code' => 'PERSONNEL2', 'name' => 'ROLE.PERSONNEL2'],
     ],
 
-    'PRODUCTYPE_CONFIG' => [
+    'PRODUCTTYPE_CONFIG' => [
         'SIZE' => [
-            ['code' => 'LONG', 'name' => 'PRODUCTYPE_CONFIG.LONG'],
-            ['code' => 'LARGE', 'name' => 'PRODUCTYPE_CONFIG.LARGE'],
-            ['code' => 'HIGH', 'name' => 'PRODUCTYPE_CONFIG.HIGH'],
+            ['code' => 'LONG', 'name' => 'PRODUCTTYPE_CONFIG.LONG'],
+            ['code' => 'LARGE', 'name' => 'PRODUCTTYPE_CONFIG.LARGE'],
+            ['code' => 'HIGH', 'name' => 'PRODUCTTYPE_CONFIG.HIGH'],
         ],
         'COLOR' => [
-            ['code' => 'COVER', 'name' => 'PRODUCTYPE_CONFIG.COVER'],
-            ['code' => 'INSIDE', 'name' => 'PRODUCTYPE_CONFIG.INSIDE'],
+            ['code' => 'COVER', 'name' => 'PRODUCTTYPE_CONFIG.COVER'],
+            ['code' => 'INSIDE', 'name' => 'PRODUCTTYPE_CONFIG.INSIDE'],
         ],
         'PAPER_TYPE' => [
-            ['code' => 'COVER', 'name' => 'PRODUCTYPE_CONFIG.COVER'],
-            ['code' => 'INSIDE', 'name' => 'PRODUCTYPE_CONFIG.INSIDE'],
+            ['code' => 'COVER', 'name' => 'PRODUCTTYPE_CONFIG.COVER'],
+            ['code' => 'INSIDE', 'name' => 'PRODUCTTYPE_CONFIG.INSIDE'],
         ],
         'OUTSOURCE_TYPE' => [
-            ['code' => 'LAMINATE_GLOSSY', 'name' => 'PRODUCTYPE_CONFIG.LAMINATE_GLOSSY'],
-            ['code' => 'LAMINATE_BLURRY', 'name' => 'PRODUCTYPE_CONFIG.LAMINATE_BLURRY'],
-            ['code' => 'LAMINATE_EMULSION', 'name' => 'PRODUCTYPE_CONFIG.LAMINATE_EMULSION'],
+            ['code' => 'LAMINATE_GLOSSY', 'name' => 'PRODUCTTYPE_CONFIG.LAMINATE_GLOSSY'],
+            ['code' => 'LAMINATE_BLURRY', 'name' => 'PRODUCTTYPE_CONFIG.LAMINATE_BLURRY'],
+            ['code' => 'LAMINATE_EMULSION', 'name' => 'PRODUCTTYPE_CONFIG.LAMINATE_EMULSION'],
         ]
     ]
 ];

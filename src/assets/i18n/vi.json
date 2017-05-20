@@ -48,6 +48,16 @@
   "PRODUCTTYPE": {
     "PRODUCTTYPE_LABLE_TITLE": "loại sản phẩm"
   },
+  "PRODUCTTYPE_CONFIG": {
+    "LONG": "Chiều dài",
+    "LARGE": "Chiều rộng",
+    "HIGH": "Chiều cao",
+    "COVER": "Bìa",
+    "INSIDE": "Ruột",
+    "LAMINATE_GLOSSY": "Cán bóng",
+    "LAMINATE_BLURRY": "Cán mờ",
+    "LAMINATE_EMULSION": "Ép nhũ"
+  },
   "COMMON": {
     "LIST_LABLE": "Danh sách",
     "DETAL_LABLE": "Chi tiết",
