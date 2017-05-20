@@ -18,14 +18,14 @@ class ProducttypesTableSeeder extends Seeder
             App\Entities\Producttypes::create([
                 'code' => $faker->text(20),
                 'name' => $faker->text(200),
-                'size_config' => $faker->text(100),
-                'color_config' => $faker->text(100),
-                'paper_type_config' => $faker->text(100),
+                'size_config' => $faker->text(20),
+                'color_config' => $faker->text(20),
+                'paper_type_config' => $faker->text(20),
                 'number_page' => rand(0,1),
                 'hardcover' => rand(0,1),
                 'annex' => rand(0,1),
                 'sheet_hung' => rand(0,1),
-                'outsource_type_config' => $faker->text(100),
+                'outsource_type_config' => $faker->text(20),
                 'enabled' => rand(0,1),
             ]);
         }
