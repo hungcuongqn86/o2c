@@ -14,6 +14,7 @@ const appRoutes: Routes = [
     {path: 'user', component: UserComponent},
     {path: 'customer', component: CustomerComponent},
     {path: 'record', component: RecordComponent},
+    {path: 'producttype', loadChildren: './producttype/producttype.module#ProducttypeModule'}
 ];
 
 export const appRoutingProviders: any[] = [];

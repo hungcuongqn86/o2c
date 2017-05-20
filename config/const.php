@@ -28,18 +28,14 @@ return [
 	],
 
     'ARRAY_MENU' => [
-        ['name' => 'SIDEBAR.DASHBOARD', 'icon' => 'fa fa-dashboard', 'uri' => 'index',
-            'child' => [
-                ['name' => 'SIDEBAR.WORK_PROCESS', 'icon' => 'fa fa-circle-o', 'uri' => 'dashboard/process'],
-                ['name' => 'SIDEBAR.WORK_GENERAL', 'icon' => 'fa fa-circle-o', 'uri' => 'dashboard/general'],
-            ]
-        ],
+        ['name' => 'SIDEBAR.DASHBOARD', 'icon' => 'fa fa-dashboard', 'uri' => 'index',],
         ['name' => 'SIDEBAR.CUSTOMER', 'icon' => 'fa fa-address-card', 'uri' => 'customer'],
         ['name' => 'SIDEBAR.CONTRACT', 'icon' => 'fa fa-th', 'uri' => 'contract'],
         ['name' => 'SIDEBAR.FOLLOW', 'icon' => 'fa fa fa-sliders', 'uri' => 'follow'],
         ['name' => 'SIDEBAR.WAREHOUSE', 'icon' => 'fa fa fa-th-large', 'uri' => 'warehouse'],
         ['name' => 'SIDEBAR.RECORD', 'icon' => 'fa fa fa-archive', 'uri' => 'record'],
         ['name' => 'SIDEBAR.REPORT', 'icon' => 'fa fa-list-alt', 'uri' => 'report'],
+        ['name' => 'SIDEBAR.PRODUCT_TYPE', 'icon' => 'fa fa-server', 'uri' => 'producttype'],
         ['name' => 'SIDEBAR.USER', 'icon' => 'fa fa-user-circle-o', 'uri' => 'user'],
         ['name' => 'SIDEBAR.LIST_SYS', 'icon' => 'fa fa-table', 'uri' => 'list'],
     ],
