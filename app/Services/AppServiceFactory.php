@@ -7,6 +7,7 @@ use App\Services\Impl\UsersService;
 use App\Services\Impl\ContractService;
 use App\Services\Impl\CustomersService;
 use App\Services\Impl\ProducttypeService;
+use App\Services\Impl\ProductService;
 
 class AppServiceFactory {
 	protected static $mListsService;
@@ -47,5 +48,13 @@ class AppServiceFactory {
             self::$mProducttypeService = new ProducttypeService();
         }
         return self::$mProducttypeService;
+    }
+
+    protected static $mProductService;
+    public static function mProductService() {
+        if (self::$mProductService == null) {
+            self::$mProductService = new ProductService();
+        }
+        return self::$mProductService;
     }
 }
