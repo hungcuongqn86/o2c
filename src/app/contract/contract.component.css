@@ -4,3 +4,7 @@
     margin-bottom: 0;
     margin-top: 5px;
 }
+
+.product-modal-dialog {
+    width: 900px;
+}
