@@ -2,7 +2,7 @@ import {Component, ViewChild, OnInit} from '@angular/core';
 import {NgModel} from '@angular/forms'
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {TranslateService} from 'ng2-translate/ng2-translate';
-import {contractService}    from  './contract.service';
+import {producttypeService}    from  './producttype.service';
 import {ConfirmComponent} from '../confirm.component';
 import {AlertComponent} from '../alert.component';
 import {DialogService} from "ng2-bootstrap-modal";
@@ -11,12 +11,12 @@ import {Observable} from 'rxjs/Rx';
 declare let $: any;
 
 @Component({
-    selector: 'app-contract-add',
-    templateUrl: './contract-add.component.html',
-    styleUrls: ['./contract.component.css']
+    selector: 'app-contract-detail',
+    templateUrl: './producttype-detail.component.html',
+    styleUrls: ['./producttype.component.css']
 })
 
-export class ContractAddComponent implements OnInit {
+export class ProducttypeDetailComponent implements OnInit {
     @ViewChild('form') form: NgModel;
     @ViewChild('form1') form1: NgModel;
     detail: any = JSON.parse('{"id":0,"code":"","signdate":"","customer_id":"","content":"","value":"","durationdate":""}');
@@ -26,7 +26,7 @@ export class ContractAddComponent implements OnInit {
 
     titleAction:string='COMMON.ADD_LABLE';
 
-    constructor(private translate: TranslateService, private contractService: contractService, private router: Router, private route: ActivatedRoute, private dialogService: DialogService) {
+    constructor(private translate: TranslateService, private producttypeService: producttypeService, private router: Router, private route: ActivatedRoute, private dialogService: DialogService) {
         this.route.params.forEach((params: Params) => {
             if(params['id']&&params['id'].length){
                 this.recordId = params['id'];
@@ -44,7 +44,7 @@ export class ContractAddComponent implements OnInit {
     }
 
     private getDetail(id: string) {
-        this.contractService.getSingle(id).subscribe(
+        this.producttypeService.getSingle(id).subscribe(
             data => {
                 this.detail = data;
             },
@@ -56,7 +56,7 @@ export class ContractAddComponent implements OnInit {
     }
 
     getCustomersData() {
-        this.contractService.getCustomersData().subscribe(
+        this.producttypeService.getCustomersData().subscribe(
             data => {
                 this.customer = data;
             },
@@ -68,7 +68,7 @@ export class ContractAddComponent implements OnInit {
     }
 
     private saveRecord() {
-        this.contractService.saveRecord(this.detail).subscribe(
+        this.producttypeService.saveRecord(this.detail).subscribe(
             res => {
                 this.res = res;
                 if (res.error == false) {
@@ -100,7 +100,7 @@ export class ContractAddComponent implements OnInit {
     }
 
     private deleteRecord() {
-        this.contractService.deleteRecord(this.recordId.toString()).subscribe(
+        this.producttypeService.deleteRecord(this.recordId.toString()).subscribe(
             res => {
                 this.res = res;
                 if (res.error == false) {
@@ -117,7 +117,7 @@ export class ContractAddComponent implements OnInit {
     }
 
     private getListData() {
-        this.contractService.getListData().subscribe(
+        this.producttypeService.getListData().subscribe(
             data => {
                 this.genListData(data.data);
             },
@@ -195,7 +195,7 @@ export class ContractAddComponent implements OnInit {
     }
 
     private goBack() {
-        this.router.navigate(['/contract']);
+        this.router.navigate(['/producttype']);
     }
 
     ngAfterViewInit() {

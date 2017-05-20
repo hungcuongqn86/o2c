@@ -31,7 +31,8 @@ class ProducttypeController extends Controller
         }
     }
 
-    public function getSingle(Request $req){
+    public function getSingle(Request $req)
+    {
         $input = $req->all();
         try {
             return response()->success(AppServiceFactory::mProducttypeService()->getSingle($input));
@@ -44,7 +45,8 @@ class ProducttypeController extends Controller
         }
     }
 
-    public function saveRecord(Request $request) {
+    public function saveRecord(Request $request)
+    {
         $input = $request->all();
         try {
             return response()->success(AppServiceFactory::mProducttypeService()->saveRecord($input));
@@ -57,7 +59,8 @@ class ProducttypeController extends Controller
         }
     }
 
-    public function delete($ids) {
+    public function delete($ids)
+    {
         try {
             return response()->success(AppServiceFactory::mProducttypeService()->delete($ids));
         } catch (\PDOException $e) {
@@ -65,6 +68,15 @@ class ProducttypeController extends Controller
             return response()->error(trans('messages.MSG_PDO_Error'), 400);
         } catch (\Exception $e) {
             throw $e;
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
+
+    public function getConfig()
+    {
+        try {
+            return response()->success(config('const.PRODUCTYPE_CONFIG'));
+        } catch (\Exception $e) {
             return response()->error(trans('messages.MSG_Error'), 400);
         }
     }

@@ -6,6 +6,8 @@ import {AlertComponent} from '../alert.component';
 import {DialogService} from "ng2-bootstrap-modal";
 import {Observable} from 'rxjs/Rx';
 
+declare let $: any;
+
 @Component({
     selector: 'app-producttype',
     templateUrl: './producttype.component.html',
@@ -155,7 +157,11 @@ export class ProducttypeComponent implements OnInit {
         );
     }
 
-    private addContract(){
-        this.router.navigate(['/contract/add']);
+    private addRecord(){
+        this.router.navigate(['/producttype/add']);
+    }
+
+    ngAfterViewInit() {
+        $.AdminLTE.layout.fix();
     }
 }

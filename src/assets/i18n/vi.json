@@ -45,6 +45,9 @@
   "CONTRACT": {
     "CONTRACT_LABLE_TITLE": "hợp đồng"
   },
+  "PRODUCTTYPE": {
+    "PRODUCTTYPE_LABLE_TITLE": "loại sản phẩm"
+  },
   "COMMON": {
     "LIST_LABLE": "Danh sách",
     "DETAL_LABLE": "Chi tiết",
