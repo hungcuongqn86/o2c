@@ -50,6 +50,13 @@ Route::group(['prefix' => 'contract'], function () {
     Route::delete('/delete/{ids}', 'ContractController@delete');
 });
 
+Route::group(['prefix' => 'product'], function () {
+    Route::get('/getAll', 'ProductController@getAll');
+    Route::get('/getSingle', 'ProductController@getSingle');
+    Route::post('/saveRecord', 'ProductController@saveRecord');
+    Route::delete('/delete/{ids}', 'ProductController@delete');
+});
+
 Route::group(['prefix' => 'customer'], function () {
     Route::get('/getAll', 'CustomerController@getAll');
     Route::get('/getSingle', 'CustomerController@getSingle');

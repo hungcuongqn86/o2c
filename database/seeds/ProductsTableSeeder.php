@@ -26,6 +26,7 @@ class ProductsTableSeeder extends Seeder
                 'inside_color' => $faker->text(10),
                 'cover_paper_type' => $faker->text(10),
                 'inside_paper_type' => $faker->text(10),
+                'standard' => $faker->text(10),
                 'number_page' => rand(300,500),
                 'hardcover' => rand(0,1),
                 'number_page_annex' => rand(1,10),

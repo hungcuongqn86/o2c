@@ -20,21 +20,23 @@ export class ContractAddComponent implements OnInit {
     @ViewChild('form') form: NgModel;
     @ViewChild('form1') form1: NgModel;
     detail: any = JSON.parse('{"id":0,"code":"","signdate":"","customer_id":"","content":"","value":"","durationdate":""}');
-    recordId:number=0;
+    products: any = [];
+    recordId: number = 0;
     customer: any = [];
     res: any;
 
-    titleAction:string='COMMON.ADD_LABLE';
+    titleAction: string = 'COMMON.ADD_LABLE';
 
     constructor(private translate: TranslateService, private contractService: contractService, private router: Router, private route: ActivatedRoute, private dialogService: DialogService) {
         this.route.params.forEach((params: Params) => {
-            if(params['id']&&params['id'].length){
+            if (params['id'] && params['id'].length) {
                 this.recordId = params['id'];
             }
         });
-        if(this.recordId){
+        if (this.recordId) {
             this.titleAction = 'COMMON.EDIT_LABLE';
             this.getDetail(this.recordId.toString());
+            this.getProduct(this.recordId.toString());
         }
     }
 
@@ -49,7 +51,19 @@ export class ContractAddComponent implements OnInit {
                 this.detail = data;
             },
             error => {
-                console.error("Not user!");
+                console.error("Not detail!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    private getProduct(id: string) {
+        this.contractService.getProduct(id).subscribe(
+            data => {
+                this.products = data;
+            },
+            error => {
+                console.error("Not products!");
                 return Observable.throw(error);
             }
         );
@@ -128,67 +142,67 @@ export class ContractAddComponent implements OnInit {
         );
     }
 
-    unitList:any=[];
-    standardList:any=[];
-    outsourcingList:any=[];
-    packingList:any=[];
-    moldList:any=[];
-    number_handList:any=[];
-    print_typeList:any=[];
-    print_sizeList:any=[];
-    print_colorList:any=[];
-    zinc_typeList:any=[];
-    machineList:any=[];
-    paper_typeList:any=[];
-    size_storeList:any=[];
-    cut_typeList:any=[];
-    number_charList:any=[];
+    unitList: any = [];
+    standardList: any = [];
+    outsourcingList: any = [];
+    packingList: any = [];
+    moldList: any = [];
+    number_handList: any = [];
+    print_typeList: any = [];
+    print_sizeList: any = [];
+    print_colorList: any = [];
+    zinc_typeList: any = [];
+    machineList: any = [];
+    paper_typeList: any = [];
+    size_storeList: any = [];
+    cut_typeList: any = [];
+    number_charList: any = [];
 
-    private genListData(data:any){
-        Object.keys(data).map((key)=> {
-            if(data[key].listtype_code == 'unit'){
+    private genListData(data: any) {
+        Object.keys(data).map((key) => {
+            if (data[key].listtype_code == 'unit') {
                 this.unitList.push(data[key]);
             }
-            if(data[key].listtype_code == 'standard'){
+            if (data[key].listtype_code == 'standard') {
                 this.standardList.push(data[key]);
             }
-            if(data[key].listtype_code == 'outsourcing'){
+            if (data[key].listtype_code == 'outsourcing') {
                 this.outsourcingList.push(data[key]);
             }
-            if(data[key].listtype_code == 'packing'){
+            if (data[key].listtype_code == 'packing') {
                 this.packingList.push(data[key]);
             }
-            if(data[key].listtype_code == 'mold'){
+            if (data[key].listtype_code == 'mold') {
                 this.moldList.push(data[key]);
             }
-            if(data[key].listtype_code == 'number_hand'){
+            if (data[key].listtype_code == 'number_hand') {
                 this.number_handList.push(data[key]);
             }
-            if(data[key].listtype_code == 'print_type'){
+            if (data[key].listtype_code == 'print_type') {
                 this.print_typeList.push(data[key]);
             }
-            if(data[key].listtype_code == 'print_size'){
+            if (data[key].listtype_code == 'print_size') {
                 this.print_sizeList.push(data[key]);
             }
-            if(data[key].listtype_code == 'print_color'){
+            if (data[key].listtype_code == 'print_color') {
                 this.print_colorList.push(data[key]);
             }
-            if(data[key].listtype_code == 'zinc_type'){
+            if (data[key].listtype_code == 'zinc_type') {
                 this.zinc_typeList.push(data[key]);
             }
-            if(data[key].listtype_code == 'machine'){
+            if (data[key].listtype_code == 'machine') {
                 this.machineList.push(data[key]);
             }
-            if(data[key].listtype_code == 'paper_type'){
+            if (data[key].listtype_code == 'paper_type') {
                 this.paper_typeList.push(data[key]);
             }
-            if(data[key].listtype_code == 'size_store'){
+            if (data[key].listtype_code == 'size_store') {
                 this.size_storeList.push(data[key]);
             }
-            if(data[key].listtype_code == 'cut_type'){
+            if (data[key].listtype_code == 'cut_type') {
                 this.cut_typeList.push(data[key]);
             }
-            if(data[key].listtype_code == 'number_char'){
+            if (data[key].listtype_code == 'number_char') {
                 this.number_charList.push(data[key]);
             }
         });

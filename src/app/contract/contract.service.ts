@@ -28,6 +28,13 @@ export class contractService {
         return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
     }
 
+    getProduct(id:string){
+        let url = this.apiUrl + `/product/getAll`;
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('contract_id', id);
+        return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
+    }
+
     saveRecord(list: any) {
         let url = this.apiUrl + '/' + this.module + `/saveRecord`;
         let headers = new Headers({'Content-Type': 'application/json'});

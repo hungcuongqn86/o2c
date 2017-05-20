@@ -27,21 +27,17 @@ class ProductService extends CommonService implements IProductService {
 	 */
 	public function ProductGetAll($filter) {
 		$query = Products::whereRaw("1 = 1");
-        $sSearchInput = isset($filter['searchInput']) ? trim($filter['searchInput']) : '';
+        $iContract_id = isset($filter['contract_id']) ? $filter['contract_id'] : 0;
         $sSortCol = isset($filter['sSortCol']) ? $filter['sSortCol'] : 'id';
         $sSortDir = isset($filter['sSortDir']) ? $filter['sSortDir'] : 'asc';
-
-        $limit = isset($filter['limit']) ? $filter['limit'] : config('const.LIMIT_PER_PAGE');
-        if ($sSearchInput != '') {
-            $query->where('name', 'LIKE', '%' . $sSearchInput . '%');
-            $query->orWhere('code', 'LIKE', '%' . $sSearchInput . '%');
+        if($iContract_id){
+            $query->where('contract_id','=',$iContract_id);
         }
-
         if ($sSortCol) {
             $query->orderBy($sSortCol, $sSortDir);
         }
 
-        $rResult = $query->paginate($limit)->toArray();
+        $rResult = $query->get()->toArray();
 		return $rResult;
 	}
 

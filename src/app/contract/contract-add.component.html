@@ -156,6 +156,83 @@
                         </div>
 
                         <div class="tab-pane" id="product">
+                            <div class="col-md-12">
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Danh sách sản phẩm</h3>
+                                    </div>
+                                    <div class="box-body no-padding">
+                                        <div class="mailbox-controls">
+                                            <!-- Check all button -->
+                                            <button type="button" (click)="checkboxtoggle()"
+                                                    class="btn btn-default btn-sm checkbox-toggle"><i
+                                                    class="fa {{checkall? 'fa-check-square-o': 'fa-square-o'}}"></i>
+                                            </button>
+                                            <button type="button" (click)="getProducttypesData(searchparam)"
+                                                    class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                            <button type="button" (click)="addRecord()" class="btn btn-default btn-sm"><i
+                                                    class="fa fa-plus"></i>
+                                            </button>
+                                            <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
+                                                    class="fa fa-pencil-square-o"></i>
+                                            </button>
+                                            <button type="button" (click)="showConfirm()" class="btn btn-default btn-sm"><i
+                                                    class="fa fa-trash-o"></i>
+                                            </button>
+                                        </div>
+                                        <div class="table-responsive mailbox-messages">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th style="width: 10px">#</th>
+                                                    <th>Loại sản phẩm</th>
+                                                    <th>Số lượng</th>
+                                                    <th>Kích thước</th>
+                                                    <th>Số trang ruột</th>
+                                                    <th>Quy cách đóng</th>
+                                                </tr>
+                                                <tr *ngFor="let prodItem of products">
+                                                    <td><input id="{{prodItem.id}}" name="{{prodItem.id}}" title="Chọn hợp đồng"
+                                                               type="checkbox"
+                                                               [checked]=""
+                                                               (change)="checkedItems(prodItem.id)"></td>
+                                                    <td class="mailbox-name">{{prodItem.producttype_code}}</td>
+                                                    <td class="mailbox-name">{{prodItem.count}}</td>
+                                                    <td class="mailbox-name">{{prodItem.long}}x{{prodItem.large}}</td>
+                                                    <td class="mailbox-name">{{prodItem.number_page}}</td>
+                                                    <td class="mailbox-subject">{{prodItem.standard}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <!-- /.table -->
+                                        </div>
+                                        <!-- /.mail-box-messages -->
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer no-padding">
+                                        <div class="mailbox-controls">
+                                            <!-- Check all button -->
+                                            <button type="button" (click)="checkboxtoggle()"
+                                                    class="btn btn-default btn-sm checkbox-toggle"><i
+                                                    class="fa {{checkall? 'fa-check-square-o': 'fa-square-o'}}"></i>
+                                            </button>
+                                            <button type="button" (click)="getProducttypesData(searchparam)"
+                                                    class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                            <button type="button" (click)="addRecord()" class="btn btn-default btn-sm"><i
+                                                    class="fa fa-plus"></i>
+                                            </button>
+                                            <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
+                                                    class="fa fa-pencil-square-o"></i>
+                                            </button>
+                                            <button type="button" (click)="showConfirm()" class="btn btn-default btn-sm"><i
+                                                    class="fa fa-trash-o"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <form class="form-horizontal" #form1="ngForm">
                                 <div class="box-body">
                                     <div class="row">
