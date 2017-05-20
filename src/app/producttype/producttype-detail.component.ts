@@ -127,7 +127,7 @@ export class ProducttypeDetailComponent implements OnInit {
     private showConfirm() {
         let disposable = this.dialogService.addDialog(ConfirmComponent, {
             title: 'Xác nhận xóa dữ liệu',
-            message: 'Bạn chắc chắn muốn xóa hợp đồng này!'
+            message: 'Bạn chắc chắn muốn xóa loại sản phẩm này!'
         })
             .subscribe((isConfirmed) => {
                 if (isConfirmed) {

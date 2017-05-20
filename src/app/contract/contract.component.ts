@@ -34,6 +34,7 @@ export class ContractComponent implements OnInit {
     }
 
     getContractsData(filter: any) {
+        this.checklist = [];
         this.contractService.getContractsData(filter).subscribe(
             data => {
                 this.listdata = data.data;

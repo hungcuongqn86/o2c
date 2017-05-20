@@ -36,6 +36,7 @@ export class ProducttypeComponent implements OnInit {
     }
 
     getProducttypesData(filter: any) {
+        this.checklist = [];
         this.producttypeService.getProducttypesData(filter).subscribe(
             data => {
                 this.listdata = data.data;
