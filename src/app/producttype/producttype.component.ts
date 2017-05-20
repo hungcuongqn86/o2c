@@ -19,7 +19,7 @@ export class ProducttypeComponent implements OnInit {
     total: number = 0;
     current_page: number = 1;
     last_page: number = 1;
-    searchparam: any = JSON.parse('{"searchInput":"","sSortCol":"code","sSortDir":"asc","page":1,"limit":15}');
+    searchparam: any = JSON.parse('{"searchInput":"","sSortCol":"id","sSortDir":"asc","page":1,"limit":15}');
 
     checklist: Array<any> = [];
     checkall: boolean = false;

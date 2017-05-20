@@ -38,14 +38,17 @@
                                         class="btn btn-default btn-sm checkbox-toggle"><i
                                         class="fa {{checkall? 'fa-check-square-o': 'fa-square-o'}}"></i>
                                 </button>
+                                <button type="button" (click)="getContractsData(searchparam)"
+                                        class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
+                                        class="fa fa-plus"></i>
+                                </button>
+                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
+                                        class="fa fa-pencil-square-o"></i>
+                                </button>
                                 <button type="button" (click)="showConfirm()" class="btn btn-default btn-sm"><i
                                         class="fa fa-trash-o"></i>
                                 </button>
-                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
-                                        class="fa fa-share"></i>
-                                </button>
-                                <button type="button" (click)="getContractsData(searchparam)"
-                                        class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                                 <div class="pull-right">
                                     {{from}}-{{to}}/{{total}}
                                     <div class="btn-group">
@@ -67,10 +70,8 @@
                                                    [checked]="checklist!='' && checklist.includes(item.id)"
                                                    (change)="checkedItems(item.id)"></td>
                                         <td class="mailbox-name">{{item.code}}</td>
-                                        <td class="mailbox-date">{{item.signdate}}</td>
-                                        <td class="mailbox-name">{{item.customers.name}}</td>
-                                        <td class="mailbox-subject">{{item.content}}</td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                        <td class="mailbox-name">{{item.name}}</td>
+                                        <td class="mailbox-subject">{{item.enabled}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -84,16 +85,19 @@
                                 <!-- Check all button -->
                                 <button type="button" (click)="checkboxtoggle()"
                                         class="btn btn-default btn-sm checkbox-toggle"><i
-                                        class="fa  {{checkall? 'fa-check-square-o': 'fa-square-o'}}"></i>
+                                        class="fa {{checkall? 'fa-check-square-o': 'fa-square-o'}}"></i>
+                                </button>
+                                <button type="button" (click)="getContractsData(searchparam)"
+                                        class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
+                                        class="fa fa-plus"></i>
+                                </button>
+                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
+                                        class="fa fa-pencil-square-o"></i>
                                 </button>
                                 <button type="button" (click)="showConfirm()" class="btn btn-default btn-sm"><i
                                         class="fa fa-trash-o"></i>
                                 </button>
-                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
-                                        class="fa fa-share"></i>
-                                </button>
-                                <button type="button" (click)="getContractsData(searchparam)"
-                                        class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                                 <div class="pull-right">
                                     {{from}}-{{to}}/{{total}}
                                     <div class="btn-group">
