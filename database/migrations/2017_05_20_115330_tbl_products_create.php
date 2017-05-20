@@ -20,6 +20,7 @@ class TblProductsCreate extends Migration
             $table->collation = 'utf8_unicode_ci';
 
             $table->bigIncrements('id')->unsigned();
+            $table->bigInteger('contract_id')->nullable()->unsigned();
             $table->string('producttype_code', 20)->nullable();
             $table->bigInteger('count')->unsigned()->nullable();
             $table->string('long', 20)->nullable();
