@@ -5,6 +5,23 @@
     margin-top: 5px;
 }
 
+.modal-dialog,
+.modal-content {
+    /* 80% of window height */
+    height: 95%;
+}
+
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100% - 120px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .product-modal-dialog {
-    width: 900px;
+    width: 90%;
+}
+
+.sizeinput {
+    width: 33%;
 }

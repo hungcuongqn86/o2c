@@ -159,8 +159,9 @@ export class ContractAddComponent implements OnInit {
 
     public showProduct() {
         this.dialogService.addDialog(ProductDetailComponent, {
-            title:'Thêm mới sản phẩm',
-            question:'What is your name?: '})
+            id:0,
+            contract_id:this.recordId,
+            title:'Thêm mới sản phẩm'})
             .subscribe((message)=>{
                 //We get dialog result
                 console.log(message);

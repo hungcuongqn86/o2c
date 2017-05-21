@@ -5,39 +5,41 @@
             <h4 class="modal-title">{{title || 'Prompt'}}</h4>
         </div>
         <div class="modal-body">
-            <!--<form class="form-horizontal" #form1="ngForm">
+            <form class="form-horizontal" #form1="ngForm">
                 <div class="box-body">
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="product_name" class="col-sm-3 control-label text-red">Tên sản
-                                phẩm</label>
+                            <label for="producttype_code" class="col-sm-4 control-label text-red">Loại sản phẩm</label>
 
-                            <div class="col-sm-9"
-                                 [ngClass]="(product_name.touched && !product_name.valid)? 'has-error': ''">
-                                <input [(ngModel)]="detail.product_name" type="text"
-                                       class="form-control"
-                                       #product_name="ngModel"
-                                       id="product_name" name="product_name"
-                                       placeholder="Tên sản phẩm" required>
-                                <div [hidden]="product_name.valid || product_name.untouched">
-                                            <span *ngIf="product_name.errors && product_name.errors.required"
+                            <div class="col-sm-8"
+                                 [ngClass]="(producttype_code.touched && !producttype_code.valid)? 'has-error': ''">
+                                <select [(ngModel)]="detail.producttype_code" class="form-control" id="producttype_code"
+                                        #producttype_code="ngModel"
+                                        name="producttype_code" title="Loại sản phẩm" required>
+                                    <option value=""></option>
+                                    <option *ngFor='let item of listdata' value="{{item.code}}">{{item.name |
+                                        translate }}
+                                    </option>
+                                </select>
+                                <div [hidden]="producttype_code.valid || producttype_code.untouched">
+                                            <span *ngIf="producttype_code.errors && producttype_code.errors.required"
                                                   class="help-block">
-                                                Phải nhập tên sản phẩm!
+                                                Phải chọn loại sản phẩm!
                                             </span>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="number" class="col-sm-3 control-label text-red">Số lượng</label>
+                            <label for="count" class="col-sm-4 control-label text-red">Số lượng</label>
 
-                            <div class="col-sm-9"
-                                 [ngClass]="(number.touched && !number.valid)? 'has-error': ''">
-                                <input [(ngModel)]="detail.number" type="text" class="form-control"
-                                       #number="ngModel"
-                                       id="number" name="number"
+                            <div class="col-sm-8"
+                                 [ngClass]="(count.touched && !count.valid)? 'has-error': ''">
+                                <input [(ngModel)]="detail.count" type="text" class="form-control"
+                                       #count="ngModel"
+                                       id="count" name="count"
                                        placeholder="Số lượng thành phẩm" required>
-                                <div [hidden]="number.valid || number.untouched">
-                                            <span *ngIf="number.errors && number.errors.required" class="help-block">
+                                <div [hidden]="count.valid || count.untouched">
+                                            <span *ngIf="count.errors && count.errors.required" class="help-block">
                                                 Phải nhập số lượng thành phẩm!
                                             </span>
                                 </div>
@@ -46,146 +48,237 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="unit" class="col-sm-3 control-label text-red">Đơn vị
-                                tính</label>
+                            <label for="long" class="col-sm-4 control-label">Kích thước</label>
 
-                            <div class="col-sm-9"
-                                 [ngClass]="(unit.touched && !unit.valid)? 'has-error': ''">
-                                <select [(ngModel)]="detail.unit" class="form-control" id="unit"
-                                        #unit="ngModel"
-                                        name="unit" title="Đơn vị tính" required>
-                                    <option value=""></option>
-                                    <option *ngFor='let item of unitList' value="{{item.code}}">
-                                        {{item.name}}
-                                    </option>
-                                </select>
-                                <div [hidden]="unit.valid || unit.untouched">
-                                            <span *ngIf="unit.errors && unit.errors.required"
-                                                  class="help-block">
-                                                Phải chọn đơn vị tính!
-                                            </span>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input [(ngModel)]="detail.long" type="text"
+                                           class="form-control sizeinput input-group-addon"
+                                           #long="ngModel"
+                                           id="long" name="long"
+                                           placeholder="Dài">
+                                    <input [(ngModel)]="detail.large" type="text"
+                                           class="form-control sizeinput input-group-addon"
+                                           #large="ngModel"
+                                           id="large" name="large"
+                                           placeholder="Rộng">
+                                    <input [(ngModel)]="detail.high" type="text"
+                                           class="form-control sizeinput input-group-addon"
+                                           #high="ngModel"
+                                           id="high" name="high"
+                                           placeholder="Cao">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="standard" class="col-sm-3 control-label text-red">Quy cách
-                                đóng</label>
+                            <label for="standard" class="col-sm-4 control-label">Gia công gáy</label>
 
-                            <div class="col-sm-9"
-                                 [ngClass]="(standard.touched && !standard.valid)? 'has-error': ''">
+                            <div class="col-sm-8">
                                 <select [(ngModel)]="detail.standard" class="form-control" id="standard"
-                                        #standard="ngModel"
-                                        name="standard" title="Quy cách đóng" required>
+                                        name="standard" title="Gia công gáy">
                                     <option value=""></option>
                                     <option *ngFor='let item of standardList' value="{{item.code}}">
                                         {{item.name}}
                                     </option>
                                 </select>
-                                <div [hidden]="standard.valid || standard.untouched">
-                                            <span *ngIf="standard.errors && standard.errors.required"
-                                                  class="help-block">
-                                                Phải chọn quy cách đóng!
-                                            </span>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="outsourcing" class="col-sm-3 control-label text-red">Cách gia
-                                công</label>
+                            <label for="inside_color" class="col-sm-4 control-label text-red">Số màu in ruột</label>
 
-                            <div class="col-sm-9"
-                                 [ngClass]="(outsourcing.touched && !outsourcing.valid)? 'has-error': ''">
-                                <select [(ngModel)]="detail.outsourcing" class="form-control"
-                                        id="outsourcing"
-                                        #outsourcing="ngModel"
-                                        name="outsourcing" title="Cách gia công" required>
+                            <div class="col-sm-8"
+                                 [ngClass]="(inside_color.touched && !inside_color.valid)? 'has-error': ''">
+                                <select [(ngModel)]="detail.inside_color" class="form-control"
+                                        id="inside_color"
+                                        #inside_color="ngModel"
+                                        name="inside_color" title="Số màu in ruột" required>
                                     <option value=""></option>
                                     <option *ngFor='let item of outsourcingList' value="{{item.code}}">
                                         {{item.name}}
                                     </option>
                                 </select>
-                                <div [hidden]="outsourcing.valid || outsourcing.untouched">
-                                            <span *ngIf="outsourcing.errors && outsourcing.errors.required"
+                                <div [hidden]="inside_color.valid || inside_color.untouched">
+                                            <span *ngIf="inside_color.errors && inside_color.errors.required"
+                                                  class="help-block">
+                                                Phải chọn màu in ruột!
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="cover_color" class="col-sm-4 control-label">Số màu in bìa</label>
+
+                            <div class="col-sm-8">
+                                <select [(ngModel)]="detail.cover_color" class="form-control"
+                                        id="cover_color"
+                                        name="cover_color" title="Số màu in bìa">
+                                    <option value=""></option>
+                                    <option *ngFor='let item of packingList' value="{{item.code}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="inside_paper_type" class="col-sm-4 control-label text-red">Giấy ruột</label>
+
+                            <div class="col-sm-8"
+                                 [ngClass]="(inside_paper_type.touched && !inside_paper_type.valid)? 'has-error': ''">
+                                <select [(ngModel)]="detail.inside_paper_type" class="form-control"
+                                        id="inside_paper_type"
+                                        #inside_paper_type="ngModel"
+                                        name="inside_paper_type" title="Loại giấy ruột" required>
+                                    <option value=""></option>
+                                    <option *ngFor='let item of outsourcingList' value="{{item.code}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <div [hidden]="inside_paper_type.valid || inside_paper_type.untouched">
+                                            <span *ngIf="inside_paper_type.errors && inside_paper_type.errors.required"
+                                                  class="help-block">
+                                                Phải chọn loại giấy ruột!
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="cover_paper_type" class="col-sm-4 control-label">Giấy bìa</label>
+
+                            <div class="col-sm-8">
+                                <select [(ngModel)]="detail.cover_paper_type" class="form-control"
+                                        id="cover_paper_type"
+                                        name="cover_paper_type" title="Lọa giấy bìa">
+                                    <option value=""></option>
+                                    <option *ngFor='let item of packingList' value="{{item.code}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="number_page" class="col-sm-4 control-label text-red">Số trang ruột</label>
+
+                            <div class="col-sm-8"
+                                 [ngClass]="(number_page.touched && !number_page.valid)? 'has-error': ''">
+                                <input [(ngModel)]="detail.number_page" type="text" class="form-control"
+                                       #number_page="ngModel"
+                                       id="number_page" name="number_page"
+                                       placeholder="Số trang ruột" required>
+                                <div [hidden]="number_page.valid || number_page.untouched">
+                                            <span *ngIf="number_page.errors && number_page.errors.required"
+                                                  class="help-block">
+                                                Phải nhập số trang ruột!
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="inside_paper_type" class="col-sm-4 control-label text-red">Cách gia công</label>
+
+                            <div class="col-sm-8"
+                                 [ngClass]="(outsource_type.touched && !outsource_type.valid)? 'has-error': ''">
+                                <select [(ngModel)]="detail.outsource_type" class="form-control"
+                                        id="outsource_type"
+                                        #outsource_type="ngModel"
+                                        name="outsource_type" title="Cách gia công" required>
+                                    <option value=""></option>
+                                    <option *ngFor='let item of outsourcingList' value="{{item.code}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
+                                <div [hidden]="outsource_type.valid || outsource_type.untouched">
+                                            <span *ngIf="outsource_type.errors && outsource_type.errors.required"
                                                   class="help-block">
                                                 Phải chọn cách gia công!
                                             </span>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="packing" class="col-sm-3 control-label text-red">Cách đóng
-                                gói</label>
+                            <label for="sheet_hung" class="col-sm-4 control-label">Tờ gác</label>
 
-                            <div class="col-sm-9"
-                                 [ngClass]="(packing.touched && !packing.valid)? 'has-error': ''">
-                                <select [(ngModel)]="detail.packing" class="form-control"
-                                        id="packing"
-                                        #packing="ngModel"
-                                        name="packing" title="Cách đóng gói" required>
+                            <div class="col-sm-8">
+                                <select [(ngModel)]="detail.sheet_hung" class="form-control"
+                                        id="sheet_hung"
+                                        name="sheet_hung" title="Tờ gác">
                                     <option value=""></option>
-                                    <option *ngFor='let item of packingList' value="{{item.code}}">
+                                    <option *ngFor='let item of outsourcingList' value="{{item.code}}">
                                         {{item.name}}
                                     </option>
                                 </select>
-                                <div [hidden]="packing.valid || packing.untouched">
-                                            <span *ngIf="packing.errors && packing.errors.required" class="help-block">
-                                                Phải chọn cách đóng gói!
-                                            </span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <div class="col-sm-offset-4 col-sm-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input [(ngModel)]="detail.hardcover" id="hardcover" name="hardcover"
+                                               type="checkbox"> Bìa cứng
+                                    </label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="success_date" class="col-sm-3 control-label  text-red">Ngày
-                                hạn</label>
+                            <label for="number_page_annex" class="col-sm-4 control-label">Số trang phụ bản</label>
 
-                            <div class="col-sm-9"
-                                 [ngClass]="(success_date.touched && !success_date.valid)? 'has-error': ''">
-                                <input [(ngModel)]="detail.success_date" type="text"
-                                       class="form-control"
-                                       #success_date="ngModel"
-                                       id="success_date" name="success_date"
-                                       placeholder="Ngày hoàn thành" required>
-                                <div [hidden]="success_date.valid || success_date.untouched">
-                                            <span *ngIf="success_date.errors && success_date.errors.required"
-                                                  class="help-block">
-                                                Phải nhập ngày hoàn thành sản phẩm!
-                                            </span>
-                                </div>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="detail.number_page_annex" type="text" class="form-control"
+                                       id="number_page_annex" name="number_page_annex"
+                                       placeholder="Số trang phụ bản">
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="note" class="col-sm-3 control-label">Ghi chú</label>
+                            <label for="inside_color_annex" class="col-sm-4 control-label">Số màu phụ bản</label>
 
-                            <div class="col-sm-9">
-                                                <textarea [(ngModel)]="detail.note" name="note" id="note"
-                                                          class="form-control"
-                                                          rows="3" placeholder="Ghi chú"
-                                                          maxlength="400" required
-                                                          #note="ngModel"></textarea>
+                            <div class="col-sm-8">
+                                <input [(ngModel)]="detail.inside_color_annex" type="text" class="form-control"
+                                       id="inside_color_annex" name="inside_color_annex"
+                                       placeholder="Số màu phụ bản">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="inside_paper_type_annex" class="col-sm-4 control-label">Giấy phụ bản</label>
+
+                            <div class="col-sm-8">
+                                <select [(ngModel)]="detail.inside_paper_type_annex" class="form-control"
+                                        id="inside_paper_type_annex"
+                                        name="inside_paper_type_annex" title="Giấy phụ bản" required>
+                                    <option value=""></option>
+                                    <option *ngFor='let item of outsourcingList' value="{{item.code}}">
+                                        {{item.name}}
+                                    </option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
-                &lt;!&ndash; /.box-body &ndash;&gt;
-                <div class="box-footer">
+                <!-- /.box-body -->
+                <!--<div class="box-footer">
                     <button type="button" [disabled]="!form1.form.valid" (click)="saveRecord()"
                             class="btn {{!form1.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập
                         nhật
                     </button>
-                </div>
-                &lt;!&ndash; /.box-footer &ndash;&gt;
-            </form>-->
-
+                </div>-->
+                <!-- /.box-footer -->
+            </form>
 
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="apply()">Cập nhật</button>
-            <button type="button" class="btn btn-default" (click)="close()" >Hủy bỏ</button>
+            <button type="button" [disabled]="!form1.form.valid" class="btn {{!form1.form.valid? 'btn-default': 'btn-primary'}}" (click)="apply()">Cập nhật</button>
+            <button type="button" class="btn btn-default" (click)="close()">Hủy bỏ</button>
         </div>
     </div>
 </div>
