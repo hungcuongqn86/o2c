@@ -22,6 +22,7 @@ import {ListComponent} from './list/list.component';
 import {ListService} from './list/list.service';
 import {UserComponent} from './user/user.component';
 import {userService}    from  './user/user.service';
+import {productService} from  './contract/product.service';
 import {CustomerComponent} from './customer/customer.component';
 import {ReportComponent} from './report/report.component';
 
@@ -60,7 +61,8 @@ export function createTranslateLoader(http: Http) {
         HttpClient,
         AppService,
         ListService,
-        userService
+        userService,
+        productService
     ],
     //Don't forget to add the component to entryComponents section
     entryComponents: [
