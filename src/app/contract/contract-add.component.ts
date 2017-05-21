@@ -63,7 +63,7 @@ export class ContractAddComponent implements OnInit {
 
     public getProduct(id: string) {
         this.checklist = [];
-        if(id!=''){
+        if (id != '') {
             this.contractService.getProduct(id).subscribe(
                 data => {
                     this.products = data;
@@ -73,7 +73,7 @@ export class ContractAddComponent implements OnInit {
                     return Observable.throw(error);
                 }
             );
-        }else{
+        } else {
             this.products = [];
         }
     }
@@ -97,14 +97,14 @@ export class ContractAddComponent implements OnInit {
         }
     }
 
-    private showAlert(message:string) {
+    private showAlert(message: string) {
         this.dialogService.addDialog(AlertComponent, {title: 'Thông báo!', message: message})
             .subscribe(() => {
                 //console.log(111111);
             });
     }
 
-    public deleteProdConfirm(){
+    public deleteProdConfirm() {
         if (this.checklist.length == 0) {
             this.showAlert('Bạn phải chọn sản phẩm muốn xóa!');
             return false;
@@ -125,7 +125,7 @@ export class ContractAddComponent implements OnInit {
     }
 
     private deleteProd() {
-        let idlist:string='';
+        let idlist: string = '';
         if (this.checklist.length > 0) {
             idlist = this.checklist.join(',');
         }
@@ -159,11 +159,12 @@ export class ContractAddComponent implements OnInit {
 
     public addProduct() {
         this.dialogService.addDialog(ProductDetailComponent, {
-            id:0,
-            contract_id:this.recordId,
-            title:'Thêm mới sản phẩm'})
-            .subscribe((message)=>{
-                //We get dialog result
+            id: 0,
+            contract_id: this.recordId,
+            title: 'Thêm mới sản phẩm'
+        })
+            .subscribe((message) => {
+                this.getProduct(this.recordId.toString());
             });
     }
 
@@ -177,17 +178,14 @@ export class ContractAddComponent implements OnInit {
             return false;
         }
         this.dialogService.addDialog(ProductDetailComponent, {
-            id:this.checklist[0],
-            contract_id:this.recordId,
-            title:'Thêm mới sản phẩm'})
-            .subscribe((message)=>{
-                //We get dialog result
+            id: this.checklist[0],
+            contract_id: this.recordId,
+            title: 'Thêm mới sản phẩm'
+        })
+            .subscribe((message) => {
+                this.getProduct(this.recordId.toString());
             });
     }
-
-
-
-
 
 
     getCustomersData() {

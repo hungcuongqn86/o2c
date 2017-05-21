@@ -26,6 +26,8 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     paper_typeList: any = [];
     outsourcingList: any = [];
 
+    res: any;
+
     constructor(dialogService: DialogService, private productService: productService) {
         super(dialogService);
     }
@@ -93,7 +95,24 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     }
 
     apply() {
-        this.result = this.message;
-        this.close();
+        /*if (this.sizeSelected.length > 0) {
+            this.detail.size_config = this.sizeSelected.join(',');
+        } else {
+            this.detail.size_config = '';
+        }*/
+        this.productService.saveRecord(this.detail).subscribe(
+            res => {
+                this.res = res;
+                if (res.error == false) {
+                    this.close();
+                } else if (res.error == true) {
+                    console.error(res.message[0]);
+                }
+            },
+            error => {
+                console.error("Save Error!");
+                return Observable.throw(error);
+            }
+        );
     }
 }
