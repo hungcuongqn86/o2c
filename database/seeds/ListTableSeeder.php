@@ -16,7 +16,7 @@ class ListTableSeeder extends Seeder
 
         for($index = 0; $index < count(self::$sampleDumpListCode); $index++) {
             $listtype_code = self::$sampleDumpListCode[$index]['code'];
-            for($i = 0; $i < 30; $i++) {
+            for($i = 0; $i < 5; $i++) {
                 App\Entities\Lists::create([
                     'listtype_code' => $listtype_code,
                     'code' => $faker->text(20),

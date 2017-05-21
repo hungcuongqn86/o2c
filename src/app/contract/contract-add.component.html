@@ -40,7 +40,7 @@
                                                 <select [(ngModel)]="detail.customer_id" class="form-control"
                                                         id="customer_id"
                                                         #customer_id="ngModel"
-                                                        name="customer_id" title="Bộ phận" required>
+                                                        name="customer_id" title="Khách hàng" required>
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
                                                         {{item.name}}
