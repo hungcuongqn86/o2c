@@ -62,6 +62,7 @@ export class ContractAddComponent implements OnInit {
     }
 
     public getProduct(id: string) {
+        this.checklist = [];
         if (id != '') {
             this.contractService.getProduct(id).subscribe(
                 data => {
@@ -132,7 +133,6 @@ export class ContractAddComponent implements OnInit {
             res => {
                 this.res = res;
                 if (res.error == false) {
-                    this.checklist = [];
                     this.getProduct(this.recordId.toString());
                 } else if (res.error == true) {
                     console.error(res.message[0]);
@@ -158,7 +158,6 @@ export class ContractAddComponent implements OnInit {
     }
 
     public addProduct() {
-        this.checklist = [];
         this.dialogService.addDialog(ProductDetailComponent, {
             id: 0,
             contract_id: this.recordId,

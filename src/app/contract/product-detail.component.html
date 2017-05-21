@@ -177,24 +177,20 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="inside_paper_type" class="col-sm-4 control-label text-red">Cách gia công</label>
+                            <label for="inside_paper_type" class="col-sm-4 control-label">Cách gia công</label>
 
-                            <div class="col-sm-8"
-                                 [ngClass]="(outsource_type.touched && !outsource_type.valid)? 'has-error': ''">
-                                <select [(ngModel)]="detail.outsource_type" class="form-control"
-                                        id="outsource_type"
-                                        #outsource_type="ngModel"
-                                        name="outsource_type" title="Cách gia công" required>
-                                    <option value=""></option>
-                                    <option *ngFor='let item of outsourcingList' value="{{item.code}}">
-                                        {{item.name}}
-                                    </option>
-                                </select>
-                                <div [hidden]="outsource_type.valid || outsource_type.untouched">
-                                            <span *ngIf="outsource_type.errors && outsource_type.errors.required"
-                                                  class="help-block">
-                                                Phải chọn cách gia công!
-                                            </span>
+                            <div class="col-sm-8">
+                                <div class="multiobj">
+                                    <div *ngFor='let OutsourceTypeItem of outsourcingList'
+                                         class="checkbox col-sm-6">
+                                        <label>
+                                            <input id="{{OutsourceTypeItem.code}}"
+                                                   name="{{OutsourceTypeItem.code}}"
+                                                   [checked]="detail.outsource_type!='' && detail.outsource_type.includes(OutsourceTypeItem.code)"
+                                                   (change)="checkedOutsourceItems(OutsourceTypeItem.code)"
+                                                   type="checkbox"> {{OutsourceTypeItem.name}}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
