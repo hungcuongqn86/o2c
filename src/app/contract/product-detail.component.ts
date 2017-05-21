@@ -25,6 +25,7 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     print_colorList: any = [];
     paper_typeList: any = [];
     outsourcingList: any = [];
+    outsourceTypeSelected: Array<any> = [];
 
     res: any;
 
@@ -45,6 +46,9 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         this.productService.getSingle(id).subscribe(
             data => {
                 this.detail = data;
+                if (this.detail.outsource_type != '') {
+                    this.outsourceTypeSelected = this.detail.outsource_type.split(',');
+                }
             },
             error => {
                 console.error("Not product!");
@@ -94,12 +98,24 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         });
     }
 
+    checkedOutsourceItems(value: string) {
+        if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
+            this.outsourceTypeSelected.push(value);
+        }
+        else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
+            let indexx: number = this.outsourceTypeSelected.indexOf(value);
+            if (indexx >= 0) {
+                this.outsourceTypeSelected.splice(indexx, 1);
+            }
+        }
+    }
+
     apply() {
-        /*if (this.sizeSelected.length > 0) {
-            this.detail.size_config = this.sizeSelected.join(',');
+        if (this.outsourceTypeSelected.length > 0) {
+            this.detail.outsource_type = this.outsourceTypeSelected.join(',');
         } else {
-            this.detail.size_config = '';
-        }*/
+            this.detail.outsource_type = '';
+        }
         this.productService.saveRecord(this.detail).subscribe(
             res => {
                 this.res = res;
