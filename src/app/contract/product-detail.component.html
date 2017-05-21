@@ -257,9 +257,9 @@
                             <div class="col-sm-8">
                                 <select [(ngModel)]="detail.inside_paper_type_annex" class="form-control"
                                         id="inside_paper_type_annex"
-                                        name="inside_paper_type_annex" title="Giấy phụ bản" required>
+                                        name="inside_paper_type_annex" title="Giấy phụ bản">
                                     <option value=""></option>
-                                    <option *ngFor='let item of outsourcingList' value="{{item.code}}">
+                                    <option *ngFor='let item of paper_typeList' value="{{item.code}}">
                                         {{item.name}}
                                     </option>
                                 </select>

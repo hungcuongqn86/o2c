@@ -26,4 +26,11 @@ export class productService {
         params.set('limit', '10000');
         return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
     }
+
+    getSingle(id: string) {
+        let url = this.apiUrl + '/' + this.module + `/getSingle`;
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('id', id);
+        return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
+    }
 }

@@ -157,14 +157,31 @@ export class ContractAddComponent implements OnInit {
         }
     }
 
-    public showProduct() {
+    public addProduct() {
         this.dialogService.addDialog(ProductDetailComponent, {
             id:0,
             contract_id:this.recordId,
             title:'Thêm mới sản phẩm'})
             .subscribe((message)=>{
                 //We get dialog result
-                console.log(message);
+            });
+    }
+
+    public editProduct() {
+        if (this.checklist.length == 0) {
+            this.showAlert('Bạn phải chọn sản phẩm muốn sửa!');
+            return false;
+        }
+        if (this.checklist.length > 1) {
+            this.showAlert('Bạn chỉ được chọn một sản phẩm muốn sửa!');
+            return false;
+        }
+        this.dialogService.addDialog(ProductDetailComponent, {
+            id:this.checklist[0],
+            contract_id:this.recordId,
+            title:'Thêm mới sản phẩm'})
+            .subscribe((message)=>{
+                //We get dialog result
             });
     }
 
