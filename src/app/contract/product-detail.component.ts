@@ -21,6 +21,7 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     message: string = '';
     detail: any = JSON.parse('{"id":0,"contract_id":"","producttype_code":"","count":"","long":"","large":"","high":"","cover_color":"","inside_color":"","cover_paper_type":"","inside_paper_type":"","standard":"","number_page":"","hardcover":"","number_page_annex":"","inside_color_annex":"","inside_paper_type_annex":"","sheet_hung":"","outsource_type":""}');
     producttype: any = [];
+    producttypeDetail: any = [];
     standardList: any = [];
     print_colorList: any = [];
     paper_typeList: any = [];
@@ -37,9 +38,6 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         this.detail.contract_id = this.contract_id;
         this.getProducttypes();
         this.getListData();
-        if(this.id){
-            this.getDetail(this.id.toString());
-        }
     }
 
     private getDetail(id: string) {
@@ -48,6 +46,9 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
                 this.detail = data;
                 if (this.detail.outsource_type != '') {
                     this.outsourceTypeSelected = this.detail.outsource_type.split(',');
+                }
+                if (this.detail.outsource_type != '') {
+                    this.selectProducttype();
                 }
             },
             error => {
@@ -61,12 +62,25 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         this.productService.getProducttypesData().subscribe(
             data => {
                 this.producttype = data.data;
+                if (this.id) {
+                    this.getDetail(this.id.toString());
+                }
             },
             error => {
                 console.error("Not producttype!");
                 return Observable.throw(error);
             }
         );
+    }
+
+    public selectProducttype() {
+        for (let i = 0; i < this.producttype.length; i++) {
+            const value = this.producttype[i].code;
+            if (value == this.detail.producttype_code) {
+                this.producttypeDetail = this.producttype[i];
+                return false;
+            }
+        }
     }
 
     private getListData() {

@@ -15,6 +15,7 @@
                                  [ngClass]="(producttype_code.touched && !producttype_code.valid)? 'has-error': ''">
                                 <select [(ngModel)]="detail.producttype_code" class="form-control" id="producttype_code"
                                         #producttype_code="ngModel"
+                                        (change)="selectProducttype()"
                                         name="producttype_code" title="Loại sản phẩm" required>
                                     <option value=""></option>
                                     <option *ngFor='let producttypeitem of producttype' value="{{producttypeitem.code}}">{{producttypeitem.name}}</option>
@@ -50,17 +51,18 @@
 
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <input [(ngModel)]="detail.long" type="text"
+                                    <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('LONG')" [(ngModel)]="detail.long" type="text"
                                            class="form-control sizeinput input-group-addon"
                                            #long="ngModel"
                                            id="long" name="long"
                                            placeholder="Dài">
-                                    <input [(ngModel)]="detail.large" type="text"
+                                    <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('LARGE')"
+                                           [(ngModel)]="detail.large" type="text"
                                            class="form-control sizeinput input-group-addon"
                                            #large="ngModel"
                                            id="large" name="large"
                                            placeholder="Rộng">
-                                    <input [(ngModel)]="detail.high" type="text"
+                                    <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('HIGH')" [(ngModel)]="detail.high" type="text"
                                            class="form-control sizeinput input-group-addon"
                                            #high="ngModel"
                                            id="high" name="high"
