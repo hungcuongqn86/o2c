@@ -19,16 +19,14 @@ declare let $: any;
 export class ProducttypeDetailComponent implements OnInit {
     @ViewChild('form') form: NgModel;
     @ViewChild('form1') form1: NgModel;
-    config: any = JSON.parse('{"code":"","name":"","size_config":""}');
-    detail: any = JSON.parse('{"id":0,"code":"","name":"","size_config":"","color_config":"","paper_type_config":"","number_page":0,"hardcover":0,"annex":0,"sheet_hung":0,"outsource_type_config":"","enabled":0}');
+    elements: any = [];
+    detail: any = JSON.parse('{"id":0,"code":"","name":"","size_config":"","element_config":"","image":"","enabled":0}');
     recordId: number = 0;
     customer: any = [];
     res: any;
 
     sizeSelected: Array<any> = [];
-    colorSelected: Array<any> = [];
-    paperTypeSelected: Array<any> = [];
-    outsourceTypeSelected: Array<any> = [];
+    elementSelected: Array<any> = [];
 
     titleAction: string = 'COMMON.ADD_LABLE';
 
@@ -45,13 +43,13 @@ export class ProducttypeDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getConfig();
+        this.getElement();
     }
 
-    private getConfig() {
-        this.producttypeService.getConfig().subscribe(
+    private getElement() {
+        this.producttypeService.getElement().subscribe(
             data => {
-                this.config = data;
+                this.elements = data;
             },
             error => {
                 console.error("Not config!");
@@ -67,18 +65,12 @@ export class ProducttypeDetailComponent implements OnInit {
                 if (this.detail.size_config != '') {
                     this.sizeSelected = this.detail.size_config.split(',');
                 }
-                if (this.detail.color_config != '') {
-                    this.colorSelected = this.detail.color_config.split(',');
-                }
-                if (this.detail.paper_type_config != '') {
-                    this.paperTypeSelected = this.detail.paper_type_config.split(',');
-                }
-                if (this.detail.outsource_type_config != '') {
-                    this.outsourceTypeSelected = this.detail.outsource_type_config.split(',');
+                if (this.detail.element_config != '') {
+                    this.elementSelected = this.detail.element_config.split(',');
                 }
             },
             error => {
-                console.error("Not user!");
+                console.error("Not producttype!");
                 return Observable.throw(error);
             }
         );
@@ -91,23 +83,12 @@ export class ProducttypeDetailComponent implements OnInit {
             this.detail.size_config = '';
         }
 
-        if (this.colorSelected.length > 0) {
-            this.detail.color_config = this.colorSelected.join(',');
+        if (this.elementSelected.length > 0) {
+            this.detail.element_config = this.elementSelected.join(',');
         } else {
-            this.detail.color_config = '';
+            this.detail.element_config = '';
         }
 
-        if (this.paperTypeSelected.length > 0) {
-            this.detail.paper_type_config = this.paperTypeSelected.join(',');
-        } else {
-            this.detail.paper_type_config = '';
-        }
-
-        if (this.outsourceTypeSelected.length > 0) {
-            this.detail.outsource_type_config = this.outsourceTypeSelected.join(',');
-        } else {
-            this.detail.outsource_type_config = '';
-        }
         this.producttypeService.saveRecord(this.detail).subscribe(
             res => {
                 this.res = res;
@@ -172,38 +153,14 @@ export class ProducttypeDetailComponent implements OnInit {
         }
     }
 
-    checkedColorItems(value: string) {
+    checkedElementItems(value: string) {
         if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
-            this.colorSelected.push(value);
+            this.elementSelected.push(value);
         }
         else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
-            let indexx: number = this.colorSelected.indexOf(value);
+            let indexx: number = this.elementSelected.indexOf(value);
             if (indexx >= 0) {
-                this.colorSelected.splice(indexx, 1);
-            }
-        }
-    }
-
-    checkedPaperTypeItems(value: string) {
-        if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
-            this.paperTypeSelected.push(value);
-        }
-        else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
-            let indexx: number = this.paperTypeSelected.indexOf(value);
-            if (indexx >= 0) {
-                this.paperTypeSelected.splice(indexx, 1);
-            }
-        }
-    }
-
-    checkedOutsourceItems(value: string) {
-        if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
-            this.outsourceTypeSelected.push(value);
-        }
-        else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
-            let indexx: number = this.outsourceTypeSelected.indexOf(value);
-            if (indexx >= 0) {
-                this.outsourceTypeSelected.splice(indexx, 1);
+                this.elementSelected.splice(indexx, 1);
             }
         }
     }

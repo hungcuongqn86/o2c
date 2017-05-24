@@ -37,26 +37,5 @@ return [
         ['code' => 'MANAGER3', 'name' => 'ROLE.MANAGER3'],
         ['code' => 'PERSONNEL1', 'name' => 'ROLE.PERSONNEL1'],
         ['code' => 'PERSONNEL2', 'name' => 'ROLE.PERSONNEL2'],
-    ],
-
-    'PRODUCTTYPE_CONFIG' => [
-        'SIZE' => [
-            ['code' => 'LONG', 'name' => 'PRODUCTTYPE_CONFIG.LONG'],
-            ['code' => 'LARGE', 'name' => 'PRODUCTTYPE_CONFIG.LARGE'],
-            ['code' => 'HIGH', 'name' => 'PRODUCTTYPE_CONFIG.HIGH'],
-        ],
-        'COLOR' => [
-            ['code' => 'COVER', 'name' => 'PRODUCTTYPE_CONFIG.COVER'],
-            ['code' => 'INSIDE', 'name' => 'PRODUCTTYPE_CONFIG.INSIDE'],
-        ],
-        'PAPER_TYPE' => [
-            ['code' => 'COVER', 'name' => 'PRODUCTTYPE_CONFIG.COVER'],
-            ['code' => 'INSIDE', 'name' => 'PRODUCTTYPE_CONFIG.INSIDE'],
-        ],
-        'OUTSOURCE_TYPE' => [
-            ['code' => 'LAMINATE_GLOSSY', 'name' => 'PRODUCTTYPE_CONFIG.LAMINATE_GLOSSY'],
-            ['code' => 'LAMINATE_BLURRY', 'name' => 'PRODUCTTYPE_CONFIG.LAMINATE_BLURRY'],
-            ['code' => 'LAMINATE_EMULSION', 'name' => 'PRODUCTTYPE_CONFIG.LAMINATE_EMULSION'],
-        ]
     ]
 ];

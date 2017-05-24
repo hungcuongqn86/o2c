@@ -72,10 +72,10 @@ class ProducttypeController extends Controller
         }
     }
 
-    public function getConfig()
+    public function getElement()
     {
         try {
-            return response()->success(config('const.PRODUCTTYPE_CONFIG'));
+            return response()->success(config('bases.element'));
         } catch (\Exception $e) {
             return response()->error(trans('messages.MSG_Error'), 400);
         }

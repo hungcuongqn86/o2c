@@ -36,7 +36,7 @@ Route::group(['prefix' => 'user'], function () {
 });
 
 Route::group(['prefix' => 'producttype'], function () {
-    Route::get('/config', 'ProducttypeController@getConfig');
+    Route::get('/getElement', 'ProducttypeController@getElement');
     Route::get('/getAll', 'ProducttypeController@getAll');
     Route::get('/getSingle', 'ProducttypeController@getSingle');
     Route::post('/saveRecord', 'ProducttypeController@saveRecord');

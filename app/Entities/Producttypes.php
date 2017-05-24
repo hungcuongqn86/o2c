@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entities;
 
 use Illuminate\Notifications\Notifiable;
@@ -16,13 +17,8 @@ class Producttypes extends BaseEntity
         'code',
         'name',
         'size_config',
-        'color_config',
-        'paper_type_config',
-        'number_page',
-        'hardcover',
-        'annex',
-        'sheet_hung',
-        'outsource_type_config',
+        'element_config',
+        'image',
         'enabled'
     ];
 

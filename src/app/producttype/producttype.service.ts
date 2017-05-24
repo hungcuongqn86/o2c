@@ -11,8 +11,8 @@ export class producttypeService {
     constructor(private http: HttpClient) {
     }
 
-    getConfig() {
-        let url = this.apiUrl + '/' + this.module + `/config`;
+    getElement() {
+        let url = this.apiUrl + '/' + this.module + `/getElement`;
         return this.http.get(url).map((res: Response) => res.json().data);
     }
 

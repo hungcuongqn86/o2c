@@ -66,123 +66,59 @@
                                             <label class="col-sm-3 control-label">Kích thước</label>
                                             <div class="col-sm-9">
                                                 <div class="multiobj">
-                                                    <div *ngFor='let sizeItem of config.SIZE' class="checkbox col-sm-6">
+                                                    <div class="checkbox col-sm-6">
                                                         <label>
-                                                            <input id="{{sizeItem.code}}" name="{{sizeItem.code}}"
-                                                                   [checked]="detail.size_config!='' && detail.size_config.includes(sizeItem.code)"
-                                                                   (change)="checkedSizeItems(sizeItem.code)"
-                                                                   type="checkbox"> {{sizeItem.name | translate}}
+                                                            <input id="dai" name="dai"
+                                                                   [checked]="detail.size_config!='' && detail.size_config.includes('dai')"
+                                                                   (change)="checkedSizeItems('dai')"
+                                                                   type="checkbox"> Dài
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox col-sm-6">
+                                                        <label>
+                                                            <input id="rong" name="rong"
+                                                                   [checked]="detail.size_config!='' && detail.size_config.includes('rong')"
+                                                                   (change)="checkedSizeItems('rong')"
+                                                                   type="checkbox"> Rộng
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox col-sm-6">
+                                                        <label>
+                                                            <input id="cao" name="cao"
+                                                                   [checked]="detail.size_config!='' && detail.size_config.includes('cao')"
+                                                                   (change)="checkedSizeItems('cao')"
+                                                                   type="checkbox"> Cao
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label class="col-sm-3 control-label">Cách gia công</label>
+                                            <label class="col-sm-3 control-label">Ảnh đại diện</label>
+                                            <div class="col-sm-9">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label class="col-sm-3 control-label">Thành phần</label>
                                             <div class="col-sm-9">
                                                 <div class="multiobj">
-                                                    <div *ngFor='let OutsourceTypeItem of config.OUTSOURCE_TYPE'
+                                                    <div *ngFor='let element of elements'
                                                          class="checkbox col-sm-6">
                                                         <label>
-                                                            <input id="{{OutsourceTypeItem.code}}"
-                                                                   name="{{OutsourceTypeItem.code}}"
-                                                                   [checked]="detail.outsource_type_config!='' && detail.outsource_type_config.includes(OutsourceTypeItem.code)"
-                                                                   (change)="checkedOutsourceItems(OutsourceTypeItem.code)"
-                                                                   type="checkbox"> {{OutsourceTypeItem.name | translate
-                                                            }}
+                                                            <input id="{{element.id}}"
+                                                                   name="{{element.id}}"
+                                                                   [checked]="detail.element_config!='' && detail.element_config.includes(element.id)"
+                                                                   (change)="checkedElementItems(element.id)"
+                                                                   type="checkbox"> {{element.name}}
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label class="col-sm-3 control-label">Loại giấy/ Đl</label>
-                                            <div class="col-sm-9">
-                                                <div class="multiobj">
-                                                    <div *ngFor='let papertypeItem of config.PAPER_TYPE'
-                                                         class="checkbox col-sm-6">
-                                                        <label>
-                                                            <input id="{{papertypeItem.code}}"
-                                                                   name="{{papertypeItem.code}}"
-                                                                   [checked]="detail.paper_type_config!='' && detail.paper_type_config.includes(papertypeItem.code)"
-                                                                   (change)="checkedPaperTypeItems(papertypeItem.code)"
-                                                                   type="checkbox"> {{papertypeItem.name | translate }}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-sm-6">
-                                            <label class="col-sm-3 control-label">Số màu in</label>
-                                            <div class="col-sm-9">
-                                                <div class="multiobj">
-                                                    <div *ngFor='let colorItem of config.COLOR'
-                                                         class="checkbox col-sm-6">
-                                                        <label>
-                                                            <input id="{{colorItem.code}}" name="{{colorItem.code}}"
-                                                                   [checked]="detail.color_config!='' && detail.color_config.includes(colorItem.code)"
-                                                                   (change)="checkedColorItems(colorItem.code)"
-                                                                   type="checkbox"> {{colorItem.name | translate }}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <div class="col-sm-offset-3 col-sm-9">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input [(ngModel)]="detail.number_page" id="number_page"
-                                                               name="number_page"
-                                                               type="checkbox"> Số trang ruột
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-sm-6">
-                                            <div class="col-sm-offset-3 col-sm-9">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input [(ngModel)]="detail.hardcover" id="hardcover"
-                                                               name="hardcover"
-                                                               type="checkbox"> Bìa cứng
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <div class="col-sm-offset-3 col-sm-9">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input [(ngModel)]="detail.annex" id="annex" name="annex"
-                                                               type="checkbox"> Phụ bản
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-sm-6">
-                                            <div class="col-sm-offset-3 col-sm-9">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input [(ngModel)]="detail.sheet_hung" id="sheet_hung"
-                                                               name="sheet_hung"
-                                                               type="checkbox"> Tờ gác
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="form-group col-sm-6">
                                             <div class="col-sm-offset-3 col-sm-9">
                                                 <div class="checkbox">
