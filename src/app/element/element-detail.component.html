@@ -18,9 +18,10 @@
                                     <div class="multiobj">
                                         <div *ngFor='let item of properties.data' class="checkbox col-sm-6">
                                             <label>
-                                                <input id="{{item.code}}" name="{{item.code}}"
+                                                <input id="{{properties.id+'#'+item.code}}"
+                                                       name="{{properties.id+'#'+item.code}}"
                                                        [checked]="0"
-                                                       (change)="checkedItems(item.code)"
+                                                       (change)="checkedItems(properties.id+'#'+item.code)"
                                                        type="checkbox"> {{item.name | translate }}
                                             </label>
                                         </div>
