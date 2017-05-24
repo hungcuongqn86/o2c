@@ -6,13 +6,15 @@ import {HttpClient}         from '../http-client';
 import {TranslateModule} from "ng2-translate/ng2-translate";
 
 import {ElementComponent}    from './element.component';
+import {ElementDetailComponent} from  './element-detail.component';
 import {ElementRoutingModule}    from './element-routing.module';
 import {ElementService}    from  './element.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, ElementRoutingModule, HttpModule, TranslateModule],
     declarations: [
-        ElementComponent
+        ElementComponent,
+        ElementDetailComponent
     ],
     providers: [HttpClient, ElementService]
 })

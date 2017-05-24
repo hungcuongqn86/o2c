@@ -15,4 +15,11 @@ export class ElementService {
         let url = this.apiUrl + '/' + this.module + `/config`;
         return this.http.get(url).map((res: Response) => res.json().data);
     }
+
+    getSingle(id: string) {
+        let url = this.apiUrl + '/' + this.module + `/getSingle`;
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('id', id);
+        return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
+    }
 }

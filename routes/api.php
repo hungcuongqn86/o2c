@@ -45,6 +45,7 @@ Route::group(['prefix' => 'producttype'], function () {
 
 Route::group(['prefix' => 'element'], function () {
     Route::get('/config', 'ElementController@getElementConfig');
+    Route::get('/getSingle', 'ElementController@getSingle');
 });
 
 Route::group(['prefix' => 'contract'], function () {

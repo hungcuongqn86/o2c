@@ -17,6 +17,7 @@ export class ElementDetailComponent implements OnInit {
     @ViewChild('form') form: NgModel;
     detail: any = JSON.parse('{"id":0,"code":"","name":"","size_config":"","color_config":"","paper_type_config":"","number_page":0,"hardcover":0,"annex":0,"sheet_hung":0,"outsource_type_config":"","enabled":0}');
     res: any;
+    recordId;
 
     constructor(private translate: TranslateService, private ElementService: ElementService, private router: Router, private route: ActivatedRoute) {
         this.route.params.forEach((params: Params) => {
@@ -27,31 +28,19 @@ export class ElementDetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        //this.getConfig();
+        this.getDetail(this.recordId);
     }
 
     private getDetail(id: string) {
-        /*this.producttypeService.getSingle(id).subscribe(
+        this.ElementService.getSingle(id).subscribe(
             data => {
                 this.detail = data;
-                if (this.detail.size_config != '') {
-                    this.sizeSelected = this.detail.size_config.split(',');
-                }
-                if (this.detail.color_config != '') {
-                    this.colorSelected = this.detail.color_config.split(',');
-                }
-                if (this.detail.paper_type_config != '') {
-                    this.paperTypeSelected = this.detail.paper_type_config.split(',');
-                }
-                if (this.detail.outsource_type_config != '') {
-                    this.outsourceTypeSelected = this.detail.outsource_type_config.split(',');
-                }
             },
             error => {
                 console.error("Not user!");
                 return Observable.throw(error);
             }
-        );*/
+        );
     }
 
     ngAfterViewInit() {
