@@ -36,6 +36,7 @@ return [
         ['name' => 'SIDEBAR.RECORD', 'icon' => 'fa fa fa-archive', 'uri' => 'record'],
         ['name' => 'SIDEBAR.REPORT', 'icon' => 'fa fa-list-alt', 'uri' => 'report'],
         ['name' => 'SIDEBAR.PRODUCT_TYPE', 'icon' => 'fa fa-server', 'uri' => 'producttype'],
+        ['name' => 'SIDEBAR.ELEMENT', 'icon' => 'fa fa-bandcamp', 'uri' => 'element'],
         ['name' => 'SIDEBAR.USER', 'icon' => 'fa fa-user-circle-o', 'uri' => 'user'],
         ['name' => 'SIDEBAR.LIST_SYS', 'icon' => 'fa fa-table', 'uri' => 'list'],
     ],

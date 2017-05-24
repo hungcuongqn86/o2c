@@ -16,7 +16,8 @@
     "FOLLOW": "Sổ theo dõi sản xuất",
     "WAREHOUSE": "Kho thành phẩm",
     "RECORD": "Hồ sơ lưu",
-    "PRODUCT_TYPE": "Loại sản phẩm"
+    "PRODUCT_TYPE": "Loại sản phẩm",
+    "ELEMENT": "Thành phần"
   },
   "LISTTYPE": {
     "department": "Bộ phận",

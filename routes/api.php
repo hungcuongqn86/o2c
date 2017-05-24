@@ -43,6 +43,10 @@ Route::group(['prefix' => 'producttype'], function () {
     Route::delete('/delete/{ids}', 'ProducttypeController@delete');
 });
 
+Route::group(['prefix' => 'element'], function () {
+    Route::get('/config', 'ElementController@getElementConfig');
+});
+
 Route::group(['prefix' => 'contract'], function () {
     Route::get('/getAll', 'ContractController@getAll');
     Route::get('/getSingle', 'ContractController@getSingle');
