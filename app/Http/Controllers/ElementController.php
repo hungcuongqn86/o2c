@@ -44,13 +44,11 @@ class ElementController extends Controller
                 $arrProperties = config('bases.properties');
                 $arrP = [];
                 foreach ($properties as $item) {
-                    $arrP[$item] = $arrProperties[$item];
                     if (($arrProperties[$item]['type'] == 'select') || ($arrProperties[$item]['type'] == 'mcheck')) {
-                        $arrP[$item]['data'] = AppServiceFactory::mListsService()->ListGet($item);
-                    } else {
-                        $arrP[$item]['data'] = [];
+                        $arrProperties[$item]['id'] = $item;
+                        $arrProperties[$item]['data'] = AppServiceFactory::mListsService()->ListGet($item);
+                        $arrP[] = $arrProperties[$item];
                     }
-
                 }
                 $arrReturn['properties'] = $arrP;
             }

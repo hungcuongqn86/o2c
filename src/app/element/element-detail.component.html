@@ -3,7 +3,40 @@
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">{{detail.name}}</h3>
+                        <button type="button" (click)="goBack()" class="btn btn-warning pull-right">Quay lại</button>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal" #form="ngForm">
+                        <div class="box-body">
+                            <div *ngFor='let properties of detail.properties' class="form-group">
+                                <label class="col-sm-3 control-label">{{properties.lable}}</label>
+                                <div class="col-sm-9">
+                                    <div class="multiobj">
+                                        <div *ngFor='let item of properties.data' class="checkbox col-sm-6">
+                                            <label>
+                                                <input id="{{item.code}}" name="{{item.code}}"
+                                                       [checked]="0"
+                                                       (change)="checkedItems(item.code)"
+                                                       type="checkbox"> {{item.name | translate }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
+                                    class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập nhật
+                            </button>
+                        </div>
+                        <!-- /.box-footer -->
+                    </form>
+                </div>
             </div>
         </div>
     </section>

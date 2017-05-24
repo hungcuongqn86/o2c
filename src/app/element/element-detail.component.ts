@@ -15,7 +15,7 @@ declare let $: any;
 
 export class ElementDetailComponent implements OnInit {
     @ViewChild('form') form: NgModel;
-    detail: any = JSON.parse('{"id":0,"code":"","name":"","size_config":"","color_config":"","paper_type_config":"","number_page":0,"hardcover":0,"annex":0,"sheet_hung":0,"outsource_type_config":"","enabled":0}');
+    detail: any = JSON.parse('{"id":0,"name":"","properties":""}');
     res: any;
     recordId;
 
@@ -35,12 +35,17 @@ export class ElementDetailComponent implements OnInit {
         this.ElementService.getSingle(id).subscribe(
             data => {
                 this.detail = data;
+                // console.log(this.detail.properties);
             },
             error => {
-                console.error("Not user!");
+                console.error("Not element!");
                 return Observable.throw(error);
             }
         );
+    }
+
+    private goBack() {
+        this.router.navigate(['/element']);
     }
 
     ngAfterViewInit() {
