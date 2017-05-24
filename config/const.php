@@ -8,24 +8,11 @@
  */
 
 return [
-	'ARRAY_LISTTYPE' => [
-		['code' => 'department', 'name' => 'LISTTYPE.department'],
-		['code' => 'unit', 'name' => 'LISTTYPE.unit'],
-        ['code' => 'standard', 'name' => 'LISTTYPE.standard'],
+    'ARRAY_LISTTYPE' => [
+        ['code' => 'department', 'name' => 'LISTTYPE.department'],
         ['code' => 'cach_gia_cong', 'name' => 'LISTTYPE.outsourcing'],
-        ['code' => 'packing', 'name' => 'LISTTYPE.packing'],
-        ['code' => 'mold', 'name' => 'LISTTYPE.mold'],
-        ['code' => 'number_hand', 'name' => 'LISTTYPE.number_hand'],
-        ['code' => 'print_type', 'name' => 'LISTTYPE.print_type'],
-        ['code' => 'print_size', 'name' => 'LISTTYPE.print_size'],
-        ['code' => 'mau_in', 'name' => 'LISTTYPE.print_color'],
-        ['code' => 'zinc_type', 'name' => 'LISTTYPE.zinc_type'],
-        ['code' => 'machine', 'name' => 'LISTTYPE.machine'],
-        ['code' => 'loai_giay', 'name' => 'LISTTYPE.paper_type'],
-        ['code' => 'size_store', 'name' => 'LISTTYPE.size_store'],
-        ['code' => 'cut_type', 'name' => 'LISTTYPE.cut_type'],
-        ['code' => 'number_char', 'name' => 'LISTTYPE.number_char']
-	],
+        ['code' => 'loai_giay', 'name' => 'LISTTYPE.paper_type']
+    ],
 
     'ARRAY_MENU' => [
         ['name' => 'SIDEBAR.DASHBOARD', 'icon' => 'fa fa-dashboard', 'uri' => 'index',],

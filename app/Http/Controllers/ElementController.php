@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\AppServiceFactory;
+use App\Entities\ElementProperties;
+
+//use Illuminate\Support\Facades\DB;
 
 class ElementController extends Controller
 {
@@ -53,6 +56,34 @@ class ElementController extends Controller
                 $arrReturn['properties'] = $arrP;
             }
             return response()->success($arrReturn);
+        } catch (\Exception $e) {
+            throw $e;
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
+
+    public function saveRecord(Request $request)
+    {
+        $input = $request->all();
+        $id = $input['id'];
+        $data = json_decode($input['data'], true);
+        try {
+            //Delete exit
+            ElementProperties::where('element_code', '=', $id)->delete();
+            foreach ($data as $datum) {
+                $arrinput = explode('#', $datum);
+                $arrinsert = array(
+                    'element_code' => $id,
+                    'properties_code' => $arrinput[0],
+                    'list_code' => $arrinput[1]
+                );
+                $db = new ElementProperties($arrinsert);
+                $db->save();
+            }
+            return response()->success([1]);
+        } catch (\PDOException $e) {
+            throw $e;
+            return response()->error(trans('messages.MSG_PDO_Error'), 400);
         } catch (\Exception $e) {
             throw $e;
             return response()->error(trans('messages.MSG_Error'), 400);

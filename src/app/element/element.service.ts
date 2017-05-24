@@ -22,4 +22,11 @@ export class ElementService {
         params.set('id', id);
         return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
     }
+
+    saveRecord(list: any) {
+        let url = this.apiUrl + '/' + this.module + `/saveRecord`;
+        let headers = new Headers({'Content-Type': 'application/json'});
+        let body = JSON.stringify(list);
+        return this.http.post(url, body, headers).map((res: Response) => res.json());
+    }
 }

@@ -15,7 +15,7 @@ declare let $: any;
 
 export class ElementDetailComponent implements OnInit {
     @ViewChild('form') form: NgModel;
-    detail: any = JSON.parse('{"id":0,"name":"","properties":""}');
+    detail: any = JSON.parse('{"id":0,"name":"","properties":"","data":""}');
     arrSelect: any = [];
     res: any;
     recordId;
@@ -45,7 +45,25 @@ export class ElementDetailComponent implements OnInit {
         );
     }
 
-    checkedItems(value: string) {
+    private saveRecord() {
+        this.detail.data = JSON.stringify(this.arrSelect);
+        this.ElementService.saveRecord(this.detail).subscribe(
+            res => {
+                this.res = res;
+                if (res.error == false) {
+                    this.router.navigate(['/element']);
+                } else if (res.error == true) {
+                    console.error(res.message[0]);
+                }
+            },
+            error => {
+                console.error("Save Error!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    public checkedItems(value: string) {
         if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
             this.arrSelect.push(value);
         }
@@ -55,7 +73,6 @@ export class ElementDetailComponent implements OnInit {
                 this.arrSelect.splice(indexx, 1);
             }
         }
-        console.log(this.arrSelect);
     }
 
     private goBack() {
