@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entities;
 
 use Illuminate\Notifications\Notifiable;
@@ -26,13 +27,15 @@ class Contracts extends BaseEntity
         'outsourcing',
         'packing',
         'success_date',
+        'image',
         'note'
     ];
 
     protected $hidden = [
     ];
 
-    public function Customers() {
+    public function Customers()
+    {
         return $this->belongsTo(Customers::class, 'customer_id', 'id');
     }
 }

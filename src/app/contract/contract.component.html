@@ -90,9 +90,11 @@
                                 </button>
                                 <button type="button" (click)="getContractsData(searchparam)"
                                         class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i>
+                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
+                                        class="fa fa-pencil-square-o"></i>
                                 </button>
-                                <button type="button" (click)="showConfirm()" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i>
+                                <button type="button" (click)="showConfirm()" class="btn btn-default btn-sm"><i
+                                        class="fa fa-trash-o"></i>
                                 </button>
                                 <div class="pull-right">
                                     {{from}}-{{to}}/{{total}}
@@ -110,14 +112,17 @@
                                 <table class="table table-hover table-striped">
                                     <tbody>
                                     <tr *ngFor="let item of listdata">
-                                        <td><input id="{{item.id}}" name="{{item.id}}" title="Chọn hợp đồng" type="checkbox"
+                                        <td><input id="{{item.id}}" name="{{item.id}}" title="Chọn hợp đồng"
+                                                   type="checkbox"
                                                    [checked]="checklist!='' && checklist.includes(item.id)"
                                                    (change)="checkedItems(item.id)"></td>
                                         <td class="mailbox-name">{{item.code}}</td>
                                         <td class="mailbox-date">{{item.signdate}}</td>
                                         <td class="mailbox-name">{{item.customers.name}}</td>
                                         <td class="mailbox-subject">{{item.content}}</td>
-                                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                        <td class="mailbox-attachment"><i *ngIf="item.image"
+                                                                          class="fa fa-paperclip"></i>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -135,9 +140,11 @@
                                 </button>
                                 <button type="button" (click)="getContractsData(searchparam)"
                                         class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i class="fa fa-pencil-square-o"></i>
+                                <button type="button" (click)="editRecord()" class="btn btn-default btn-sm"><i
+                                        class="fa fa-pencil-square-o"></i>
                                 </button>
-                                <button type="button" (click)="showConfirm()" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i>
+                                <button type="button" (click)="showConfirm()" class="btn btn-default btn-sm"><i
+                                        class="fa fa-trash-o"></i>
                                 </button>
                                 <div class="pull-right">
                                     {{from}}-{{to}}/{{total}}

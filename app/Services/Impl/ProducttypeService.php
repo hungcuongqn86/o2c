@@ -72,6 +72,11 @@ class ProducttypeService extends CommonService implements IProducttypeService
             $return['FILE_ENCODE'] = base64_encode(urlencode($return['image']));
             $return['upload'] = 0;
             $return['image'] = '';
+        } else {
+            $return['FILE_VIEW'] = '';
+            $return['FILE_ENCODE'] = '';
+            $return['upload'] = 0;
+            $return['image'] = '';
         }
         return $return;
     }

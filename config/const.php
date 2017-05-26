@@ -40,5 +40,6 @@ return [
     ],
 
     'UPLOAD_DIR' => env('UPLOAD_DIR', 'uploads/'),
-    'PRODUCT_PIC_DIR' => env('PRODUCT_PIC_DIR', 'product/')
+    'PRODUCT_PIC_DIR' => env('PRODUCT_PIC_DIR', 'product/'),
+    'CONTRACT_DIR' => env('CONTRACT_DIR', 'contract/')
 ];

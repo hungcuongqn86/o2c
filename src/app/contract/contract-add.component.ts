@@ -1,10 +1,11 @@
-import {Component, ViewChild, OnInit} from '@angular/core';
+import {Component, ViewChild, OnInit, AfterViewInit, NgZone, Inject} from '@angular/core';
 import {NgModel} from '@angular/forms'
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {contractService}    from  './contract.service';
 import {ConfirmComponent} from '../confirm.component';
 import {AlertComponent} from '../alert.component';
+import {NgUploaderOptions, UploadedFile} from 'ngx-uploader';
 import {ProductDetailComponent} from './product-detail.component';
 import {DialogService} from "ng2-bootstrap-modal";
 import {Observable} from 'rxjs/Rx';
@@ -17,13 +18,20 @@ declare let $: any;
     styleUrls: ['./contract.component.css']
 })
 
-export class ContractAddComponent implements OnInit {
+export class ContractAddComponent implements OnInit, AfterViewInit {
     @ViewChild('form') form: NgModel;
     @ViewChild('form1') form1: NgModel;
-    detail: any = JSON.parse('{"id":0,"code":"","signdate":"","customer_id":"","content":"","value":"","durationdate":""}');
+    detail: any = JSON.parse('{"id":0,"code":"","signdate":"","customer_id":"","content":"","value":"","durationdate":"","image":"","upload":0,"FILE_VIEW":"","FILE_ENCODE":""}');
     products: any = [];
     recordId: number = 0;
     customer: any = [];
+
+    options: NgUploaderOptions;
+    response: any;
+    filenameview: string = '';
+    fileencode: string;
+    hasBaseDropZoneOver: boolean = true;
+    sizeLimit: number = 1000000; // 1MB
     res: any;
 
     checklist: Array<any> = [];
@@ -31,7 +39,7 @@ export class ContractAddComponent implements OnInit {
 
     titleAction: string = 'COMMON.ADD_LABLE';
 
-    constructor(private translate: TranslateService, private contractService: contractService, private router: Router, private route: ActivatedRoute, private dialogService: DialogService) {
+    constructor(private translate: TranslateService, private contractService: contractService, private router: Router, private route: ActivatedRoute, private dialogService: DialogService, @Inject(NgZone) private zone: NgZone) {
         this.route.params.forEach((params: Params) => {
             if (params['id'] && params['id'].length) {
                 this.recordId = params['id'];
@@ -42,6 +50,11 @@ export class ContractAddComponent implements OnInit {
             this.getDetail(this.recordId.toString());
             this.getProduct(this.recordId.toString());
         }
+        this.options = new NgUploaderOptions({
+            url: './api/upload',
+            autoUpload: true,
+            calculateSpeed: true
+        });
     }
 
     ngOnInit() {
@@ -53,6 +66,8 @@ export class ContractAddComponent implements OnInit {
         this.contractService.getSingle(id).subscribe(
             data => {
                 this.detail = data;
+                this.filenameview = this.detail.FILE_VIEW;
+                this.fileencode = this.detail.FILE_ENCODE;
             },
             error => {
                 console.error("Not detail!");
@@ -205,7 +220,7 @@ export class ContractAddComponent implements OnInit {
             res => {
                 this.res = res;
                 if (res.error == false) {
-                    console.log(111);
+                    // console.log(111);
                 } else if (res.error == true) {
                     console.error(res.message[0]);
                 }
@@ -333,5 +348,36 @@ export class ContractAddComponent implements OnInit {
 
     ngAfterViewInit() {
         $.AdminLTE.layout.fix();
+    }
+
+    beforeUpload(uploadingFile: UploadedFile): void {
+        if (uploadingFile.size > this.sizeLimit) {
+            uploadingFile.setAbort();
+            console.log('File is too large!');
+        }
+    }
+
+    handleUpload(data: any) {
+        setTimeout(() => {
+            this.zone.run(() => {
+                this.response = data;
+                if (data && data.response) {
+                    this.res = JSON.parse(data.response);
+                    if (this.res.error == false) {
+                        this.detail.image = this.res.data.PATH;
+                        this.detail.upload = 1;
+                        this.filenameview = this.res.data.FILE_VIEW;
+                        this.fileencode = this.res.data.FILE_ENCODE;
+                    } else {
+                        this.detail.upload = 0;
+                        this.detail.image = '';
+                    }
+                }
+            });
+        });
+    }
+
+    fileOverBase(e: boolean) {
+        this.hasBaseDropZoneOver = e;
     }
 }
