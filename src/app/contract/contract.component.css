@@ -26,3 +26,23 @@
 .sizeinput {
     width: 33%;
 }
+
+.producs-base-item {
+    border: 1px solid #ddd;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.producs-base-item:hover {
+    background-color: #1b6d85;
+}
+
+.producs-base-item img {
+    width: 90%;
+    margin: 10px;
+}
+
+.producs-base-item .produc-name {
+    margin: 5px;
+    margin-top: 15px;
+}

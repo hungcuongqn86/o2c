@@ -22,6 +22,16 @@ class Producttypes extends BaseEntity
         'enabled'
     ];
 
+    protected $appends = ['is_img'];
+
+    public function getIsImgAttribute()
+    {
+        if (isset($this->attributes['image']) && $this->attributes['image'] != '') {
+            return base64_encode(urlencode($this->attributes['image']));
+        }
+        return '';
+    }
+
     protected $hidden = [
     ];
 }

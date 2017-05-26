@@ -28,6 +28,7 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     outsourcingList: any = [];
     outsourceTypeSelected: Array<any> = [];
 
+    status = 'none';
     res: any;
 
     constructor(dialogService: DialogService, private productService: productService) {
@@ -64,6 +65,7 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
                 this.producttype = data.data;
                 if (this.id) {
                     this.getDetail(this.id.toString());
+                    this.status = 'edit';
                 }
             },
             error => {
@@ -73,11 +75,17 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         );
     }
 
+    public selectGridProducttype(code) {
+        this.detail.producttype_code = code;
+        this.selectProducttype();
+    }
+
     public selectProducttype() {
         for (let i = 0; i < this.producttype.length; i++) {
             const value = this.producttype[i].code;
             if (value == this.detail.producttype_code) {
                 this.producttypeDetail = this.producttype[i];
+                this.status = 'edit';
                 return false;
             }
         }
