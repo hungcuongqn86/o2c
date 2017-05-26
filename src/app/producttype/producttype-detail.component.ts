@@ -1,10 +1,11 @@
-import {Component, ViewChild, OnInit} from '@angular/core';
+import {Component, ViewChild, OnInit, NgZone, Inject} from '@angular/core';
 import {NgModel} from '@angular/forms'
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {producttypeService}    from  './producttype.service';
 import {ConfirmComponent} from '../confirm.component';
 import {AlertComponent} from '../alert.component';
+import {NgUploaderOptions, UploadedFile} from 'ngx-uploader';
 import {DialogService} from "ng2-bootstrap-modal";
 import {Observable} from 'rxjs/Rx';
 
@@ -20,9 +21,15 @@ export class ProducttypeDetailComponent implements OnInit {
     @ViewChild('form') form: NgModel;
     @ViewChild('form1') form1: NgModel;
     elements: any = [];
-    detail: any = JSON.parse('{"id":0,"code":"","name":"","size_config":"","element_config":"","image":"","enabled":0}');
+    detail: any = JSON.parse('{"id":0,"code":"","name":"","size_config":"","element_config":"","image":"","upload":0,"FILE_VIEW":"","FILE_ENCODE":"","enabled":0}');
     recordId: number = 0;
     customer: any = [];
+    options: NgUploaderOptions;
+    response: any;
+    filenameview: string = '';
+    fileencode: string;
+    hasBaseDropZoneOver: boolean = true;
+    sizeLimit: number = 1000000; // 1MB
     res: any;
 
     sizeSelected: Array<any> = [];
@@ -30,7 +37,7 @@ export class ProducttypeDetailComponent implements OnInit {
 
     titleAction: string = 'COMMON.ADD_LABLE';
 
-    constructor(private translate: TranslateService, private producttypeService: producttypeService, private router: Router, private route: ActivatedRoute, private dialogService: DialogService) {
+    constructor(private translate: TranslateService, private producttypeService: producttypeService, private router: Router, private route: ActivatedRoute, private dialogService: DialogService, @Inject(NgZone) private zone: NgZone) {
         this.route.params.forEach((params: Params) => {
             if (params['id'] && params['id'].length) {
                 this.recordId = params['id'];
@@ -40,6 +47,12 @@ export class ProducttypeDetailComponent implements OnInit {
             this.titleAction = 'COMMON.EDIT_LABLE';
             this.getDetail(this.recordId.toString());
         }
+
+        this.options = new NgUploaderOptions({
+            url: './api/upload',
+            autoUpload: true,
+            calculateSpeed: true
+        });
     }
 
     ngOnInit() {
@@ -68,6 +81,8 @@ export class ProducttypeDetailComponent implements OnInit {
                 if (this.detail.element_config != '') {
                     this.elementSelected = this.detail.element_config.split(',');
                 }
+                this.filenameview = this.detail.FILE_VIEW;
+                this.fileencode = this.detail.FILE_ENCODE;
             },
             error => {
                 console.error("Not producttype!");
@@ -163,6 +178,37 @@ export class ProducttypeDetailComponent implements OnInit {
                 this.elementSelected.splice(indexx, 1);
             }
         }
+    }
+
+    beforeUpload(uploadingFile: UploadedFile): void {
+        if (uploadingFile.size > this.sizeLimit) {
+            uploadingFile.setAbort();
+            console.log('File is too large!');
+        }
+    }
+
+    handleUpload(data: any) {
+        setTimeout(() => {
+            this.zone.run(() => {
+                this.response = data;
+                if (data && data.response) {
+                    this.res = JSON.parse(data.response);
+                    if (this.res.error == false) {
+                        this.detail.image = this.res.data.PATH;
+                        this.detail.upload = 1;
+                        this.filenameview = this.res.data.FILE_VIEW;
+                        this.fileencode = this.res.data.FILE_ENCODE;
+                    } else {
+                        this.detail.upload = 0;
+                        this.detail.image = '';
+                    }
+                }
+            });
+        });
+    }
+
+    fileOverBase(e: boolean) {
+        this.hasBaseDropZoneOver = e;
     }
 
     ngAfterViewInit() {

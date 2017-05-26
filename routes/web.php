@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/download/{file}', 'PublicController@download');
 
 Route::match(['get', 'post'], '/{any}', function ($any) {
     return view('index');

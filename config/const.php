@@ -37,5 +37,8 @@ return [
         ['code' => 'MANAGER3', 'name' => 'ROLE.MANAGER3'],
         ['code' => 'PERSONNEL1', 'name' => 'ROLE.PERSONNEL1'],
         ['code' => 'PERSONNEL2', 'name' => 'ROLE.PERSONNEL2'],
-    ]
+    ],
+
+    'UPLOAD_DIR' => env('UPLOAD_DIR', 'uploads/'),
+    'PRODUCT_PIC_DIR' => env('PRODUCT_PIC_DIR', 'product/')
 ];
