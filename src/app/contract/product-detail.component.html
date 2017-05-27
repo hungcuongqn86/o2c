@@ -77,19 +77,19 @@
 
                                 <div class="col-sm-8">
                                     <div class="input-group">
-                                        <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('LONG')"
+                                        <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('dai')"
                                                [(ngModel)]="detail.long" type="text"
                                                class="form-control sizeinput input-group-addon"
                                                #long="ngModel"
                                                id="long" name="long"
                                                placeholder="Dài">
-                                        <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('LARGE')"
+                                        <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('rong')"
                                                [(ngModel)]="detail.large" type="text"
                                                class="form-control sizeinput input-group-addon"
                                                #large="ngModel"
                                                id="large" name="large"
                                                placeholder="Rộng">
-                                        <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('HIGH')"
+                                        <input *ngIf="producttypeDetail.size_config && producttypeDetail.size_config.includes('cao')"
                                                [(ngModel)]="detail.high" type="text"
                                                class="form-control sizeinput input-group-addon"
                                                #high="ngModel"

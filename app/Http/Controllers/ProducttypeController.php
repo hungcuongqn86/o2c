@@ -45,6 +45,20 @@ class ProducttypeController extends Controller
         }
     }
 
+    public function getSingleByCode(Request $req)
+    {
+        $input = $req->all();
+        try {
+            return response()->success(AppServiceFactory::mProducttypeService()->getSingleByCode($input));
+        } catch (\PDOException $e) {
+            throw $e;
+            return response()->error(trans('messages.MSG_PDO_Error'), 400);
+        } catch (\Exception $e) {
+            throw $e;
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
+
     public function saveRecord(Request $request)
     {
         $input = $request->all();

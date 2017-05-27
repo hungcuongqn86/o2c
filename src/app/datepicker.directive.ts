@@ -15,7 +15,7 @@ declare let $: any;
 export class DatePicker extends DefaultValueAccessor implements OnInit {
     private element: ElementRef;
 
-    constructor(private model: NgModel, element: ElementRef, renderer: Renderer) {
+    constructor(element: ElementRef, renderer: Renderer) {
         super(renderer, element);
         this.element = element;
     }

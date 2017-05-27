@@ -57,12 +57,6 @@ class ProducttypeService extends CommonService implements IProducttypeService
         $id = $input['id'];
         $query = Producttypes::where('id', '=', $id);
         $return = $query->first()->toArray();
-        if (isset($return['signdate']) && ($return['signdate'] != '')) {
-            $return['signdate'] = _YYyymmddToddmmyyyy($return['signdate']);
-        }
-        if (isset($return['durationdate']) && ($return['durationdate'] != '')) {
-            $return['durationdate'] = _YYyymmddToddmmyyyy($return['durationdate']);
-        }
         if ($return['image']) {
             $arrFileName = explode('-', $return['image']);
             if (sizeof($arrFileName) > 1) {
@@ -78,6 +72,14 @@ class ProducttypeService extends CommonService implements IProducttypeService
             $return['upload'] = 0;
             $return['image'] = '';
         }
+        return $return;
+    }
+
+    public function getSingleByCode($input)
+    {
+        $code = $input['code'];
+        $query = Producttypes::where('code', '=', $code);
+        $return = $query->first()->toArray();
         return $return;
     }
 

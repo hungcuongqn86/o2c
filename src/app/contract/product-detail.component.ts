@@ -81,14 +81,17 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     }
 
     public selectProducttype() {
-        for (let i = 0; i < this.producttype.length; i++) {
-            const value = this.producttype[i].code;
-            if (value == this.detail.producttype_code) {
-                this.producttypeDetail = this.producttype[i];
+        this.productService.getProducttype(this.detail.producttype_code).subscribe(
+            data => {
+                this.producttypeDetail = data;
+                console.log(this.producttypeDetail);
                 this.status = 'edit';
-                return false;
+            },
+            error => {
+                console.error("Not producttype!");
+                return Observable.throw(error);
             }
-        }
+        );
     }
 
     private getListData() {
@@ -97,7 +100,7 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
                 this.genListData(data.data);
             },
             error => {
-                console.error("Not menu!");
+                console.error("Not list!");
                 return Observable.throw(error);
             }
         );

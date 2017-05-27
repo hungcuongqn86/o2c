@@ -40,6 +40,7 @@ Route::group(['prefix' => 'producttype'], function () {
     Route::get('/getElement', 'ProducttypeController@getElement');
     Route::get('/getAll', 'ProducttypeController@getAll');
     Route::get('/getSingle', 'ProducttypeController@getSingle');
+    Route::get('/getSingleByCode', 'ProducttypeController@getSingleByCode');
     Route::post('/saveRecord', 'ProducttypeController@saveRecord');
     Route::delete('/delete/{ids}', 'ProducttypeController@delete');
 });

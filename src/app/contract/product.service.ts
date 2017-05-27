@@ -19,6 +19,13 @@ export class productService {
         return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
     }
 
+    getProducttype(code) {
+        let url = this.apiUrl + `/producttype/getSingleByCode`;
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('code', code);
+        return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
+    }
+
     getListData(): any {
         const url = this.apiUrl + `/list/getAll`;
         let params: URLSearchParams = new URLSearchParams();
