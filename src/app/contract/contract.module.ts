@@ -5,6 +5,7 @@ import {HttpModule}          from '@angular/http';
 import {HttpClient}         from '../http-client';
 import {TranslateModule} from "ng2-translate/ng2-translate";
 import {NgUploaderModule} from 'ngx-uploader';
+import {DatePicker} from '../datepicker.directive';
 
 
 import {ContractComponent}    from './contract.component';
@@ -16,8 +17,10 @@ import {contractService}    from  './contract.service';
     imports: [CommonModule, FormsModule, ContractRoutingModule, HttpModule, TranslateModule, NgUploaderModule],
     declarations: [
         ContractComponent,
-        ContractAddComponent
+        ContractAddComponent,
+        DatePicker
     ],
+    exports: [DatePicker],
     providers: [HttpClient, contractService]
 })
 export class ContractModule {
