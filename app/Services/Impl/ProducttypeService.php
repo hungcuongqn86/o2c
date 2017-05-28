@@ -3,6 +3,7 @@
 namespace App\Services\Impl;
 
 use App\Entities\Producttypes;
+use App\Entities\ElementProperties;
 use App\Services\Intf\IProducttypeService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -80,7 +81,42 @@ class ProducttypeService extends CommonService implements IProducttypeService
         $code = $input['code'];
         $query = Producttypes::where('code', '=', $code);
         $return = $query->first()->toArray();
+        $arrElementData = [];
+        if ($return['element_config'] != '') {
+            $arrElement = explode(',', $return['element_config']);
+            foreach ($arrElement as $elementid) {
+                $arrElementData[] = self::getSingleElement($elementid);
+            }
+            $return['element_config'] = $arrElementData;
+        }
         return $return;
+    }
+
+    private function getSingleElement($id)
+    {
+        foreach (config('bases.element') as $element) {
+            if ($element['id'] === $id) {
+                if ($element['properties'] != '') {
+                    $arrProperties = explode(',', $element['properties']);
+                    $arrPropertiesData = [];
+                    foreach ($arrProperties as $propertiesid) {
+                        $arrPropertiesData[] = self::getSingleProperties($propertiesid, $id);
+                    }
+                    $element['properties'] = $arrPropertiesData;
+                }
+                return $element;
+            }
+        }
+        return [];
+    }
+
+    private function getSingleProperties($tag, $element)
+    {
+        $arrProperties = config('bases.properties.' . $tag);
+        if (($arrProperties['type'] == 'select') || ($arrProperties['type'] == 'mcheck')) {
+            $arrProperties['data'] = ElementProperties::where('element_code', '=', $element)->where('properties_code', '=', $tag)->get()->toArray();
+        }
+        return $arrProperties;
     }
 
     public function saveRecord($input)
