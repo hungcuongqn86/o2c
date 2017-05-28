@@ -215,10 +215,10 @@
                                             <tr>
                                                 <th style="width: 10px">#</th>
                                                 <th>Loại sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
                                                 <th>Số lượng</th>
                                                 <th>Kích thước</th>
-                                                <th>Số trang ruột</th>
-                                                <th>Quy cách đóng</th>
+                                                <th>Mô tả</th>
                                             </tr>
                                             <tr *ngFor="let prodItem of products">
                                                 <td><input id="{{prodItem.id}}" name="{{prodItem.id}}"
@@ -227,10 +227,10 @@
                                                            [checked]=""
                                                            (change)="checkedItems(prodItem.id)"></td>
                                                 <td class="mailbox-name">{{prodItem.producttypes.name}}</td>
+                                                <td class="mailbox-name">{{prodItem.name}}</td>
                                                 <td class="mailbox-name">{{prodItem.count}}</td>
                                                 <td class="mailbox-name">{{prodItem.long}}x{{prodItem.large}}</td>
-                                                <td class="mailbox-name">{{prodItem.number_page}}</td>
-                                                <td class="mailbox-subject">{{prodItem.standard}}</td>
+                                                <td class="mailbox-subject">{{prodItem.description}}</td>
                                             </tr>
                                             </tbody>
                                         </table>

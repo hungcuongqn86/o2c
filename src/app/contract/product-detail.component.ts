@@ -19,7 +19,7 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     contract_id: number;
     title: string;
     message: string = '';
-    detail: any = JSON.parse('{"id":0,"contract_id":"","producttype_code":"","count":"","long":"","large":"","high":"","name":"","description":"","elements":""}');
+    detail: any = JSON.parse('{"id":0,"contract_id":"","producttype_code":"","count":"","long":"","large":"","high":"","name":"","description":"","elements":{}}');
     producttype: any = [];
     producttypeDetail: any = [];
     standardList: any = [];
@@ -45,10 +45,10 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         this.productService.getSingle(id).subscribe(
             data => {
                 this.detail = data;
-                if (this.detail.outsource_type != '') {
-                    this.outsourceTypeSelected = this.detail.outsource_type.split(',');
+                if (this.detail.elements != '') {
+                    this.detail.elements = JSON.parse(this.detail.elements);
                 }
-                if (this.detail.outsource_type != '') {
+                if (this.detail.producttype_code != '') {
                     this.selectProducttype();
                 }
             },
@@ -84,7 +84,6 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         this.productService.getProducttype(this.detail.producttype_code).subscribe(
             data => {
                 this.producttypeDetail = data;
-                console.log(this.producttypeDetail);
                 this.status = 'edit';
             },
             error => {

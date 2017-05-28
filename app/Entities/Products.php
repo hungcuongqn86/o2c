@@ -19,9 +19,9 @@ class Products extends BaseEntity
         'name',
         'description',
         'count',
-        'long',
-        'large',
-        'high',
+        'dai',
+        'rong',
+        'cao',
         'elements'
     ];
 

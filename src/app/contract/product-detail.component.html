@@ -75,19 +75,19 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('dai')"
-                                           [(ngModel)]="detail.long" type="text"
+                                           [(ngModel)]="detail.dai" type="text"
                                            class="form-control sizeinput input-group-addon"
                                            #long="ngModel"
                                            id="long" name="long"
                                            placeholder="Dài">
                                     <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('rong')"
-                                           [(ngModel)]="detail.large" type="text"
+                                           [(ngModel)]="detail.rong" type="text"
                                            class="form-control sizeinput input-group-addon"
                                            #large="ngModel"
                                            id="large" name="large"
                                            placeholder="Rộng">
                                     <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('cao')"
-                                           [(ngModel)]="detail.high" type="text"
+                                           [(ngModel)]="detail.cao" type="text"
                                            class="form-control sizeinput input-group-addon"
                                            #high="ngModel"
                                            id="high" name="high"
@@ -129,10 +129,12 @@
                                    class="col-sm-4 control-label">{{properties.lable}}</label>
                             <div class="col-sm-8">
                                 <input *ngIf="properties.type=='text'" type="text" class="form-control"
+                                       [(ngModel)]="detail.elements[elsement.id+'-in-'+properties.id]"
                                        id="{{elsement.id}}-in-{{properties.id}}"
                                        name="{{elsement.id}}-in-{{properties.id}}"
                                        placeholder="{{properties.lable}} {{elsement.name}}">
                                 <select title="{{properties.lable}} {{elsement.name}}" *ngIf="properties.type=='select'"
+                                        [(ngModel)]="detail.elements[elsement.id+'-sel-'+properties.id]"
                                         id="{{elsement.id}}-sel-{{properties.id}}"
                                         name="{{elsement.id}}-sel-{{properties.id}}"
                                         class="form-control">
@@ -144,6 +146,7 @@
                                 <div *ngIf="properties.type=='check'" class="checkbox">
                                     <label>
                                         <input type="checkbox" id="{{elsement.id}}-chk-{{properties.id}}"
+                                               [(ngModel)]="detail.elements[elsement.id+'-chk-'+properties.id]"
                                                name="{{elsement.id}}-chk-{{properties.id}}"> {{properties.lable}}
                                     </label>
                                 </div>
