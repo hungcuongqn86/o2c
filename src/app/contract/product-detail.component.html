@@ -26,90 +26,139 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="status==='edit'" class="box-body">
+            <div *ngIf="status==='edit'">
                 <form class="form-horizontal" #form1="ngForm">
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="form-group col-sm-4">
-                                <label for="producttype_code" class="col-sm-4 control-label text-red">Loại sản
-                                    phẩm</label>
 
-                                <div class="col-sm-8"
-                                     [ngClass]="(producttype_code.touched && !producttype_code.valid)? 'has-error': ''">
-                                    <select [(ngModel)]="detail.producttype_code" class="form-control"
-                                            id="producttype_code"
-                                            #producttype_code="ngModel"
-                                            (change)="selectProducttype()"
-                                            name="producttype_code" title="Loại sản phẩm" required>
-                                        <option value=""></option>
-                                        <option *ngFor='let producttypeitem of producttype'
-                                                value="{{producttypeitem.code}}">{{producttypeitem.name}}
-                                        </option>
-                                    </select>
-                                    <div [hidden]="producttype_code.valid || producttype_code.untouched">
+                    <fieldset>
+                        <legend>thông tin chung</legend>
+                        <div class="form-group col-sm-4">
+                            <label for="producttype_code" class="col-sm-4 control-label text-red">Loại</label>
+
+                            <div class="col-sm-8"
+                                 [ngClass]="(producttype_code.touched && !producttype_code.valid)? 'has-error': ''">
+                                <select [(ngModel)]="detail.producttype_code" class="form-control"
+                                        id="producttype_code"
+                                        #producttype_code="ngModel"
+                                        (change)="selectProducttype()"
+                                        name="producttype_code" title="Loại sản phẩm" required>
+                                    <option *ngFor='let producttypeitem of producttype'
+                                            value="{{producttypeitem.code}}">{{producttypeitem.name}}
+                                    </option>
+                                </select>
+                                <div [hidden]="producttype_code.valid || producttype_code.untouched">
                                             <span *ngIf="producttype_code.errors && producttype_code.errors.required"
                                                   class="help-block">
                                                 Phải chọn loại sản phẩm!
                                             </span>
-                                    </div>
                                 </div>
                             </div>
-                            <div *ngIf="detail.producttype_code!=''" class="form-group col-sm-4">
-                                <label for="count" class="col-sm-4 control-label text-red">Số lượng</label>
+                        </div>
+                        <div *ngIf="detail.producttype_code!=''" class="form-group col-sm-4">
+                            <label for="count" class="col-sm-4 control-label text-red">Số lượng</label>
 
-                                <div class="col-sm-8"
-                                     [ngClass]="(count.touched && !count.valid)? 'has-error': ''">
-                                    <input [(ngModel)]="detail.count" type="text" class="form-control"
-                                           #count="ngModel"
-                                           id="count" name="count"
-                                           placeholder="Số lượng thành phẩm" required>
-                                    <div [hidden]="count.valid || count.untouched">
+                            <div class="col-sm-8"
+                                 [ngClass]="(count.touched && !count.valid)? 'has-error': ''">
+                                <input [(ngModel)]="detail.count" type="text" class="form-control"
+                                       #count="ngModel"
+                                       id="count" name="count"
+                                       placeholder="Số lượng thành phẩm" required>
+                                <div [hidden]="count.valid || count.untouched">
                                             <span *ngIf="count.errors && count.errors.required" class="help-block">
                                                 Phải nhập số lượng thành phẩm!
                                             </span>
-                                    </div>
                                 </div>
                             </div>
-                            <div *ngIf="detail.producttype_code!=''" class="form-group col-sm-4">
-                                <label for="long" class="col-sm-4 control-label text-red">Kích thước</label>
+                        </div>
+                        <div *ngIf="detail.producttype_code!=''" class="form-group col-sm-4">
+                            <label for="long" class="col-sm-4 control-label text-red">Kích thước</label>
 
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('dai')"
-                                               [(ngModel)]="detail.long" type="text"
-                                               class="form-control sizeinput input-group-addon"
-                                               #long="ngModel"
-                                               id="long" name="long"
-                                               placeholder="Dài">
-                                        <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('rong')"
-                                               [(ngModel)]="detail.large" type="text"
-                                               class="form-control sizeinput input-group-addon"
-                                               #large="ngModel"
-                                               id="large" name="large"
-                                               placeholder="Rộng">
-                                        <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('cao')"
-                                               [(ngModel)]="detail.high" type="text"
-                                               class="form-control sizeinput input-group-addon"
-                                               #high="ngModel"
-                                               id="high" name="high"
-                                               placeholder="Cao">
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('dai')"
+                                           [(ngModel)]="detail.long" type="text"
+                                           class="form-control sizeinput input-group-addon"
+                                           #long="ngModel"
+                                           id="long" name="long"
+                                           placeholder="Dài">
+                                    <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('rong')"
+                                           [(ngModel)]="detail.large" type="text"
+                                           class="form-control sizeinput input-group-addon"
+                                           #large="ngModel"
+                                           id="large" name="large"
+                                           placeholder="Rộng">
+                                    <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('cao')"
+                                           [(ngModel)]="detail.high" type="text"
+                                           class="form-control sizeinput input-group-addon"
+                                           #high="ngModel"
+                                           id="high" name="high"
+                                           placeholder="Cao">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label for="count" class="col-sm-4 control-label text-red">Tên sản phẩm</label>
+
+                            <div class="col-sm-8"
+                                 [ngClass]="(name.touched && !name.valid)? 'has-error': ''">
+                                <input [(ngModel)]="detail.name" type="text" class="form-control"
+                                       #name="ngModel"
+                                       id="name" name="name"
+                                       placeholder="Tên sản phẩm" required>
+                                <div [hidden]="name.valid || name.untouched">
+                                            <span *ngIf="name.errors && name.errors.required" class="help-block">
+                                                Phải nhập tên sản phẩm!
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label for="count" class="col-sm-4 control-label">Mô tả</label>
+
+                            <div class="col-sm-8">
+                                <textarea [(ngModel)]="detail.description" name="description" id="description"
+                                          class="form-control"
+                                          rows="2" placeholder="Mô tả sản phẩm"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset *ngFor='let elsement of producttypeDetail.element_config'>
+                        <legend>{{elsement.name}}</legend>
+                        <div *ngFor='let properties of elsement.properties'
+                             class="form-group col-sm-4">
+                            <label for="producttype_code"
+                                   class="col-sm-4 control-label">{{properties.lable}}</label>
+                            <div class="col-sm-8">
+                                <input *ngIf="properties.type=='text'" type="text" class="form-control"
+                                       id="{{elsement.id}}-in-{{properties.id}}"
+                                       name="{{elsement.id}}-in-{{properties.id}}"
+                                       placeholder="{{properties.lable}} {{elsement.name}}">
+                                <select title="{{properties.lable}} {{elsement.name}}" *ngIf="properties.type=='select'"
+                                        id="{{elsement.id}}-sel-{{properties.id}}"
+                                        name="{{elsement.id}}-sel-{{properties.id}}"
+                                        class="form-control">
+                                    <option value=""></option>
+                                    <option *ngFor='let dataitem of properties.data'
+                                            value="{{dataitem.list_code}}">{{dataitem.list_code}}
+                                    </option>
+                                </select>
+                                <div *ngIf="properties.type=='check'" class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="{{elsement.id}}-chk-{{properties.id}}"
+                                               name="{{elsement.id}}-chk-{{properties.id}}"> {{properties.lable}}
+                                    </label>
+                                </div>
+                                <div *ngIf="properties.type=='mcheck'" class="multiobj">
+                                    <div *ngFor='let dataitem of properties.data' class="checkbox col-sm-12">
+                                        <label>
+                                            <input id="{{elsement.id}}-mchk-{{properties.id}}-val-{{dataitem.list_code}}"
+                                                   name="{{elsement.id}}-mchk-{{properties.id}}-val-{{dataitem.list_code}}"
+                                                   type="checkbox"> {{dataitem.list_code}}
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <template ngFor let-elsement [ngForOf]="producttypeDetail.element_config">
-                                <div *ngFor='let properties of elsement.properties'
-                                     class="form-group col-sm-4">
-                                    <label for="producttype_code" class="col-sm-4 control-label text-red">{{properties.lable}}</label>
-                                    <div class="col-sm-8">
-
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
+                    </fieldset>
                 </form>
             </div>
         </div>

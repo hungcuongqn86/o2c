@@ -1,15 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
-.form-horizontal .control-label{
+.form-horizontal .control-label {
     text-align: left;
 }
 
-.hidebox{
+.hidebox {
     display: none;
 }
 
-.multiobj{
+.multiobj {
     border: 1px solid #ddd;
     display: inline-block;
     padding-bottom: 10px;
     width: 100%;
+}
+
+fieldset {
+    padding: .35em .625em .75em;
+    margin: 10px 0;
+    border: 1px solid #c0c0c0;
+}
+
+legend {
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 14px;
+}
+
+.form-horizontal .form-group {
+    min-height: 70px;
 }

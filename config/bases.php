@@ -3,22 +3,27 @@
 return [
     'properties' => [
         'loai_giay' => [
+            'id' => 'loai_giay',
             'type' => 'select',
             'lable' => 'Loại giấy'
         ],
         'mau_in' => [
+            'id' => 'mau_in',
             'type' => 'select',
             'lable' => 'Số màu in'
         ],
         'so_trang' => [
+            'id' => 'so_trang',
             'type' => 'text',
             'lable' => 'Số trang'
         ],
         'bia_cung' => [
+            'id' => 'bia_cung',
             'type' => 'check',
             'lable' => 'Bìa cứng'
         ],
         'cach_gia_cong' => [
+            'id' => 'cach_gia_cong',
             'type' => 'mcheck',
             'lable' => 'Cách gia công'
         ]
