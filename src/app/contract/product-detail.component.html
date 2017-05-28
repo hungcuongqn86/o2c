@@ -28,7 +28,6 @@
             </div>
             <div *ngIf="status==='edit'">
                 <form class="form-horizontal" #form1="ngForm">
-
                     <fieldset>
                         <legend>thông tin chung</legend>
                         <div class="form-group col-sm-4">
@@ -154,6 +153,8 @@
                                     <div *ngFor='let dataitem of properties.data' class="checkbox col-sm-12">
                                         <label>
                                             <input id="{{elsement.id}}-mchk-{{properties.id}}-val-{{dataitem.list_code}}"
+                                                   [checked]="checkSelected.includes(elsement.id+'-mchk-'+properties.id+'-val-'+dataitem.list_code)"
+                                                   (change)="checkedItems(elsement.id+'-mchk-'+properties.id+'-val-'+dataitem.list_code)"
                                                    name="{{elsement.id}}-mchk-{{properties.id}}-val-{{dataitem.list_code}}"
                                                    type="checkbox"> {{dataitem.list_code}}
                                         </label>

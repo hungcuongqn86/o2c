@@ -18,15 +18,10 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     id: number;
     contract_id: number;
     title: string;
-    message: string = '';
     detail: any = JSON.parse('{"id":0,"contract_id":"","producttype_code":"","count":"","long":"","large":"","high":"","name":"","description":"","elements":{}}');
     producttype: any = [];
     producttypeDetail: any = [];
-    standardList: any = [];
-    print_colorList: any = [];
-    paper_typeList: any = [];
-    outsourcingList: any = [];
-    outsourceTypeSelected: Array<any> = [];
+    checkSelected: Array<any> = [];
 
     status = 'none';
     res: any;
@@ -38,7 +33,6 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     ngOnInit() {
         this.detail.contract_id = this.contract_id;
         this.getProducttypes();
-        this.getListData();
     }
 
     private getDetail(id: string) {
@@ -47,6 +41,7 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
                 this.detail = data;
                 if (this.detail.elements != '') {
                     this.detail.elements = JSON.parse(this.detail.elements);
+                    this.checkSelected = this.detail.elements.checkSelected.split(',');
                 }
                 if (this.detail.producttype_code != '') {
                     this.selectProducttype();
@@ -93,48 +88,24 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         );
     }
 
-    private getListData() {
-        this.productService.getListData().subscribe(
-            data => {
-                this.genListData(data.data);
-            },
-            error => {
-                console.error("Not list!");
-                return Observable.throw(error);
-            }
-        );
-    }
-
-    private genListData(data: any) {
-        Object.keys(data).map((key) => {
-            if (data[key].listtype_code == 'standard') {
-                this.standardList.push(data[key]);
-            }
-            if (data[key].listtype_code == 'print_color') {
-                this.print_colorList.push(data[key]);
-            }
-            if (data[key].listtype_code == 'paper_type') {
-                this.paper_typeList.push(data[key]);
-            }
-            if (data[key].listtype_code == 'outsourcing') {
-                this.outsourcingList.push(data[key]);
-            }
-        });
-    }
-
-    checkedOutsourceItems(value: string) {
+    public checkedItems(value: string) {
         if ((<HTMLInputElement>document.getElementById(value)).checked === true) {
-            this.outsourceTypeSelected.push(value);
+            this.checkSelected.push(value);
         }
         else if ((<HTMLInputElement>document.getElementById(value)).checked === false) {
-            let indexx: number = this.outsourceTypeSelected.indexOf(value);
+            let indexx: number = this.checkSelected.indexOf(value);
             if (indexx >= 0) {
-                this.outsourceTypeSelected.splice(indexx, 1);
+                this.checkSelected.splice(indexx, 1);
             }
         }
     }
 
     apply() {
+        if (this.checkSelected.length > 0) {
+            this.detail.elements['checkSelected'] = this.checkSelected.join(',');
+        } else {
+            this.detail.elements['checkSelected'] = '';
+        }
         this.productService.saveRecord(this.detail).subscribe(
             res => {
                 this.res = res;
