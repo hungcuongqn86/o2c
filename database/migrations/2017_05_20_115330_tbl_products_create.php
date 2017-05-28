@@ -22,22 +22,13 @@ class TblProductsCreate extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->bigInteger('contract_id')->nullable()->unsigned();
             $table->string('producttype_code', 20)->nullable();
+            $table->string('name', 400)->nullable();
+            $table->string('description', 500)->nullable();
             $table->bigInteger('count')->unsigned()->nullable();
-            $table->string('long', 20)->nullable();
-            $table->string('large', 20)->nullable();
-            $table->string('high', 20)->nullable();
-            $table->string('cover_color', 20)->nullable();
-            $table->string('inside_color', 20)->nullable();
-            $table->string('cover_paper_type', 20)->nullable();
-            $table->string('inside_paper_type', 20)->nullable();
-            $table->string('standard', 20)->nullable();
-            $table->bigInteger('number_page')->unsigned()->nullable();
-            $table->tinyInteger('hardcover')->unsigned()->nullable()->default(0);
-            $table->string('number_page_annex', 20)->nullable();
-            $table->string('inside_color_annex', 20)->nullable();
-            $table->string('inside_paper_type_annex', 20)->nullable();
-            $table->string('sheet_hung', 20)->nullable();
-            $table->string('outsource_type', 200)->nullable();
+            $table->string('dai', 20)->nullable();
+            $table->string('rong', 20)->nullable();
+            $table->string('cao', 20)->nullable();
+            $table->longText('elements')->nullable();
             $table->timestamps();
         });
     }

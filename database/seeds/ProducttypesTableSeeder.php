@@ -15,9 +15,15 @@ class ProducttypesTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         for ($i = 0; $i < 10; $i++) {
+            $code = 'SACH';
+            $name = 'Sách';
+            if ($i) {
+                $code = $faker->text(20);
+                $name = $faker->text(200);
+            }
             App\Entities\Producttypes::create([
-                'code' => $faker->text(20),
-                'name' => $faker->text(200),
+                'code' => $code,
+                'name' => $name,
                 'size_config' => 'dai,rong,cao',
                 'element_config' => 'bia,ruot',
                 'image' => '',

@@ -19,7 +19,7 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     contract_id: number;
     title: string;
     message: string = '';
-    detail: any = JSON.parse('{"id":0,"contract_id":"","producttype_code":"","count":"","long":"","large":"","high":"","cover_color":"","inside_color":"","cover_paper_type":"","inside_paper_type":"","standard":"","number_page":"","hardcover":"","number_page_annex":"","inside_color_annex":"","inside_paper_type_annex":"","sheet_hung":"","outsource_type":""}');
+    detail: any = JSON.parse('{"id":0,"contract_id":"","producttype_code":"","count":"","long":"","large":"","high":"","name":"","description":"","elements":""}');
     producttype: any = [];
     producttypeDetail: any = [];
     standardList: any = [];
@@ -136,11 +136,6 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
     }
 
     apply() {
-        if (this.outsourceTypeSelected.length > 0) {
-            this.detail.outsource_type = this.outsourceTypeSelected.join(',');
-        } else {
-            this.detail.outsource_type = '';
-        }
         this.productService.saveRecord(this.detail).subscribe(
             res => {
                 this.res = res;

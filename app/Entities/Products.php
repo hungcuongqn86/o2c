@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entities;
 
 use Illuminate\Notifications\Notifiable;
@@ -15,28 +16,20 @@ class Products extends BaseEntity
     protected $fillable = [
         'contract_id',
         'producttype_code',
+        'name',
+        'description',
         'count',
         'long',
         'large',
         'high',
-        'cover_color',
-        'inside_color',
-        'cover_paper_type',
-        'inside_paper_type',
-        'standard',
-        'number_page',
-        'hardcover',
-        'number_page_annex',
-        'inside_color_annex',
-        'inside_paper_type_annex',
-        'sheet_hung',
-        'outsource_type'
+        'elements'
     ];
 
     protected $hidden = [
     ];
 
-    public function Producttypes() {
+    public function Producttypes()
+    {
         return $this->belongsTo(Producttypes::class, 'producttype_code', 'code');
     }
 }
