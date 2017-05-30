@@ -264,326 +264,82 @@
                         </div>
 
                         <div class="tab-pane" id="command">
-                            <!--<form class="form-horizontal" #form2="ngForm">
-                                <div class="box-body">
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="structure_name" class="col-sm-3 control-label text-red">Tên kết
-                                                cấu</label>
-
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(structure_name.touched && !structure_name.valid)? 'has-error': ''">
-                                                <input [(ngModel)]="detail.structure_name" type="text"
-                                                       class="form-control"
-                                                       #structure_name="ngModel"
-                                                       id="structure_name" name="structure_name"
-                                                       placeholder="Tên kết cấu" required>
-                                                <div [hidden]="structure_name.valid || structure_name.untouched">
-                                            <span *ngIf="structure_name.errors && structure_name.errors.required"
-                                                  class="help-block">
-                                                Phải nhập tên kết cấu!
-                                            </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="number_page" class="col-sm-3 control-label">Số
-                                                trang</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.number_page" type="text" class="form-control"
-                                                       id="number_page" name="number_page"
-                                                       placeholder="Số trang">
-                                            </div>
-                                        </div>
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Danh sách lệnh sản xuất</h3>
+                                </div>
+                                <div class="box-body no-padding">
+                                    <div class="mailbox-controls">
+                                        <!-- Check all button -->
+                                        <button type="button" (click)="checkboxtoggle()"
+                                                class="btn btn-default btn-sm checkbox-toggle"><i
+                                                class="fa {{checkall? 'fa-check-square-o': 'fa-square-o'}}"></i>
+                                        </button>
+                                        <button type="button" (click)="getProduct(recordId.toString())"
+                                                class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                        <button type="button" (click)="addProduct()" class="btn btn-default btn-sm"><i
+                                                class="fa fa-plus"></i>
+                                        </button>
+                                        <button type="button" (click)="editProduct()" class="btn btn-default btn-sm"><i
+                                                class="fa fa-pencil-square-o"></i>
+                                        </button>
+                                        <button type="button" (click)="deleteProdConfirm()"
+                                                class="btn btn-default btn-sm"><i
+                                                class="fa fa-trash-o"></i>
+                                        </button>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="size_prod" class="col-sm-3 control-label">Khổ
-                                                TP</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.number" type="text" class="form-control"
-                                                       id="size_prod" name="size_prod"
-                                                       placeholder="Khổ thành phẩm">
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="mold" class="col-sm-3 control-label">Bát/ Khuôn
-                                                in</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.mold" class="form-control" id="mold"
-                                                        name="mold" title="Bát/ Khuôn in">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of moldList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                    <div class="table-responsive mailbox-messages">
+                                        <table class="table table-hover table-striped">
+                                            <tbody>
+                                            <tr>
+                                                <th style="width: 10px">#</th>
+                                                <th>Loại sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Kích thước</th>
+                                                <th>Mô tả</th>
+                                            </tr>
+                                            <tr *ngFor="let cmdItem of products">
+                                                <td><input id="{{cmdItem.id}}" name="{{cmdItem.id}}"
+                                                           title="Chọn hợp đồng"
+                                                           type="checkbox"
+                                                           [checked]=""
+                                                           (change)="checkedItems(cmdItem.id)"></td>
+                                                <td class="mailbox-name">{{cmdItem.producttypes.name}}</td>
+                                                <td class="mailbox-name">{{cmdItem.name}}</td>
+                                                <td class="mailbox-name">{{cmdItem.count}}</td>
+                                                <td class="mailbox-name">{{cmdItem.long}}x{{cmdItem.large}}</td>
+                                                <td class="mailbox-subject">{{cmdItem.description}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- /.table -->
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="number_hand" class="col-sm-3 control-label">Số
-                                                tay</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.number_hand" class="form-control"
-                                                        id="number_hand"
-                                                        name="number_hand" title="Số tay">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of number_handList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="print_type" class="col-sm-3 control-label">Cách
-                                                in</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.print_type" class="form-control"
-                                                        id="print_type"
-                                                        name="print_type" title="Cách in">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of print_typeList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="print_size" class="col-sm-3 control-label">Khổ
-                                                in</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.print_size" class="form-control"
-                                                        id="print_size"
-                                                        name="print_size" title="Khổ in">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of print_sizeList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="print_color" class="col-sm-3 control-label">Màu
-                                                in</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.print_color" class="form-control"
-                                                        id="print_color"
-                                                        name="print_color" title="Màu in">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of print_colorList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="zinc_type" class="col-sm-3 control-label">Loại
-                                                kẽm</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.zinc_type" class="form-control"
-                                                        id="zinc_type"
-                                                        name="zinc_type" title="Loại kẽm">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of zinc_typeList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="machine" class="col-sm-3 control-label">Máy</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.machine" class="form-control"
-                                                        id="machine"
-                                                        #machine="ngModel"
-                                                        name="machine" title="Máy in">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of machineList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="zinc_count"
-                                                   class="col-sm-3 control-label">SL(kẽm-đế)</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.zinc_count" type="text"
-                                                       class="form-control"
-                                                       #zinc_count="ngModel"
-                                                       id="zinc_count" name="zinc_count"
-                                                       placeholder="Số lượng kẽm, đế">
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="paper_type" class="col-sm-3 control-label">Loại giấy</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.paper_type" class="form-control"
-                                                        id="paper_type"
-                                                        #paper_type="ngModel"
-                                                        name="paper_type" title="Loại giấy">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of paper_typeList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="size_store" class="col-sm-3 control-label">Khổ
-                                                kho</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.size_store" class="form-control"
-                                                        id="size_store"
-                                                        #size_store="ngModel"
-                                                        name="size_store" title="Khổ kho">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of size_storeList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="cut_type" class="col-sm-3 control-label">Cắt
-                                                cách</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.cut_type" class="form-control"
-                                                        id="cut_type"
-                                                        #cut_type="ngModel"
-                                                        name="cut_type" title="Cách cắt">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of cut_typeList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="paper_count" class="col-sm-3 control-label">SL giấy
-                                                (tờ)</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.paper_count" type="text"
-                                                       class="form-control"
-                                                       #paper_count="ngModel"
-                                                       id="paper_count" name="paper_count"
-                                                       placeholder="Số lượng giấy theo tờ">
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="paper_kg" class="col-sm-3 control-label">SL giấy (kg)</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.paper_kg" type="text"
-                                                       class="form-control"
-                                                       #paper_kg="ngModel"
-                                                       id="paper_kg" name="paper_kg"
-                                                       placeholder="Số lượng giấy theo kg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="amortization" class="col-sm-3 control-label">Bù hao</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.amortization" type="text"
-                                                       class="form-control"
-                                                       #amortization="ngModel"
-                                                       id="amortization" name="amortization"
-                                                       placeholder="Bù hao">
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="un_amortization" class="col-sm-3 control-label">Tờ chưa bù
-                                                hao</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.un_amortization" type="text"
-                                                       class="form-control"
-                                                       #un_amortization="ngModel"
-                                                       id="un_amortization" name="un_amortization"
-                                                       placeholder="Tờ chưa bù hao">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="total_sheet" class="col-sm-3 control-label">Tổng tờ
-                                                in</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.total_sheet" type="text"
-                                                       class="form-control"
-                                                       #total_sheet="ngModel"
-                                                       id="total_sheet" name="total_sheet"
-                                                       placeholder="Tổng tờ in">
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="print_count" class="col-sm-3 control-label">Lượt in</label>
-
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.print_count" type="text"
-                                                       class="form-control"
-                                                       #print_count="ngModel"
-                                                       id="print_count" name="print_count"
-                                                       placeholder="Lượt in">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="number_char" class="col-sm-3 control-label">Số vạch</label>
-
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.number_char" class="form-control"
-                                                        id="number_char"
-                                                        #number_char="ngModel"
-                                                        name="number_char" title="Số vạch">
-                                                    <option value=""></option>
-                                                    <option *ngFor='let item of number_charList' value="{{item.code}}">
-                                                        {{item.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                    <!-- /.mail-box-messages -->
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer no-padding">
+                                    <div class="mailbox-controls">
+                                        <!-- Check all button -->
+                                        <button type="button" (click)="checkboxtoggle()"
+                                                class="btn btn-default btn-sm checkbox-toggle"><i
+                                                class="fa {{checkall? 'fa-check-square-o': 'fa-square-o'}}"></i>
+                                        </button>
+                                        <button type="button" (click)="getProduct(recordId.toString())"
+                                                class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                        <button type="button" (click)="addProduct()" class="btn btn-default btn-sm"><i
+                                                class="fa fa-plus"></i>
+                                        </button>
+                                        <button type="button" (click)="editProduct()" class="btn btn-default btn-sm"><i
+                                                class="fa fa-pencil-square-o"></i>
+                                        </button>
+                                        <button type="button" (click)="deleteProdConfirm()"
+                                                class="btn btn-default btn-sm"><i
+                                                class="fa fa-trash-o"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                &lt;!&ndash; /.box-body &ndash;&gt;
-                                <div class="box-footer">
-                                    <button type="button" [disabled]="!form.form.valid" (click)="saveRecord()"
-                                            class="btn {{!form.form.valid? 'btn-default': 'btn-info'}} pull-right">Cập
-                                        nhật
-                                    </button>
-                                </div>
-                                &lt;!&ndash; /.box-footer &ndash;&gt;
-                            </form>-->
+                            </div>
                         </div>
 
                         <!-- /.tab-pane -->

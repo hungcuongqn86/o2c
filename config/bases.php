@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'ARRAY_LISTTYPE' => [
+        ['code' => 'department', 'name' => 'LISTTYPE.department'],
+        ['code' => 'cach_gia_cong', 'name' => 'LISTTYPE.outsourcing'],
+        ['code' => 'loai_giay', 'name' => 'LISTTYPE.paper_type']
+    ],
     'properties' => [
         'loai_giay' => [
             'id' => 'loai_giay',
@@ -56,4 +61,27 @@ return [
             , 'properties' => 'so_trang,loai_giay,mau_in'
         ]
     ],
+
+    'command' => [
+        [
+            'id' => 'tckh'
+            , 'name' => 'Lệnh tổng hợp của phòng TCKH'
+        ],
+        [
+            'id' => 'tkcb'
+            , 'name' => 'Lệnh thiết kế, chế bản'
+        ],
+        [
+            'id' => 'cat_giay'
+            , 'name' => 'Lệnh cắt giấy trắng'
+        ],
+        [
+            'id' => 'may_in'
+            , 'name' => 'Lệnh máy in'
+        ],
+        [
+            'id' => 'gia_cong_sau_in'
+            , 'name' => 'Lệnh gia công sau in'
+        ]
+    ]
 ];

@@ -39,7 +39,7 @@ class PublicController extends Controller
     public function getListType()
     {
         try {
-            return response()->success(config('const.ARRAY_LISTTYPE'));
+            return response()->success(config('bases.ARRAY_LISTTYPE'));
         } catch (\Exception $e) {
             return response()->error(trans('messages.MSG_Error'), 400);
         }

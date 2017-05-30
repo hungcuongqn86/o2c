@@ -8,12 +8,6 @@
  */
 
 return [
-    'ARRAY_LISTTYPE' => [
-        ['code' => 'department', 'name' => 'LISTTYPE.department'],
-        ['code' => 'cach_gia_cong', 'name' => 'LISTTYPE.outsourcing'],
-        ['code' => 'loai_giay', 'name' => 'LISTTYPE.paper_type']
-    ],
-
     'ARRAY_MENU' => [
         ['name' => 'SIDEBAR.DASHBOARD', 'icon' => 'fa fa-dashboard', 'uri' => 'index',],
         ['name' => 'SIDEBAR.CUSTOMER', 'icon' => 'fa fa-address-card', 'uri' => 'customer'],
