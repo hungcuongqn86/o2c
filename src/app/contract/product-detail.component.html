@@ -122,46 +122,48 @@
                     </fieldset>
                     <fieldset *ngFor='let elsement of producttypeDetail.element_config'>
                         <legend>{{elsement.name}}</legend>
-                        <div *ngFor='let properties of elsement.properties'
-                             class="form-group col-sm-4">
-                            <label for="producttype_code"
-                                   class="col-sm-4 control-label">{{properties.lable}}</label>
-                            <div class="col-sm-8">
-                                <input *ngIf="properties.type=='text'" type="text" class="form-control"
-                                       [(ngModel)]="detail.elements[elsement.id+'-in-'+properties.id]"
-                                       id="{{elsement.id}}-in-{{properties.id}}"
-                                       name="{{elsement.id}}-in-{{properties.id}}"
-                                       placeholder="{{properties.lable}} {{elsement.name}}">
-                                <select title="{{properties.lable}} {{elsement.name}}" *ngIf="properties.type=='select'"
-                                        [(ngModel)]="detail.elements[elsement.id+'-sel-'+properties.id]"
-                                        id="{{elsement.id}}-sel-{{properties.id}}"
-                                        name="{{elsement.id}}-sel-{{properties.id}}"
-                                        class="form-control">
-                                    <option value=""></option>
-                                    <option *ngFor='let dataitem of properties.data'
-                                            value="{{dataitem.list_code}}">{{dataitem.list_code}}
-                                    </option>
-                                </select>
-                                <div *ngIf="properties.type=='check'" class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="{{elsement.id}}-chk-{{properties.id}}"
-                                               [(ngModel)]="detail.elements[elsement.id+'-chk-'+properties.id]"
-                                               name="{{elsement.id}}-chk-{{properties.id}}"> {{properties.lable}}
-                                    </label>
-                                </div>
-                                <div *ngIf="properties.type=='mcheck'" class="multiobj">
-                                    <div *ngFor='let dataitem of properties.data' class="checkbox col-sm-12">
+                        <template ngFor let-properties [ngForOf]="elsement.properties">
+                            <div *ngIf="properties.visible" class="form-group col-sm-4">
+                                <label for="producttype_code"
+                                       class="col-sm-4 control-label">{{properties.lable}}</label>
+                                <div class="col-sm-8">
+                                    <input *ngIf="properties.type=='text'" type="text" class="form-control"
+                                           [(ngModel)]="detail.elements[elsement.id+'-in-'+properties.id]"
+                                           id="{{elsement.id}}-in-{{properties.id}}"
+                                           name="{{elsement.id}}-in-{{properties.id}}"
+                                           placeholder="{{properties.lable}} {{elsement.name}}">
+                                    <select title="{{properties.lable}} {{elsement.name}}"
+                                            *ngIf="properties.type=='select'"
+                                            [(ngModel)]="detail.elements[elsement.id+'-sel-'+properties.id]"
+                                            id="{{elsement.id}}-sel-{{properties.id}}"
+                                            name="{{elsement.id}}-sel-{{properties.id}}"
+                                            class="form-control">
+                                        <option value=""></option>
+                                        <option *ngFor='let dataitem of properties.data'
+                                                value="{{dataitem.list_code}}">{{dataitem.list_code}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="properties.type=='check'" class="checkbox">
                                         <label>
-                                            <input id="{{elsement.id}}-mchk-{{properties.id}}-val-{{dataitem.list_code}}"
-                                                   [checked]="checkSelected.includes(elsement.id+'-mchk-'+properties.id+'-val-'+dataitem.list_code)"
-                                                   (change)="checkedItems(elsement.id+'-mchk-'+properties.id+'-val-'+dataitem.list_code)"
-                                                   name="{{elsement.id}}-mchk-{{properties.id}}-val-{{dataitem.list_code}}"
-                                                   type="checkbox"> {{dataitem.list_code}}
+                                            <input type="checkbox" id="{{elsement.id}}-chk-{{properties.id}}"
+                                                   [(ngModel)]="detail.elements[elsement.id+'-chk-'+properties.id]"
+                                                   name="{{elsement.id}}-chk-{{properties.id}}"> {{properties.lable}}
                                         </label>
+                                    </div>
+                                    <div *ngIf="properties.type=='mcheck'" class="multiobj">
+                                        <div *ngFor='let dataitem of properties.data' class="checkbox col-sm-12">
+                                            <label>
+                                                <input id="{{elsement.id}}-mchk-{{properties.id}}-val-{{dataitem.list_code}}"
+                                                       [checked]="checkSelected.includes(elsement.id+'-mchk-'+properties.id+'-val-'+dataitem.list_code)"
+                                                       (change)="checkedItems(elsement.id+'-mchk-'+properties.id+'-val-'+dataitem.list_code)"
+                                                       name="{{elsement.id}}-mchk-{{properties.id}}-val-{{dataitem.list_code}}"
+                                                       type="checkbox"> {{dataitem.list_code}}
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </template>
                     </fieldset>
                 </form>
             </div>

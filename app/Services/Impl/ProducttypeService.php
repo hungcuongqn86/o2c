@@ -114,7 +114,21 @@ class ProducttypeService extends CommonService implements IProducttypeService
     {
         $arrProperties = config('bases.properties.' . $tag);
         if (($arrProperties['type'] == 'select') || ($arrProperties['type'] == 'mcheck')) {
-            $arrProperties['data'] = ElementProperties::where('element_code', '=', $element)->where('properties_code', '=', $tag)->get()->toArray();
+            if ($arrProperties['datatype'] === 'list') {
+                $arrProperties['data'] = ElementProperties::where('element_code', '=', $element)->where('properties_code', '=', $tag)->get()->toArray();
+            }
+            if ($arrProperties['datatype'] === 'function') {
+                $arrProperties['data'] = ElementProperties::where('element_code', '=', $element)->where('properties_code', '=', $tag)->get()->toArray();
+                $arrDetail = config('data.' . $tag);
+                foreach ($arrProperties['data'] as $key => $item) {
+                    foreach ($arrDetail as $detail) {
+                        if ($item['list_code'] === $detail['code']) {
+                            $arrProperties['data'][$key]['detail'] = $detail;
+                            break;
+                        }
+                    }
+                }
+            }
         }
         return $arrProperties;
     }
