@@ -20,7 +20,7 @@ fieldset {
     border: 1px solid #c0c0c0;
 }
 
-legend {
+legend, .capitalize {
     font-weight: bold;
     text-transform: capitalize;
     font-size: 14px;

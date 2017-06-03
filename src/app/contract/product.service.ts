@@ -4,12 +4,31 @@ import 'rxjs/add/operator/toPromise';
 import {HttpClient} from '../http-client';
 
 @Injectable()
+export class cmdEl {
+    public id;
+    public name = '';
+    public so_trang = '';
+    public kho_tp = '';
+
+    constructor() {
+    }
+}
+
+@Injectable()
 export class productService {
     private apiUrl = './api';  // URL to web api
     private module = 'product';
 
     constructor(private http: HttpClient) {
     }
+
+    getProduct(id: string) {
+        let url = this.apiUrl + `/product/getAll`;
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('contract_id', id);
+        return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
+    }
+
 
     getProducttypesData(): any {
         let url = this.apiUrl + `/producttype/getAll`;

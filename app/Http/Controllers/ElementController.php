@@ -49,7 +49,12 @@ class ElementController extends Controller
                 foreach ($properties as $item) {
                     if (($arrProperties[$item]['type'] == 'select') || ($arrProperties[$item]['type'] == 'mcheck')) {
                         $arrProperties[$item]['id'] = $item;
-                        $arrProperties[$item]['data'] = AppServiceFactory::mListsService()->ListGet($item);
+                        if ($arrProperties[$item]['datatype'] === 'list') {
+                            $arrProperties[$item]['data'] = AppServiceFactory::mListsService()->ListGet($item);
+                        }
+                        if ($arrProperties[$item]['datatype'] === 'function') {
+                            $arrProperties[$item]['data'] = config('data.' . $item);
+                        }
                         $arrP[] = $arrProperties[$item];
                     }
                 }

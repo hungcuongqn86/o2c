@@ -14,6 +14,7 @@ import {BootstrapModalModule} from 'ng2-bootstrap-modal';
 import {ConfirmComponent} from './confirm.component';
 import {AlertComponent} from './alert.component';
 import {ProductDetailComponent} from './contract/product-detail.component';
+import {ProductCommandComponent} from './contract/product-command.component';
 
 /* Routing Module */
 import {routing, appRoutingProviders}   from './app-routing.module';
@@ -22,7 +23,7 @@ import {ListComponent} from './list/list.component';
 import {ListService} from './list/list.service';
 import {UserComponent} from './user/user.component';
 import {userService}    from  './user/user.service';
-import {productService} from  './contract/product.service';
+import {cmdEl, productService} from  './contract/product.service';
 import {CustomerComponent} from './customer/customer.component';
 import {ReportComponent} from './report/report.component';
 
@@ -41,7 +42,8 @@ export function createTranslateLoader(http: Http) {
         ReportComponent,
         ConfirmComponent,
         AlertComponent,
-        ProductDetailComponent
+        ProductDetailComponent,
+        ProductCommandComponent
     ],
     imports: [
         BrowserModule,
@@ -62,13 +64,15 @@ export function createTranslateLoader(http: Http) {
         AppService,
         ListService,
         userService,
+        cmdEl,
         productService
     ],
     //Don't forget to add the component to entryComponents section
     entryComponents: [
         ConfirmComponent,
         AlertComponent,
-        ProductDetailComponent
+        ProductDetailComponent,
+        ProductCommandComponent
     ],
     bootstrap: [AppComponent]
 })

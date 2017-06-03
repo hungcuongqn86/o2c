@@ -10,27 +10,44 @@ return [
         'loai_giay' => [
             'id' => 'loai_giay',
             'type' => 'select',
-            'lable' => 'Loại giấy'
+            'datatype' => 'function',
+            'lable' => 'Loại giấy',
+            'visible' => true
         ],
         'mau_in' => [
             'id' => 'mau_in',
             'type' => 'select',
-            'lable' => 'Số màu in'
+            'datatype' => 'list',
+            'lable' => 'Số màu in',
+            'visible' => true
         ],
         'so_trang' => [
             'id' => 'so_trang',
             'type' => 'text',
-            'lable' => 'Số trang'
+            'datatype' => 'list',
+            'lable' => 'Số trang',
+            'visible' => true
         ],
         'bia_cung' => [
             'id' => 'bia_cung',
             'type' => 'check',
-            'lable' => 'Bìa cứng'
+            'datatype' => 'list',
+            'lable' => 'Bìa cứng',
+            'visible' => true
         ],
         'cach_gia_cong' => [
             'id' => 'cach_gia_cong',
             'type' => 'mcheck',
-            'lable' => 'Cách gia công'
+            'datatype' => 'list',
+            'lable' => 'Cách gia công',
+            'visible' => true
+        ],
+        'kho_giay' => [
+            'id' => 'kho_giay',
+            'type' => 'mcheck',
+            'datatype' => 'function',
+            'lable' => 'Khổ giấy',
+            'visible' => false
         ]
     ],
 
@@ -38,12 +55,12 @@ return [
         [
             'id' => 'ruot'
             , 'name' => 'ruột'
-            , 'properties' => 'so_trang,loai_giay,mau_in'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay'
         ],
         [
             'id' => 'bia'
             , 'name' => 'bìa'
-            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong'
+            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay'
         ],
         [
             'id' => 'gay'

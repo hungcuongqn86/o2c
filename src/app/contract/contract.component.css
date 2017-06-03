@@ -15,7 +15,7 @@
     /* 100% = dialog height, 120px = header + footer */
     max-height: calc(100% - 120px);
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: auto;
     min-height: 75%;
 }
 

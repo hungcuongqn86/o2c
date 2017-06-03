@@ -1,0 +1,73 @@
+<div class="modal-dialog product-modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" (click)="close()">&times;</button>
+            <h4 class="modal-title">Lệnh sản xuất</h4>
+        </div>
+        <div class="modal-body">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số trang</th>
+                    <th>Khổ TP(cm)</th>
+                    <th>Bát/khuôn in</th>
+                    <th>Số tay</th>
+                    <th>Cách in</th>
+                    <th>Khổ in</th>
+                    <th>Màu in</th>
+                    <th>Loại kẽm</th>
+                    <th>Máy</th>
+                    <th>SL(kẽm-đế)</th>
+                    <th>Loại giấy/ĐL</th>
+                    <th>Khổ kho</th>
+                    <th>SL.Giấy xuất(tờ)</th>
+                    <th>SL.Giấy xuất(kg)</th>
+                    <th>Cách cắt</th>
+                    <th>Bù hao</th>
+                    <th>Tờ chưa bù hao</th>
+                    <th>Tổng SL tờ in đã bù hao</th>
+                    <th>Lượt/Click</th>
+                    <th>Số vạch</th>
+                    <th>Quy cách đóng</th>
+                    <th>Cách gia công</th>
+                    <th>ĐVT</th>
+                    <th>Số lượng</th>
+                    <th>Cách đóng gói</th>
+                </tr>
+                <tr *ngFor="let el of elements">
+                    <td class="capitalize">{{el.name}}</td>
+                    <td>{{el.so_trang}}</td>
+                    <td>{{el.kho_tp}}</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                    <td>###</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="status==='edit'" class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="close()">Quay lại</button>
+        </div>
+    </div>
+</div>
