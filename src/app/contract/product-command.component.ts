@@ -17,6 +17,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     product: any = [];
     productType: any = [];
     elements: Array<any> = [];
+    formData: any = JSON.parse('{"zinc_type":{"bia-sel-zinc_type":"CTP"}}');
     status = 'none';
     res: any;
 
@@ -59,7 +60,9 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         );
     }
 
-    private genElement() {
+    public genElement() {
+        console.log(this.formData);
+        this.elements = [];
         const Els = this.productType.element_config;
         for (let i = 0; i < Els.length; i++) {
             const itemG: any = this._genElement(Els[i]);
@@ -92,9 +95,20 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     }
 
     private _genBia(el: any) {
+        // console.log(el);
+
         const res: cmdEl = new cmdEl();
+        res.id = el.id;
         res.name = el.name;
         res.kho_tp = this.product.dai + 'x' + this.product.rong;
+        res.mau_in = this.product.elements['bia-sel-mau_in'];
+        res.sl_kem = res.mau_in.split('/')[0];
+        res.zinc_type = el.properties.filter(function (itm) {
+            return itm.id === 'zinc_type';
+        })[0];
+
+
+        // console.log(res);
         // Loai giay
         const sLoaiGiay = this.product.elements['bia-sel-loai_giay'];
         let arrLoaiGiay = el.properties.filter(function (itm) {
@@ -109,6 +123,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         let dl = 0;
         let dg = 0;
         if (objLoaiGiay) {
+            res.loai_giay = objLoaiGiay[0].detail.name;
             dl = objLoaiGiay[0].detail.dl;
             dg = objLoaiGiay[0].detail.dg;
         }
@@ -124,19 +139,21 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         let sKhoGiay;
         let sl: number;
         let detailKG: any;
+        let so_to: number;
+        let gia_giay: number;
+        let minGiaGiay = 0;
         for (let i = 0; i < arrKhoGiay.length; i++) {
             detailKG = arrKhoGiay[i].detail;
-            console.log(detailKG.d, detailKG.r);
-
             if (this.product.dai >= this.product.rong * 2) {
                 sl = this.getSoLuong(detailKG.d, detailKG.r, this.product.dai, this.product.rong * 2, detailKG.kep_nhip);
             } else {
                 sl = this.getSoLuong(detailKG.d, detailKG.r, this.product.rong * 2, this.product.dai, detailKG.kep_nhip);
             }
-            console.log(sl);
+            so_to = Math.ceil(this.product.count / sl);
+            arrKhoGiay[i].gia_giay = so_to * detailKG.d * detailKG.r * dl * dg / 10000;
+            //console.log(so_to, detailKG.d, detailKG.r, dl, dg, arrKhoGiay[i].gia_giay);
         }
-
-
+        // console.log(dl, dg, arrKhoGiay);
 
         /*const index = el.properties.findIndex(x => x.id === 'loai_giay');
          const arrLoaiGiay = el.properties[index]['data'];*/

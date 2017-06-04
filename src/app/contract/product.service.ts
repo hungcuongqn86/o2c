@@ -9,6 +9,10 @@ export class cmdEl {
     public name = '';
     public so_trang = '';
     public kho_tp = '';
+    public loai_giay = '';
+    public mau_in = '';
+    public sl_kem = '';
+    public zinc_type: any = [];
 
     constructor() {
     }

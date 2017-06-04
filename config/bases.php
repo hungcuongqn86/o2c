@@ -4,7 +4,8 @@ return [
     'ARRAY_LISTTYPE' => [
         ['code' => 'department', 'name' => 'LISTTYPE.department'],
         ['code' => 'cach_gia_cong', 'name' => 'LISTTYPE.outsourcing'],
-        ['code' => 'loai_giay', 'name' => 'LISTTYPE.paper_type']
+        ['code' => 'loai_giay', 'name' => 'LISTTYPE.paper_type'],
+        ['code' => 'zinc_type', 'name' => 'LISTTYPE.zinc_type'],
     ],
     'properties' => [
         'loai_giay' => [
@@ -17,7 +18,7 @@ return [
         'mau_in' => [
             'id' => 'mau_in',
             'type' => 'select',
-            'datatype' => 'list',
+            'datatype' => 'function',
             'lable' => 'Số màu in',
             'visible' => true
         ],
@@ -48,6 +49,20 @@ return [
             'datatype' => 'function',
             'lable' => 'Khổ giấy',
             'visible' => false
+        ],
+        'zinc_type' => [
+            'id' => 'zinc_type',
+            'type' => 'select',
+            'datatype' => 'list',
+            'lable' => 'Loại kẽm',
+            'visible' => false
+        ],
+        'may_in' => [
+            'id' => 'may_in',
+            'type' => 'select',
+            'datatype' => 'function',
+            'lable' => 'Máy in',
+            'visible' => false
         ]
     ],
 
@@ -55,12 +70,12 @@ return [
         [
             'id' => 'ruot'
             , 'name' => 'ruột'
-            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type'
         ],
         [
             'id' => 'bia'
             , 'name' => 'bìa'
-            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay'
+            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay,zinc_type'
         ],
         [
             'id' => 'gay'

@@ -37,7 +37,6 @@ class ListTableSeeder extends Seeder
         ['code' => 'number_hand', 'name' => 'LISTTYPE.number_hand'],
         ['code' => 'print_type', 'name' => 'LISTTYPE.print_type'],
         ['code' => 'print_size', 'name' => 'LISTTYPE.print_size'],
-        ['code' => 'mau_in', 'name' => 'LISTTYPE.print_color'],
         ['code' => 'zinc_type', 'name' => 'LISTTYPE.zinc_type'],
         ['code' => 'machine', 'name' => 'LISTTYPE.machine'],
         ['code' => 'loai_giay', 'name' => 'LISTTYPE.paper_type'],
