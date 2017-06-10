@@ -70,12 +70,12 @@ return [
         [
             'id' => 'ruot'
             , 'name' => 'ruột'
-            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in'
         ],
         [
             'id' => 'bia'
             , 'name' => 'bìa'
-            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay,zinc_type'
+            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay,zinc_type,may_in'
         ],
         [
             'id' => 'gay'

@@ -61,7 +61,6 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     }
 
     public genElement() {
-        console.log(this.formData);
         this.elements = [];
         const Els = this.productType.element_config;
         for (let i = 0; i < Els.length; i++) {
@@ -95,8 +94,6 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     }
 
     private _genBia(el: any) {
-        // console.log(el);
-
         const res: cmdEl = new cmdEl();
         res.id = el.id;
         res.name = el.name;
@@ -107,8 +104,6 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             return itm.id === 'zinc_type';
         })[0];
 
-
-        // console.log(res);
         // Loai giay
         const sLoaiGiay = this.product.elements['bia-sel-loai_giay'];
         let arrLoaiGiay = el.properties.filter(function (itm) {
@@ -136,12 +131,21 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         if (objKhoGiay.length) {
             arrKhoGiay = objKhoGiay[0].data;
         }
-        let sKhoGiay;
         let sl: number;
         let detailKG: any;
         let so_to: number;
-        let gia_giay: number;
-        let minGiaGiay = 0;
+
+        // May in
+        const objMay = el.properties.filter(function (itm) {
+            return itm.id === 'may_in';
+        });
+        let arrMay: any;
+        if (objMay.length) {
+            arrMay = objMay[0].data;
+        }
+        // Loai kem
+        const zincType = this.formData.zinc_type['bia-sel-zinc_type'];
+
         for (let i = 0; i < arrKhoGiay.length; i++) {
             detailKG = arrKhoGiay[i].detail;
             if (this.product.dai >= this.product.rong * 2) {
@@ -151,14 +155,74 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             }
             so_to = Math.ceil(this.product.count / sl);
             arrKhoGiay[i].gia_giay = so_to * detailKG.d * detailKG.r * dl * dg / 10000;
-            //console.log(so_to, detailKG.d, detailKG.r, dl, dg, arrKhoGiay[i].gia_giay);
+            arrKhoGiay[i].may_in = this.fixPrinter(zincType, res.mau_in, detailKG, arrMay);
         }
-        // console.log(dl, dg, arrKhoGiay);
+
+        const fixKhoGiay = this.fixKhoGiay(arrKhoGiay);
+        res.kho_in = fixKhoGiay.detail.name;
+        res.may_in = fixKhoGiay.may_in.detail.name;
+        console.log(fixKhoGiay);
 
         /*const index = el.properties.findIndex(x => x.id === 'loai_giay');
          const arrLoaiGiay = el.properties[index]['data'];*/
 
         return res;
+    }
+
+    private fixKhoGiay(arrKhoGiay): any {
+        let dem = true;
+        let mingia: number;
+        let kg: any = null;
+        for (let i = 0; i < arrKhoGiay.length; i++) {
+            if (arrKhoGiay[i].may_in) {
+                if (dem) {
+                    mingia = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem);
+                    kg = arrKhoGiay[i];
+                    dem = false;
+                } else {
+                    if ((Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem)) < mingia) {
+                        mingia = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem);
+                        kg = arrKhoGiay[i];
+                    }
+                }
+            }
+        }
+        return kg
+    }
+
+    private fixPrinter(zincType, mau_in, detailKG, arrMay): any {
+        const somau = mau_in.split('/')[0];
+        let dem = true;
+        let giakem: number;
+        let may: any = null;
+        for (let i = 0; i < arrMay.length; i++) {
+            if (somau <= arrMay[i].detail.so_mau) {
+                if (this.checkSize(detailKG, arrMay[i].detail.min_size, arrMay[i].detail.max_size)) {
+                    if (dem) {
+                        giakem = Number(arrMay[i].detail.gia_kem[zincType]);
+                        may = arrMay[i];
+                        may.gia_kem = giakem;
+                        dem = false;
+                    } else {
+                        if (Number(arrMay[i].detail.gia_kem[zincType]) < giakem) {
+                            giakem = Number(arrMay[i].detail.gia_kem[zincType]);
+                            may = arrMay[i];
+                            may.gia_kem = giakem;
+                        }
+                    }
+                }
+            }
+        }
+        return may;
+    }
+
+    private checkSize(detailKG, min, max): boolean {
+        const arrMin = min.split('x');
+        const arrMax = max.split('x');
+        if ((detailKG.r < arrMin[0]) || (detailKG.r > arrMax[0]) || (detailKG.d < arrMin[1]) || (detailKG.d > arrMax[1])) {
+            return false;
+        }
+        return true;
     }
 
     private _genRuot(el: any) {

@@ -12,6 +12,9 @@ export class cmdEl {
     public loai_giay = '';
     public mau_in = '';
     public sl_kem = '';
+    public kho_in = '';
+    public may_in = '';
+
     public zinc_type: any = [];
 
     constructor() {
