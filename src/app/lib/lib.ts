@@ -1,4 +1,5 @@
 import * as config from '../lib/const';
+import {AppModule} from "../app.module";
 
 export class Lib {
     constructor() {
@@ -157,5 +158,23 @@ export class Lib {
         const colorCov = colorCount.split('/');
         const ZincByColor = Number(colorCov[0]) + Number(colorCov[1]);
         return ZincByColor * printConst * paperNumber;
+    }
+
+    public getPaperCount(pCount: number, depreciation): number {
+        let objDepreciation: any;
+        for (let i = 0; i < depreciation.length; i++) {
+            if ((pCount > depreciation[i].min) && (pCount <= depreciation[i].max)) {
+                objDepreciation = depreciation[i];
+            }
+        }
+        if (objDepreciation) {
+            if (objDepreciation.hs === 1) {
+                return objDepreciation.df;
+            } else {
+                return objDepreciation.df + (objDepreciation.hs * pCount);
+            }
+        } else {
+            return 0;
+        }
     }
 }

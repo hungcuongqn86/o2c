@@ -45,6 +45,15 @@ class PublicController extends Controller
         }
     }
 
+    public function getDepreciation()
+    {
+        try {
+            return response()->success(config('data.dm_bu_hao'));
+        } catch (\Exception $e) {
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
+
     public function upload(Request $request)
     {
         try {

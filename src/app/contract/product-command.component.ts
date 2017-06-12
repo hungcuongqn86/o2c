@@ -20,6 +20,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     elements: Array<any> = [];
     formData: any = JSON.parse('{"zinc_type":{"bia-sel-zinc_type":"CTP", "ruot-sel-zinc_type":"CTP", "to_gac-sel-zinc_type":"CTP", "phu_ban-sel-zinc_type":"CTP"}}');
     status = 'none';
+    depreciation: any;
     res: any;
 
     constructor(private Lib: Lib, dialogService: DialogService, private productService: productService) {
@@ -28,6 +29,19 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
 
     ngOnInit() {
         this.getDetail(this.idProd);
+        this.getDepreciation();
+    }
+
+    private getDepreciation() {
+        this.productService.getDepreciation().subscribe(
+            data => {
+                this.depreciation = data;
+            },
+            error => {
+                console.error("Not Depreciation!");
+                return Observable.throw(error);
+            }
+        );
     }
 
     private getDetail(id) {
@@ -136,6 +150,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 sl = this.Lib.getNumberResize(detailKG.d, detailKG.r, this.product.rong * 2, this.product.dai, detailKG.kep_nhip);
             }
             so_to = Math.ceil(this.product.count / sl);
+            so_to = this.Lib.getPaperCount(so_to, this.depreciation);
             arrKhoGiay[i].gia_giay = so_to * detailKG.d * detailKG.r * dl * dg / 10000;
             zincCount = this.Lib.getZincCount(res.mau_in, 1, so_to);
             arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, zincCount, res.mau_in, detailKG, arrMay);
@@ -145,6 +160,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         const fixKhoGiay = this.Lib.fixKhoGiay(arrKhoGiay);
         res.kho_in = fixKhoGiay.detail.name;
         res.may_in = fixKhoGiay.may_in.detail.name;
+        res.sl_kem = fixKhoGiay.sl_kem;
         return [res];
     }
 
@@ -193,7 +209,9 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                     sl = this.Lib.getNumberResize(detailKG.d, detailKG.r, this.product.rong * 2, this.product.dai, detailKG.kep_nhip);
                 }
                 so_to = Math.ceil(this.product.count / sl);
+                so_to = this.Lib.getPaperCount(so_to, this.depreciation);
                 arrKhoGiay[i].gia_giay = so_to * detailKG.d * detailKG.r * dl * dg / 10000;
+                // zincCount = this.Lib.getZincCount(res.mau_in, 1, so_to);
                 arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, 1, itemRes.mau_in, detailKG, arrMay);
             }
             const fixKhoGiay = this.Lib.fixKhoGiay(arrKhoGiay);
