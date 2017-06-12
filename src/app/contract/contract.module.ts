@@ -7,7 +7,6 @@ import {TranslateModule} from "ng2-translate/ng2-translate";
 import {NgUploaderModule} from 'ngx-uploader';
 import {DatePicker} from '../datepicker.directive';
 
-
 import {ContractComponent}    from './contract.component';
 import {ContractAddComponent}    from './contract-add.component';
 import {ContractRoutingModule}    from './contract-routing.module';

@@ -85,12 +85,12 @@ return [
         [
             'id' => 'to_gac'
             , 'name' => 'tờ gác'
-            , 'properties' => 'so_trang,loai_giay,mau_in'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in'
         ],
         [
             'id' => 'phu_ban'
             , 'name' => 'phụ bản'
-            , 'properties' => 'so_trang,loai_giay,mau_in'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in'
         ]
     ]
 ];

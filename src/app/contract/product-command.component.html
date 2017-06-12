@@ -5,7 +5,7 @@
             <h4 class="modal-title">Lệnh sản xuất</h4>
         </div>
         <div class="modal-body">
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped tbl-command">
                 <tbody>
                 <tr>
                     <th>Tên sản phẩm</th>
@@ -46,8 +46,7 @@
                     <td>
                         <select style="width: 75px;" title="{{el.zinc_type.lable}} {{el.name}}" class="form-control"
                                 [(ngModel)]="formData.zinc_type[el.id+'-sel-'+el.zinc_type.id]"
-                                (change)="genElement()"
-                                id="{{el.id}}-sel-{{el.zinc_type.id}}" name="{{el.id}}-sel-{{el.zinc_type.id}}">
+                                (change)="genElement()" name="{{el.id}}-sel-{{el.zinc_type.id}}">
                             <option *ngFor='let dataitem of el.zinc_type.data'
                                     value="{{dataitem.list_code}}">{{dataitem.list_code}}
                             </option>
@@ -72,9 +71,6 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div *ngIf="status==='edit'" class="modal-footer">
-            <button type="button" class="btn btn-default" (click)="close()">Quay lại</button>
         </div>
     </div>
 </div>
