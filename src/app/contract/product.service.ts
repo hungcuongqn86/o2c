@@ -14,6 +14,13 @@ export class cmdEl {
     public sl_kem = '';
     public kho_in = '';
     public may_in = '';
+    public so_tay = '';
+    public so_bat = '';
+    public cach_in = '';
+    public sl_giay_xuat = '';
+    public tong_to_da_bu_hao = '';
+    public tong_to_chua_bu_hao = '';
+    public bu_hao = '';
 
     public zinc_type: any = [];
 

@@ -114,11 +114,17 @@ export class Lib {
             if (arrKhoGiay[i].may_in) {
                 if (dem) {
                     mingia = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem);
+                    if (arrKhoGiay[i].fixKhoGiay2) {
+                        mingia = mingia + Number(arrKhoGiay[i].fixKhoGiay2.gia_giay) + Number(arrKhoGiay[i].fixKhoGiay2.may_in.gia_kem);
+                    }
                     kg = arrKhoGiay[i];
                     dem = false;
                 } else {
                     if ((Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem)) < mingia) {
                         mingia = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem);
+                        if (arrKhoGiay[i].fixKhoGiay2) {
+                            mingia = mingia + Number(arrKhoGiay[i].fixKhoGiay2.gia_giay) + Number(arrKhoGiay[i].fixKhoGiay2.may_in.gia_kem);
+                        }
                         kg = arrKhoGiay[i];
                     }
                 }
@@ -156,8 +162,15 @@ export class Lib {
 
     public getZincCount(colorCount: string, printConst: number, paperNumber: number): number {
         const colorCov = colorCount.split('/');
-        const ZincByColor = Number(colorCov[0]) + Number(colorCov[1]);
-        return ZincByColor * printConst * paperNumber;
+        let ZincByColor = Number(colorCov[0]) + Number(colorCov[1]);
+        if (printConst === 2) {
+            if (Number(colorCov[0]) > Number(colorCov[1])) {
+                ZincByColor = Number(colorCov[0]) * 2;
+            } else {
+                ZincByColor = Number(colorCov[1]) * 2;
+            }
+        }
+        return ZincByColor * paperNumber / printConst;
     }
 
     public getPaperCount(pCount: number, depreciation): number {
@@ -171,10 +184,60 @@ export class Lib {
             if (objDepreciation.hs === 1) {
                 return objDepreciation.df;
             } else {
-                return objDepreciation.df + (objDepreciation.hs * pCount);
+                return objDepreciation.hsbh + (objDepreciation.hs * pCount);
             }
         } else {
             return 0;
         }
+    }
+
+
+    public getQualifiedSize(arrKhoGiay, ppd, ppr, allR) {
+        let res: Array<any> = [];
+        for (let i = 0; i < arrKhoGiay.length; i++) {
+            arrKhoGiay[i].so_bat = this._getDivisor(this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, ppd, ppr, arrKhoGiay[i].detail.kep_nhip));
+            if (arrKhoGiay[i].so_bat && arrKhoGiay[i].so_bat > 2) {
+                arrKhoGiay[i].divisor = this.genDivisor(arrKhoGiay[i].so_bat, allR);
+                res.push(arrKhoGiay[i])
+            }
+        }
+        return res;
+    }
+
+    public getQualifiedSizeB(arrKhoGiay, ppd, ppr) {
+        let res: Array<any> = [];
+        for (let i = 0; i < arrKhoGiay.length; i++) {
+            arrKhoGiay[i].so_bat = this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, ppd, ppr, arrKhoGiay[i].detail.kep_nhip);
+            if (arrKhoGiay[i].so_bat > 0) {
+                res.push(arrKhoGiay[i])
+            }
+        }
+        return res;
+    }
+
+
+    public genDivisor(so_bat, ppCount) {
+        let res: Array<number> = [];
+        let ts = so_bat;
+        if (ppCount < 2) {
+            return null;
+        }
+        // Tro khac
+        let index = (Math.floor(ppCount / (ts * 2))) * (ts * 2);
+        res.push(index);
+
+        // Tro no
+        let numDiv = ppCount - index;
+        while ((numDiv >= ts) && (ts >= 2)) {
+            index = (Math.floor(numDiv / ts)) * ts;
+            res.push(index);
+            numDiv = numDiv - index;
+            ts = ts / 2
+        }
+
+        if (numDiv > 0) {
+            res.push(numDiv);
+        }
+        return res;
     }
 }
