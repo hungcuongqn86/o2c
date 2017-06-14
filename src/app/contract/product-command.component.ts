@@ -143,7 +143,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             arrKhoGiay = this.Lib.getQualifiedSizeB(arrKhoGiay, this.product.rong * 2, this.product.dai);
         }
 
-        for (let i = 0; i < arrKhoGiay.length; i++) {
+        /*for (let i = 0; i < arrKhoGiay.length; i++) {
             let sl = 0;
             let detailKG = arrKhoGiay[i].detail;
             if (this.product.dai >= this.product.rong * 2) {
@@ -165,7 +165,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             arrKhoGiay[i].bu_hao = buhao;
 
             arrKhoGiay[i].tong_to_da_bu_hao = tongGiay1r;
-            arrKhoGiay[i].sl_giay_xuat = tongGiay1r/2;
+            arrKhoGiay[i].sl_giay_xuat = tongGiay1r / 2;
             arrKhoGiay[i].tong_to_chua_bu_hao = soto1tay * so_tay;
         }
 
@@ -178,7 +178,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         res.bu_hao = fixKhoGiay.bu_hao;
         res.tong_to_da_bu_hao = fixKhoGiay.tong_to_da_bu_hao;
         res.sl_giay_xuat = fixKhoGiay.sl_giay_xuat;
-        res.tong_to_chua_bu_hao = fixKhoGiay.tong_to_chua_bu_hao;
+        res.tong_to_chua_bu_hao = fixKhoGiay.tong_to_chua_bu_hao;*/
         return [res];
     }
 
@@ -202,28 +202,34 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             dg = arrLoaiGiay.detail.dg;
         }
         let mau_in = this.product.elements['ruot-sel-mau_in'];
+        let mat_in = this.Lib.getMatIn(mau_in);
 
 
         let soto1tay = 0;
+        let sosp1tay = 1;
+        let so_luot_in = 0;
+        let tong_luot_in = 0;
         let buhao = 0;
         let tongGiay1r = 0;
         let zincCount = 0;
         let arrKhoGiay2 = this.Lib.getQualifiedSizeB(arrKhoGiay, this.product.dai, this.product.rong);
-        let fixKhoGiay2: any = null;
         for (let k = 0; k < arrKhoGiay2.length; k++) {
             let so_tay2 = 1;
             soto1tay = Number(Math.ceil(this.product.count / arrKhoGiay2[k].so_bat));
+            sosp1tay = this.Lib.getNumberResize(arrKhoGiay2[k].detail.d, arrKhoGiay2[k].detail.r, this.product.dai, this.product.rong, arrKhoGiay2[k].detail.kep_nhip);
+            arrKhoGiay2[k].so_luot_in = (this.product.count / sosp1tay) * mat_in;
             buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
             tongGiay1r = (soto1tay + buhao) * so_tay2;
             zincCount = this.Lib.getZincCount(mau_in, 2, 1);
             arrKhoGiay2[k].zincCount = zincCount;
             arrKhoGiay2[k].gia_giay = tongGiay1r * arrKhoGiay2[k].detail.d * arrKhoGiay2[k].detail.r * dl * dg / 10000;
-            arrKhoGiay2[k].may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, arrKhoGiay2[k].detail, arrMay);
+            arrKhoGiay2[k].may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, arrKhoGiay2[k].detail, arrMay, arrKhoGiay2[k].so_luot_in);
             arrKhoGiay2[k].tong_to_chua_bu_hao = soto1tay * so_tay2;
             arrKhoGiay2[k].tong_to_da_bu_hao = tongGiay1r;
             arrKhoGiay2[k].bu_hao = buhao;
         }
-        fixKhoGiay2 = this.Lib.fixKhoGiay(arrKhoGiay2);
+
+        const fixKhoGiay2 = this.Lib.fixKhoGiay(arrKhoGiay2);
         arrKhoGiay = this.Lib.getQualifiedSize(arrKhoGiay, this.product.dai, this.product.rong, allR);
 
         for (let i = 0; i < arrKhoGiay.length; i++) {
@@ -232,6 +238,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             let tong_so_to = 0;
             let ts = arrKhoGiay[i].so_bat * 2;
             let arrDivisor: Array<any> = [];
+            console.log('----------------------------');
+            tong_luot_in = 0;
             for (let j = 0; j < arrKhoGiay[i].divisor.length; j++) {
                 let divisorItem: any = [];
                 if (arrKhoGiay[i].divisor[j] > 2) {
@@ -239,6 +247,11 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         ts = ts / 2;
                         so_tay = arrKhoGiay[i].divisor[j] / ts;
                         soto1tay = Number(Math.ceil(soto1tay / 2));
+                        sosp1tay = sosp1tay * 2;
+                        //luot in
+                        so_luot_in = (this.product.count / sosp1tay) * mat_in * so_tay;
+                        tong_luot_in = tong_luot_in + so_luot_in;
+                        console.log(so_luot_in);
                         buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
                         tongGiay1r = (soto1tay + buhao) * so_tay;
                         tong_so_to = tong_so_to + tongGiay1r;
@@ -249,6 +262,11 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                     } else {
                         so_tay = arrKhoGiay[i].divisor[j] / ts;
                         soto1tay = this.product.count;
+                        sosp1tay = 1;
+                        //luot in
+                        so_luot_in = this.product.count * mat_in * so_tay;
+                        tong_luot_in = tong_luot_in + so_luot_in;
+                        console.log(so_luot_in);
                         buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
                         tongGiay1r = (soto1tay + buhao) * so_tay;
                         tong_so_to = tong_so_to + tongGiay1r;
@@ -280,8 +298,10 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 arrDivisor.push(divisorItem);
             }
 
-            arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000) + fixKhoGiay2.gia_giay;
-            arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, SumzincCount, mau_in, arrKhoGiay[i].detail, arrMay);
+            arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000) + arrKhoGiay[i].fixKhoGiay2.gia_giay;
+
+            console.log(arrKhoGiay[i], tong_luot_in);
+            arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, SumzincCount, mau_in, arrKhoGiay[i].detail, arrMay, tong_luot_in);
             arrKhoGiay[i]._divisor = arrDivisor;
         }
 

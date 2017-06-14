@@ -67,7 +67,7 @@ export class Lib {
         return Math.max(kq1, kq2, kq3, kq4);
     }
 
-    public fixPrinter(zincType, zincCount, mau_in, detailKG, arrMay): any {
+    public fixPrinter(zincType, zincCount, mau_in, detailKG, arrMay, luot_in): any {
         const colorCov = mau_in.split('/');
         let somau = colorCov[0];
         if (colorCov[0] < colorCov[1]) {
@@ -75,20 +75,40 @@ export class Lib {
         }
         let dem = true;
         let giakem: number = 0;
-        let may: any = null;
+        let cpin: number = 0;
+        let chiphi: number = 0;
+        let may: any = [];
         for (let i = 0; i < arrMay.length; i++) {
             if (somau <= arrMay[i].detail.so_mau) {
                 if (this.checkSize(detailKG, arrMay[i].detail.min_size, arrMay[i].detail.max_size)) {
                     if (dem) {
                         giakem = Number(arrMay[i].detail.gia_kem[zincType]) * zincCount;
-                        may = arrMay[i];
+                        if (luot_in < 1000) {
+                            cpin = zincCount * arrMay[i].detail.cong_in_kem;
+                        } else {
+                            cpin = luot_in * arrMay[i].detail.cong_in_luot;
+                        }
+                        chiphi = giakem + cpin;
+                        Object.keys(arrMay[i]).map((index) => {
+                            may[index] = arrMay[i][index];
+                        });
                         may.gia_kem = giakem;
+                        may.cong_in = cpin;
                         dem = false;
                     } else {
-                        if ((Number(arrMay[i].detail.gia_kem[zincType]) * zincCount) < giakem) {
-                            giakem = Number(arrMay[i].detail.gia_kem[zincType]) * zincCount;
-                            may = arrMay[i];
+                        giakem = Number(arrMay[i].detail.gia_kem[zincType]) * zincCount;
+                        if (luot_in < 1000) {
+                            cpin = zincCount * arrMay[i].detail.cong_in_kem;
+                        } else {
+                            cpin = luot_in * arrMay[i].detail.cong_in_luot;
+                        }
+                        if ((giakem + cpin) < chiphi) {
+                            chiphi = giakem + cpin;
+                            Object.keys(arrMay[i]).map((index) => {
+                                may[index] = arrMay[i][index];
+                            });
                             may.gia_kem = giakem;
+                            may.cong_in = cpin;
                         }
                     }
                 }
@@ -100,7 +120,7 @@ export class Lib {
     private checkSize(detailKG, min, max): boolean {
         const arrMin = min.split('x');
         const arrMax = max.split('x');
-        if ((detailKG.r < arrMin[0]) || (detailKG.r > arrMax[0]) || (detailKG.d < arrMin[1]) || (detailKG.d > arrMax[1])) {
+        if ((detailKG.r < Number(arrMin[0])) || (detailKG.r > Number(arrMax[0])) || (detailKG.d < Number(arrMin[1])) || (detailKG.d > Number(arrMax[1]))) {
             return false;
         }
         return true;
@@ -109,23 +129,28 @@ export class Lib {
     public fixKhoGiay(arrKhoGiay): any {
         let dem = true;
         let mingia: number = 0;
-        let kg: any = null;
+        let kg: any = [];
         for (let i = 0; i < arrKhoGiay.length; i++) {
             if (arrKhoGiay[i].may_in) {
                 if (dem) {
-                    mingia = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem);
+                    mingia = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem) + Number(arrKhoGiay[i].may_in.cong_in);
                     if (arrKhoGiay[i].fixKhoGiay2) {
-                        mingia = mingia + Number(arrKhoGiay[i].fixKhoGiay2.gia_giay) + Number(arrKhoGiay[i].fixKhoGiay2.may_in.gia_kem);
+                        mingia = mingia + Number(arrKhoGiay[i].fixKhoGiay2.gia_giay) + Number(arrKhoGiay[i].fixKhoGiay2.may_in.gia_kem) + Number(arrKhoGiay[i].fixKhoGiay2.may_in.cong_in);
                     }
-                    kg = arrKhoGiay[i];
+                    Object.keys(arrKhoGiay[i]).map((index) => {
+                        kg[index] = arrKhoGiay[i][index];
+                    });
                     dem = false;
                 } else {
-                    if ((Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem)) < mingia) {
-                        mingia = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem);
-                        if (arrKhoGiay[i].fixKhoGiay2) {
-                            mingia = mingia + Number(arrKhoGiay[i].fixKhoGiay2.gia_giay) + Number(arrKhoGiay[i].fixKhoGiay2.may_in.gia_kem);
-                        }
-                        kg = arrKhoGiay[i];
+                    let giakt = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem) + Number(arrKhoGiay[i].may_in.cong_in);
+                    if (arrKhoGiay[i].fixKhoGiay2) {
+                        giakt = giakt + Number(arrKhoGiay[i].fixKhoGiay2.gia_giay) + Number(arrKhoGiay[i].fixKhoGiay2.may_in.gia_kem) + Number(arrKhoGiay[i].fixKhoGiay2.may_in.cong_in);
+                    }
+                    if (giakt < mingia) {
+                        mingia = giakt;
+                        Object.keys(arrKhoGiay[i]).map((index) => {
+                            kg[index] = arrKhoGiay[i][index];
+                        });
                     }
                 }
             }
@@ -209,7 +234,11 @@ export class Lib {
         for (let i = 0; i < arrKhoGiay.length; i++) {
             arrKhoGiay[i].so_bat = this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, ppd, ppr, arrKhoGiay[i].detail.kep_nhip);
             if (arrKhoGiay[i].so_bat > 0) {
-                res.push(arrKhoGiay[i])
+                let kg: any = [];
+                Object.keys(arrKhoGiay[i]).map((index) => {
+                    kg[index] = arrKhoGiay[i][index];
+                });
+                res.push(kg)
             }
         }
         return res;
@@ -237,6 +266,18 @@ export class Lib {
 
         if (numDiv > 0) {
             res.push(numDiv);
+        }
+        return res;
+    }
+
+    public getMatIn(mau_in): number {
+        const colorCov = mau_in.split('/');
+        let res = 0;
+        if (colorCov[0] > 0) {
+            res++;
+        }
+        if (colorCov[1] > 0) {
+            res++;
         }
         return res;
     }
