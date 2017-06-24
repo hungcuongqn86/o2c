@@ -54,7 +54,13 @@
                     <td>{{el.may_in}}</td>
                     <td>{{el.sl_kem}}</td>
                     <td>{{el.loai_giay}}</td>
-                    <td>###</td>
+                    <td><select style="width: 75px;" title="{{el.arrKho_kho.lable}} {{el.name}}" class="form-control"
+                                [(ngModel)]="formData.kho_kho[el.id+'-sel-'+el.arrKho_kho.id]"
+                                (change)="genElement()" name="{{el.id}}-sel-{{el.arrKho_kho.id}}">
+                        <option *ngFor='let dataitem of el.arrKho_kho.data'
+                                value="{{dataitem.list_code}}">{{dataitem.list_code}}
+                        </option>
+                    </select></td>
                     <td>{{el.sl_giay_xuat}}</td>
                     <td>###</td>
                     <td>###</td>

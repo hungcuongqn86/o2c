@@ -24,6 +24,7 @@ export class cmdEl {
     public so_luot_in = '';
 
     public zinc_type: any = [];
+    public arrKho_kho: any = [];
 
     constructor() {
     }

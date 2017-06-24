@@ -18,7 +18,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     product: any = [];
     productType: any = [];
     elements: Array<any> = [];
-    formData: any = JSON.parse('{"zinc_type":{"bia-sel-zinc_type":"CTP", "ruot-sel-zinc_type":"CTP", "to_gac-sel-zinc_type":"CTP", "phu_ban-sel-zinc_type":"CTP"}}');
+    formData: any = JSON.parse('{"zinc_type":{"bia-sel-zinc_type":"CTP", "ruot-sel-zinc_type":"CTP", "to_gac-sel-zinc_type":"CTP", "phu_ban-sel-zinc_type":"CTP"}' +
+        ',"kho_kho":{"bia-sel-kho_kho":"", "ruot-sel-kho_kho":"", "to_gac-sel-kho_kho":"", "phu_ban-sel-kho_kho":""}}');
     status = 'none';
     depreciation: any;
     res: any;
@@ -117,7 +118,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         res.kho_tp = this.product.dai + 'x' + this.product.rong;
         res.mau_in = this.product.elements['bia-sel-mau_in'];
         res.zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
-
+        // Kho kho
+        res.arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
         // Loai giay
         const sLoaiGiay = this.product.elements['bia-sel-loai_giay'];
         const arrAllLoaiGiay = this.Lib.getFunctionData(el.properties, 'id', 'loai_giay', 'data');
@@ -197,6 +199,9 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         const allR = this.product.elements['ruot-in-so_trang'];
         let arrKhoGiay = this.Lib.getFunctionData(el.properties, 'id', 'kho_giay', 'data');
         const zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
+        // Kho kho
+        const arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
+        console.log(arrKho_kho);
         // May in
         const arrMay = this.Lib.getFunctionData(el.properties, 'id', 'may_in', 'data');
         // Loai kem
@@ -295,6 +300,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                     divisorItem.so_luot_in = so_luot_in;
                 } else {
                     // Con 2 to roi
+                    // console.log(111);
                     arrKhoGiay[i].fixKhoGiay2 = fixKhoGiay2;
                     divisorItem.zincCount = fixKhoGiay2.zincCount;
                     divisorItem.so_tay = 1;
@@ -309,13 +315,13 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 divisorItem.so_trang = arrKhoGiay[i].divisor[j];
                 arrDivisor.push(divisorItem);
             }
-            /*if (arrKhoGiay[i].fixKhoGiay2 && arrKhoGiay[i].fixKhoGiay2.gia_giay) {
-             arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000) + arrKhoGiay[i].fixKhoGiay2.gia_giay;
-             }else{
-             arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000);
-             }*/
-            arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000);
-            // console.log(arrKhoGiay[i], tong_luot_in);
+            //console.log(arrKhoGiay);
+            if (arrKhoGiay[i].fixKhoGiay2 && arrKhoGiay[i].fixKhoGiay2.gia_giay) {
+                arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000) + arrKhoGiay[i].fixKhoGiay2.gia_giay;
+            } else {
+                arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000);
+            }
+            //arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000);
             arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, SumzincCount, mau_in, arrKhoGiay[i].detail, arrMay, tong_luot_in);
             arrKhoGiay[i]._divisor = arrDivisor;
         }
@@ -329,6 +335,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             itemRes.so_trang = fixKhoGiay._divisor[i].so_trang;
             itemRes.kho_tp = this.product.dai + 'x' + this.product.rong;
             itemRes.zinc_type = zinc_type;
+            itemRes.arrKho_kho = arrKho_kho;
             itemRes.loai_giay = arrLoaiGiay.detail.name;
             itemRes.mau_in = mau_in;
             itemRes.sl_kem = fixKhoGiay._divisor[i].zincCount;
