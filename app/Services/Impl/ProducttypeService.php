@@ -92,7 +92,7 @@ class ProducttypeService extends CommonService implements IProducttypeService
         return $return;
     }
 
-    private function getSingleElement($id)
+    public function getSingleElement($id)
     {
         foreach (config('bases.element') as $element) {
             if ($element['id'] === $id) {

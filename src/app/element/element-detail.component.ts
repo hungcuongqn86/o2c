@@ -17,6 +17,7 @@ export class ElementDetailComponent implements OnInit {
     @ViewChild('form') form: NgModel;
     detail: any = JSON.parse('{"id":0,"name":"","properties":"","data":""}');
     arrSelect: any = [];
+    arrValue: any = [];
     res: any;
     recordId;
 
@@ -30,19 +31,46 @@ export class ElementDetailComponent implements OnInit {
 
     ngOnInit() {
         this.getDetail(this.recordId);
+        this.getSingleElement(this.recordId);
     }
 
     private getDetail(id: string) {
         this.ElementService.getSingle(id).subscribe(
             data => {
                 this.detail = data;
-                // console.log(this.detail.properties);
             },
             error => {
                 console.error("Not element!");
                 return Observable.throw(error);
             }
         );
+    }
+
+    private getSingleElement(id: string) {
+        this.ElementService.getSingleElement(id).subscribe(
+            data => {
+                this.arrValue = data;
+                this.convertValue();
+            },
+            error => {
+                console.error("Not element!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    private convertValue() {
+        if (this.arrValue.properties && this.arrValue.properties.length) {
+            for (let i = 0; i < this.arrValue.properties.length; i++) {
+                if (this.arrValue.properties[i].data) {
+                    for (let j = 0; j < this.arrValue.properties[i].data.length; j++) {
+                        const value = this.arrValue.properties[i].data[j].properties_code + '#' + this.arrValue.properties[i].data[j].list_code;
+                        this.arrSelect.push(value);
+                        // console.log(this.arrValue.properties[i].data[j]);
+                    }
+                }
+            }
+        }
     }
 
     private saveRecord() {
@@ -73,6 +101,7 @@ export class ElementDetailComponent implements OnInit {
                 this.arrSelect.splice(indexx, 1);
             }
         }
+        // console.log(this.arrSelect);
     }
 
     private goBack() {

@@ -20,7 +20,7 @@
                                             <label>
                                                 <input id="{{properties.id+'#'+item.code}}"
                                                        name="{{properties.id+'#'+item.code}}"
-                                                       [checked]="0"
+                                                       [checked]="arrSelect.includes(properties.id+'#'+item.code)"
                                                        (change)="checkedItems(properties.id+'#'+item.code)"
                                                        type="checkbox"> {{item.name | translate }}
                                             </label>
