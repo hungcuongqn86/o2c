@@ -353,8 +353,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             itemRes.bu_hao = fixKhoGiay._divisor[i].bu_hao;
             itemRes.so_luot_in = fixKhoGiay._divisor[i].so_luot_in;
             itemRes.cach_cat = cach_cat;
-            itemRes.sl_giay_xuat = Number(itemRes.tong_to_da_bu_hao) / itemRes.cach_cat;
-            itemRes.sl_giay_xuat_kg = Number(itemRes.tong_to_da_bu_hao) * constKg;
+            itemRes.sl_giay_xuat = (Number(itemRes.tong_to_da_bu_hao) / itemRes.cach_cat).toFixed(2);
+            itemRes.sl_giay_xuat_kg = (Number(itemRes.tong_to_da_bu_hao) * constKg).toFixed(2);
             res.push(itemRes);
         }
         return res;
