@@ -140,7 +140,7 @@
                                             class="form-control">
                                         <option value=""></option>
                                         <option *ngFor='let dataitem of properties.data'
-                                                value="{{dataitem.list_code}}">{{dataitem.list_code}}
+                                                value="{{dataitem.list_code}}">{{dataitem.detail.name}}
                                         </option>
                                     </select>
                                     <div *ngIf="properties.type=='check'" class="checkbox">

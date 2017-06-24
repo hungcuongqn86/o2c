@@ -70,6 +70,13 @@ return [
             'datatype' => 'function',
             'lable' => 'Khổ kho',
             'visible' => false
+        ],
+        'cach_in' => [
+            'id' => 'cach_in',
+            'type' => 'select',
+            'datatype' => 'function',
+            'lable' => 'Cách thức in',
+            'visible' => true
         ]
     ],
 
@@ -77,12 +84,12 @@ return [
         [
             'id' => 'ruot'
             , 'name' => 'ruột'
-            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho,cach_in'
         ],
         [
             'id' => 'bia'
             , 'name' => 'bìa'
-            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay,zinc_type,may_in,kho_kho'
+            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay,zinc_type,may_in,kho_kho,cach_in'
         ],
         [
             'id' => 'gay'
@@ -92,12 +99,12 @@ return [
         [
             'id' => 'to_gac'
             , 'name' => 'tờ gác'
-            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho,cach_in'
         ],
         [
             'id' => 'phu_ban'
             , 'name' => 'phụ bản'
-            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho,cach_in'
         ]
     ]
 ];
