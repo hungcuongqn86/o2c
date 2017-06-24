@@ -17,11 +17,13 @@ export class cmdEl {
     public so_tay = '';
     public so_bat = '';
     public cach_in = '';
-    public sl_giay_xuat = '';
+    public sl_giay_xuat = 0;
     public tong_to_da_bu_hao = '';
     public tong_to_chua_bu_hao = '';
     public bu_hao = '';
     public so_luot_in = '';
+    public cach_cat = 0;
+    public sl_giay_xuat_kg = 0;
 
     public zinc_type: any = [];
     public arrKho_kho: any = [];

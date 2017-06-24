@@ -158,6 +158,31 @@ export class Lib {
         return kg
     }
 
+    public fixKhokho(fixKhoGiay, arrKho_kho) {
+        let res: any = [];
+        let min = 0;
+        let dem = true;
+        for (let i = 0; i < arrKho_kho.data.length; i++) {
+            if ((Number(arrKho_kho.data[i].detail.d) > Number(fixKhoGiay.detail.d)) && (Number(arrKho_kho.data[i].detail.r) > Number(fixKhoGiay.detail.r))) {
+                if (dem) {
+                    min = (Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.detail.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.detail.r));
+                    Object.keys(arrKho_kho.data[i]).map((index) => {
+                        res[index] = arrKho_kho.data[i][index];
+                    });
+                    dem = false;
+                } else {
+                    if ((Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.detail.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.detail.r)) < min) {
+                        min = (Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.detail.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.detail.r));
+                        Object.keys(arrKho_kho.data[i]).map((index) => {
+                            res[index] = arrKho_kho.data[i][index];
+                        });
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
     public getDivisor(num: number): any {
         let res: Array<number> = [];
         if (num < 2) {

@@ -54,7 +54,7 @@
                     <td>{{el.may_in}}</td>
                     <td>{{el.sl_kem}}</td>
                     <td>{{el.loai_giay}}</td>
-                    <td><select style="width: 75px;" title="{{el.arrKho_kho.lable}} {{el.name}}" class="form-control"
+                    <td><select style="width: 99px;" title="{{el.arrKho_kho.lable}} {{el.name}}" class="form-control"
                                 [(ngModel)]="formData.kho_kho[el.id+'-sel-'+el.arrKho_kho.id]"
                                 (change)="genElement()" name="{{el.id}}-sel-{{el.arrKho_kho.id}}">
                         <option *ngFor='let dataitem of el.arrKho_kho.data'
@@ -62,8 +62,8 @@
                         </option>
                     </select></td>
                     <td>{{el.sl_giay_xuat}}</td>
-                    <td>###</td>
-                    <td>###</td>
+                    <td>{{el.sl_giay_xuat_kg}}</td>
+                    <td>{{el.cach_cat}}</td>
                     <td>{{el.bu_hao}}</td>
                     <td>{{el.tong_to_chua_bu_hao}}</td>
                     <td>{{el.tong_to_da_bu_hao}}</td>
