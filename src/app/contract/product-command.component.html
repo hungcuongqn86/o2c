@@ -31,7 +31,6 @@
                     <th>Số vạch</th>
                     <th>Quy cách đóng</th>
                     <th>Cách gia công</th>
-                    <th>Số lượng</th>
                     <th>Cách đóng gói</th>
                 </tr>
                 <tr *ngFor="let el of elements">
@@ -62,8 +61,7 @@
                     <td>{{el.bu_hao}}</td>
                     <td>{{el.tong_to_chua_bu_hao}}</td>
                     <td>{{el.tong_to_da_bu_hao}}</td>
-                    <td>###</td>
-                    <td>###</td>
+                    <td>{{el.so_luot_in}}</td>
                     <td>###</td>
                     <td>###</td>
                     <td>###</td>
@@ -71,6 +69,12 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button"
+                    class="btn btn-primary" (click)="apply()">Xuất Excell
+            </button>
+            <button type="button" class="btn btn-default" (click)="close()">Hủy bỏ</button>
         </div>
     </div>
 </div>

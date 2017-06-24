@@ -21,6 +21,7 @@ export class cmdEl {
     public tong_to_da_bu_hao = '';
     public tong_to_chua_bu_hao = '';
     public bu_hao = '';
+    public so_luot_in = '';
 
     public zinc_type: any = [];
 
