@@ -200,7 +200,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         let arrKhoGiay = this.Lib.getFunctionData(el.properties, 'id', 'kho_giay', 'data');
         const zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
         // Kho kho
-        const arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
+        let arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
         const kho_kho = this.formData.kho_kho['ruot-sel-kho_kho'];
         // May in
         const arrMay = this.Lib.getFunctionData(el.properties, 'id', 'may_in', 'data');
@@ -323,7 +323,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
 
         const fixKhoGiay = this.Lib.fixKhoGiay(arrKhoGiay);
         let fixKhokho: any = [];
-
+        arrKho_kho = this.Lib.getKhoKho(fixKhoGiay, arrKho_kho);
         if (!kho_kho) {
             fixKhokho = this.Lib.fixKhokho(fixKhoGiay, arrKho_kho);
         } else {

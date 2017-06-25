@@ -158,12 +158,23 @@ export class Lib {
         return kg
     }
 
+    public getKhoKho(fixKhoGiay, arrKho_kho) {
+        let res: any = [];
+        for (let i = 0; i < arrKho_kho.data.length; i++) {
+            if ((Number(arrKho_kho.data[i].detail.d) >= Number(fixKhoGiay.detail.d)) && (Number(arrKho_kho.data[i].detail.r) >= Number(fixKhoGiay.detail.r))) {
+                res.push(arrKho_kho.data[i]);
+            }
+        }
+        arrKho_kho.data = res;
+        return arrKho_kho;
+    }
+
     public fixKhokho(fixKhoGiay, arrKho_kho) {
         let res: any = [];
         let min = 0;
         let dem = true;
         for (let i = 0; i < arrKho_kho.data.length; i++) {
-            if ((Number(arrKho_kho.data[i].detail.d) > Number(fixKhoGiay.detail.d)) && (Number(arrKho_kho.data[i].detail.r) > Number(fixKhoGiay.detail.r))) {
+            if ((Number(arrKho_kho.data[i].detail.d) >= Number(fixKhoGiay.detail.d)) && (Number(arrKho_kho.data[i].detail.r) >= Number(fixKhoGiay.detail.r))) {
                 if (dem) {
                     min = (Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.detail.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.detail.r));
                     Object.keys(arrKho_kho.data[i]).map((index) => {
