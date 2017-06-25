@@ -20,6 +20,53 @@ export class Lib {
         return arrRes;
     }
 
+    public getNumberResize11(d, r, id, ir, kn): number {
+        console.log(d, r, id, ir, kn);
+        // TH1
+        const dkn = d - kn;
+        let kq1 = 0;
+        if ((dkn > id) && (r > ir)) {
+            kq1 = Math.floor(dkn / id) * Math.floor(r / ir);
+            let td1 = dkn - (Math.floor(dkn / id) * id);
+            if ((td1 >= ir) && (r >= id)) {
+                kq1 = kq1 + this.getNumberResize(r, td1, id, ir, 0);
+            }
+        }
+
+        // TH2
+        let kq2 = 0;
+        if ((dkn > ir) && (r > id)) {
+            kq2 = Math.floor(dkn / ir) * Math.floor(r / id);
+            let tr2 = r - (Math.floor(r / id) * id);
+            if ((tr2 >= ir) && (dkn >= id)) {
+                kq2 = kq2 + this.getNumberResize(dkn, tr2, id, ir, 0);
+            }
+        }
+
+        // TH3
+        const rkn = r - kn;
+        let kq3 = 0;
+        if ((d > id) && (rkn > ir)) {
+            kq3 = Math.floor(d / id) * Math.floor(rkn / ir);
+            let td3 = d - (Math.floor(d / id) * id);
+            if ((td3 >= ir) && (rkn >= id)) {
+                kq3 = kq3 + this.getNumberResize(rkn, td3, id, ir, 0);
+            }
+        }
+
+        // TH4
+        let kq4 = 0;
+        if ((d > ir) && (rkn > id)) {
+            kq4 = Math.floor(d / ir) * Math.floor(rkn / id);
+            let tr4 = rkn - (Math.floor(rkn / id) * id);
+            if ((tr4 >= ir) && (d >= id)) {
+                kq4 = kq4 + this.getNumberResize(d, tr4, id, ir, 0);
+            }
+        }
+        console.log(kq1, kq2, kq3, kq4);
+        return Math.max(kq1, kq2, kq3, kq4);
+    }
+
     public getNumberResize(d, r, id, ir, kn): number {
         // console.log(d, r, id, ir, kn);
         // TH1

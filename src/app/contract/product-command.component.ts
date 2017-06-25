@@ -271,7 +271,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         tong_so_to = tong_so_to + tongGiay1r;
                         zincCount = this.Lib.getZincCount(mau_in, 2, so_tay);
                         SumzincCount = SumzincCount + zincCount;
-                        divisorItem.so_bat = this.Lib.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, this.product.dai, this.product.rong, arrKhoGiay[i].detail.kep_nhip);
+                        divisorItem.so_bat = this.Lib.getNumberResize(Number(arrKhoGiay[i].detail.d), Number(arrKhoGiay[i].detail.r), Number(this.product.dai), Number(this.product.rong), Number(arrKhoGiay[i].detail.kep_nhip));
                         divisorItem.cach_in = 'Trở nó';
                     } else {
                         so_tay = arrKhoGiay[i].divisor[j] / ts;
@@ -285,7 +285,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         tong_so_to = tong_so_to + tongGiay1r;
                         zincCount = this.Lib.getZincCount(mau_in, 1, so_tay);
                         SumzincCount = SumzincCount + zincCount;
-                        divisorItem.so_bat = this.Lib.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, this.product.dai, this.product.rong, arrKhoGiay[i].detail.kep_nhip);
+                        divisorItem.so_bat = this.Lib.getNumberResize(Number(arrKhoGiay[i].detail.d), Number(arrKhoGiay[i].detail.r), Number(this.product.dai), Number(this.product.rong), Number(arrKhoGiay[i].detail.kep_nhip));
                         divisorItem.cach_in = 'Trở khác';
                     }
 
@@ -301,7 +301,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                     arrKhoGiay[i].fixKhoGiay2 = fixKhoGiay2;
                     divisorItem.zincCount = fixKhoGiay2.zincCount;
                     divisorItem.so_tay = 1;
-                    divisorItem.so_bat = this.Lib.getNumberResize(fixKhoGiay2.detail.d, fixKhoGiay2.detail.r, this.product.dai, this.product.rong, fixKhoGiay2.detail.kep_nhip);
+                    divisorItem.so_bat = this.Lib.getNumberResize(Number(fixKhoGiay2.detail.d), Number(fixKhoGiay2.detail.r), Number(this.product.dai), Number(this.product.rong), Number(fixKhoGiay2.detail.kep_nhip));
                     divisorItem.cach_in = 'Trở nó';
                     divisorItem.tong_to_da_bu_hao = fixKhoGiay2.tong_to_da_bu_hao;
                     divisorItem.tong_to_chua_bu_hao = fixKhoGiay2.tong_to_chua_bu_hao;
@@ -333,7 +333,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         }
 
         this.formData.kho_kho['ruot-sel-kho_kho'] = fixKhokho.detail.code;
-        const cach_cat = this.Lib.getNumberResize(fixKhokho.detail.d, fixKhokho.detail.r, fixKhoGiay.detail.d, fixKhoGiay.detail.r, 0);
+        const cach_cat = this.Lib.getNumberResize(Number(fixKhokho.detail.d), Number(fixKhokho.detail.r), Number(fixKhoGiay.detail.d), Number(fixKhoGiay.detail.r), 0);
         const constKg = Number(dl) * Number(fixKhokho.detail.d) * Number(fixKhokho.detail.r) / 10000000;
         for (let i = 0; i < fixKhoGiay._divisor.length; i++) {
             const itemRes = new cmdEl();
