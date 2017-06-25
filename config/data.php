@@ -87,16 +87,6 @@ return [
             , 'name' => '1/0'
         ]
     ],
-    'cach_in' => [
-        [
-            'code' => 'roi'
-            , 'name' => 'In tờ rời'
-        ],
-        [
-            'code' => 'cuon'
-            , 'name' => 'In cuộn'
-        ]
-    ],
     'loai_giay' => [
         [
             'code' => 'c150'

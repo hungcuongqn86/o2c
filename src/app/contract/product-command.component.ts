@@ -201,6 +201,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         const zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
         // Kho kho
         const arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
+        const kho_kho = this.formData.kho_kho['ruot-sel-kho_kho'];
         // May in
         const arrMay = this.Lib.getFunctionData(el.properties, 'id', 'may_in', 'data');
         // Loai kem
@@ -217,7 +218,6 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         }
         let mau_in = this.product.elements['ruot-sel-mau_in'];
         let mat_in = this.Lib.getMatIn(mau_in);
-
 
         let soto1tay = 0;
         let sosp1tay = 1;
@@ -245,7 +245,6 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
 
         const fixKhoGiay2 = this.Lib.fixKhoGiay(arrKhoGiay2);
         arrKhoGiay = this.Lib.getQualifiedSize(arrKhoGiay, this.product.dai, this.product.rong, allR);
-
         // console.log(arrKhoGiay);
 
         for (let i = 0; i < arrKhoGiay.length; i++) {
@@ -323,10 +322,19 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         }
 
         const fixKhoGiay = this.Lib.fixKhoGiay(arrKhoGiay);
-        const fixKhokho = this.Lib.fixKhokho(fixKhoGiay, arrKho_kho);
+        let fixKhokho: any = [];
+
+        if (!kho_kho) {
+            fixKhokho = this.Lib.fixKhokho(fixKhoGiay, arrKho_kho);
+        } else {
+            fixKhokho = arrKho_kho.data.filter(function (itm) {
+                return itm['list_code'] === kho_kho;
+            })[0];
+        }
+
         this.formData.kho_kho['ruot-sel-kho_kho'] = fixKhokho.detail.code;
         const cach_cat = this.Lib.getNumberResize(fixKhokho.detail.d, fixKhokho.detail.r, fixKhoGiay.detail.d, fixKhoGiay.detail.r, 0);
-        const constKg = Number(dl) * Number(fixKhoGiay.detail.d) * Number(fixKhoGiay.detail.r) / 10000000;
+        const constKg = Number(dl) * Number(fixKhokho.detail.d) * Number(fixKhokho.detail.r) / 10000000;
         for (let i = 0; i < fixKhoGiay._divisor.length; i++) {
             const itemRes = new cmdEl();
             itemRes.id = el.id;

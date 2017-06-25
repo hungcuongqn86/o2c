@@ -73,9 +73,9 @@ return [
         ],
         'cach_in' => [
             'id' => 'cach_in',
-            'type' => 'select',
-            'datatype' => 'function',
-            'lable' => 'Cách thức in',
+            'type' => 'check',
+            'datatype' => 'list',
+            'lable' => 'In cuộn',
             'visible' => true
         ]
     ],
@@ -89,7 +89,7 @@ return [
         [
             'id' => 'bia'
             , 'name' => 'bìa'
-            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay,zinc_type,may_in,kho_kho,cach_in'
+            , 'properties' => 'loai_giay,mau_in,bia_cung,cach_gia_cong,kho_giay,zinc_type,may_in,kho_kho'
         ],
         [
             'id' => 'gay'
@@ -99,12 +99,12 @@ return [
         [
             'id' => 'to_gac'
             , 'name' => 'tờ gác'
-            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho,cach_in'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho'
         ],
         [
             'id' => 'phu_ban'
             , 'name' => 'phụ bản'
-            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho,cach_in'
+            , 'properties' => 'so_trang,loai_giay,mau_in,kho_giay,zinc_type,may_in,kho_kho'
         ]
     ]
 ];
