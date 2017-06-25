@@ -260,7 +260,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 if (arrKhoGiay[i].divisor[j] > 2) {
                     if (j > 0) {
                         ts = ts / 2;
-                        so_tay = arrKhoGiay[i].divisor[j] / ts;
+                        so_tay = Math.ceil(arrKhoGiay[i].divisor[j] / ts);
                         soto1tay = Number(Math.ceil(soto1tay / 2));
                         sosp1tay = sosp1tay * 2;
                         //luot in
@@ -274,7 +274,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         divisorItem.so_bat = this.Lib.getNumberResize(Number(arrKhoGiay[i].detail.d), Number(arrKhoGiay[i].detail.r), Number(this.product.dai), Number(this.product.rong), Number(arrKhoGiay[i].detail.kep_nhip));
                         divisorItem.cach_in = 'Trở nó';
                     } else {
-                        so_tay = arrKhoGiay[i].divisor[j] / ts;
+                        so_tay = Math.ceil(arrKhoGiay[i].divisor[j] / ts);
                         soto1tay = this.product.count;
                         sosp1tay = 1;
                         //luot in
