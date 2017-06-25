@@ -266,7 +266,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         //luot in
                         so_luot_in = (this.product.count / sosp1tay) * mat_in * so_tay;
                         tong_luot_in = tong_luot_in + so_luot_in;
-                        buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+                        buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciation);
                         tongGiay1r = (soto1tay + buhao) * so_tay;
                         tong_so_to = tong_so_to + tongGiay1r;
                         zincCount = this.Lib.getZincCount(mau_in, 2, so_tay);
@@ -280,7 +280,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         //luot in
                         so_luot_in = this.product.count * mat_in * so_tay;
                         tong_luot_in = tong_luot_in + so_luot_in;
-                        buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+                        buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciation);
                         tongGiay1r = (soto1tay + buhao) * so_tay;
                         tong_so_to = tong_so_to + tongGiay1r;
                         zincCount = this.Lib.getZincCount(mau_in, 1, so_tay);

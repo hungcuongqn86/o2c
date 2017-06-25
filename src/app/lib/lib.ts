@@ -281,6 +281,29 @@ export class Lib {
         return ZincByColor * paperNumber / printConst;
     }
 
+    public getBuhao(luot: number, dl: number, mau, depreciation: any): number {
+        const colorCov = mau.split('/');
+        let somau = Number(colorCov[0]);
+        if (colorCov[0] < colorCov[1]) {
+            somau = Number(colorCov[1]);
+        }
+
+        let objDepreciation: any;
+        for (let i = 0; i < depreciation.length; i++) {
+            if ((luot > depreciation[i].min) && (luot <= depreciation[i].max)) {
+                objDepreciation = depreciation[i];
+            }
+        }
+
+        let objDepreciationDl: any;
+        for (let i = 0; i < objDepreciation.dl.length; i++) {
+            if ((dl > objDepreciation.dl[i].min) && (dl <= objDepreciation.dl[i].max)) {
+                objDepreciationDl = objDepreciation.dl[i];
+            }
+        }
+        return objDepreciationDl.mau[somau - 1];
+    }
+
     public getPaperCount(pCount: number, depreciation): number {
         let objDepreciation: any;
         for (let i = 0; i < depreciation.length; i++) {
