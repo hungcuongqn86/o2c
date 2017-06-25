@@ -48,6 +48,11 @@
 }
 
 .tbl-command {
-    width: 200%;
-    max-width: 200%;
+    width: 300%;
+    max-width: 300%;
+}
+
+.header-tbl {
+    background-color: #dddddd;
+    vertical-align: middle;
 }
