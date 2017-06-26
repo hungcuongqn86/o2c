@@ -114,7 +114,7 @@ export class Lib {
         return Math.max(kq1, kq2, kq3, kq4);
     }
 
-    public fixPrinter(zincType, zincCount, mau_in, detailKG, arrMay, luot_in): any {
+    public fixPrinter(zincType, zincCount, mau_in, detailKG, arrMay, luot_in, in_cuon = false): any {
         const colorCov = mau_in.split('/');
         let somau = colorCov[0];
         if (colorCov[0] < colorCov[1]) {
@@ -126,36 +126,38 @@ export class Lib {
         let chiphi: number = 0;
         let may: any = [];
         for (let i = 0; i < arrMay.length; i++) {
-            if (somau <= arrMay[i].detail.so_mau) {
-                if (this.checkSize(detailKG, arrMay[i].detail.min_size, arrMay[i].detail.max_size)) {
-                    if (dem) {
-                        giakem = Number(arrMay[i].detail.gia_kem[zincType]) * zincCount;
-                        if (luot_in < 1000) {
-                            cpin = zincCount * arrMay[i].detail.cong_in_kem;
-                        } else {
-                            cpin = luot_in * arrMay[i].detail.cong_in_luot;
-                        }
-                        chiphi = giakem + cpin;
-                        Object.keys(arrMay[i]).map((index) => {
-                            may[index] = arrMay[i][index];
-                        });
-                        may.gia_kem = giakem;
-                        may.cong_in = cpin;
-                        dem = false;
-                    } else {
-                        giakem = Number(arrMay[i].detail.gia_kem[zincType]) * zincCount;
-                        if (luot_in < 1000) {
-                            cpin = zincCount * arrMay[i].detail.cong_in_kem;
-                        } else {
-                            cpin = luot_in * arrMay[i].detail.cong_in_luot;
-                        }
-                        if ((giakem + cpin) < chiphi) {
+            if (in_cuon === arrMay[i].detail.in_cuon) {
+                if (somau <= arrMay[i].detail.so_mau) {
+                    if (this.checkSize(detailKG, arrMay[i].detail.min_size, arrMay[i].detail.max_size)) {
+                        if (dem) {
+                            giakem = Number(arrMay[i].detail.gia_kem[zincType]) * zincCount;
+                            if (luot_in < 1000) {
+                                cpin = zincCount * arrMay[i].detail.cong_in_kem;
+                            } else {
+                                cpin = luot_in * arrMay[i].detail.cong_in_luot;
+                            }
                             chiphi = giakem + cpin;
                             Object.keys(arrMay[i]).map((index) => {
                                 may[index] = arrMay[i][index];
                             });
                             may.gia_kem = giakem;
                             may.cong_in = cpin;
+                            dem = false;
+                        } else {
+                            giakem = Number(arrMay[i].detail.gia_kem[zincType]) * zincCount;
+                            if (luot_in < 1000) {
+                                cpin = zincCount * arrMay[i].detail.cong_in_kem;
+                            } else {
+                                cpin = luot_in * arrMay[i].detail.cong_in_luot;
+                            }
+                            if ((giakem + cpin) < chiphi) {
+                                chiphi = giakem + cpin;
+                                Object.keys(arrMay[i]).map((index) => {
+                                    may[index] = arrMay[i][index];
+                                });
+                                may.gia_kem = giakem;
+                                may.cong_in = cpin;
+                            }
                         }
                     }
                 }
@@ -178,7 +180,7 @@ export class Lib {
         let mingia: number = 0;
         let kg: any = [];
         for (let i = 0; i < arrKhoGiay.length; i++) {
-            if (arrKhoGiay[i].may_in) {
+            if (arrKhoGiay[i].may_in.id) {
                 if (dem) {
                     mingia = Number(arrKhoGiay[i].gia_giay) + Number(arrKhoGiay[i].may_in.gia_kem) + Number(arrKhoGiay[i].may_in.cong_in);
                     if (arrKhoGiay[i].fixKhoGiay2) {

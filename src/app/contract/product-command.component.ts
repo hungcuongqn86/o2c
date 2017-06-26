@@ -238,7 +238,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             zincCount = this.Lib.getZincCount(mau_in, 2, 1);
             arrKhoGiay2[k].zincCount = zincCount;
             arrKhoGiay2[k].gia_giay = tongGiay1r * arrKhoGiay2[k].detail.d * arrKhoGiay2[k].detail.r * dl * dg / 10000;
-            arrKhoGiay2[k].may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, arrKhoGiay2[k].detail, arrMay, arrKhoGiay2[k].so_luot_in);
+            arrKhoGiay2[k].may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, arrKhoGiay2[k].detail, arrMay, arrKhoGiay2[k].so_luot_in, in_cuon);
             arrKhoGiay2[k].tong_to_chua_bu_hao = soto1tay * so_tay2;
             arrKhoGiay2[k].tong_to_da_bu_hao = tongGiay1r;
             arrKhoGiay2[k].bu_hao = buhao;
@@ -318,7 +318,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             } else {
                 arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000);
             }
-            arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, SumzincCount, mau_in, arrKhoGiay[i].detail, arrMay, tong_luot_in);
+            arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, SumzincCount, mau_in, arrKhoGiay[i].detail, arrMay, tong_luot_in, in_cuon);
             arrKhoGiay[i]._divisor = arrDivisor;
         }
 
