@@ -3,51 +3,151 @@
 return [
     'may_in' => [
         [
-            'code' => 'M16-4'
-            , 'name' => 'M16 - 4 màu'
+            'code' => 'H1'
+            , 'name' => 'Heidelberg CD102-4'
             , 'so_mau' => 4
-            , 'max_size' => '82x110'
-            , 'min_size' => '40x60'
+            , 'max_size' => '72x102'
+            , 'min_size' => '39x54'
             , 'cong_in_kem' => 120000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
         ],
         [
-            'code' => 'M8-4'
-            , 'name' => 'M8 - 4 màu'
+            'code' => 'K1'
+            , 'name' => 'Lithrone Komori L432'
             , 'so_mau' => 4
-            , 'max_size' => '48x66'
-            , 'min_size' => '25x35'
+            , 'max_size' => '54.5x79'
+            , 'min_size' => '32x43'
             , 'cong_in_kem' => 60000
             , 'cong_in_luot' => 40
             , 'gia_kem' => ['CTP' => '56000', 'M8' => '45000']
         ],
         [
-            'code' => 'M8-1'
-            , 'name' => 'M8 - 1 màu'
-            , 'so_mau' => 1
-            , 'max_size' => '48x66'
-            , 'min_size' => '25x35'
+            'code' => 'K2'
+            , 'name' => 'Lithrone Komori L440'
+            , 'so_mau' => 4
+            , 'max_size' => '72x102'
+            , 'min_size' => '39x54'
             , 'cong_in_kem' => 60000
             , 'cong_in_luot' => 20
             , 'gia_kem' => ['CTP' => '56000', 'M8' => '45000']
         ],
         [
-            'code' => 'M16-1'
-            , 'name' => 'M16 - 1 màu'
-            , 'so_mau' => 1
-            , 'max_size' => '82x110'
-            , 'min_size' => '46x66'
+            'code' => 'M2'
+            , 'name' => 'Mitsubishi Daiya 3F4'
+            , 'so_mau' => 4
+            , 'max_size' => '72x102'
+            , 'min_size' => '39x54'
             , 'cong_in_kem' => 120000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
         ],
         [
-            'code' => 'M16-2'
-            , 'name' => 'M16 - 2 màu'
+            'code' => 'L1'
+            , 'name' => 'Lithrone Komori L240'
             , 'so_mau' => 2
-            , 'max_size' => '82x110'
-            , 'min_size' => '46x66'
+            , 'max_size' => '72x102'
+            , 'min_size' => '39x54'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'L3'
+            , 'name' => 'Lithrone Komori L240'
+            , 'so_mau' => 2
+            , 'max_size' => '72x102'
+            , 'min_size' => '39x54'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'S226'
+            , 'name' => 'Komori'
+            , 'so_mau' => 2
+            , 'max_size' => '45x65'
+            , 'min_size' => '25x35'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'A1'
+            , 'name' => 'Komori'
+            , 'so_mau' => 1
+            , 'max_size' => '78x108'
+            , 'min_size' => '54x78'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'A3'
+            , 'name' => 'Aki (In 1/1)'
+            , 'so_mau' => 1
+            , 'max_size' => '69x98'
+            , 'min_size' => '49x69'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'S26'
+            , 'name' => 'Komori'
+            , 'so_mau' => 1
+            , 'max_size' => '45x65'
+            , 'min_size' => '25x35'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'IC'
+            , 'name' => 'City Line (4/4)'
+            , 'so_mau' => 4
+            , 'max_size' => '50.8x70'
+            , 'min_size' => '0x0'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'M3'
+            , 'name' => 'Mitsubishi'
+            , 'so_mau' => 4
+            , 'max_size' => '72x102'
+            , 'min_size' => '39x54'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'M4'
+            , 'name' => 'Mitsubishi'
+            , 'so_mau' => 4
+            , 'max_size' => '51x72'
+            , 'min_size' => '26x36'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'L2'
+            , 'name' => 'Lithrone Komori'
+            , 'so_mau' => 2
+            , 'max_size' => '72x102'
+            , 'min_size' => '39x54'
+            , 'cong_in_kem' => 120000
+            , 'cong_in_luot' => 30
+            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
+        ],
+        [
+            'code' => 'LP'
+            , 'name' => 'LP40 In1/1'
+            , 'so_mau' => 1
+            , 'max_size' => '72x102'
+            , 'min_size' => '49x69'
             , 'cong_in_kem' => 120000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']

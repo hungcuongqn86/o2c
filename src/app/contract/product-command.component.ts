@@ -196,6 +196,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
 
     private _genRuot(el: any): Array<cmdEl> {
         let res: Array<cmdEl> = [];
+        const in_cuon = this.product.elements['ruot-chk-cach_in'];
         const allR = this.product.elements['ruot-in-so_trang'];
         let arrKhoGiay = this.Lib.getFunctionData(el.properties, 'id', 'kho_giay', 'data');
         const zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
