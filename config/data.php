@@ -526,6 +526,80 @@ return [
         ]
         ]
     ],
+    'dm_bu_hao_in_cuon' => [
+        [
+            'min' => 0
+            , 'max' => 30000
+            , 'so_mau' => [
+            [
+                'number' => 1
+                , 'value' => 500
+            ],
+            [
+                'number' => 2
+                , 'value' => 700
+            ],
+            [
+                'number' => 4
+                , 'value' => 1000
+            ]
+        ]
+        ],
+        [
+            'min' => 30000
+            , 'max' => 50000
+            , 'so_mau' => [
+            [
+                'number' => 1
+                , 'value' => 500
+            ],
+            [
+                'number' => 2
+                , 'value' => 700
+            ],
+            [
+                'number' => 4
+                , 'value' => 1500
+            ]
+        ]
+        ],
+        [
+            'min' => 50000
+            , 'max' => 100000
+            , 'so_mau' => [
+            [
+                'number' => 1
+                , 'value' => 1000
+            ],
+            [
+                'number' => 2
+                , 'value' => 1000
+            ],
+            [
+                'number' => 4
+                , 'value' => 2000
+            ]
+        ]
+        ],
+        [
+            'min' => 100000
+            , 'max' => 5000000
+            , 'so_mau' => [
+            [
+                'number' => 1
+                , 'value' => 1500
+            ],
+            [
+                'number' => 2
+                , 'value' => 2000
+            ],
+            [
+                'number' => 4
+                , 'value' => 2500
+            ]
+        ]
+        ],
+    ],
     'kho_kho' => [
         [
             'code' => '109x158'

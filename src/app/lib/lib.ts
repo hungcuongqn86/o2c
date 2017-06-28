@@ -270,7 +270,7 @@ export class Lib {
         return index;
     }
 
-    public getZincCount(colorCount: string, printConst: number, paperNumber: number): number {
+    public getZincCountR(colorCount: string, printConst: number, paperNumber: number): number {
         const colorCov = colorCount.split('/');
         let ZincByColor = Number(colorCov[0]) + Number(colorCov[1]);
         if (printConst === 2) {
@@ -281,6 +281,15 @@ export class Lib {
             }
         }
         return ZincByColor * paperNumber / printConst;
+    }
+
+    public getZincCountC(colorCount: string, paperNumber: number): number {
+        const colorCov = colorCount.split('/');
+        let somau = Number(colorCov[0]);
+        if (colorCov[0] < colorCov[1]) {
+            somau = Number(colorCov[1]);
+        }
+        return somau * paperNumber / 8;
     }
 
     public getBuhao(luot: number, dl: number, mau, depreciation: any): number {

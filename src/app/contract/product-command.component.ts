@@ -165,7 +165,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             let tongGiay1r = (soto1tay + buhao) * so_tay;
             arrKhoGiay[i].gia_giay = tongGiay1r * detailKG.d * detailKG.r * dl * dg / 10000;
 
-            let zincCount = this.Lib.getZincCount(res.mau_in, 2, 1);
+            let zincCount = this.Lib.getZincCountR(res.mau_in, 2, 1);
             so_luot_in = (this.product.count / sl) * mat_in;
 
             arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, zincCount, res.mau_in, detailKG, arrMay, so_luot_in);
@@ -235,7 +235,11 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             arrKhoGiay2[k].so_luot_in = (this.product.count / sosp1tay) * mat_in;
             buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
             tongGiay1r = (soto1tay + buhao) * so_tay2;
-            zincCount = this.Lib.getZincCount(mau_in, 2, 1);
+            if (in_cuon) {
+                zincCount = this.Lib.getZincCountC(mau_in, 2);
+            } else {
+                zincCount = this.Lib.getZincCountR(mau_in, 2, 1);
+            }
             arrKhoGiay2[k].zincCount = zincCount;
             arrKhoGiay2[k].gia_giay = tongGiay1r * arrKhoGiay2[k].detail.d * arrKhoGiay2[k].detail.r * dl * dg / 10000;
             arrKhoGiay2[k].may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, arrKhoGiay2[k].detail, arrMay, arrKhoGiay2[k].so_luot_in, in_cuon);
@@ -270,7 +274,11 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciation);
                         tongGiay1r = (soto1tay + buhao) * so_tay;
                         tong_so_to = tong_so_to + tongGiay1r;
-                        zincCount = this.Lib.getZincCount(mau_in, 2, so_tay);
+                        if (in_cuon) {
+                            zincCount = this.Lib.getZincCountC(mau_in, arrKhoGiay[i].divisor[j]);
+                        } else {
+                            zincCount = this.Lib.getZincCountR(mau_in, 2, so_tay);
+                        }
                         SumzincCount = SumzincCount + zincCount;
                         divisorItem.so_bat = this.Lib.getNumberResize(Number(arrKhoGiay[i].detail.d), Number(arrKhoGiay[i].detail.r), Number(this.product.dai), Number(this.product.rong), Number(arrKhoGiay[i].detail.kep_nhip));
                         divisorItem.cach_in = 'Trở nó';
@@ -284,7 +292,11 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciation);
                         tongGiay1r = (soto1tay + buhao) * so_tay;
                         tong_so_to = tong_so_to + tongGiay1r;
-                        zincCount = this.Lib.getZincCount(mau_in, 1, so_tay);
+                        if (in_cuon) {
+                            zincCount = this.Lib.getZincCountC(mau_in, arrKhoGiay[i].divisor[j]);
+                        } else {
+                            zincCount = this.Lib.getZincCountR(mau_in, 1, so_tay);
+                        }
                         SumzincCount = SumzincCount + zincCount;
                         divisorItem.so_bat = this.Lib.getNumberResize(Number(arrKhoGiay[i].detail.d), Number(arrKhoGiay[i].detail.r), Number(this.product.dai), Number(this.product.rong), Number(arrKhoGiay[i].detail.kep_nhip));
                         divisorItem.cach_in = 'Trở khác';
@@ -408,7 +420,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 arrKhoGiay2[k].so_luot_in = (this.product.count / sosp1tay) * mat_in;
                 buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
                 tongGiay1r = (soto1tay + buhao) * so_tay2;
-                zincCount = this.Lib.getZincCount(mau_in, 2, 1);
+                zincCount = this.Lib.getZincCountR(mau_in, 2, 1);
                 arrKhoGiay2[k].zincCount = zincCount;
                 arrKhoGiay2[k].gia_giay = tongGiay1r * arrKhoGiay2[k].detail.d * arrKhoGiay2[k].detail.r * dl * dg / 10000;
                 arrKhoGiay2[k].may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, arrKhoGiay2[k].detail, arrMay, arrKhoGiay2[k].so_luot_in);
@@ -444,7 +456,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
                             tongGiay1r = (soto1tay + buhao) * so_tay;
                             tong_so_to = tong_so_to + tongGiay1r;
-                            zincCount = this.Lib.getZincCount(mau_in, 2, so_tay);
+                            zincCount = this.Lib.getZincCountR(mau_in, 2, so_tay);
                             SumzincCount = SumzincCount + zincCount;
                             divisorItem.so_bat = this.Lib.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, this.product.dai, this.product.rong, arrKhoGiay[i].detail.kep_nhip);
                             divisorItem.cach_in = 'Trở nó';
@@ -458,7 +470,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
                             tongGiay1r = (soto1tay + buhao) * so_tay;
                             tong_so_to = tong_so_to + tongGiay1r;
-                            zincCount = this.Lib.getZincCount(mau_in, 1, so_tay);
+                            zincCount = this.Lib.getZincCountR(mau_in, 1, so_tay);
                             SumzincCount = SumzincCount + zincCount;
                             divisorItem.so_bat = this.Lib.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, this.product.dai, this.product.rong, arrKhoGiay[i].detail.kep_nhip);
                             divisorItem.cach_in = 'Trở khác';
@@ -572,7 +584,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 arrKhoGiay2[k].so_luot_in = (this.product.count / sosp1tay) * mat_in;
                 buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
                 tongGiay1r = (soto1tay + buhao) * so_tay2;
-                zincCount = this.Lib.getZincCount(mau_in, 2, 1);
+                zincCount = this.Lib.getZincCountR(mau_in, 2, 1);
                 arrKhoGiay2[k].zincCount = zincCount;
                 arrKhoGiay2[k].gia_giay = tongGiay1r * arrKhoGiay2[k].detail.d * arrKhoGiay2[k].detail.r * dl * dg / 10000;
                 arrKhoGiay2[k].may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, arrKhoGiay2[k].detail, arrMay, arrKhoGiay2[k].so_luot_in);
@@ -608,7 +620,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
                             tongGiay1r = (soto1tay + buhao) * so_tay;
                             tong_so_to = tong_so_to + tongGiay1r;
-                            zincCount = this.Lib.getZincCount(mau_in, 2, so_tay);
+                            zincCount = this.Lib.getZincCountR(mau_in, 2, so_tay);
                             SumzincCount = SumzincCount + zincCount;
                             divisorItem.so_bat = this.Lib.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, this.product.dai, this.product.rong, arrKhoGiay[i].detail.kep_nhip);
                             divisorItem.cach_in = 'Trở nó';
@@ -622,7 +634,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
                             tongGiay1r = (soto1tay + buhao) * so_tay;
                             tong_so_to = tong_so_to + tongGiay1r;
-                            zincCount = this.Lib.getZincCount(mau_in, 1, so_tay);
+                            zincCount = this.Lib.getZincCountR(mau_in, 1, so_tay);
                             SumzincCount = SumzincCount + zincCount;
                             divisorItem.so_bat = this.Lib.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, this.product.dai, this.product.rong, arrKhoGiay[i].detail.kep_nhip);
                             divisorItem.cach_in = 'Trở khác';
