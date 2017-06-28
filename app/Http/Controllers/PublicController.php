@@ -45,10 +45,19 @@ class PublicController extends Controller
         }
     }
 
-    public function getDepreciation()
+    public function getDepreciationR()
     {
         try {
             return response()->success(config('data.dm_bu_hao'));
+        } catch (\Exception $e) {
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
+
+    public function getDepreciationC()
+    {
+        try {
+            return response()->success(config('data.dm_bu_hao_in_cuon'));
         } catch (\Exception $e) {
             return response()->error(trans('messages.MSG_Error'), 400);
         }

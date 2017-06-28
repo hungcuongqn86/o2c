@@ -20,7 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/menu', 'PublicController@getMenu');
 Route::get('/roles', 'PublicController@getRoles');
 Route::get('/listtype', 'PublicController@getListType');
-Route::get('/depreciation', 'PublicController@getDepreciation');
+Route::get('/depreciationr', 'PublicController@getDepreciationR');
+Route::get('/depreciationc', 'PublicController@getDepreciationC');
 Route::post('/upload', 'PublicController@upload');
 
 Route::group(['prefix' => 'list'], function () {

@@ -292,7 +292,7 @@ export class Lib {
         return somau * paperNumber / 8;
     }
 
-    public getBuhao(luot: number, dl: number, mau, depreciation: any): number {
+    public getBuhao(luot: number, dl: number, mau, depreciationR: any, depreciationC: any, in_cuon = false): number {
         const colorCov = mau.split('/');
         let somau = Number(colorCov[0]);
         if (colorCov[0] < colorCov[1]) {
@@ -300,19 +300,36 @@ export class Lib {
         }
 
         let objDepreciation: any;
-        for (let i = 0; i < depreciation.length; i++) {
-            if ((luot > depreciation[i].min) && (luot <= depreciation[i].max)) {
-                objDepreciation = depreciation[i];
+        if (in_cuon) {
+            for (let i = 0; i < depreciationC.length; i++) {
+                if ((luot > depreciationC[i].min) && (luot <= depreciationC[i].max)) {
+                    objDepreciation = depreciationC[i];
+                }
             }
-        }
 
-        let objDepreciationDl: any;
-        for (let i = 0; i < objDepreciation.dl.length; i++) {
-            if ((dl > objDepreciation.dl[i].min) && (dl <= objDepreciation.dl[i].max)) {
-                objDepreciationDl = objDepreciation.dl[i];
+            let objDepreciationSM: any;
+            for (let i = 0; i < objDepreciation.so_mau.length; i++) {
+                if (somau == objDepreciation.so_mau[i].number) {
+                    objDepreciationSM = objDepreciation.so_mau[i];
+                }
             }
+
+            return objDepreciationSM.value;
+        } else {
+            for (let i = 0; i < depreciationR.length; i++) {
+                if ((luot > depreciationR[i].min) && (luot <= depreciationR[i].max)) {
+                    objDepreciation = depreciationR[i];
+                }
+            }
+
+            let objDepreciationDl: any;
+            for (let i = 0; i < objDepreciation.dl.length; i++) {
+                if ((dl > objDepreciation.dl[i].min) && (dl <= objDepreciation.dl[i].max)) {
+                    objDepreciationDl = objDepreciation.dl[i];
+                }
+            }
+            return objDepreciationDl.mau[somau - 1];
         }
-        return objDepreciationDl.mau[somau - 1];
     }
 
     public getPaperCount(pCount: number, depreciation): number {

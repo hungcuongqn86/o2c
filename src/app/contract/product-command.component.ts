@@ -21,7 +21,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     formData: any = JSON.parse('{"zinc_type":{"bia-sel-zinc_type":"CTP", "ruot-sel-zinc_type":"CTP", "to_gac-sel-zinc_type":"CTP", "phu_ban-sel-zinc_type":"CTP"}' +
         ',"kho_kho":{"bia-sel-kho_kho":"", "ruot-sel-kho_kho":"", "to_gac-sel-kho_kho":"", "phu_ban-sel-kho_kho":""}}');
     status = 'none';
-    depreciation: any;
+    depreciationR: any;
+    depreciationC: any;
     res: any;
 
     constructor(private Lib: Lib, dialogService: DialogService, private productService: productService) {
@@ -30,13 +31,26 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
 
     ngOnInit() {
         this.getDetail(this.idProd);
-        this.getDepreciation();
+        this.getDepreciationR();
+        this.getDepreciationC();
     }
 
-    private getDepreciation() {
-        this.productService.getDepreciation().subscribe(
+    private getDepreciationR() {
+        this.productService.getDepreciationR().subscribe(
             data => {
-                this.depreciation = data;
+                this.depreciationR = data;
+            },
+            error => {
+                console.error("Not Depreciation!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    private getDepreciationC() {
+        this.productService.getDepreciationC().subscribe(
+            data => {
+                this.depreciationC = data;
             },
             error => {
                 console.error("Not Depreciation!");
@@ -161,7 +175,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             }
             let so_tay = Math.ceil(4 / (sl * 2));
             let soto1tay = Number(Math.ceil(this.product.count / 2));
-            let buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+            let buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
             let tongGiay1r = (soto1tay + buhao) * so_tay;
             arrKhoGiay[i].gia_giay = tongGiay1r * detailKG.d * detailKG.r * dl * dg / 10000;
 
@@ -233,7 +247,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             soto1tay = Number(Math.ceil(this.product.count / arrKhoGiay2[k].so_bat));
             sosp1tay = this.Lib.getNumberResize(arrKhoGiay2[k].detail.d, arrKhoGiay2[k].detail.r, this.product.dai, this.product.rong, arrKhoGiay2[k].detail.kep_nhip);
             arrKhoGiay2[k].so_luot_in = (this.product.count / sosp1tay) * mat_in;
-            buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+            buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
+            // buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciationR, this.depreciationC, in_cuon);
             tongGiay1r = (soto1tay + buhao) * so_tay2;
             if (in_cuon) {
                 zincCount = this.Lib.getZincCountC(mau_in, 2);
@@ -271,7 +286,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         //luot in
                         so_luot_in = (this.product.count / sosp1tay) * mat_in * so_tay;
                         tong_luot_in = tong_luot_in + so_luot_in;
-                        buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciation);
+                        buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciationR, this.depreciationC, in_cuon);
                         tongGiay1r = (soto1tay + buhao) * so_tay;
                         tong_so_to = tong_so_to + tongGiay1r;
                         if (in_cuon) {
@@ -289,7 +304,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         //luot in
                         so_luot_in = this.product.count * mat_in * so_tay;
                         tong_luot_in = tong_luot_in + so_luot_in;
-                        buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciation);
+                        buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciationR, this.depreciationC, in_cuon);
                         tongGiay1r = (soto1tay + buhao) * so_tay;
                         tong_so_to = tong_so_to + tongGiay1r;
                         if (in_cuon) {
@@ -418,7 +433,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 soto1tay = Number(Math.ceil(this.product.count / arrKhoGiay2[k].so_bat));
                 sosp1tay = this.Lib.getNumberResize(arrKhoGiay2[k].detail.d, arrKhoGiay2[k].detail.r, this.product.dai, this.product.rong, arrKhoGiay2[k].detail.kep_nhip);
                 arrKhoGiay2[k].so_luot_in = (this.product.count / sosp1tay) * mat_in;
-                buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+                buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
                 tongGiay1r = (soto1tay + buhao) * so_tay2;
                 zincCount = this.Lib.getZincCountR(mau_in, 2, 1);
                 arrKhoGiay2[k].zincCount = zincCount;
@@ -453,7 +468,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             //luot in
                             so_luot_in = (this.product.count / sosp1tay) * mat_in * so_tay;
                             tong_luot_in = tong_luot_in + so_luot_in;
-                            buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+                            buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
                             tongGiay1r = (soto1tay + buhao) * so_tay;
                             tong_so_to = tong_so_to + tongGiay1r;
                             zincCount = this.Lib.getZincCountR(mau_in, 2, so_tay);
@@ -467,7 +482,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             //luot in
                             so_luot_in = this.product.count * mat_in * so_tay;
                             tong_luot_in = tong_luot_in + so_luot_in;
-                            buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+                            buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
                             tongGiay1r = (soto1tay + buhao) * so_tay;
                             tong_so_to = tong_so_to + tongGiay1r;
                             zincCount = this.Lib.getZincCountR(mau_in, 1, so_tay);
@@ -582,7 +597,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 soto1tay = Number(Math.ceil(this.product.count / arrKhoGiay2[k].so_bat));
                 sosp1tay = this.Lib.getNumberResize(arrKhoGiay2[k].detail.d, arrKhoGiay2[k].detail.r, this.product.dai, this.product.rong, arrKhoGiay2[k].detail.kep_nhip);
                 arrKhoGiay2[k].so_luot_in = (this.product.count / sosp1tay) * mat_in;
-                buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+                buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
                 tongGiay1r = (soto1tay + buhao) * so_tay2;
                 zincCount = this.Lib.getZincCountR(mau_in, 2, 1);
                 arrKhoGiay2[k].zincCount = zincCount;
@@ -617,7 +632,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             //luot in
                             so_luot_in = (this.product.count / sosp1tay) * mat_in * so_tay;
                             tong_luot_in = tong_luot_in + so_luot_in;
-                            buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+                            buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
                             tongGiay1r = (soto1tay + buhao) * so_tay;
                             tong_so_to = tong_so_to + tongGiay1r;
                             zincCount = this.Lib.getZincCountR(mau_in, 2, so_tay);
@@ -631,7 +646,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             //luot in
                             so_luot_in = this.product.count * mat_in * so_tay;
                             tong_luot_in = tong_luot_in + so_luot_in;
-                            buhao = this.Lib.getPaperCount(soto1tay, this.depreciation);
+                            buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
                             tongGiay1r = (soto1tay + buhao) * so_tay;
                             tong_so_to = tong_so_to + tongGiay1r;
                             zincCount = this.Lib.getZincCountR(mau_in, 1, so_tay);

@@ -71,8 +71,13 @@ export class productService {
         return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
     }
 
-    getDepreciation() {
-        let url = this.apiUrl + `/depreciation`;
+    getDepreciationR() {
+        let url = this.apiUrl + `/depreciationr`;
+        return this.http.get(url).map((res: Response) => res.json().data);
+    }
+
+    getDepreciationC() {
+        let url = this.apiUrl + `/depreciationc`;
         return this.http.get(url).map((res: Response) => res.json().data);
     }
 
