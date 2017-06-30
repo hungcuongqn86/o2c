@@ -79,7 +79,6 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
         this.productService.getProducttype(this.detail.producttype_code).subscribe(
             data => {
                 this.producttypeDetail = data;
-                // console.log(data);
                 this.status = 'edit';
             },
             error => {

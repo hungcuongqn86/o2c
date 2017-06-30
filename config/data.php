@@ -685,5 +685,27 @@ return [
         , 'cat_giay_trang' => '10000'
         , 'mayin_tkcb' => '9000'
         , 'gia_cong_sau_in' => '50000'
+    ],
+    'cach_gia_cong' => [
+        [
+            'code' => 'cach1'
+            , 'name' => 'Cách 1'
+        ],
+        [
+            'code' => 'cach2'
+            , 'name' => 'Cách 2'
+        ],
+        [
+            'code' => 'cach3'
+            , 'name' => 'Cách 3'
+        ],
+        [
+            'code' => 'cach4'
+            , 'name' => 'Cách 4'
+        ],
+        [
+            'code' => 'cach5'
+            , 'name' => 'Cách 5'
+        ],
     ]
 ];

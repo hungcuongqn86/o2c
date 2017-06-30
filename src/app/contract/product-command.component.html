@@ -106,9 +106,15 @@
                     <td>{{el.tong_to_da_bu_hao}}</td>
                     <td>{{el.so_luot_in}}</td>
                     <td>###</td>
-                    <td>###</td>
-                    <td>###</td>
-                    <td>###</td>
+                    <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        ###
+                    </td>
+                    <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        {{cachGiaCong.join(', ')}}
+                    </td>
+                    <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        ###
+                    </td>
                     <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         {{arrTime['tkcb']}}
                     </td>

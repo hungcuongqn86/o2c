@@ -3,7 +3,6 @@
 return [
     'ARRAY_LISTTYPE' => [
         ['code' => 'department', 'name' => 'LISTTYPE.department'],
-        ['code' => 'cach_gia_cong', 'name' => 'LISTTYPE.outsourcing'],
         ['code' => 'loai_giay', 'name' => 'LISTTYPE.paper_type'],
         ['code' => 'zinc_type', 'name' => 'LISTTYPE.zinc_type'],
     ],
@@ -39,7 +38,7 @@ return [
         'cach_gia_cong' => [
             'id' => 'cach_gia_cong',
             'type' => 'mcheck',
-            'datatype' => 'list',
+            'datatype' => 'function',
             'lable' => 'Cách gia công',
             'visible' => true
         ],

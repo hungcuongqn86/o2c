@@ -26,6 +26,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     depreciationB: any;
     constTime: any;
     arrTime: Array<any> = [];
+    cachGiaCong: Array<string> = [];
     res: any;
 
     constructor(private Lib: Lib, dialogService: DialogService, private productService: productService) {
@@ -133,6 +134,18 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             }
         }
         this.genTime(so_tay);
+        this.genCachGiaCong();
+    }
+
+    private genCachGiaCong() {
+        const data: string = this.product.elements.checkSelected.split(',');
+        const substring = 'bia-mchk-cach_gia_cong';
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].includes(substring)) {
+                const arrItem = data[i].split('-val-');
+                this.cachGiaCong.push(arrItem[1]);
+            }
+        }
     }
 
     private genTime(so_tay) {
