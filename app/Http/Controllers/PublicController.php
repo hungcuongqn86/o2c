@@ -63,6 +63,24 @@ class PublicController extends Controller
         }
     }
 
+    public function getDepreciationB()
+    {
+        try {
+            return response()->success(config('data.dm_bu_hao_bia'));
+        } catch (\Exception $e) {
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
+
+    public function getConstTime()
+    {
+        try {
+            return response()->success(config('data.hs_thoi_gian_in'));
+        } catch (\Exception $e) {
+            return response()->error(trans('messages.MSG_Error'), 400);
+        }
+    }
+
     public function upload(Request $request)
     {
         try {

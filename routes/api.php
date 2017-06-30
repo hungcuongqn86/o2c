@@ -22,6 +22,8 @@ Route::get('/roles', 'PublicController@getRoles');
 Route::get('/listtype', 'PublicController@getListType');
 Route::get('/depreciationr', 'PublicController@getDepreciationR');
 Route::get('/depreciationc', 'PublicController@getDepreciationC');
+Route::get('/depreciationb', 'PublicController@getDepreciationB');
+Route::get('/consttime', 'PublicController@getConstTime');
 Route::post('/upload', 'PublicController@upload');
 
 Route::group(['prefix' => 'list'], function () {

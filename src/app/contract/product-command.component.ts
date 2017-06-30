@@ -23,6 +23,9 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     status = 'none';
     depreciationR: any;
     depreciationC: any;
+    depreciationB: any;
+    constTime: any;
+    arrTime: Array<any> = [];
     res: any;
 
     constructor(private Lib: Lib, dialogService: DialogService, private productService: productService) {
@@ -33,6 +36,32 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         this.getDetail(this.idProd);
         this.getDepreciationR();
         this.getDepreciationC();
+        this.getDepreciationB();
+        this.getConstTime();
+    }
+
+    private getConstTime() {
+        this.productService.getConstTime().subscribe(
+            data => {
+                this.constTime = data;
+            },
+            error => {
+                console.error("Not Depreciation!");
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    private getDepreciationB() {
+        this.productService.getDepreciationB().subscribe(
+            data => {
+                this.depreciationB = data;
+            },
+            error => {
+                console.error("Not Depreciation!");
+                return Observable.throw(error);
+            }
+        );
     }
 
     private getDepreciationR() {
@@ -93,14 +122,24 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     public genElement() {
         this.elements = [];
         const Els = this.productType.element_config;
+        let so_tay = 0;
         for (let i = 0; i < Els.length; i++) {
             const itemG: Array<any> = this._genElement(Els[i]);
             if (itemG && itemG.length) {
                 for (let i = 0; i < itemG.length; i++) {
+                    so_tay = so_tay + itemG[i].so_tay;
                     this.elements.push(itemG[i]);
                 }
             }
         }
+        this.genTime(so_tay);
+    }
+
+    private genTime(so_tay) {
+        const sl = this.product.count;
+        Object.keys(this.constTime).map((index) => {
+            this.arrTime[index] = ((so_tay * sl) / (2 * Number(this.constTime[index]))).toFixed(8);
+        });
     }
 
     private _genElement(el: any): Array<any> {

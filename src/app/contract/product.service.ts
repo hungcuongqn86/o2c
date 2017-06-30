@@ -81,6 +81,16 @@ export class productService {
         return this.http.get(url).map((res: Response) => res.json().data);
     }
 
+    getDepreciationB() {
+        let url = this.apiUrl + `/depreciationb`;
+        return this.http.get(url).map((res: Response) => res.json().data);
+    }
+
+    getConstTime() {
+        let url = this.apiUrl + `/consttime`;
+        return this.http.get(url).map((res: Response) => res.json().data);
+    }
+
     getSingle(id: string) {
         let url = this.apiUrl + '/' + this.module + `/getSingle`;
         let params: URLSearchParams = new URLSearchParams();

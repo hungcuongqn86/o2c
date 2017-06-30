@@ -70,7 +70,7 @@
                     <th>(27)</th>
                     <th>(28)</th>
                 </tr>
-                <tr *ngFor="let el of elements">
+                <tr *ngFor="let el of elements; let i = index">
                     <td class="capitalize">{{el.name}}</td>
                     <td>{{el.so_trang}}</td>
                     <td>{{el.kho_tp}}</td>
@@ -109,10 +109,18 @@
                     <td>###</td>
                     <td>###</td>
                     <td>###</td>
-                    <td>###</td>
-                    <td>###</td>
-                    <td>###</td>
-                    <td>###</td>
+                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        {{arrTime['tkcb']}}
+                    </td>
+                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        {{arrTime['cat_giay_trang']}}
+                    </td>
+                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        {{arrTime['mayin_tkcb']}}
+                    </td>
+                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        {{arrTime['gia_cong_sau_in']}}
+                    </td>
                 </tr>
                 </tbody>
             </table>
