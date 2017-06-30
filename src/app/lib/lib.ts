@@ -292,6 +292,27 @@ export class Lib {
         return somau * paperNumber / 8;
     }
 
+    public getBuhaoBia(luot: number, mau, depreciation: any): number {
+        const colorCov = mau.split('/');
+        let somau = Number(colorCov[0]);
+        if (colorCov[0] < colorCov[1]) {
+            somau = Number(colorCov[1]);
+        }
+
+        let objDepreciation: any;
+        for (let i = 0; i < depreciation.length; i++) {
+            if ((luot > depreciation[i].min) && (luot <= depreciation[i].max)) {
+                objDepreciation = depreciation[i];
+            }
+        }
+        if (objDepreciation) {
+            console.log(objDepreciation);
+            return objDepreciation.mau[somau - 1];
+        } else {
+            return 0;
+        }
+    }
+
     public getBuhao(luot: number, dl: number, mau, depreciationR: any, depreciationC: any, in_cuon = false): number {
         const colorCov = mau.split('/');
         let somau = Number(colorCov[0]);

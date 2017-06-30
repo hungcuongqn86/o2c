@@ -185,7 +185,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         res.mau_in = this.product.elements['bia-sel-mau_in'];
         res.zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
         // Kho kho
-        res.arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
+        let arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
+        const kho_kho = this.formData.kho_kho['bia-sel-kho_kho'];
         // Loai giay
         const sLoaiGiay = this.product.elements['bia-sel-loai_giay'];
         const arrAllLoaiGiay = this.Lib.getFunctionData(el.properties, 'id', 'loai_giay', 'data');
@@ -227,19 +228,20 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             }
             let so_tay = Math.ceil(4 / (sl * 2));
             let soto1tay = Number(Math.ceil(this.product.count / 2));
-            let buhao = this.Lib.getPaperCount(soto1tay, this.depreciationR);
+            so_luot_in = (this.product.count / sl) * mat_in;
+            let buhao = this.Lib.getBuhaoBia(so_luot_in, res.mau_in, this.depreciationB);
             let tongGiay1r = (soto1tay + buhao) * so_tay;
+            console.log(tongGiay1r);
             arrKhoGiay[i].gia_giay = tongGiay1r * detailKG.d * detailKG.r * dl * dg / 10000;
 
             let zincCount = this.Lib.getZincCountR(res.mau_in, 2, 1);
-            so_luot_in = (this.product.count / sl) * mat_in;
 
             arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, zincCount, res.mau_in, detailKG, arrMay, so_luot_in);
             arrKhoGiay[i].sl_kem = zincCount;
             arrKhoGiay[i].so_tay = so_tay;
             arrKhoGiay[i].so_bat = sl * 2;
             arrKhoGiay[i].bu_hao = buhao;
-            arrKhoGiay[i].so_luot_in = buhao;
+            arrKhoGiay[i].so_luot_in = so_luot_in;
 
             arrKhoGiay[i].tong_to_da_bu_hao = tongGiay1r;
             arrKhoGiay[i].sl_giay_xuat = tongGiay1r / 2;
@@ -247,6 +249,23 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         }
 
         const fixKhoGiay = this.Lib.fixKhoGiay(arrKhoGiay);
+        let fixKhokho: any = [];
+        arrKho_kho = this.Lib.getKhoKho(fixKhoGiay, arrKho_kho);
+        if (!kho_kho) {
+            fixKhokho = this.Lib.fixKhokho(fixKhoGiay, arrKho_kho);
+        } else {
+            fixKhokho = arrKho_kho.data.filter(function (itm) {
+                return itm['list_code'] === kho_kho;
+            })[0];
+        }
+
+        this.formData.kho_kho['bia-sel-kho_kho'] = fixKhokho.detail.code;
+        const cach_cat = this.Lib.getNumberResize(Number(fixKhokho.detail.d), Number(fixKhokho.detail.r), Number(fixKhoGiay.detail.d), Number(fixKhoGiay.detail.r), 0);
+        const constKg = Number(dl) * Number(fixKhokho.detail.d) * Number(fixKhokho.detail.r) / 10000000;
+        res.cach_cat = cach_cat;
+        res.sl_giay_xuat = (Number(fixKhoGiay.tong_to_da_bu_hao) / res.cach_cat).toFixed(2);
+        res.sl_giay_xuat_kg = (Number(fixKhoGiay.tong_to_da_bu_hao) * constKg).toFixed(2);
+        res.arrKho_kho = arrKho_kho;
         res.kho_in = fixKhoGiay.detail.name;
         res.may_in = fixKhoGiay.may_in.detail.name;
         res.sl_kem = fixKhoGiay.sl_kem;
@@ -255,7 +274,6 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         res.bu_hao = fixKhoGiay.bu_hao;
         res.so_luot_in = fixKhoGiay.so_luot_in;
         res.tong_to_da_bu_hao = fixKhoGiay.tong_to_da_bu_hao;
-        // res.sl_giay_xuat = fixKhoGiay.sl_giay_xuat;
         res.tong_to_chua_bu_hao = fixKhoGiay.tong_to_chua_bu_hao;
         return [res];
     }
