@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\AppServiceFactory;
+use Excel;
 
 class ProductController extends Controller
 {
@@ -79,5 +80,12 @@ class ProductController extends Controller
             throw $e;
             return response()->error(trans('messages.MSG_Error'), 400);
         }
+    }
+
+    public function exportExcel()
+    {
+        $tempPath = storage_path('app/template/command.xlsx');
+        Excel::load($tempPath, function ($reader) {
+        })->download('xlsx');
     }
 }

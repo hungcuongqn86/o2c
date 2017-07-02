@@ -130,7 +130,9 @@ class PublicController extends Controller
             array('data1', 'data2'),
             array('data3', 'data4')
         );
-        Excel::load('file.xlsx', function ($reader) {
+
+        $tempPath = storage_path('app/template/command.xlsx');
+        Excel::load($tempPath, function ($reader) {
         })->download('xlsx');
         /*Excel::create('New file', function ($excel) use ($data) {
             $excel->sheet('New sheet', function ($sheet) use ($data) {

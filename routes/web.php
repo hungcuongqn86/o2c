@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/download/{file}', 'PublicController@download');
-Route::get('/excel', 'PublicController@excel');
+Route::get('/command/excel', 'ProductController@exportExcel');
 Route::match(['get', 'post'], '/{any}', function ($any) {
     return view('index');
 })->where('any', '.*');
