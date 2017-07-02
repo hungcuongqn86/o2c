@@ -18,7 +18,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     product: any = [];
     productType: any = [];
     elements: Array<any> = [];
-    formData: any = JSON.parse('{"numofthung": 1,"zinc_type":{"bia-sel-zinc_type":"CTP", "ruot-sel-zinc_type":"CTP", "to_gac-sel-zinc_type":"CTP", "phu_ban-sel-zinc_type":"CTP"}' +
+    formData: any = JSON.parse('{"numofthung": 1, "thung":"25x27x35","zinc_type":{"bia-sel-zinc_type":"CTP", "ruot-sel-zinc_type":"CTP", "to_gac-sel-zinc_type":"CTP", "phu_ban-sel-zinc_type":"CTP"}' +
         ',"kho_kho":{"bia-sel-kho_kho":"", "ruot-sel-kho_kho":"", "to_gac-sel-kho_kho":"", "phu_ban-sel-kho_kho":""}}');
     status = 'none';
     depreciationR: any;
@@ -28,6 +28,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     arrTime: Array<any> = [];
     cachGiaCong: Array<string> = [];
     cachGiaCongData: any;
+    thungData: any;
     numthung = 1;
     res: any;
 
@@ -45,6 +46,19 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         this.getDepreciationC();
         this.getDepreciationB();
         this.getConstTime();
+        this.getThungData();
+    }
+
+    private getThungData() {
+        this.productService.getThungData().subscribe(
+            data => {
+                this.thungData = data;
+            },
+            error => {
+                console.error("Not ThungData!");
+                return Observable.throw(error);
+            }
+        );
     }
 
     private getConstTime() {

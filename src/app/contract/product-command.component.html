@@ -107,7 +107,12 @@
                     <td>{{el.so_luot_in}}</td>
                     <td>{{el.so_vach}}</td>
                     <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
-                        ###
+                        <select style="width: 110px;" title="thung" class="form-control"
+                                [(ngModel)]="formData.thung" name="thung">
+                            <option *ngFor='let dataitem of thungData'
+                                    value="{{dataitem.code}}">{{dataitem.name}}
+                            </option>
+                        </select>
                     </td>
                     <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         {{cachGiaCong.join(', ')}}

@@ -621,5 +621,19 @@ return [
             'code' => 'cach5'
             , 'name' => 'Phay gáy'
         ],
+    ],
+    'thung_hop' => [
+        [
+            'code' => '25x27x35'
+            , 'name' => '25x27x35'
+        ],
+        [
+            'code' => '21x27x39'
+            , 'name' => '21x27x39'
+        ],
+        [
+            'code' => '21x31x42'
+            , 'name' => '21x31x42'
+        ]
     ]
 ];

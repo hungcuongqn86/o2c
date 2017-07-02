@@ -93,6 +93,11 @@ export class productService {
         return this.http.get(url).map((res: Response) => res.json().data);
     }
 
+    getThungData() {
+        let url = this.apiUrl + '/' + this.module + `/boxGetAll`;
+        return this.http.get(url).map((res: Response) => res.json().data);
+    }
+
     getSingle(id: string) {
         let url = this.apiUrl + '/' + this.module + `/getSingle`;
         let params: URLSearchParams = new URLSearchParams();

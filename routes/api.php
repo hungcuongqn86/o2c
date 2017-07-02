@@ -64,6 +64,7 @@ Route::group(['prefix' => 'contract'], function () {
 });
 
 Route::group(['prefix' => 'product'], function () {
+    Route::get('/boxGetAll', 'ProductController@boxGetAll');
     Route::get('/getAll', 'ProductController@getAll');
     Route::get('/getSingle', 'ProductController@getSingle');
     Route::post('/saveRecord', 'ProductController@saveRecord');
