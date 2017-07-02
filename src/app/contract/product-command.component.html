@@ -105,7 +105,7 @@
                     <td>{{el.tong_to_chua_bu_hao}}</td>
                     <td>{{el.tong_to_da_bu_hao}}</td>
                     <td>{{el.so_luot_in}}</td>
-                    <td>###</td>
+                    <td>{{el.so_vach}}</td>
                     <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         ###
                     </td>
@@ -113,7 +113,9 @@
                         {{cachGiaCong.join(', ')}}
                     </td>
                     <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
-                        ###
+                        <input style="width: 40px;" [(ngModel)]="formData.numofthung" name="numofthung" id="numofthung"
+                               type="number" (change)="getThung()" min="0"> sản phẩm/1
+                        thùng<br><span>, {{numthung}} thùng</span>
                     </td>
                     <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         {{arrTime['tkcb']}}

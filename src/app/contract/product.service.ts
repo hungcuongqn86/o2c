@@ -23,6 +23,7 @@ export class cmdEl {
     public bu_hao = '';
     public so_luot_in = '';
     public cach_cat = 0;
+    public so_vach = 0;
     public sl_giay_xuat_kg = '';
 
     public zinc_type: any = [];

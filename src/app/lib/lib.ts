@@ -63,8 +63,20 @@ export class Lib {
                 kq4 = kq4 + this.getNumberResize(d, tr4, id, ir, 0);
             }
         }
-        console.log(kq1, kq2, kq3, kq4);
         return Math.max(kq1, kq2, kq3, kq4);
+    }
+
+    public getSoVach(batx2) {
+        if (batx2 < 2) {
+            return 0;
+        }
+        let index = 2;
+        let res = 0;
+        while (index * 2 <= batx2) {
+            res = res + 1;
+            index = index * 2;
+        }
+        return res;
     }
 
     public getNumberResize(d, r, id, ir, kn): number {

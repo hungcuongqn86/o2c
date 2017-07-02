@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Excel;
 
 class PublicController extends Controller
 {
@@ -118,5 +119,36 @@ class PublicController extends Controller
         } else {
             return response()->error(['ERRORS_MS.MSG_DOWNLOAD_FILE_ERROR'], 200);
         }
+    }
+
+    public function excel()
+    {
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        $data = array(
+            array('data1', 'data2'),
+            array('data3', 'data4')
+        );
+        Excel::load('file.xlsx', function ($reader) {
+        })->download('xlsx');
+        /*Excel::create('New file', function ($excel) use ($data) {
+            $excel->sheet('New sheet', function ($sheet) use ($data) {
+//                dd($data);
+                $sheet->rows(array(
+                    array('test1', 'test2'),
+                    array('test3', 'test4')
+                ));
+                $sheet->cell('A1', function($cell) {
+
+                    // manipulate the cell
+                    $cell->setValue('data1');
+
+                });
+                // $sheet->loadView('excel.test');
+
+            });
+
+        })->download('xlsx');*/
     }
 }

@@ -18,7 +18,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     product: any = [];
     productType: any = [];
     elements: Array<any> = [];
-    formData: any = JSON.parse('{"zinc_type":{"bia-sel-zinc_type":"CTP", "ruot-sel-zinc_type":"CTP", "to_gac-sel-zinc_type":"CTP", "phu_ban-sel-zinc_type":"CTP"}' +
+    formData: any = JSON.parse('{"numofthung": 1,"zinc_type":{"bia-sel-zinc_type":"CTP", "ruot-sel-zinc_type":"CTP", "to_gac-sel-zinc_type":"CTP", "phu_ban-sel-zinc_type":"CTP"}' +
         ',"kho_kho":{"bia-sel-kho_kho":"", "ruot-sel-kho_kho":"", "to_gac-sel-kho_kho":"", "phu_ban-sel-kho_kho":""}}');
     status = 'none';
     depreciationR: any;
@@ -28,6 +28,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     arrTime: Array<any> = [];
     cachGiaCong: Array<string> = [];
     cachGiaCongData: any;
+    numthung = 1;
     res: any;
 
     constructor(private Lib: Lib, dialogService: DialogService, private productService: productService) {
@@ -101,6 +102,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                 if (this.product.elements != '') {
                     this.product.elements = JSON.parse(this.product.elements);
                 }
+                this.getThung();
                 this.getProducttype();
             },
             error => {
@@ -217,6 +219,10 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         return res;
     }
 
+    private getThung() {
+        this.numthung = Math.ceil(Number(this.product.count) / this.formData.numofthung);
+    }
+
     private _genElement(el: any): Array<any> {
         let res: Array<any> = [];
         switch (el.id) {
@@ -328,6 +334,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         res.sl_kem = fixKhoGiay.sl_kem;
         res.so_tay = fixKhoGiay.so_tay;
         res.so_bat = fixKhoGiay.so_bat;
+        res.so_vach = this.Lib.getSoVach(Number(res.so_bat) * 2);
         res.bu_hao = fixKhoGiay.bu_hao;
         res.so_luot_in = fixKhoGiay.so_luot_in;
         res.tong_to_da_bu_hao = fixKhoGiay.tong_to_da_bu_hao;
@@ -445,6 +452,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                     divisorItem.tong_to_chua_bu_hao = soto1tay * so_tay;
                     divisorItem.bu_hao = buhao;
                     divisorItem.so_luot_in = so_luot_in;
+                    divisorItem.so_vach = this.Lib.getSoVach(arrKhoGiay[i].so_bat * 2);
                 } else {
                     // Con 2 to roi
                     // console.log(111);
@@ -457,6 +465,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                     divisorItem.tong_to_chua_bu_hao = fixKhoGiay2.tong_to_chua_bu_hao;
                     divisorItem.bu_hao = fixKhoGiay2.bu_hao;
                     divisorItem.so_luot_in = fixKhoGiay2.so_luot_in;
+                    divisorItem.so_vach = this.Lib.getSoVach(divisorItem.so_bat * 2);
                 }
                 divisorItem.so_trang = arrKhoGiay[i].divisor[j];
                 arrDivisor.push(divisorItem);
@@ -484,7 +493,12 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
 
         this.formData.kho_kho['ruot-sel-kho_kho'] = fixKhokho.detail.code;
         const cach_cat = this.Lib.getNumberResize(Number(fixKhokho.detail.d), Number(fixKhokho.detail.r), Number(fixKhoGiay.detail.d), Number(fixKhoGiay.detail.r), 0);
-        const constKg = Number(dl) * Number(fixKhokho.detail.d) * Number(fixKhokho.detail.r) / 10000000;
+        let constKg = 0;
+        if (in_cuon) {
+            constKg = Number(dl) * Number(fixKhokho.detail.d) * Number(fixKhokho.detail.r) / 10000000;
+        } else {
+            constKg = Number(dl) * Number(fixKhokho.detail.d) * Number(fixKhokho.detail.r) / 10000000;
+        }
         for (let i = 0; i < fixKhoGiay._divisor.length; i++) {
             const itemRes = new cmdEl();
             itemRes.id = el.id;
@@ -506,6 +520,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             itemRes.so_tay = fixKhoGiay._divisor[i].so_tay;
             itemRes.so_bat = fixKhoGiay._divisor[i].so_bat;
             itemRes.cach_in = fixKhoGiay._divisor[i].cach_in;
+            itemRes.so_vach = fixKhoGiay._divisor[i].so_vach;
             itemRes.tong_to_chua_bu_hao = fixKhoGiay._divisor[i].tong_to_chua_bu_hao;
             itemRes.tong_to_da_bu_hao = fixKhoGiay._divisor[i].tong_to_da_bu_hao;
             itemRes.bu_hao = fixKhoGiay._divisor[i].bu_hao;
