@@ -72,7 +72,7 @@ export class Lib {
         // TH1
         const dkn = d - kn;
         let kq1 = 0;
-        if ((dkn > id) && (r > ir)) {
+        if ((dkn >= id) && (r >= ir)) {
             kq1 = Math.floor(dkn / id) * Math.floor(r / ir);
             let td1 = dkn - (Math.floor(dkn / id) * id);
             if ((td1 >= ir) && (r >= id)) {
@@ -82,7 +82,7 @@ export class Lib {
 
         // TH2
         let kq2 = 0;
-        if ((dkn > ir) && (r > id)) {
+        if ((dkn >= ir) && (r >= id)) {
             kq2 = Math.floor(dkn / ir) * Math.floor(r / id);
             let tr2 = r - (Math.floor(r / id) * id);
             if ((tr2 >= ir) && (dkn >= id)) {
@@ -93,7 +93,7 @@ export class Lib {
         // TH3
         const rkn = r - kn;
         let kq3 = 0;
-        if ((d > id) && (rkn > ir)) {
+        if ((d >= id) && (rkn >= ir)) {
             kq3 = Math.floor(d / id) * Math.floor(rkn / ir);
             let td3 = d - (Math.floor(d / id) * id);
             if ((td3 >= ir) && (rkn >= id)) {
@@ -103,7 +103,7 @@ export class Lib {
 
         // TH4
         let kq4 = 0;
-        if ((d > ir) && (rkn > id)) {
+        if ((d >= ir) && (rkn >= id)) {
             kq4 = Math.floor(d / ir) * Math.floor(rkn / id);
             let tr4 = rkn - (Math.floor(rkn / id) * id);
             if ((tr4 >= ir) && (d >= id)) {
@@ -126,7 +126,7 @@ export class Lib {
         let chiphi: number = 0;
         let may: any = [];
         for (let i = 0; i < arrMay.length; i++) {
-            if (in_cuon === arrMay[i].detail.in_cuon) {
+            if (arrMay[i].detail && in_cuon === arrMay[i].detail.in_cuon) {
                 if (somau <= arrMay[i].detail.so_mau) {
                     if (this.checkSize(detailKG, arrMay[i].detail.min_size, arrMay[i].detail.max_size)) {
                         if (dem) {
@@ -306,7 +306,7 @@ export class Lib {
             }
         }
         if (objDepreciation) {
-            console.log(objDepreciation);
+            // console.log(objDepreciation);
             return objDepreciation.mau[somau - 1];
         } else {
             return 0;

@@ -17,7 +17,7 @@ export class cmdEl {
     public so_tay = '';
     public so_bat = '';
     public cach_in = '';
-    public sl_giay_xuat = '';
+    public sl_giay_xuat = 0;
     public tong_to_da_bu_hao = '';
     public tong_to_chua_bu_hao = '';
     public bu_hao = '';
@@ -27,6 +27,7 @@ export class cmdEl {
 
     public zinc_type: any = [];
     public arrKho_kho: any = [];
+    public arrTime: any = [];
 
     constructor() {
     }

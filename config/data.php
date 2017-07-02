@@ -3,116 +3,6 @@
 return [
     'may_in' => [
         [
-            'code' => 'H1'
-            , 'in_cuon' => false
-            , 'name' => 'Heidelberg CD102-4'
-            , 'so_mau' => 4
-            , 'max_size' => '72x102'
-            , 'min_size' => '39x54'
-            , 'cong_in_kem' => 120000
-            , 'cong_in_luot' => 30
-            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
-        [
-            'code' => 'K1'
-            , 'in_cuon' => false
-            , 'name' => 'Lithrone Komori L432'
-            , 'so_mau' => 4
-            , 'max_size' => '54.5x79'
-            , 'min_size' => '32x43'
-            , 'cong_in_kem' => 60000
-            , 'cong_in_luot' => 40
-            , 'gia_kem' => ['CTP' => '56000', 'M8' => '45000']
-        ],
-        [
-            'code' => 'K2'
-            , 'in_cuon' => false
-            , 'name' => 'Lithrone Komori L440'
-            , 'so_mau' => 4
-            , 'max_size' => '72x102'
-            , 'min_size' => '39x54'
-            , 'cong_in_kem' => 60000
-            , 'cong_in_luot' => 20
-            , 'gia_kem' => ['CTP' => '56000', 'M8' => '45000']
-        ],
-        [
-            'code' => 'M2'
-            , 'in_cuon' => false
-            , 'name' => 'Mitsubishi Daiya 3F4'
-            , 'so_mau' => 4
-            , 'max_size' => '72x102'
-            , 'min_size' => '39x54'
-            , 'cong_in_kem' => 120000
-            , 'cong_in_luot' => 30
-            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
-        [
-            'code' => 'L1'
-            , 'in_cuon' => false
-            , 'name' => 'Lithrone Komori L240'
-            , 'so_mau' => 2
-            , 'max_size' => '72x102'
-            , 'min_size' => '39x54'
-            , 'cong_in_kem' => 120000
-            , 'cong_in_luot' => 30
-            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
-        [
-            'code' => 'L3'
-            , 'in_cuon' => false
-            , 'name' => 'Lithrone Komori L240'
-            , 'so_mau' => 2
-            , 'max_size' => '72x102'
-            , 'min_size' => '39x54'
-            , 'cong_in_kem' => 120000
-            , 'cong_in_luot' => 30
-            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
-        [
-            'code' => 'S226'
-            , 'in_cuon' => false
-            , 'name' => 'Komori'
-            , 'so_mau' => 2
-            , 'max_size' => '45x65'
-            , 'min_size' => '25x35'
-            , 'cong_in_kem' => 120000
-            , 'cong_in_luot' => 30
-            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
-        [
-            'code' => 'A1'
-            , 'in_cuon' => false
-            , 'name' => 'Komori'
-            , 'so_mau' => 1
-            , 'max_size' => '78x108'
-            , 'min_size' => '54x78'
-            , 'cong_in_kem' => 120000
-            , 'cong_in_luot' => 30
-            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
-        [
-            'code' => 'A3'
-            , 'in_cuon' => false
-            , 'name' => 'Aki (In 1/1)'
-            , 'so_mau' => 1
-            , 'max_size' => '69x98'
-            , 'min_size' => '49x69'
-            , 'cong_in_kem' => 120000
-            , 'cong_in_luot' => 30
-            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
-        [
-            'code' => 'S26'
-            , 'in_cuon' => false
-            , 'name' => 'Komori'
-            , 'so_mau' => 1
-            , 'max_size' => '45x65'
-            , 'min_size' => '25x35'
-            , 'cong_in_kem' => 120000
-            , 'cong_in_luot' => 30
-            , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
-        [
             'code' => 'IC'
             , 'in_cuon' => true
             , 'name' => 'City Line (4/4)'
@@ -166,7 +56,7 @@ return [
             , 'cong_in_kem' => 120000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
-        ],
+        ]
     ],
     'mau_in' => [
         [
@@ -644,10 +534,34 @@ return [
     ],
     'kho_kho' => [
         [
-            'code' => '109x158'
-            , 'name' => '109x158'
-            , 'r' => '109'
-            , 'd' => '158'
+            'code' => '60x84'
+            , 'name' => '60x84'
+            , 'r' => '60'
+            , 'd' => '84'
+        ],
+        [
+            'code' => '65x86'
+            , 'name' => '65x86'
+            , 'r' => '65'
+            , 'd' => '86'
+        ],
+        [
+            'code' => '63,5x96,5'
+            , 'name' => '63,5x96,5'
+            , 'r' => '63.5'
+            , 'd' => '96.5'
+        ],
+        [
+            'code' => '65x100'
+            , 'name' => '65x100'
+            , 'r' => '65'
+            , 'd' => '100'
+        ],
+        [
+            'code' => '70x100'
+            , 'name' => '70x100'
+            , 'r' => '70'
+            , 'd' => '100'
         ],
         [
             'code' => '79x109'
@@ -656,56 +570,56 @@ return [
             , 'd' => '109'
         ],
         [
-            'code' => '59x86'
-            , 'name' => '59x86'
-            , 'r' => '59'
-            , 'd' => '86'
+            'code' => '39x54'
+            , 'name' => '39x54'
+            , 'r' => '39'
+            , 'd' => '54'
         ],
         [
-            'code' => '65x84'
-            , 'name' => '65x84'
-            , 'r' => '65'
-            , 'd' => '84'
+            'code' => '54x79'
+            , 'name' => '54x79'
+            , 'r' => '54'
+            , 'd' => '79'
         ],
         [
-            'code' => '51x70'
-            , 'name' => '51x70'
-            , 'r' => '51'
-            , 'd' => '70'
+            'code' => '42x60'
+            , 'name' => '42x60'
+            , 'r' => '42'
+            , 'd' => '60'
         ],
         [
-            'code' => '61x120'
-            , 'name' => '61x120'
-            , 'r' => '61'
-            , 'd' => '120'
-        ]
+            'code' => '30x42'
+            , 'name' => '30x42'
+            , 'r' => '30'
+            , 'd' => '42'
+        ],
     ],
     'hs_thoi_gian_in' => [
-        'tkcb' => '12000'
-        , 'cat_giay_trang' => '10000'
-        , 'mayin_tkcb' => '9000'
-        , 'gia_cong_sau_in' => '50000'
+        'tkcb' => '5500,12000,8000'
+        , 'cat_giay_trang' => '4400,10000,6000'
+        , 'mayin_tkcb' => '6600,9000,9000'
+        , 'gia_cong_sau_in' => '8800,50000,11000'
     ],
     'cach_gia_cong' => [
         [
             'code' => 'cach1'
-            , 'name' => 'Cách 1'
+            , 'name' => 'Cán bóng'
         ],
         [
             'code' => 'cach2'
-            , 'name' => 'Cách 2'
+            , 'name' => 'Cán mờ'
         ],
         [
             'code' => 'cach3'
-            , 'name' => 'Cách 3'
+            , 'name' => 'Lăn sần'
         ],
         [
             'code' => 'cach4'
-            , 'name' => 'Cách 4'
+            , 'name' => 'Đóng lồng'
         ],
         [
             'code' => 'cach5'
-            , 'name' => 'Cách 5'
+            , 'name' => 'Phay gáy'
         ],
     ]
 ];
