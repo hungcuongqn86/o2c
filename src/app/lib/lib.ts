@@ -18,7 +18,7 @@ export class Lib {
         return arrRes;
     }
 
-    public genDivisor(tong_so_trang, product, arrKhoGiay, GiaCongGay, in_cuon) {
+    public genDivisor(tong_so_trang, product, arrKhoGiay, GiaCongGay, in_cuon, dl) {
         const res: any = [];
         if (tong_so_trang === 0) {
             return [];
@@ -26,70 +26,145 @@ export class Lib {
         if ((tong_so_trang === 4) && (GiaCongGay === 'khau_chi')) {
             return [];
         }
-        for (let i = 0; i < arrKhoGiay.length; i++) {
-            let le = tong_so_trang;
-            let le_s = 0;
-            let tro_khac = false;
-            let so_trang = 0;
-            let so_tay = 0;
-            let divisor: any = [];
-            let so_bat = this.caSoBat(this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, product.dai, product.rong, arrKhoGiay[i].detail.kep_nhip));
-            if (le >= 4) {
-                if (so_bat > 0) {
-                    if ((so_bat !== 2) || (GiaCongGay !== 'khau_chi')) {
-                        so_tay = Math.floor(le / (so_bat * 2));
-                        if (so_tay > 0) {
-                            tro_khac = true;
+        if (in_cuon) {
+            for (let i = 0; i < arrKhoGiay.length; i++) {
+                if (arrKhoGiay[i].detail.ic) {
+                    let maxdivisor = 0; // Tuong ung so cua vao giay
+                    if (Number(dl) <= 48) {
+                        //Co the gap 5 vach
+                        maxdivisor = 3;
+                    } else {
+                        //Chi co the gap den 4 vach
+                        maxdivisor = 2;
+                    }
+                    let divisor: any = [];
+                    let so_bat = this.caSoBat(this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, product.dai, product.rong, arrKhoGiay[i].detail.kep_nhip));
+                    if (tong_so_trang >= (so_bat * 2)) {
+                        let so_tay = Math.floor(tong_so_trang / (so_bat * 2));
+                        let so_trang = so_tay * so_bat * 2;
+                        let le_s = tong_so_trang - so_trang;
+                        if ((le_s === 4) && (GiaCongGay === 'khau_chi')) {
+                            so_tay = so_tay - 1;
                             so_trang = so_tay * so_bat * 2;
-                            le_s = le - so_trang;
-                            if ((le_s === 4) && (GiaCongGay === 'khau_chi')) {
-                                so_tay = so_tay - 1;
-                                so_trang = so_tay * so_bat * 2;
-                                le = le - so_trang;
-                            } else {
-                                le = le_s;
-                            }
-                        } else {
-                            tro_khac = false;
-                            let so_bat_tro_no = so_bat;
-                            while ((so_bat_tro_no > le) && (so_bat_tro_no > 2)) {
-                                so_bat_tro_no = so_bat_tro_no / 2;
-                            }
-
-                            so_trang = so_bat_tro_no;
-                            le_s = le - so_trang;
-                            if ((le_s !== 4) || (GiaCongGay !== 'khau_chi')) {
-                                so_tay = 1;
-                                le = le_s;
-                            }
                         }
-
-                        if (so_tay > 0) {
+                        let le = tong_so_trang - so_trang;
+                        if (so_tay <= maxdivisor) {
                             const item = {
-                                'tro_khac': tro_khac,
+                                'tro_khac': true,
+                                'in_cuon': true,
                                 'so_trang': so_trang,
                                 'kho_giay': arrKhoGiay[i].detail,
                                 'so_bat': so_bat,
                                 'so_tay': so_tay
                             };
                             if (le > 0) {
-                                divisor = this.genDivisor(le, product, arrKhoGiay, GiaCongGay, in_cuon);
+                                divisor = this.genDivisor(le, product, arrKhoGiay, GiaCongGay, false, dl);
                                 item['divisor'] = divisor;
                             }
                             res.push(item);
+                        } else {
+                            const so_nguyen = Math.floor(so_tay / maxdivisor);
+                            const so_trang_div1 = so_nguyen * maxdivisor * so_bat * 2;
+                            const item1 = {
+                                'tro_khac': true,
+                                'in_cuon': true,
+                                'so_trang': so_trang_div1,
+                                'kho_giay': arrKhoGiay[i].detail,
+                                'so_bat': so_bat,
+                                'so_tay': so_nguyen * maxdivisor
+                            };
+                            if (so_trang_div1 < so_trang) {
+                                const so_trang_div2 = so_trang - so_trang_div1;
+                                const item2 = {
+                                    'tro_khac': true,
+                                    'in_cuon': true,
+                                    'so_trang': so_trang_div2,
+                                    'kho_giay': arrKhoGiay[i].detail,
+                                    'so_bat': so_bat,
+                                    'so_tay': so_tay - (so_nguyen * maxdivisor)
+                                };
+                                if (le > 0) {
+                                    divisor = this.genDivisor(le, product, arrKhoGiay, GiaCongGay, false, dl);
+                                    item2['divisor'] = divisor;
+                                }
+                                item1['divisor'] = [item2];
+                            } else {
+                                if (le > 0) {
+                                    divisor = this.genDivisor(le, product, arrKhoGiay, GiaCongGay, false, dl);
+                                    item1['divisor'] = divisor;
+                                }
+                            }
+                            res.push(item1);
                         }
                     }
                 }
-            } else {
-                if (so_bat > 0) {
-                    const item = {
-                        'tro_khac': false,
-                        'so_trang': le,
-                        'kho_giay': arrKhoGiay[i].detail,
-                        'so_bat': so_bat,
-                        'so_tay': 1
-                    };
-                    res.push(item);
+            }
+        } else {
+            for (let i = 0; i < arrKhoGiay.length; i++) {
+                let le = tong_so_trang;
+                let le_s = 0;
+                let tro_khac = false;
+                let so_trang = 0;
+                let so_tay = 0;
+                let divisor: any = [];
+                let so_bat = this.caSoBat(this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, product.dai, product.rong, arrKhoGiay[i].detail.kep_nhip));
+                if (le >= 4) {
+                    if (so_bat > 0) {
+                        if ((so_bat !== 2) || (GiaCongGay !== 'khau_chi')) {
+                            so_tay = Math.floor(le / (so_bat * 2));
+                            if (so_tay > 0) {
+                                tro_khac = true;
+                                so_trang = so_tay * so_bat * 2;
+                                le_s = le - so_trang;
+                                if ((le_s === 4) && (GiaCongGay === 'khau_chi')) {
+                                    so_tay = so_tay - 1;
+                                    so_trang = so_tay * so_bat * 2;
+                                    le = le - so_trang;
+                                } else {
+                                    le = le_s;
+                                }
+                            } else {
+                                tro_khac = false;
+                                let so_bat_tro_no = so_bat;
+                                while ((so_bat_tro_no > le) && (so_bat_tro_no > 2)) {
+                                    so_bat_tro_no = so_bat_tro_no / 2;
+                                }
+
+                                so_trang = so_bat_tro_no;
+                                le_s = le - so_trang;
+                                if ((le_s !== 4) || (GiaCongGay !== 'khau_chi')) {
+                                    so_tay = 1;
+                                    le = le_s;
+                                }
+                            }
+
+                            if (so_tay > 0) {
+                                const item = {
+                                    'tro_khac': tro_khac,
+                                    'so_trang': so_trang,
+                                    'kho_giay': arrKhoGiay[i].detail,
+                                    'so_bat': so_bat,
+                                    'so_tay': so_tay
+                                };
+                                if (le > 0) {
+                                    divisor = this.genDivisor(le, product, arrKhoGiay, GiaCongGay, in_cuon, dl);
+                                    item['divisor'] = divisor;
+                                }
+                                res.push(item);
+                            }
+                        }
+                    }
+                } else {
+                    if (so_bat > 0) {
+                        const item = {
+                            'tro_khac': false,
+                            'so_trang': le,
+                            'kho_giay': arrKhoGiay[i].detail,
+                            'so_bat': so_bat,
+                            'so_tay': 1
+                        };
+                        res.push(item);
+                    }
                 }
             }
         }

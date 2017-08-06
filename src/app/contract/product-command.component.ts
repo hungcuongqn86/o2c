@@ -381,10 +381,10 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             dl = arrLoaiGiay.detail.dl;
             dg = arrLoaiGiay.detail.dg;
         }
-        //In cuon
+
         const GiaCongGay = this.product.elements['gay-sel-cach_gia_cong'];
         // let divisor = this.Lib.genDivisor(tong_so_trang, this.product, [arrKhoGiay[1]], GiaCongGay, in_cuon);
-        let divisor = this.Lib.genDivisor(tong_so_trang, this.product, arrKhoGiay, GiaCongGay, in_cuon);
+        let divisor = this.Lib.genDivisor(tong_so_trang, this.product, arrKhoGiay, GiaCongGay, in_cuon, dl);
         if (divisor) {
             console.log(divisor);
         }
