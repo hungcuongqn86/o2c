@@ -37,7 +37,7 @@ return [
         ],
         'cach_gia_cong' => [
             'id' => 'cach_gia_cong',
-            'type' => 'mcheck',
+            'type' => 'select',
             'datatype' => 'function',
             'lable' => 'Cách gia công',
             'visible' => true

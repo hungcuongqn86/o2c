@@ -73,18 +73,18 @@
 
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('dai')"
-                                           [(ngModel)]="detail.dai" type="text"
-                                           class="form-control sizeinput input-group-addon"
-                                           #long="ngModel"
-                                           id="long" name="long"
-                                           placeholder="Dài">
                                     <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('rong')"
                                            [(ngModel)]="detail.rong" type="text"
                                            class="form-control sizeinput input-group-addon"
                                            #large="ngModel"
                                            id="large" name="large"
                                            placeholder="Rộng">
+                                    <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('dai')"
+                                           [(ngModel)]="detail.dai" type="text"
+                                           class="form-control sizeinput input-group-addon"
+                                           #long="ngModel"
+                                           id="long" name="long"
+                                           placeholder="Dài">
                                     <input [disabled]="producttypeDetail.size_config && !producttypeDetail.size_config.includes('cao')"
                                            [(ngModel)]="detail.cao" type="text"
                                            class="form-control sizeinput input-group-addon"

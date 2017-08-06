@@ -96,13 +96,13 @@ return [
         [
             'code' => 'c50'
             , 'name' => 'C50'
-            , 'dl' => '50'
+            , 'dl' => '40'
             , 'dg' => '20.000'
         ],
         [
             'code' => 'c60'
             , 'name' => 'C60'
-            , 'dl' => '60'
+            , 'dl' => '45'
             , 'dg' => '20.500'
         ], [
             'code' => 'c70'
@@ -167,6 +167,7 @@ return [
             , 'r' => '54'
             , 'd' => '79'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '71x99'
@@ -174,6 +175,7 @@ return [
             , 'r' => '71'
             , 'd' => '99'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '72x99'
@@ -181,6 +183,7 @@ return [
             , 'r' => '72'
             , 'd' => '99'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '60x84'
@@ -188,6 +191,7 @@ return [
             , 'r' => '60'
             , 'd' => '84'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '54.5x79'
@@ -195,6 +199,7 @@ return [
             , 'r' => '54.5'
             , 'd' => '79'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '39x54'
@@ -202,6 +207,7 @@ return [
             , 'r' => '39'
             , 'd' => '54'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '35.5x49.5'
@@ -209,6 +215,7 @@ return [
             , 'r' => '35.5'
             , 'd' => '49.5'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '36x49.5'
@@ -216,6 +223,7 @@ return [
             , 'r' => '36'
             , 'd' => '49.5'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '42x60'
@@ -223,6 +231,7 @@ return [
             , 'r' => '42'
             , 'd' => '60'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '39x54'
@@ -230,6 +239,7 @@ return [
             , 'r' => '39'
             , 'd' => '54'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '36x49'
@@ -237,6 +247,7 @@ return [
             , 'r' => '36'
             , 'd' => '49'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
         ],
         [
             'code' => '43x65'
@@ -244,6 +255,15 @@ return [
             , 'r' => '43'
             , 'd' => '65'
             , 'kep_nhip' => '1.0'
+            , 'ic' => false
+        ],
+        [
+            'code' => '50.8x69'
+            , 'name' => '50.8x69'
+            , 'r' => '50.8'
+            , 'd' => '69'
+            , 'kep_nhip' => '1.0'
+            , 'ic' => true
         ]
     ],
     'dm_bu_hao' => [
@@ -621,6 +641,14 @@ return [
             'code' => 'cach5'
             , 'name' => 'Phay gáy'
         ],
+        [
+            'code' => 'khau_chi'
+            , 'name' => 'Khâu chỉ'
+        ],
+        [
+            'code' => 'phay_keo'
+            , 'name' => 'Phay keo'
+        ]
     ],
     'thung_hop' => [
         [

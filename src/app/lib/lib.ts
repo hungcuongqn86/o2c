@@ -1,6 +1,4 @@
-import * as config from '../lib/const';
-import {AppModule} from "../app.module";
-
+import * as config from './const';
 export class Lib {
     constructor() {
     }
@@ -20,8 +18,97 @@ export class Lib {
         return arrRes;
     }
 
+    public genDivisor(tong_so_trang, product, arrKhoGiay, GiaCongGay, in_cuon) {
+        const res: any = [];
+        if (tong_so_trang === 0) {
+            return [];
+        }
+        if ((tong_so_trang === 4) && (GiaCongGay === 'khau_chi')) {
+            return [];
+        }
+        for (let i = 0; i < arrKhoGiay.length; i++) {
+            let le = tong_so_trang;
+            let le_s = 0;
+            let tro_khac = false;
+            let so_trang = 0;
+            let so_tay = 0;
+            let divisor: any = [];
+            let so_bat = this.caSoBat(this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, product.dai, product.rong, arrKhoGiay[i].detail.kep_nhip));
+            if (le >= 4) {
+                if (so_bat > 0) {
+                    if ((so_bat !== 2) || (GiaCongGay !== 'khau_chi')) {
+                        so_tay = Math.floor(le / (so_bat * 2));
+                        if (so_tay > 0) {
+                            tro_khac = true;
+                            so_trang = so_tay * so_bat * 2;
+                            le_s = le - so_trang;
+                            if ((le_s === 4) && (GiaCongGay === 'khau_chi')) {
+                                so_tay = so_tay - 1;
+                                so_trang = so_tay * so_bat * 2;
+                                le = le - so_trang;
+                            } else {
+                                le = le_s;
+                            }
+                        } else {
+                            tro_khac = false;
+                            let so_bat_tro_no = so_bat;
+                            while ((so_bat_tro_no > le) && (so_bat_tro_no > 2)) {
+                                so_bat_tro_no = so_bat_tro_no / 2;
+                            }
+
+                            so_trang = so_bat_tro_no;
+                            le_s = le - so_trang;
+                            if ((le_s !== 4) || (GiaCongGay !== 'khau_chi')) {
+                                so_tay = 1;
+                                le = le_s;
+                            }
+                        }
+
+                        if (so_tay > 0) {
+                            const item = {
+                                'tro_khac': tro_khac,
+                                'so_trang': so_trang,
+                                'kho_giay': arrKhoGiay[i].detail,
+                                'so_bat': so_bat,
+                                'so_tay': so_tay
+                            };
+                            if (le > 0) {
+                                divisor = this.genDivisor(le, product, arrKhoGiay, GiaCongGay, in_cuon);
+                                item['divisor'] = divisor;
+                            }
+                            res.push(item);
+                        }
+                    }
+                }
+            } else {
+                if (so_bat > 0) {
+                    const item = {
+                        'tro_khac': false,
+                        'so_trang': le,
+                        'kho_giay': arrKhoGiay[i].detail,
+                        'so_bat': so_bat,
+                        'so_tay': 1
+                    };
+                    res.push(item);
+                }
+            }
+        }
+        return res;
+    }
+
+    private caSoBat(number) {
+        const arrValue = config.arrSoBat;
+        for (let i = 0; i < arrValue.length; i++) {
+            if (number >= arrValue[i]) {
+                return arrValue[i];
+            }
+        }
+        return 0;
+    }
+
+
     public getNumberResize11(d, r, id, ir, kn): number {
-        console.log(d, r, id, ir, kn);
+        // console.log(d, r, id, ir, kn);
         // TH1
         const dkn = d - kn;
         let kq1 = 0;
@@ -260,18 +347,18 @@ export class Lib {
         if (num < 2) {
             return null;
         }
-        let index = this._getDivisor(num);
+        let index = this._getSobat(num);
         res.push(index);
         let numDiv = num - index;
         while ((numDiv >= 2)) {
-            index = this._getDivisor(numDiv);
+            index = this._getSobat(numDiv);
             res.push(index);
             numDiv = numDiv - index;
         }
         return res;
     }
 
-    private _getDivisor(num: number): number {
+    public _getSobat(num: number): number {
         if (num < 2) {
             return 0;
         }
@@ -387,9 +474,9 @@ export class Lib {
     public getQualifiedSize(arrKhoGiay, ppd, ppr, allR) {
         let res: Array<any> = [];
         for (let i = 0; i < arrKhoGiay.length; i++) {
-            arrKhoGiay[i].so_bat = this._getDivisor(this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, ppd, ppr, arrKhoGiay[i].detail.kep_nhip));
+            arrKhoGiay[i].so_bat = this._getSobat(this.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, ppd, ppr, arrKhoGiay[i].detail.kep_nhip));
             if (arrKhoGiay[i].so_bat && arrKhoGiay[i].so_bat > 2) {
-                arrKhoGiay[i].divisor = this.genDivisor(arrKhoGiay[i].so_bat, allR);
+                arrKhoGiay[i].divisor = this.genDivisorIc(arrKhoGiay[i].so_bat, allR);
                 res.push(arrKhoGiay[i])
             }
         }
@@ -412,27 +499,72 @@ export class Lib {
     }
 
 
-    public genDivisor(so_bat, ppCount) {
-        let res: Array<number> = [];
-        let ts = so_bat;
-        if (ppCount < 2) {
-            return null;
-        }
-        // Tro khac
-        let index = (Math.floor(ppCount / (ts * 2))) * (ts * 2);
-        res.push(index);
-
-        // Tro no
-        let numDiv = ppCount - index;
-        while ((numDiv >= ts) && (ts >= 2)) {
-            index = (Math.floor(numDiv / ts)) * ts;
-            res.push(index);
-            numDiv = numDiv - index;
-            ts = ts / 2
+    public genDivisorIc(so_bat, ppCount, maxdivisor = 0, GiaCongGay = '') {
+        let tle = ppCount;
+        let st = 0;
+        const mindivisor = so_bat * 2;
+        if (tle >= mindivisor) {
+            st = Math.floor(tle / (so_bat * 2));
+            tle = tle - (st * (so_bat * 2));
+            if (GiaCongGay === 'khau_chi') {
+                if ((tle > 2) && (tle < 8)) {
+                    st = st - 1;
+                    tle = tle + (so_bat * 2);
+                }
+            }
         }
 
-        if (numDiv > 0) {
-            res.push(numDiv);
+        let res: Array<any> = [];
+        let le = ppCount - tle;
+        const sovach: Array<number> = [];
+        let divindex = maxdivisor;
+        let divcount = (so_bat * 2) * maxdivisor;
+        if (le >= mindivisor) {
+            while (divcount > le) {
+                divindex = divindex - 1;
+                divcount = (so_bat * 2) * divindex;
+            }
+
+            while ((le >= divcount) && (divcount >= mindivisor)) {
+                sovach.push(2 + divindex);
+                const _item = (Math.floor(le / divcount)) * divcount;
+                res.push(_item);
+                le = le - _item;
+                while (divcount > le) {
+                    divindex = divindex - 1;
+                    divcount = (so_bat * 2) * divindex;
+                }
+            }
+        }
+        return [res, sovach, tle];
+    }
+
+    public genDivisorTr(so_bat, ppCount) {
+        let res: Array<any> = [];
+        let ts = so_bat * 2;
+        let item = 0;
+        let le = ppCount;
+
+        if (le > ts) {
+            item = (Math.floor(le / ts)) * ts;
+            res.push(item);
+            le = le - item;
+            ts = ts / 2;
+        }
+        while (ts > le) {
+            ts = ts / 2;
+        }
+        while ((le >= ts) && (ts >= 2)) {
+            item = (Math.floor(le / ts)) * ts;
+            res.push(item);
+            le = le - item;
+            ts = ts / 2;
+            while (ts > le) {
+                ts = ts / 2;
+            }
+        }
+        if (le > 0) {
+            res.push(le);
         }
         return res;
     }

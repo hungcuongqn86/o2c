@@ -263,7 +263,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         const res: cmdEl = new cmdEl();
         res.id = el.id;
         res.name = el.name;
-        res.kho_tp = this.product.dai + 'x' + this.product.rong;
+        res.kho_tp = this.product.rong + 'x' + this.product.dai;
         res.mau_in = this.product.elements['bia-sel-mau_in'];
         res.zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
         // Kho kho
@@ -289,7 +289,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         // SL giay
         let arrKhoGiay = this.Lib.getFunctionData(el.properties, 'id', 'kho_giay', 'data');
         const allR = this.product.elements['ruot-in-so_trang'];
-        const day_gay = (allR / 16) * (dl / 100);
+        const day_gay = (allR / 16) * (dl / 1000);
         const rCV = (this.product.rong * 2) + day_gay;
         if (this.product.dai >= rCV) {
             arrKhoGiay = this.Lib.getQualifiedSizeB(arrKhoGiay, this.product.dai, rCV);
@@ -358,6 +358,88 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     }
 
     private _genRuot(el: any): Array<cmdEl> {
+        let res: Array<cmdEl> = [];
+        const tong_so_trang = Number(this.product.elements['ruot-in-so_trang']);
+        const in_cuon = this.product.elements['ruot-chk-cach_in'];
+        // Loai kem
+        const zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
+        const zincType = this.formData.zinc_type['ruot-sel-zinc_type'];
+        // Kho kho
+        let arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
+        const kho_kho = this.formData.kho_kho['ruot-sel-kho_kho'];
+        // May in
+        const arrMay = this.Lib.getFunctionData(el.properties, 'id', 'may_in', 'data');
+        // Kho giay
+        let arrKhoGiay = this.Lib.getFunctionData(el.properties, 'id', 'kho_giay', 'data');
+        // Loai giay
+        const sLoaiGiay = this.product.elements['ruot-sel-loai_giay'];
+        const arrAllLoaiGiay = this.Lib.getFunctionData(el.properties, 'id', 'loai_giay', 'data');
+        const arrLoaiGiay = this.Lib.getFunctionData(arrAllLoaiGiay, 'list_code', sLoaiGiay);
+        let dl = 0;
+        let dg = 0;
+        if (arrLoaiGiay) {
+            dl = arrLoaiGiay.detail.dl;
+            dg = arrLoaiGiay.detail.dg;
+        }
+        //In cuon
+        const GiaCongGay = this.product.elements['gay-sel-cach_gia_cong'];
+        // let divisor = this.Lib.genDivisor(tong_so_trang, this.product, [arrKhoGiay[1]], GiaCongGay, in_cuon);
+        let divisor = this.Lib.genDivisor(tong_so_trang, this.product, arrKhoGiay, GiaCongGay, in_cuon);
+        if (divisor) {
+            console.log(divisor);
+        }
+
+        //Tinh theo cach in
+        /*if (in_cuon) {
+         //Fix may in
+         let MayIn: any = [];
+         for (let i = 0; i < arrMay.length; i++) {
+         if (arrMay[i].detail && arrMay[i].detail.in_cuon) {
+         Object.keys(arrMay[i]).map((index) => {
+         MayIn[index] = arrMay[i][index];
+         });
+         break;
+         }
+         }
+         //Fix kho giay
+         let KhoGiay: any = [];
+         for (let i = 0; i < arrKhoGiay.length; i++) {
+         if (arrKhoGiay[i].detail && arrKhoGiay[i].detail.ic) {
+         Object.keys(arrMay[i]).map((index) => {
+         KhoGiay[index] = arrKhoGiay[i][index];
+         });
+         break;
+         }
+         }
+         so_bat = this.Lib._getSobat(this.Lib.getNumberResize(KhoGiay.detail.d, KhoGiay.detail.r, this.product.dai, this.product.rong, KhoGiay.detail.kep_nhip));
+         // Chia ruot
+         let maxdivisor = 0; // Tuong ung so cua vao giay
+         if (Number(dl) <= 48) {
+         //Co the gap 5 vach
+         maxdivisor = 3;
+         } else {
+         //Chi co the gap den 4 vach
+         maxdivisor = 2;
+         }
+         icr = this.Lib.genDivisorIc(so_bat, tong_so_trang, maxdivisor, GiaCongGay);
+         sotrangroi = icr[2];
+         }
+
+         let divisor: any = [];
+         for (let i = 0; i < arrKhoGiay.length; i++) {
+         so_bat = this.Lib._getSobat(this.Lib.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, this.product.dai, this.product.rong, arrKhoGiay[i].detail.kep_nhip));
+         if (so_bat > 2) {
+         divisor = this.Lib.genDivisorTr(so_bat, sotrangroi);
+         }
+         console.log(so_bat, divisor);
+         }*/
+
+
+        return res;
+    }
+
+
+    private _genRuot1(el: any): Array<cmdEl> {
         let res: Array<cmdEl> = [];
         const in_cuon = this.product.elements['ruot-chk-cach_in'];
         const allR = this.product.elements['ruot-in-so_trang'];
@@ -518,7 +600,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             itemRes.id = el.id;
             itemRes.name = el.name;
             itemRes.so_trang = fixKhoGiay._divisor[i].so_trang;
-            itemRes.kho_tp = this.product.dai + 'x' + this.product.rong;
+            itemRes.kho_tp = this.product.rong + 'x' + this.product.dai;
             itemRes.zinc_type = zinc_type;
             itemRes.arrKho_kho = arrKho_kho;
             itemRes.loai_giay = arrLoaiGiay.detail.name;
@@ -606,5 +688,12 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             return null;
         }
         return res;
+    }
+
+    public exportExcel() {
+        // console.log(this.product);
+        const url = './command/excel';
+        const win = window.open(url, '_blank');
+        win.focus();
     }
 }
