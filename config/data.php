@@ -50,9 +50,9 @@ return [
             'code' => 'LP'
             , 'in_cuon' => false
             , 'name' => 'LP40 In1/1'
-            , 'so_mau' => 1
+            , 'so_mau' => 4
             , 'max_size' => '72x102'
-            , 'min_size' => '49x69'
+            , 'min_size' => '34x69'
             , 'cong_in_kem' => 120000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
@@ -254,6 +254,14 @@ return [
             , 'name' => '43x65'
             , 'r' => '43'
             , 'd' => '65'
+            , 'kep_nhip' => '1.0'
+            , 'ic' => false
+        ],
+        [
+            'code' => '74x35'
+            , 'name' => '74x35'
+            , 'r' => '35'
+            , 'd' => '74'
             , 'kep_nhip' => '1.0'
             , 'ic' => false
         ],

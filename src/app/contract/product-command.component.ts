@@ -381,14 +381,61 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             dl = arrLoaiGiay.detail.dl;
             dg = arrLoaiGiay.detail.dg;
         }
-
         const GiaCongGay = this.product.elements['gay-sel-cach_gia_cong'];
-        // let divisor = this.Lib.genDivisor(tong_so_trang, this.product, [arrKhoGiay[1]], GiaCongGay, in_cuon);
         let divisor = this.Lib.genDivisor(tong_so_trang, this.product, arrKhoGiay, GiaCongGay, in_cuon, dl);
         if (divisor) {
-            console.log(divisor);
-        }
+            divisor = this.Lib.convertDivisor(tong_so_trang, divisor);
+            let gia_giay = 0, tong_so_to = 0, so_luot_in = 0, soto1tay = 0, sosp1tay = 0, buhao = 0;
+            let mau_in = this.product.elements['ruot-sel-mau_in'];
+            let mat_in = this.Lib.getMatIn(mau_in);
+            let may_in: any;
+            let zincCount = 0;
+            let printConst = 1;
+            const divisorfix = {
+                init: false,
+                cost: 0,
+                divisor: []
+            };
+            let cost = 0;
+            for (let i = 0; i < divisor.length; i++) {
+                cost = 0;
+                for (let j = 0; j < divisor[i].length; j++) {
+                    //chi phi giay
+                    sosp1tay = Math.ceil(divisor[i][j].so_bat * 2 / divisor[i][j].so_trang);
+                    soto1tay = Math.ceil(this.product.count / sosp1tay);
+                    so_luot_in = soto1tay * mat_in * divisor[i][j].so_tay;
+                    buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciationR, this.depreciationC, divisor[i][j].in_cuon);
+                    tong_so_to = (soto1tay + buhao) * divisor[i][j].so_tay;
+                    gia_giay = tong_so_to * divisor[i][j].kho_giay.d * divisor[i][j].kho_giay.r * dl * dg / 10000;
 
+                    //may in, chi phi kem
+                    if (divisor[i][j].in_cuon) {
+                        zincCount = this.Lib.getZincCountC(mau_in, divisor[i][j].so_trang);
+                    } else {
+                        if (divisor[i][j].kho_giay.tro_khac) {
+                            printConst = 1;
+                        } else {
+                            printConst = 2;
+                        }
+                        zincCount = this.Lib.getZincCountR(mau_in, printConst, divisor[i][j].so_tay);
+                    }
+                    may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, divisor[i][j].kho_giay, arrMay, so_luot_in, divisor[i][j].in_cuon);
+                    cost = gia_giay + may_in.gia_kem + may_in.cong_in;
+                }
+                if (!divisorfix.init) {
+                    divisorfix.init = true;
+                    divisorfix.cost = cost;
+                    divisorfix.divisor = divisor[i];
+                } else {
+                    if (cost < divisorfix.cost) {
+                        divisorfix.cost = cost;
+                        divisorfix.divisor = divisor[i];
+                    }
+                }
+                console.log(divisor[i], cost);
+            }
+            console.log(divisorfix);
+        }
         //Tinh theo cach in
         /*if (in_cuon) {
          //Fix may in

@@ -1,5 +1,7 @@
 import * as config from './const';
 export class Lib {
+    public divisor: any = [];
+
     constructor() {
     }
 
@@ -16,6 +18,47 @@ export class Lib {
             }
         }
         return arrRes;
+    }
+
+    public convertDivisor(tong_so_trang, divisor) {
+        this.divisor = [];
+        this._convertDivisor(divisor);
+        return this.removeOrderFalse(tong_so_trang, this.divisor);
+    }
+
+    private removeOrderFalse(tong_so_trang, divisorcv) {
+        const res: any = [];
+        let tong = 0;
+        let order = true;
+        for (let i = 0; i < divisorcv.length; i++) {
+            tong = 0;
+            order = true;
+            for (let j = 0; j < divisorcv[i].length; j++) {
+                tong = tong + divisorcv[i][j].so_trang;
+                if ((j > 0) && (divisorcv[i][j].so_trang > divisorcv[i][j - 1].so_trang)) {
+                    order = false;
+                }
+            }
+            if (order && (tong === tong_so_trang)) {
+                res.push(divisorcv[i]);
+            }
+        }
+        return res;
+    }
+
+    private _convertDivisor(divisor, arrDivisorInp: Array<any> = []) {
+        let arrDivisor: Array<any> = [];
+        for (let i = 0; i < divisor.length; i++) {
+            arrDivisor = [];
+            for (let j = 0; j < arrDivisorInp.length; j++) {
+                arrDivisor.push(arrDivisorInp[j]);
+            }
+            arrDivisor.push(divisor[i]);
+            this.divisor.push(arrDivisor);
+            if (divisor[i].divisor) {
+                this._convertDivisor(divisor[i].divisor, arrDivisor);
+            }
+        }
     }
 
     public genDivisor(tong_so_trang, product, arrKhoGiay, GiaCongGay, in_cuon, dl) {
