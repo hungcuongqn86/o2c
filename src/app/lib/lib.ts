@@ -172,12 +172,13 @@ export class Lib {
                                 while ((so_bat_tro_no > le) && (so_bat_tro_no > 2)) {
                                     so_bat_tro_no = so_bat_tro_no / 2;
                                 }
-
-                                so_trang = so_bat_tro_no;
-                                le_s = le - so_trang;
-                                if ((le_s !== 4) || (GiaCongGay !== 'khau_chi')) {
-                                    so_tay = 1;
-                                    le = le_s;
+                                if ((so_bat_tro_no >= 4) && (so_bat_tro_no % 2 === 0)) {
+                                    so_trang = so_bat_tro_no;
+                                    le_s = le - so_trang;
+                                    if ((le_s !== 4) || (GiaCongGay !== 'khau_chi')) {
+                                        so_tay = 1;
+                                        le = le_s;
+                                    }
                                 }
                             }
 
@@ -351,7 +352,7 @@ export class Lib {
                             if (luot_in < 1000) {
                                 cpin = zincCount * arrMay[i].detail.cong_in_kem;
                             } else {
-                                cpin = luot_in * arrMay[i].detail.cong_in_luot;
+                                cpin = zincCount * arrMay[i].detail.cong_in_kem + ((luot_in - 1000) * arrMay[i].detail.cong_in_luot);
                             }
                             chiphi = giakem + cpin;
                             Object.keys(arrMay[i]).map((index) => {
@@ -365,7 +366,7 @@ export class Lib {
                             if (luot_in < 1000) {
                                 cpin = zincCount * arrMay[i].detail.cong_in_kem;
                             } else {
-                                cpin = luot_in * arrMay[i].detail.cong_in_luot;
+                                cpin = zincCount * arrMay[i].detail.cong_in_kem + ((luot_in - 1000) * arrMay[i].detail.cong_in_luot);
                             }
                             if ((giakem + cpin) < chiphi) {
                                 chiphi = giakem + cpin;
@@ -427,7 +428,7 @@ export class Lib {
     public getKhoKho(fixKhoGiay, arrKho_kho) {
         let res: any = [];
         for (let i = 0; i < arrKho_kho.data.length; i++) {
-            if ((Number(arrKho_kho.data[i].detail.d) >= Number(fixKhoGiay.detail.d)) && (Number(arrKho_kho.data[i].detail.r) >= Number(fixKhoGiay.detail.r))) {
+            if ((Number(arrKho_kho.data[i].detail.d) >= Number(fixKhoGiay.d)) && (Number(arrKho_kho.data[i].detail.r) >= Number(fixKhoGiay.r))) {
                 res.push(arrKho_kho.data[i]);
             }
         }
@@ -440,16 +441,16 @@ export class Lib {
         let min = 0;
         let dem = true;
         for (let i = 0; i < arrKho_kho.data.length; i++) {
-            if ((Number(arrKho_kho.data[i].detail.d) >= Number(fixKhoGiay.detail.d)) && (Number(arrKho_kho.data[i].detail.r) >= Number(fixKhoGiay.detail.r))) {
+            if ((Number(arrKho_kho.data[i].detail.d) >= Number(fixKhoGiay.d)) && (Number(arrKho_kho.data[i].detail.r) >= Number(fixKhoGiay.r))) {
                 if (dem) {
-                    min = (Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.detail.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.detail.r));
+                    min = (Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.r));
                     Object.keys(arrKho_kho.data[i]).map((index) => {
                         res[index] = arrKho_kho.data[i][index];
                     });
                     dem = false;
                 } else {
-                    if ((Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.detail.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.detail.r)) < min) {
-                        min = (Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.detail.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.detail.r));
+                    if ((Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.r)) < min) {
+                        min = (Number(arrKho_kho.data[i].detail.d) - Number(fixKhoGiay.d)) + (Number(arrKho_kho.data[i].detail.r) - Number(fixKhoGiay.r));
                         Object.keys(arrKho_kho.data[i]).map((index) => {
                             res[index] = arrKho_kho.data[i][index];
                         });

@@ -9,7 +9,7 @@ return [
             , 'so_mau' => 4
             , 'max_size' => '50.8x70'
             , 'min_size' => '0x0'
-            , 'cong_in_kem' => 120000
+            , 'cong_in_kem' => 150000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
         ],
@@ -31,7 +31,7 @@ return [
             , 'so_mau' => 4
             , 'max_size' => '51x72'
             , 'min_size' => '26x36'
-            , 'cong_in_kem' => 120000
+            , 'cong_in_kem' => 90000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
         ],
@@ -42,7 +42,7 @@ return [
             , 'so_mau' => 2
             , 'max_size' => '72x102'
             , 'min_size' => '39x54'
-            , 'cong_in_kem' => 120000
+            , 'cong_in_kem' => 70000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
         ],
@@ -53,7 +53,7 @@ return [
             , 'so_mau' => 4
             , 'max_size' => '72x102'
             , 'min_size' => '34x69'
-            , 'cong_in_kem' => 120000
+            , 'cong_in_kem' => 110000
             , 'cong_in_luot' => 30
             , 'gia_kem' => ['CTP' => '120000', 'M8' => '100000']
         ]
@@ -95,7 +95,7 @@ return [
     'loai_giay' => [
         [
             'code' => 'c50'
-            , 'name' => 'C50'
+            , 'name' => 'C48'
             , 'dl' => '40'
             , 'dg' => '20.000'
         ],
@@ -262,6 +262,14 @@ return [
             , 'name' => '74x35'
             , 'r' => '35'
             , 'd' => '74'
+            , 'kep_nhip' => '1.0'
+            , 'ic' => false
+        ],
+        [
+            'code' => '49x69'
+            , 'name' => '49x69'
+            , 'r' => '49'
+            , 'd' => '69'
             , 'kep_nhip' => '1.0'
             , 'ic' => false
         ],

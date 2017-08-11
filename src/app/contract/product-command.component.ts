@@ -167,12 +167,14 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     }
 
     private genCachGiaCong() {
-        const data: string = this.product.elements.checkSelected.split(',');
-        const substring = 'bia-mchk-cach_gia_cong';
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].includes(substring)) {
-                const arrItem = data[i].split('-val-');
-                this.cachGiaCong.push(this.getCachGiaCong(arrItem[1]));
+        if (this.product.elements.checkSelected) {
+            const data = this.product.elements.checkSelected.split(',');
+            const substring = 'bia-mchk-cach_gia_cong';
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].includes(substring)) {
+                    const arrItem = data[i].split('-val-');
+                    this.cachGiaCong.push(this.getCachGiaCong(arrItem[1]));
+                }
             }
         }
     }
@@ -327,9 +329,9 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
 
         const fixKhoGiay = this.Lib.fixKhoGiay(arrKhoGiay);
         let fixKhokho: any = [];
-        arrKho_kho = this.Lib.getKhoKho(fixKhoGiay, arrKho_kho);
+        arrKho_kho = this.Lib.getKhoKho(fixKhoGiay.detail, arrKho_kho);
         if (!kho_kho) {
-            fixKhokho = this.Lib.fixKhokho(fixKhoGiay, arrKho_kho);
+            fixKhokho = this.Lib.fixKhokho(fixKhoGiay.detail, arrKho_kho);
         } else {
             fixKhokho = arrKho_kho.data.filter(function (itm) {
                 return itm['list_code'] === kho_kho;
@@ -343,6 +345,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
         res.sl_giay_xuat = Number(fixKhoGiay.tong_to_da_bu_hao) / res.cach_cat;
         res.sl_giay_xuat_kg = (Number(fixKhoGiay.tong_to_da_bu_hao) * constKg).toFixed(2);
         res.arrKho_kho = arrKho_kho;
+        res.kho_kho = fixKhokho;
         res.kho_in = fixKhoGiay.detail.name;
         res.may_in = fixKhoGiay.may_in.detail.name;
         res.sl_kem = fixKhoGiay.sl_kem;
@@ -381,21 +384,21 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             dl = arrLoaiGiay.detail.dl;
             dg = arrLoaiGiay.detail.dg;
         }
+        const mau_in = this.product.elements['ruot-sel-mau_in'];
         const GiaCongGay = this.product.elements['gay-sel-cach_gia_cong'];
         let divisor = this.Lib.genDivisor(tong_so_trang, this.product, arrKhoGiay, GiaCongGay, in_cuon, dl);
+        const divisorfix = {
+            init: false,
+            cost: 0,
+            divisor: []
+        };
         if (divisor) {
             divisor = this.Lib.convertDivisor(tong_so_trang, divisor);
             let gia_giay = 0, tong_so_to = 0, so_luot_in = 0, soto1tay = 0, sosp1tay = 0, buhao = 0;
-            let mau_in = this.product.elements['ruot-sel-mau_in'];
             let mat_in = this.Lib.getMatIn(mau_in);
             let may_in: any;
             let zincCount = 0;
             let printConst = 1;
-            const divisorfix = {
-                init: false,
-                cost: 0,
-                divisor: []
-            };
             let cost = 0;
             for (let i = 0; i < divisor.length; i++) {
                 cost = 0;
@@ -403,24 +406,31 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                     //chi phi giay
                     sosp1tay = Math.ceil(divisor[i][j].so_bat * 2 / divisor[i][j].so_trang);
                     soto1tay = Math.ceil(this.product.count / sosp1tay);
-                    so_luot_in = soto1tay * mat_in * divisor[i][j].so_tay;
-                    buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciationR, this.depreciationC, divisor[i][j].in_cuon);
-                    tong_so_to = (soto1tay + buhao) * divisor[i][j].so_tay;
+                    divisor[i][j]['so_luot_in'] = soto1tay * mat_in * divisor[i][j].so_tay;
+                    divisor[i][j]['bu_hao'] = this.Lib.getBuhao(divisor[i][j]['so_luot_in'], dl, mau_in, this.depreciationR, this.depreciationC, divisor[i][j].in_cuon);
+                    tong_so_to = (soto1tay + divisor[i][j]['bu_hao']) * divisor[i][j].so_tay;
                     gia_giay = tong_so_to * divisor[i][j].kho_giay.d * divisor[i][j].kho_giay.r * dl * dg / 10000;
 
                     //may in, chi phi kem
                     if (divisor[i][j].in_cuon) {
                         zincCount = this.Lib.getZincCountC(mau_in, divisor[i][j].so_trang);
+                        divisor[i][j]['cach_in'] = 'Trở khác';
                     } else {
-                        if (divisor[i][j].kho_giay.tro_khac) {
+                        if (divisor[i][j].tro_khac) {
                             printConst = 1;
+                            divisor[i][j]['cach_in'] = 'Trở khác';
                         } else {
                             printConst = 2;
+                            divisor[i][j]['cach_in'] = 'Trở nó';
                         }
                         zincCount = this.Lib.getZincCountR(mau_in, printConst, divisor[i][j].so_tay);
                     }
-                    may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, divisor[i][j].kho_giay, arrMay, so_luot_in, divisor[i][j].in_cuon);
-                    cost = gia_giay + may_in.gia_kem + may_in.cong_in;
+                    may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, divisor[i][j].kho_giay, arrMay, divisor[i][j]['so_luot_in'], divisor[i][j].in_cuon);
+                    cost = cost + gia_giay + may_in.gia_kem + may_in.cong_in;
+                    divisor[i][j]['zincCount'] = zincCount;
+                    divisor[i][j]['may_in'] = may_in;
+                    divisor[i][j]['tong_to_chua_bu_hao'] = soto1tay * divisor[i][j].so_tay;
+                    divisor[i][j]['tong_to_da_bu_hao'] = (soto1tay + divisor[i][j]['bu_hao']) * divisor[i][j].so_tay;
                 }
                 if (!divisorfix.init) {
                     divisorfix.init = true;
@@ -432,252 +442,46 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                         divisorfix.divisor = divisor[i];
                     }
                 }
-                console.log(divisor[i], cost);
             }
-            console.log(divisorfix);
-        }
-        //Tinh theo cach in
-        /*if (in_cuon) {
-         //Fix may in
-         let MayIn: any = [];
-         for (let i = 0; i < arrMay.length; i++) {
-         if (arrMay[i].detail && arrMay[i].detail.in_cuon) {
-         Object.keys(arrMay[i]).map((index) => {
-         MayIn[index] = arrMay[i][index];
-         });
-         break;
-         }
-         }
-         //Fix kho giay
-         let KhoGiay: any = [];
-         for (let i = 0; i < arrKhoGiay.length; i++) {
-         if (arrKhoGiay[i].detail && arrKhoGiay[i].detail.ic) {
-         Object.keys(arrMay[i]).map((index) => {
-         KhoGiay[index] = arrKhoGiay[i][index];
-         });
-         break;
-         }
-         }
-         so_bat = this.Lib._getSobat(this.Lib.getNumberResize(KhoGiay.detail.d, KhoGiay.detail.r, this.product.dai, this.product.rong, KhoGiay.detail.kep_nhip));
-         // Chia ruot
-         let maxdivisor = 0; // Tuong ung so cua vao giay
-         if (Number(dl) <= 48) {
-         //Co the gap 5 vach
-         maxdivisor = 3;
-         } else {
-         //Chi co the gap den 4 vach
-         maxdivisor = 2;
-         }
-         icr = this.Lib.genDivisorIc(so_bat, tong_so_trang, maxdivisor, GiaCongGay);
-         sotrangroi = icr[2];
-         }
-
-         let divisor: any = [];
-         for (let i = 0; i < arrKhoGiay.length; i++) {
-         so_bat = this.Lib._getSobat(this.Lib.getNumberResize(arrKhoGiay[i].detail.d, arrKhoGiay[i].detail.r, this.product.dai, this.product.rong, arrKhoGiay[i].detail.kep_nhip));
-         if (so_bat > 2) {
-         divisor = this.Lib.genDivisorTr(so_bat, sotrangroi);
-         }
-         console.log(so_bat, divisor);
-         }*/
-
-
-        return res;
-    }
-
-
-    private _genRuot1(el: any): Array<cmdEl> {
-        let res: Array<cmdEl> = [];
-        const in_cuon = this.product.elements['ruot-chk-cach_in'];
-        const allR = this.product.elements['ruot-in-so_trang'];
-        let arrKhoGiay = this.Lib.getFunctionData(el.properties, 'id', 'kho_giay', 'data');
-        const zinc_type = this.Lib.getFunctionData(el.properties, 'id', 'zinc_type');
-        // Kho kho
-        let arrKho_kho = this.Lib.getFunctionData(el.properties, 'id', 'kho_kho');
-        const kho_kho = this.formData.kho_kho['ruot-sel-kho_kho'];
-        // May in
-        const arrMay = this.Lib.getFunctionData(el.properties, 'id', 'may_in', 'data');
-        // Loai kem
-        const zincType = this.formData.zinc_type['ruot-sel-zinc_type'];
-        // Loai giay
-        const sLoaiGiay = this.product.elements['ruot-sel-loai_giay'];
-        const arrAllLoaiGiay = this.Lib.getFunctionData(el.properties, 'id', 'loai_giay', 'data');
-        const arrLoaiGiay = this.Lib.getFunctionData(arrAllLoaiGiay, 'list_code', sLoaiGiay);
-        let dl = 0;
-        let dg = 0;
-        if (arrLoaiGiay) {
-            dl = arrLoaiGiay.detail.dl;
-            dg = arrLoaiGiay.detail.dg;
-        }
-        let mau_in = this.product.elements['ruot-sel-mau_in'];
-        let mat_in = this.Lib.getMatIn(mau_in);
-
-        let soto1tay = 0;
-        let sosp1tay = 1;
-        let so_luot_in = 0;
-        let tong_luot_in = 0;
-        let buhao = 0;
-        let tongGiay1r = 0;
-        let zincCount = 0;
-        let arrKhoGiay2 = this.Lib.getQualifiedSizeB(arrKhoGiay, this.product.dai, this.product.rong);
-        for (let k = 0; k < arrKhoGiay2.length; k++) {
-            let so_tay2 = 1;
-            sosp1tay = this.Lib.getNumberResize(arrKhoGiay2[k].detail.d, arrKhoGiay2[k].detail.r, this.product.dai, this.product.rong, arrKhoGiay2[k].detail.kep_nhip);
-            arrKhoGiay2[k].so_luot_in = (this.product.count / sosp1tay) * mat_in;
-            buhao = this.Lib.getBuhao(arrKhoGiay2[k].so_luot_in, dl, mau_in, this.depreciationR, this.depreciationC, false);
-            tongGiay1r = (soto1tay + buhao) * so_tay2;
-            zincCount = this.Lib.getZincCountR(mau_in, 2, 1);
-            arrKhoGiay2[k].zincCount = zincCount;
-            arrKhoGiay2[k].gia_giay = tongGiay1r * arrKhoGiay2[k].detail.d * arrKhoGiay2[k].detail.r * dl * dg / 10000;
-            arrKhoGiay2[k].may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, arrKhoGiay2[k].detail, arrMay, arrKhoGiay2[k].so_luot_in, false);
-            arrKhoGiay2[k].tong_to_chua_bu_hao = soto1tay * so_tay2;
-            arrKhoGiay2[k].tong_to_da_bu_hao = tongGiay1r;
-            arrKhoGiay2[k].bu_hao = buhao;
         }
 
-        const fixKhoGiay2 = this.Lib.fixKhoGiay(arrKhoGiay2);
-        arrKhoGiay = this.Lib.getQualifiedSize(arrKhoGiay, this.product.dai, this.product.rong, allR);
-        // console.log(arrKhoGiay);
-
-        for (let i = 0; i < arrKhoGiay.length; i++) {
-            let so_tay = 0;
-            let SumzincCount = 0;
-            let tong_so_to = 0;
-            let ts = arrKhoGiay[i].so_bat * 2;
-            let arrDivisor: Array<any> = [];
-            // console.log('----------------------------');
-            tong_luot_in = 0;
-            for (let j = 0; j < arrKhoGiay[i].divisor.length; j++) {
-                let divisorItem: any = [];
-                if (arrKhoGiay[i].divisor[j] > 2) {
-                    if (j > 0) {
-                        ts = ts / 2;
-                        so_tay = Math.ceil(arrKhoGiay[i].divisor[j] / ts);
-                        soto1tay = Number(Math.ceil(soto1tay / 2));
-                        sosp1tay = sosp1tay * 2;
-                        //luot in
-                        so_luot_in = (this.product.count / sosp1tay) * mat_in * so_tay;
-                        tong_luot_in = tong_luot_in + so_luot_in;
-                        buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciationR, this.depreciationC, in_cuon);
-                        tongGiay1r = (soto1tay + buhao) * so_tay;
-                        tong_so_to = tong_so_to + tongGiay1r;
-                        if (in_cuon) {
-                            zincCount = this.Lib.getZincCountC(mau_in, arrKhoGiay[i].divisor[j]);
-                        } else {
-                            zincCount = this.Lib.getZincCountR(mau_in, 2, so_tay);
-                        }
-                        SumzincCount = SumzincCount + zincCount;
-                        divisorItem.so_bat = this.Lib.getNumberResize(Number(arrKhoGiay[i].detail.d), Number(arrKhoGiay[i].detail.r), Number(this.product.dai), Number(this.product.rong), Number(arrKhoGiay[i].detail.kep_nhip));
-                        divisorItem.cach_in = 'Trở nó';
-                    } else {
-                        so_tay = Math.ceil(arrKhoGiay[i].divisor[j] / ts);
-                        soto1tay = this.product.count;
-                        sosp1tay = 1;
-                        //luot in
-                        so_luot_in = this.product.count * mat_in * so_tay;
-                        tong_luot_in = tong_luot_in + so_luot_in;
-                        buhao = this.Lib.getBuhao(so_luot_in, dl, mau_in, this.depreciationR, this.depreciationC, in_cuon);
-                        tongGiay1r = (soto1tay + buhao) * so_tay;
-                        tong_so_to = tong_so_to + tongGiay1r;
-                        if (in_cuon) {
-                            zincCount = this.Lib.getZincCountC(mau_in, arrKhoGiay[i].divisor[j]);
-                        } else {
-                            zincCount = this.Lib.getZincCountR(mau_in, 1, so_tay);
-                        }
-                        SumzincCount = SumzincCount + zincCount;
-                        divisorItem.so_bat = this.Lib.getNumberResize(Number(arrKhoGiay[i].detail.d), Number(arrKhoGiay[i].detail.r), Number(this.product.dai), Number(this.product.rong), Number(arrKhoGiay[i].detail.kep_nhip));
-                        divisorItem.cach_in = 'Trở khác';
-                    }
-
-                    divisorItem.zincCount = zincCount;
-                    divisorItem.so_tay = so_tay;
-                    divisorItem.tong_to_da_bu_hao = tongGiay1r;
-                    divisorItem.tong_to_chua_bu_hao = soto1tay * so_tay;
-                    divisorItem.bu_hao = buhao;
-                    divisorItem.so_luot_in = so_luot_in;
-                    divisorItem.so_vach = this.Lib.getSoVach(arrKhoGiay[i].so_bat * 2);
-                } else {
-                    // Con 2 to roi
-                    // console.log(111);
-                    arrKhoGiay[i].fixKhoGiay2 = fixKhoGiay2;
-                    divisorItem.zincCount = fixKhoGiay2.zincCount;
-                    divisorItem.so_tay = 1;
-                    divisorItem.so_bat = this.Lib.getNumberResize(Number(fixKhoGiay2.detail.d), Number(fixKhoGiay2.detail.r), Number(this.product.dai), Number(this.product.rong), Number(fixKhoGiay2.detail.kep_nhip));
-                    divisorItem.cach_in = 'Trở nó';
-                    divisorItem.tong_to_da_bu_hao = fixKhoGiay2.tong_to_da_bu_hao;
-                    divisorItem.tong_to_chua_bu_hao = fixKhoGiay2.tong_to_chua_bu_hao;
-                    divisorItem.bu_hao = fixKhoGiay2.bu_hao;
-                    divisorItem.so_luot_in = fixKhoGiay2.so_luot_in;
-                    divisorItem.so_vach = this.Lib.getSoVach(divisorItem.so_bat * 2);
-                }
-                divisorItem.so_trang = arrKhoGiay[i].divisor[j];
-                arrDivisor.push(divisorItem);
-            }
-            //console.log(arrKhoGiay);
-            if (arrKhoGiay[i].fixKhoGiay2 && arrKhoGiay[i].fixKhoGiay2.gia_giay) {
-                arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000) + arrKhoGiay[i].fixKhoGiay2.gia_giay;
-            } else {
-                arrKhoGiay[i].gia_giay = (tong_so_to * arrKhoGiay[i].detail.d * arrKhoGiay[i].detail.r * dl * dg / 10000);
-            }
-            arrKhoGiay[i].may_in = this.Lib.fixPrinter(zincType, SumzincCount, mau_in, arrKhoGiay[i].detail, arrMay, tong_luot_in, in_cuon);
-            arrKhoGiay[i]._divisor = arrDivisor;
-        }
-
-        const fixKhoGiay = this.Lib.fixKhoGiay(arrKhoGiay);
-        let fixKhokho: any = [];
-        arrKho_kho = this.Lib.getKhoKho(fixKhoGiay, arrKho_kho);
-        if (!kho_kho) {
-            fixKhokho = this.Lib.fixKhokho(fixKhoGiay, arrKho_kho);
-        } else {
-            fixKhokho = arrKho_kho.data.filter(function (itm) {
-                return itm['list_code'] === kho_kho;
-            })[0];
-        }
-
-        this.formData.kho_kho['ruot-sel-kho_kho'] = fixKhokho.detail.code;
-        const cach_cat = this.Lib.getNumberResize(Number(fixKhokho.detail.d), Number(fixKhokho.detail.r), Number(fixKhoGiay.detail.d), Number(fixKhoGiay.detail.r), 0);
         let constKg = 0;
-        if (in_cuon) {
-            constKg = Number(dl) * Number(fixKhokho.detail.d) * Number(fixKhokho.detail.r) / 10000000;
-        } else {
-            constKg = Number(dl) * Number(fixKhokho.detail.d) * Number(fixKhokho.detail.r) / 10000000;
-        }
-        for (let i = 0; i < fixKhoGiay._divisor.length; i++) {
+        for (let i = 0; i < divisorfix.divisor.length; i++) {
             const itemRes = new cmdEl();
             itemRes.id = el.id;
             itemRes.name = el.name;
-            itemRes.so_trang = fixKhoGiay._divisor[i].so_trang;
+            itemRes.so_trang = divisorfix.divisor[i].so_trang;
             itemRes.kho_tp = this.product.rong + 'x' + this.product.dai;
             itemRes.zinc_type = zinc_type;
-            itemRes.arrKho_kho = arrKho_kho;
             itemRes.loai_giay = arrLoaiGiay.detail.name;
             itemRes.mau_in = mau_in;
-            itemRes.sl_kem = fixKhoGiay._divisor[i].zincCount;
-            if (fixKhoGiay._divisor[i].so_trang > 2) {
-                itemRes.kho_in = fixKhoGiay.detail.name;
-                itemRes.may_in = fixKhoGiay.may_in.detail.name;
-            } else {
-                itemRes.kho_in = fixKhoGiay.fixKhoGiay2.detail.name;
-                itemRes.may_in = fixKhoGiay.fixKhoGiay2.may_in.detail.name;
-            }
-            itemRes.so_tay = fixKhoGiay._divisor[i].so_tay;
-            itemRes.so_bat = fixKhoGiay._divisor[i].so_bat;
-            itemRes.cach_in = fixKhoGiay._divisor[i].cach_in;
-            itemRes.so_vach = fixKhoGiay._divisor[i].so_vach;
-            itemRes.tong_to_chua_bu_hao = fixKhoGiay._divisor[i].tong_to_chua_bu_hao;
-            itemRes.tong_to_da_bu_hao = fixKhoGiay._divisor[i].tong_to_da_bu_hao;
-            itemRes.bu_hao = fixKhoGiay._divisor[i].bu_hao;
-            itemRes.so_luot_in = fixKhoGiay._divisor[i].so_luot_in;
-            itemRes.cach_cat = cach_cat;
+            itemRes.sl_kem = divisorfix.divisor[i].zincCount;
+            itemRes.kho_in = divisorfix.divisor[i].kho_giay.name;
+            itemRes.may_in = divisorfix.divisor[i].may_in.detail.name;
+            itemRes.so_tay = divisorfix.divisor[i].so_tay;
+            itemRes.so_bat = divisorfix.divisor[i].so_bat;
+            itemRes.cach_in = divisorfix.divisor[i].cach_in;
+            itemRes.tong_to_chua_bu_hao = divisorfix.divisor[i].tong_to_chua_bu_hao;
+            itemRes.tong_to_da_bu_hao = divisorfix.divisor[i].tong_to_da_bu_hao;
+            itemRes.bu_hao = divisorfix.divisor[i].bu_hao;
+            itemRes.so_luot_in = divisorfix.divisor[i].so_luot_in;
+            arrKho_kho = this.Lib.getKhoKho(divisorfix.divisor[i].kho_giay, arrKho_kho);
+            itemRes.arrKho_kho = arrKho_kho;
+            itemRes.kho_kho = this.Lib.fixKhokho(divisorfix.divisor[i].kho_giay, arrKho_kho);
+            itemRes.cach_cat = this.Lib.getNumberResize(Number(itemRes.kho_kho.detail.d), Number(itemRes.kho_kho.detail.r), Number(divisorfix.divisor[i].kho_giay.d), Number(divisorfix.divisor[i].kho_giay.r), 0);
+            itemRes.so_vach = this.Lib.getSoVach(divisorfix.divisor[i].so_bat * 2);
             itemRes.sl_giay_xuat = Number(itemRes.tong_to_da_bu_hao) / itemRes.cach_cat;
+
+            constKg = Number(dl) * Number(itemRes.kho_kho.detail.d) * Number(itemRes.kho_kho.detail.r) / 10000000;
             itemRes.sl_giay_xuat_kg = (Number(itemRes.tong_to_da_bu_hao) * constKg).toFixed(2);
-            if (in_cuon) {
+            if (divisorfix.divisor[i].in_cuon) {
                 itemRes.arrTime = this.genTimeC(itemRes.tong_to_da_bu_hao, itemRes.so_tay);
             } else {
                 itemRes.arrTime = this.genTimeR(itemRes.tong_to_da_bu_hao);
             }
             res.push(itemRes);
         }
+        // console.log(res);
         return res;
     }
 

@@ -41,7 +41,9 @@ export class ProductDetailComponent extends DialogComponent<ProductDetailModel, 
                 this.detail = data;
                 if (this.detail.elements != '') {
                     this.detail.elements = JSON.parse(this.detail.elements);
-                    this.checkSelected = this.detail.elements.checkSelected.split(',');
+                    if (this.detail.elements.checkSelected) {
+                        this.checkSelected = this.detail.elements.checkSelected.split(',');
+                    }
                 }
                 if (this.detail.producttype_code != '') {
                     this.selectProducttype();

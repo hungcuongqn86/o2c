@@ -28,6 +28,7 @@ export class cmdEl {
 
     public zinc_type: any = [];
     public arrKho_kho: any = [];
+    public kho_kho: any = [];
     public arrTime: any = [];
 
     constructor() {
