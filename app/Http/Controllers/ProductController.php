@@ -85,11 +85,62 @@ class ProductController extends Controller
     public function exportExcel(Request $request)
     {
         $input = $request->all();
-        $data = $input['data'];
-        dd(json_decode($data));
+        $data = json_decode($input['data']);
+        $id = $input['product'];
+        $product = AppServiceFactory::mProductService()->getSingle(['id' => $id]);
+        // dd($product);
+        $count = $product['count'];
         $tempPath = storage_path('app/template/command.xlsx');
-        Excel::load($tempPath, function ($reader) {
+        Excel::load($tempPath, function ($reader) use ($data, $count) {
+            $reader->sheet('Lenhsx', function ($sheet) use ($data, $count) {
+                $baserow = 6;
+                foreach ($data as $key => $row) {
+                    $item = [$key + 1, $row->name, $row->so_trang, $row->kho_tp, $row->so_bat, $row->so_tay, $row->cach_in, $row->kho_in, $row->mau_in, '', $row->may_in, $row->sl_kem];
+                    $sheet->prependRow($baserow, $item);
+                }
+                $strmerg = 'M' . $baserow . ':M' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
 
+                $baserow = $baserow + sizeof($data) + 2;
+                foreach ($data as $key => $row) {
+                    $item = [$key + 1, $row->name, $row->so_trang, $row->loai_giay, '', $row->sl_giay_xuat, $row->sl_giay_xuat_kg, $row->cach_cat, $row->kho_in, $row->bu_hao, $row->tong_to_chua_bu_hao, $row->tong_to_da_bu_hao];
+                    $sheet->prependRow($baserow, $item);
+                }
+                $strmerg = 'M' . $baserow . ':M' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
+
+                $baserow = $baserow + sizeof($data) + 2;
+                foreach ($data as $key => $row) {
+                    $item = [$key + 1, $row->name, $row->so_trang, $row->loai_giay, $row->kho_in, $row->sl_giay_xuat_kg, $row->so_bat, $row->so_tay, $row->mau_in, $row->may_in, $row->sl_kem, $row->so_luot_in];
+                    $sheet->prependRow($baserow, $item);
+                }
+                $strmerg = 'M' . $baserow . ':M' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
+
+                $baserow = $baserow + sizeof($data) + 2;
+                foreach ($data as $key => $row) {
+                    $item = [$key + 1, $row->name, $row->so_trang, $row->so_tay, $row->so_vach];
+                    $sheet->prependRow($baserow, $item);
+                }
+                // dd($baserow);
+                $strmerg = 'F' . $baserow . ':G' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
+                $strmerg = 'H' . $baserow . ':I' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
+                $strmerg = 'J' . $baserow . ':J' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
+                $strmerg = 'K' . $baserow . ':K' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
+                $sheet->cell('K' . $baserow, function ($cell) use ($count) {
+                    // manipulate the cell
+                    $cell->setValue($count);
+                });
+
+                $strmerg = 'L' . $baserow . ':L' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
+                $strmerg = 'M' . $baserow . ':M' . ($baserow + sizeof($data) - 1);
+                $sheet->mergeCells($strmerg);
+            });
         })->download('xlsx');
     }
 }

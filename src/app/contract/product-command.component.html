@@ -158,7 +158,7 @@
                         {{cachGiaCong.join(', ')}}
                     </td>
                     <td *ngIf="i===0" [attr.rowspan]="elements.length">cuốn</td>
-                    <td *ngIf="i===0" [attr.rowspan]="elements.length"></td>
+                    <td *ngIf="i===0" [attr.rowspan]="elements.length">{{product.count}}</td>
                     <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         <input style="width: 40px;" [(ngModel)]="formData.numofthung" name="numofthung" id="numofthung"
                                type="number" (change)="getThung()" min="0"> sản phẩm/1
