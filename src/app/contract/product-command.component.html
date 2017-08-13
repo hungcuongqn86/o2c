@@ -15,7 +15,7 @@
                     <th class="header-tbl">Tên sản phẩm</th>
                     <th class="header-tbl">Số trang</th>
                     <th class="header-tbl">Khổ TP(cm)</th>
-                    <th class="header-tbl">Bát/khuôn in</th>
+                    <th class="header-tbl"><p class="break-data">Bát/</p><p>khuôn in</p></th>
                     <th class="header-tbl">Số tay</th>
                     <th class="header-tbl">Cách in</th>
                     <th class="header-tbl">Khổ in</th>
@@ -157,8 +157,8 @@
                     <td colspan="2" style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         {{cachGiaCong.join(', ')}}
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td *ngIf="i===0" [attr.rowspan]="elements.length">cuốn</td>
+                    <td *ngIf="i===0" [attr.rowspan]="elements.length"></td>
                     <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         <input style="width: 40px;" [(ngModel)]="formData.numofthung" name="numofthung" id="numofthung"
                                type="number" (change)="getThung()" min="0"> sản phẩm/1

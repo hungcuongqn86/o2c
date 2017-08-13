@@ -82,10 +82,14 @@ class ProductController extends Controller
         }
     }
 
-    public function exportExcel()
+    public function exportExcel(Request $request)
     {
+        $input = $request->all();
+        $data = $input['data'];
+        dd(json_decode($data));
         $tempPath = storage_path('app/template/command.xlsx');
         Excel::load($tempPath, function ($reader) {
+
         })->download('xlsx');
     }
 }

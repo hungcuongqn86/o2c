@@ -160,10 +160,10 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     }
 
     private genTongGioThucHien(arrTime) {
-        this.arrTime['tkcb'] = Number(this.arrTime['tkcb']) + Number(arrTime['tkcb']);
-        this.arrTime['cat_giay_trang'] = Number(this.arrTime['cat_giay_trang']) + Number(arrTime['cat_giay_trang']);
-        this.arrTime['mayin_tkcb'] = Number(this.arrTime['mayin_tkcb']) + Number(arrTime['mayin_tkcb']);
-        this.arrTime['gia_cong_sau_in'] = Number(this.arrTime['gia_cong_sau_in']) + Number(arrTime['gia_cong_sau_in']);
+        this.arrTime['tkcb'] = (Number(this.arrTime['tkcb']) + Number(arrTime['tkcb'])).toFixed(2);
+        this.arrTime['cat_giay_trang'] = (Number(this.arrTime['cat_giay_trang']) + Number(arrTime['cat_giay_trang'])).toFixed(2);
+        this.arrTime['mayin_tkcb'] = (Number(this.arrTime['mayin_tkcb']) + Number(arrTime['mayin_tkcb'])).toFixed(2);
+        this.arrTime['gia_cong_sau_in'] = (Number(this.arrTime['gia_cong_sau_in']) + Number(arrTime['gia_cong_sau_in'])).toFixed(2);
     }
 
     private genCachGiaCong() {
@@ -541,8 +541,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     }
 
     public exportExcel() {
-        // console.log(this.product);
-        const url = './command/excel';
+        let body = JSON.stringify(this.elements);
+        const url = `./command/excel?data=${body}`;
         const win = window.open(url, '_blank');
         win.focus();
     }
