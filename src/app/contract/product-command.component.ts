@@ -465,9 +465,8 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
             itemRes.tong_to_da_bu_hao = divisorfix.divisor[i].tong_to_da_bu_hao;
             itemRes.bu_hao = divisorfix.divisor[i].bu_hao;
             itemRes.so_luot_in = divisorfix.divisor[i].so_luot_in;
-            arrKho_kho = this.Lib.getKhoKho(divisorfix.divisor[i].kho_giay, arrKho_kho);
-            itemRes.arrKho_kho = arrKho_kho;
-            itemRes.kho_kho = this.Lib.fixKhokho(divisorfix.divisor[i].kho_giay, arrKho_kho);
+            itemRes.arrKho_kho = this.Lib.getKhoKho(divisorfix.divisor[i].kho_giay, arrKho_kho);
+            itemRes.kho_kho = this.Lib.fixKhokho(divisorfix.divisor[i].kho_giay, itemRes.arrKho_kho);
             itemRes.cach_cat = this.Lib.getNumberResize(Number(itemRes.kho_kho.detail.d), Number(itemRes.kho_kho.detail.r), Number(divisorfix.divisor[i].kho_giay.d), Number(divisorfix.divisor[i].kho_giay.r), 0);
             itemRes.so_vach = this.Lib.getSoVach(divisorfix.divisor[i].so_bat * 2);
             itemRes.sl_giay_xuat = Number(itemRes.tong_to_da_bu_hao) / itemRes.cach_cat;

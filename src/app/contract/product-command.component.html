@@ -8,67 +8,22 @@
             <table class="table table-bordered table-striped tbl-command">
                 <tbody>
                 <tr>
-                    <th class="header-tbl" rowspan="2">Tên sản phẩm</th>
-                    <th class="header-tbl" rowspan="2">Số trang</th>
-                    <th class="header-tbl" rowspan="2">Khổ TP(cm)</th>
-                    <th class="header-tbl" rowspan="2">Bát/khuôn in</th>
-                    <th class="header-tbl" rowspan="2">Số tay</th>
-                    <th class="header-tbl" rowspan="2">Cách in</th>
-                    <th class="header-tbl" rowspan="2">Khổ in</th>
-                    <th class="header-tbl" rowspan="2">Màu in</th>
-                    <th class="header-tbl" rowspan="2">Loại kẽm</th>
-                    <th class="header-tbl" rowspan="2">Máy</th>
-                    <th class="header-tbl" rowspan="2">SL(kẽm-đế)</th>
-                    <th class="header-tbl" rowspan="2">Loại giấy/ĐL</th>
-                    <th class="header-tbl" rowspan="2">Khổ kho</th>
-                    <th class="header-tbl" rowspan="2">SL.Giấy xuất(tờ)</th>
-                    <th class="header-tbl" rowspan="2">SL.Giấy xuất(kg)</th>
-                    <th class="header-tbl" rowspan="2">Cách cắt</th>
-                    <th class="header-tbl" rowspan="2">Bù hao</th>
-                    <th class="header-tbl" rowspan="2">Tờ chưa bù hao</th>
-                    <th class="header-tbl" rowspan="2">Tổng SL tờ in đã bù hao</th>
-                    <th class="header-tbl" rowspan="2">Lượt/Click</th>
-                    <th class="header-tbl" rowspan="2">Số vạch</th>
-                    <th class="header-tbl" rowspan="2">Quy cách đóng</th>
-                    <th class="header-tbl" rowspan="2">Cách gia công</th>
-                    <th class="header-tbl" rowspan="2">Cách đóng gói</th>
-                    <th class="header-tbl text-center" colspan="4">Thời gian thực hiện</th>
+                    <th>I. PX. THIẾT KẾ - CHẾ BẢN</th>
+                    <th colspan="11"></th>
                 </tr>
                 <tr>
-                    <th class="header-tbl">PX. THIẾT KẾ - CHẾ BẢN</th>
-                    <th class="header-tbl">CẮT GIẤY TRẮNG</th>
-                    <th class="header-tbl">PX. MÁY IN/PX.TK-CB (IN KTS)</th>
-                    <th class="header-tbl">PX. GIA CÔNG SAU IN</th>
-                </tr>
-                <tr>
-                    <th>(1)</th>
-                    <th>(2)</th>
-                    <th>(3)</th>
-                    <th>(4)</th>
-                    <th>(5)</th>
-                    <th>(6)</th>
-                    <th>(7)</th>
-                    <th>(8)</th>
-                    <th>(9)</th>
-                    <th>(10)</th>
-                    <th>(11)</th>
-                    <th>(12)</th>
-                    <th>(13)</th>
-                    <th>(14)</th>
-                    <th>(15)</th>
-                    <th>(16)</th>
-                    <th>(17)</th>
-                    <th>(18)</th>
-                    <th>(19)</th>
-                    <th>(20)</th>
-                    <th>(21)</th>
-                    <th>(22)</th>
-                    <th>(23)</th>
-                    <th>(24)</th>
-                    <th>(25)</th>
-                    <th>(26)</th>
-                    <th>(27)</th>
-                    <th>(28)</th>
+                    <th class="header-tbl">Tên sản phẩm</th>
+                    <th class="header-tbl">Số trang</th>
+                    <th class="header-tbl">Khổ TP(cm)</th>
+                    <th class="header-tbl">Bát/khuôn in</th>
+                    <th class="header-tbl">Số tay</th>
+                    <th class="header-tbl">Cách in</th>
+                    <th class="header-tbl">Khổ in</th>
+                    <th class="header-tbl">Màu in</th>
+                    <th class="header-tbl">Loại kẽm</th>
+                    <th class="header-tbl">Máy</th>
+                    <th class="header-tbl">SL(kẽm-đế)</th>
+                    <th class="header-tbl">Thời gian</th>
                 </tr>
                 <tr *ngFor="let el of elements; let i = index">
                     <td class="capitalize">{{el.name}}</td>
@@ -90,6 +45,31 @@
                     </td>
                     <td>{{el.may_in}}</td>
                     <td>{{el.sl_kem}}</td>
+                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        {{arrTime['tkcb']}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>II. CẮT GIẤY TRẮNG</th>
+                    <th colspan="11"></th>
+                </tr>
+                <tr>
+                    <th class="header-tbl">Tên sản phẩm</th>
+                    <th class="header-tbl">Số trang</th>
+                    <th class="header-tbl">Loại giấy/ĐL</th>
+                    <th class="header-tbl">Khổ kho</th>
+                    <th class="header-tbl">SL.Giấy xuất(tờ)</th>
+                    <th class="header-tbl">SL.Giấy xuất(kg)</th>
+                    <th class="header-tbl">Cách cắt</th>
+                    <th class="header-tbl">Khổ in</th>
+                    <th class="header-tbl">Bù hao</th>
+                    <th class="header-tbl">Tờ chưa bù hao</th>
+                    <th class="header-tbl">Tổng SL tờ in đã bù hao</th>
+                    <th class="header-tbl">Thời gian</th>
+                </tr>
+                <tr *ngFor="let el of elements; let i = index">
+                    <td class="capitalize">{{el.name}}</td>
+                    <td>{{el.so_trang}}</td>
                     <td>{{el.loai_giay}}</td>
                     <td>{{el.kho_kho.detail.name}}
                         <!--<select style="width: 99px;" title="{{el.arrKho_kho.lable}} {{el.name}}" class="form-control"
@@ -103,12 +83,70 @@
                     <td>{{el.sl_giay_xuat}}</td>
                     <td>{{el.sl_giay_xuat_kg}}</td>
                     <td>{{el.cach_cat}}</td>
+                    <td>{{el.kho_in}}</td>
                     <td>{{el.bu_hao}}</td>
                     <td>{{el.tong_to_chua_bu_hao}}</td>
                     <td>{{el.tong_to_da_bu_hao}}</td>
+                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        {{arrTime['cat_giay_trang']}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>III. PX. MÁY IN/PX.TK-CB (IN KTS)</th>
+                    <th colspan="11"></th>
+                </tr>
+                <tr>
+                    <th class="header-tbl">Tên sản phẩm</th>
+                    <th class="header-tbl">Số trang</th>
+                    <th class="header-tbl">Loại giấy/ĐL</th>
+                    <th class="header-tbl">Khổ in</th>
+                    <th class="header-tbl">SL.Giấy xuất(kg)</th>
+                    <th class="header-tbl">Bát/khuôn in</th>
+                    <th class="header-tbl">Số tay</th>
+                    <th class="header-tbl">Màu in</th>
+                    <th class="header-tbl">Máy</th>
+                    <th class="header-tbl">Kẽm</th>
+                    <th class="header-tbl">Lượt/Click</th>
+                    <th class="header-tbl">Thời gian</th>
+                </tr>
+                <tr *ngFor="let el of elements; let i = index">
+                    <td class="capitalize">{{el.name}}</td>
+                    <td>{{el.so_trang}}</td>
+                    <td>{{el.loai_giay}}</td>
+                    <td>{{el.kho_in}}</td>
+                    <td>{{el.sl_giay_xuat_kg}}</td>
+                    <td>{{el.so_bat}}</td>
+                    <td>{{el.so_tay}}</td>
+                    <td>{{el.mau_in}}</td>
+                    <td>{{el.may_in}}</td>
+                    <td>{{el.sl_kem}}</td>
                     <td>{{el.so_luot_in}}</td>
+                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                        {{arrTime['mayin_tkcb']}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>IV. PX. GIA CÔNG SAU IN</th>
+                    <th colspan="11"></th>
+                </tr>
+                <tr>
+                    <th class="header-tbl">Tên sản phẩm</th>
+                    <th class="header-tbl">Số trang</th>
+                    <th class="header-tbl">Số tay</th>
+                    <th class="header-tbl">Số vạch</th>
+                    <th colspan="2" class="header-tbl">Quy cách đóng</th>
+                    <th colspan="2" class="header-tbl">Cách gia công</th>
+                    <th class="header-tbl">ĐVT</th>
+                    <th class="header-tbl">Số lượng</th>
+                    <th class="header-tbl">Cách đóng gói</th>
+                    <th class="header-tbl">Thời gian</th>
+                </tr>
+                <tr *ngFor="let el of elements; let i = index">
+                    <td class="capitalize">{{el.name}}</td>
+                    <td>{{el.so_trang}}</td>
+                    <td>{{el.so_tay}}</td>
                     <td>{{el.so_vach}}</td>
-                    <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                    <td colspan="2" style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         <select style="width: 110px;" title="thung" class="form-control"
                                 [(ngModel)]="formData.thung" name="thung">
                             <option *ngFor='let dataitem of thungData'
@@ -116,22 +154,15 @@
                             </option>
                         </select>
                     </td>
-                    <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
+                    <td colspan="2" style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         {{cachGiaCong.join(', ')}}
                     </td>
+                    <td></td>
+                    <td></td>
                     <td style="vertical-align: middle;max-width: 150px;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         <input style="width: 40px;" [(ngModel)]="formData.numofthung" name="numofthung" id="numofthung"
                                type="number" (change)="getThung()" min="0"> sản phẩm/1
                         thùng<br><span>, {{numthung}} thùng</span>
-                    </td>
-                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
-                        {{arrTime['tkcb']}}
-                    </td>
-                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
-                        {{arrTime['cat_giay_trang']}}
-                    </td>
-                    <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
-                        {{arrTime['mayin_tkcb']}}
                     </td>
                     <td style="vertical-align: middle;" *ngIf="i===0" [attr.rowspan]="elements.length">
                         {{arrTime['gia_cong_sau_in']}}
