@@ -543,8 +543,7 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
     public exportExcel() {
         let body = JSON.stringify(this.elements);
         const url = `./command/excel?data=${body}&product=${this.product.id}`;
-        console.log(url);
-        /*const win = window.open(url, '_blank');
-        win.focus();*/
+        const win = window.open(url, '_blank');
+        win.focus();
     }
 }
