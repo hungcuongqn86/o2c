@@ -406,15 +406,14 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                     //chi phi giay
                     sosp1tay = Math.ceil(divisor[i][j].so_bat * 2 / divisor[i][j].so_trang);
                     soto1tay = Math.ceil(this.product.count / sosp1tay);
-                    divisor[i][j]['so_luot_in'] = soto1tay * mat_in * divisor[i][j].so_tay;
-                    divisor[i][j]['bu_hao'] = this.Lib.getBuhao(divisor[i][j]['so_luot_in'], dl, mau_in, this.depreciationR, this.depreciationC, divisor[i][j].in_cuon);
-                    tong_so_to = (soto1tay + divisor[i][j]['bu_hao']) * divisor[i][j].so_tay;
-                    gia_giay = tong_so_to * divisor[i][j].kho_giay.d * divisor[i][j].kho_giay.r * dl * dg / 10000;
-
                     //may in, chi phi kem
                     if (divisor[i][j].in_cuon) {
                         zincCount = this.Lib.getZincCountC(mau_in, divisor[i][j].so_trang);
                         divisor[i][j]['cach_in'] = 'Trở khác';
+                        divisor[i][j]['so_luot_in'] = soto1tay * divisor[i][j].so_tay;
+                        divisor[i][j]['bu_hao'] = this.Lib.getBuhao(divisor[i][j]['so_luot_in'], dl, mau_in, this.depreciationR, this.depreciationC, divisor[i][j].in_cuon);
+                        divisor[i][j]['tong_to_chua_bu_hao'] = (divisor[i][j].so_trang / 16) * this.product.count;
+                        divisor[i][j]['tong_to_da_bu_hao'] = divisor[i][j]['tong_to_chua_bu_hao'] + (divisor[i][j].so_trang / 16) * divisor[i][j]['bu_hao'];
                     } else {
                         if (divisor[i][j].tro_khac) {
                             printConst = 1;
@@ -424,13 +423,19 @@ export class ProductCommandComponent extends DialogComponent<ProductCommandModel
                             divisor[i][j]['cach_in'] = 'Trở nó';
                         }
                         zincCount = this.Lib.getZincCountR(mau_in, printConst, divisor[i][j].so_tay);
+                        divisor[i][j]['so_luot_in'] = soto1tay * mat_in * divisor[i][j].so_tay;
+                        divisor[i][j]['bu_hao'] = this.Lib.getBuhao(divisor[i][j]['so_luot_in'], dl, mau_in, this.depreciationR, this.depreciationC, divisor[i][j].in_cuon);
+                        divisor[i][j]['tong_to_chua_bu_hao'] = soto1tay * divisor[i][j].so_tay;
+                        divisor[i][j]['tong_to_da_bu_hao'] = (soto1tay + divisor[i][j]['bu_hao']) * divisor[i][j].so_tay;
                     }
+
+                    tong_so_to = (soto1tay + divisor[i][j]['bu_hao']) * divisor[i][j].so_tay;
+                    gia_giay = tong_so_to * divisor[i][j].kho_giay.d * divisor[i][j].kho_giay.r * dl * dg / 10000;
+
                     may_in = this.Lib.fixPrinter(zincType, zincCount, mau_in, divisor[i][j].kho_giay, arrMay, divisor[i][j]['so_luot_in'], divisor[i][j].in_cuon);
                     cost = cost + gia_giay + may_in.gia_kem + may_in.cong_in;
                     divisor[i][j]['zincCount'] = zincCount;
                     divisor[i][j]['may_in'] = may_in;
-                    divisor[i][j]['tong_to_chua_bu_hao'] = soto1tay * divisor[i][j].so_tay;
-                    divisor[i][j]['tong_to_da_bu_hao'] = (soto1tay + divisor[i][j]['bu_hao']) * divisor[i][j].so_tay;
                 }
                 if (!divisorfix.init) {
                     divisorfix.init = true;

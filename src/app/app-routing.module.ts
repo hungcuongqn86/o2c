@@ -1,21 +1,22 @@
 import {ModuleWithProviders}         from '@angular/core';
 import {Routes, RouterModule}  from '@angular/router';
-import {IndexComponent} from './index/index.component';
 import {RecordComponent} from './record/record.component';
 import {ListComponent} from './list/list.component';
 import {UserComponent} from './user/user.component';
 import {CustomerComponent} from  './customer/customer.component';
+import {ErrorComponent} from './error/error.component';
 
 const appRoutes: Routes = [
-    {path: '', component: IndexComponent},
-    {path: 'index', component: IndexComponent},
+    {path: '', loadChildren: './contract/contract.module#ContractModule'},
+    {path: 'index', loadChildren: './contract/contract.module#ContractModule'},
     {path: 'contract', loadChildren: './contract/contract.module#ContractModule'},
     {path: 'list', component: ListComponent},
     {path: 'user', component: UserComponent},
     {path: 'customer', component: CustomerComponent},
     {path: 'record', component: RecordComponent},
     {path: 'element', loadChildren: './element/element.module#ElementModule'},
-    {path: 'producttype', loadChildren: './producttype/producttype.module#ProducttypeModule'}
+    {path: 'producttype', loadChildren: './producttype/producttype.module#ProducttypeModule'},
+    {path: '**', component: ErrorComponent}
 ];
 
 export const appRoutingProviders: any[] = [];

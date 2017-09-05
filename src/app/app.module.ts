@@ -4,7 +4,10 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule, Http} from '@angular/http';
 
 import {AppComponent} from './app.component';
+import {HeaderComponent} from './layouts/header.component';
+import {FooterComponent} from './layouts/footer.component';
 import {IndexComponent} from './index/index.component';
+import {ErrorComponent} from './error/error.component';
 import {AppService} from  './app.service'
 import {HttpClient}           from './http-client';
 import {Lib} from './lib/lib';
@@ -35,6 +38,9 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
     declarations: [
         AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        ErrorComponent,
         IndexComponent,
         RecordComponent,
         ListComponent,

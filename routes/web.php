@@ -11,15 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
-Route::get('/download/{file}', 'PublicController@download');
-Route::get('/command/excel', 'ProductController@exportExcel');
+Route::get('/download/{file}', 'PublicController@download')->middleware('auth');
+Route::get('/command/excel', 'ProductController@exportExcel')->middleware('auth');
+Route::get('/', function () {
+    return view('index');
+})->middleware('auth');
 Route::match(['get', 'post'], '/{any}', function ($any) {
     return view('index');
-})->where('any', '.*');
+})->where('any', '.*')->middleware('auth');

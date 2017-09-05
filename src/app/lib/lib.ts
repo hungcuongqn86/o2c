@@ -36,7 +36,7 @@ export class Lib {
             for (let j = 0; j < divisorcv[i].length; j++) {
                 tong = tong + divisorcv[i][j].so_trang;
                 if ((j > 0) && (divisorcv[i][j].so_trang > divisorcv[i][j - 1].so_trang)) {
-                    order = false;
+                    //order = false;
                 }
             }
             if (order && (tong === tong_so_trang)) {
@@ -98,7 +98,7 @@ export class Lib {
                                 'so_trang': so_trang,
                                 'kho_giay': arrKhoGiay[i].detail,
                                 'so_bat': so_bat,
-                                'so_tay': so_tay
+                                'so_tay': 1
                             };
                             if (le > 0) {
                                 divisor = this.genDivisor(le, product, arrKhoGiay, GiaCongGay, false, dl);
@@ -106,25 +106,32 @@ export class Lib {
                             }
                             res.push(item);
                         } else {
-                            const so_nguyen = Math.floor(so_tay / maxdivisor);
-                            const so_trang_div1 = so_nguyen * maxdivisor * so_bat * 2;
+                            let so_nguyen = Math.floor(so_tay / maxdivisor);
+                            let so_trang_div1 = so_nguyen * maxdivisor * so_bat * 2;
+                            let checkle16 = false;
+                            if ((maxdivisor === 3) && (so_trang - so_trang_div1 === 16)) {
+                                so_trang_div1 = so_trang_div1 - (so_bat * 2 * maxdivisor);
+                                so_nguyen = so_nguyen - 1;
+                                checkle16 = true;
+                            }
                             const item1 = {
                                 'tro_khac': true,
                                 'in_cuon': true,
                                 'so_trang': so_trang_div1,
                                 'kho_giay': arrKhoGiay[i].detail,
                                 'so_bat': so_bat,
-                                'so_tay': so_nguyen * maxdivisor
+                                'so_tay': so_nguyen
                             };
                             if (so_trang_div1 < so_trang) {
                                 const so_trang_div2 = so_trang - so_trang_div1;
+                                const tay_tinh_lai = checkle16 ? so_trang_div2 / (so_bat * 2 * 2) : 1;
                                 const item2 = {
                                     'tro_khac': true,
                                     'in_cuon': true,
                                     'so_trang': so_trang_div2,
                                     'kho_giay': arrKhoGiay[i].detail,
                                     'so_bat': so_bat,
-                                    'so_tay': so_tay - (so_nguyen * maxdivisor)
+                                    'so_tay': tay_tinh_lai
                                 };
                                 if (le > 0) {
                                     divisor = this.genDivisor(le, product, arrKhoGiay, GiaCongGay, false, dl);
