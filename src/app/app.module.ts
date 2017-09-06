@@ -30,9 +30,10 @@ import {userService}    from  './user/user.service';
 import {cmdEl, productService} from  './contract/product.service';
 import {CustomerComponent} from './customer/customer.component';
 import {ReportComponent} from './report/report.component';
+import {environment} from '../environments/environment';
 
 export function createTranslateLoader(http: Http) {
-    return new TranslateStaticLoader(http, '/assets/i18n', '.json');
+    return new TranslateStaticLoader(http, environment.basename + '/assets/i18n', '.json');
 }
 
 @NgModule({

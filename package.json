@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build & gulp",
+    "build": "ng build --prod --base-href \"/o2c/public/\" --output-hashing none & gulp",
     "build-prod": "ng build --prod --output-hashing none & gulp",
     "test": "ng test",
     "lint": "ng lint",

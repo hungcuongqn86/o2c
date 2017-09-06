@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>O2c</title>
-    <base href="/">
+    <base href="/o2c/public/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="csrf-token" name="csrf-token" content="{{ csrf_token() }}">
