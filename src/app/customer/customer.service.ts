@@ -20,4 +20,9 @@ export class CustomerService {
         });
         return this.http.get(url, {search: params}).map((res: Response) => res.json().data);
     }
+
+    deleteRecord(idlist: string) {
+        let url = this.apiUrl + '/' + this.module + `/delete/` + idlist;
+        return this.http.delete(url).map((res: Response) => res.json());
+    }
 }

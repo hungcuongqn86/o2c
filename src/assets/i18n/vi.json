@@ -46,6 +46,9 @@
   "CONTRACT": {
     "CONTRACT_LABLE_TITLE": "hợp đồng"
   },
+  "CUSTOMER": {
+    "CUSTOMER_LABLE_TITLE": "khách hàng"
+  },
   "PRODUCTTYPE": {
     "PRODUCTTYPE_LABLE_TITLE": "loại sản phẩm"
   },

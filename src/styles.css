@@ -25,3 +25,26 @@ legend, .capitalize {
     text-transform: capitalize;
     font-size: 14px;
 }
+
+.btn {
+    min-width: 90px;
+}
+
+.mailbox-controls .btn {
+    min-width: 30px;
+}
+
+.title-break {
+    border-bottom: 1px dotted #ddd;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.datepicker {
+    z-index: 9999;
+    text-align: center;
+}
+.datepicker-switch {
+    text-align: center;
+}

@@ -110,7 +110,7 @@ export class ContractComponent implements OnInit {
             });
     }
 
-    private showConfirm() {
+    showConfirm() {
         if (this.checklist.length == 0) {
             this.showAlert('Bạn phải chọn hợp đồng muốn xóa!');
             return false;
@@ -129,7 +129,7 @@ export class ContractComponent implements OnInit {
         }, 10000);
     }
 
-    private editRecord(){
+    editRecord(){
         if (this.checklist.length == 1) {
             this.router.navigate(['/contract/edit',this.checklist[0]]);
         }
@@ -156,7 +156,7 @@ export class ContractComponent implements OnInit {
         );
     }
 
-    private addContract(){
+    addContract(){
         this.router.navigate(['/contract/add']);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entities;
 
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +14,26 @@ class Customers extends BaseEntity
     public $timestamps = false;
 
     protected $fillable = [
-        'name'
+        'code',
+        'type',
+        'title',
+        'name',
+        'gender',
+        'birthday',
+        'phone_number1',
+        'phone_number2',
+        'email',
+        'address',
+        'note',
+        'company_type',
+        'company_fields',
+        'company_code',
+        'company_phone_number',
+        'company_name',
+        'company_email',
+        'company_website',
+        'group',
+        'source'
     ];
 
     protected $hidden = [
