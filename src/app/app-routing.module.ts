@@ -3,7 +3,6 @@ import {Routes, RouterModule}  from '@angular/router';
 import {RecordComponent} from './record/record.component';
 import {ListComponent} from './list/list.component';
 import {UserComponent} from './user/user.component';
-import {CustomerComponent} from  './customer/customer.component';
 import {ErrorComponent} from './error/error.component';
 
 const appRoutes: Routes = [
@@ -12,7 +11,7 @@ const appRoutes: Routes = [
     {path: 'contract', loadChildren: './contract/contract.module#ContractModule'},
     {path: 'list', component: ListComponent},
     {path: 'user', component: UserComponent},
-    {path: 'customer', component: CustomerComponent},
+    {path: 'customer', loadChildren: './customer/customer.module#CustomerModule'},
     {path: 'record', component: RecordComponent},
     {path: 'element', loadChildren: './element/element.module#ElementModule'},
     {path: 'producttype', loadChildren: './producttype/producttype.module#ProducttypeModule'},

@@ -28,7 +28,6 @@ import {ListService} from './list/list.service';
 import {UserComponent} from './user/user.component';
 import {userService}    from  './user/user.service';
 import {cmdEl, productService} from  './contract/product.service';
-import {CustomerComponent} from './customer/customer.component';
 import {ReportComponent} from './report/report.component';
 import {environment} from '../environments/environment';
 
@@ -46,7 +45,6 @@ export function createTranslateLoader(http: Http) {
         RecordComponent,
         ListComponent,
         UserComponent,
-        CustomerComponent,
         ReportComponent,
         ConfirmComponent,
         AlertComponent,
