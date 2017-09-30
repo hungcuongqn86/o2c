@@ -56,4 +56,72 @@ class CustomersService extends CommonService implements ICustomerService
         $rResult = $query->paginate($limit)->toArray();
         return $rResult;
     }
+
+    public function getSingle($input)
+    {
+        $id = $input['id'];
+        $query = Customers::where('id', '=', $id);
+        $return = $query->first()->toArray();
+        if (isset($return['birthday']) && ($return['birthday'] != '')) {
+            $return['birthday'] = _YYyymmddToddmmyyyy($return['birthday']);
+        }
+        return $return;
+    }
+
+    public function saveRecord($input)
+    {
+        if (isset($input['birthday']) && ($input['birthday'] != '')) {
+            $input['birthday'] = _ddmmyyyyToYYyymmdd($input['birthday']);
+        } else {
+            unset($input['birthday']);
+        }
+
+        if (isset($input['id']) && $input['id'] > 0) {
+            $id = $input['id'];
+            DB::beginTransaction();
+            try {
+                $record = Customers::find($id);
+                $record->update($input);
+                DB::commit();
+                return $record;
+            } catch (QueryException $e) {
+                DB::rollBack();
+                throw $e;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        } else {
+            $record = new Customers($input);
+            DB::beginTransaction();
+            try {
+                $record->save();
+                DB::commit();
+                return $record;
+            } catch (QueryException $e) {
+                DB::rollBack();
+                throw $e;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }
+    }
+
+    public function delete($ids)
+    {
+        DB::beginTransaction();
+        $arrId = explode(',', $ids);
+        try {
+            Customers::destroy($arrId);
+            DB::commit();
+            return array($ids);
+        } catch (QueryException $e) {
+            DB::rollBack();
+            throw $e;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+    }
 }

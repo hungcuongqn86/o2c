@@ -3,6 +3,9 @@ import {NgModel} from '@angular/forms'
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 import {CustomerService} from  './customer.service';
+import {ConfirmComponent} from '../confirm.component';
+import {AlertComponent} from '../alert.component';
+import {DialogService} from "ng2-bootstrap-modal";
 import {Observable} from 'rxjs/Rx';
 
 declare let $: any;
@@ -38,8 +41,9 @@ export class CustomerAddComponent implements OnInit, AfterViewInit {
         group: '',
         source: ''
     };
+    res: any;
 
-    constructor(private translate: TranslateService, private CustomerService: CustomerService, private router: Router, private route: ActivatedRoute) {
+    constructor(private translate: TranslateService, private CustomerService: CustomerService, private router: Router, private route: ActivatedRoute, private dialogService: DialogService) {
         this.route.params.forEach((params: Params) => {
             if (params['id'] && params['id'].length) {
                 this.recordId = params['id'];
@@ -47,6 +51,7 @@ export class CustomerAddComponent implements OnInit, AfterViewInit {
         });
         if (this.recordId) {
             this.titleAction = 'COMMON.EDIT_LABLE';
+            this.getDetail(this.recordId.toString());
         }
     }
 
@@ -55,10 +60,65 @@ export class CustomerAddComponent implements OnInit, AfterViewInit {
     }
 
     private getDetail(id: string) {
-
+        this.CustomerService.getSingle(id).subscribe(
+            data => {
+                this.detail = data;
+            },
+            error => {
+                console.error("Not detail!");
+                return Observable.throw(error);
+            }
+        );
     }
 
-    private goBack() {
+    saveRecord() {
+        this.CustomerService.saveRecord(this.detail).subscribe(
+            res => {
+                this.res = res;
+                if (res.error == false) {
+                    this.router.navigate(['/customer']);
+                } else if (res.error == true) {
+                    console.error(res.message[0]);
+                }
+            },
+            error => {
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    showConfirm() {
+        let disposable = this.dialogService.addDialog(ConfirmComponent, {
+            title: 'Xác nhận xóa dữ liệu',
+            message: 'Bạn chắc chắn muốn xóa khách hàng này!'
+        })
+            .subscribe((isConfirmed) => {
+                if (isConfirmed) {
+                    this.deleteRecord();
+                }
+            });
+        setTimeout(() => {
+            disposable.unsubscribe();
+        }, 10000);
+    }
+
+    private deleteRecord() {
+        this.CustomerService.deleteRecord(this.recordId.toString()).subscribe(
+            res => {
+                this.res = res;
+                if (res.error == false) {
+                    this.goBack();
+                } else if (res.error == true) {
+                    console.error(res.message[0]);
+                }
+            },
+            error => {
+                return Observable.throw(error);
+            }
+        );
+    }
+
+    goBack() {
         this.router.navigate(['/customer']);
     }
 

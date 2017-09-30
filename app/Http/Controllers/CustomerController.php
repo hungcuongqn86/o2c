@@ -34,7 +34,7 @@ class CustomerController extends Controller
     public function getSingle(Request $req){
         $input = $req->all();
         try {
-            return response()->success(AppServiceFactory::mContractService()->getSingle($input));
+            return response()->success(AppServiceFactory::mCustomerService()->getSingle($input));
         } catch (\PDOException $e) {
             //throw $e;
             return response()->error(trans('messages.MSG_PDO_Error'), 400);
@@ -47,7 +47,7 @@ class CustomerController extends Controller
     public function saveRecord(Request $request) {
         $input = $request->all();
         try {
-            return response()->success(AppServiceFactory::mContractService()->saveRecord($input));
+            return response()->success(AppServiceFactory::mCustomerService()->saveRecord($input));
         } catch (\PDOException $e) {
             DB::rollBack();
             throw $e;
@@ -61,7 +61,7 @@ class CustomerController extends Controller
 
     public function delete($ids) {
         try {
-            return response()->success(AppServiceFactory::mContractService()->delete($ids));
+            return response()->success(AppServiceFactory::mCustomerService()->delete($ids));
         } catch (\PDOException $e) {
             throw $e;
             return response()->error(trans('messages.MSG_PDO_Error'), 400);
