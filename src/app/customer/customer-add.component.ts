@@ -38,6 +38,7 @@ export class CustomerAddComponent implements OnInit, AfterViewInit {
         company_name: '',
         company_email: '',
         company_website: '',
+        company_address: '',
         group: '',
         source: ''
     };

@@ -55,8 +55,8 @@
                                                         #type="ngModel"
                                                         name="type" title="Loại cá nhân, tổ chức" required>
                                                     <option value=""></option>
-                                                    <option value="cn">Cá nhân</option>
                                                     <option value="tc">Tổ chức</option>
+                                                    <option value="cn">Cá nhân</option>
                                                 </select>
                                                 <div [hidden]="type.valid || type.untouched">
                                                     <span *ngIf="type.errors && type.errors.required"
@@ -64,6 +64,132 @@
                                                         Phải chọn loại cá nhân hay tổ chức!
                                                     </span>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="title-break">Thông tin doanh nghiệp</label>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="company_code" class="col-sm-3 control-label text-red">Mã
+                                                số</label>
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(company_code.touched && !company_code.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.company_code" type="text"
+                                                       class="form-control"
+                                                       #company_code="ngModel"
+                                                       id="company_code" name="company_code"
+                                                       placeholder="Mã số doanh nghiệp" required>
+                                                <div [hidden]="company_code.valid || company_code.untouched">
+                                                    <span *ngIf="company_code.errors && company_code.errors.required"
+                                                          class="help-block">
+                                                        Phải nhập mã số doanh nghiệp!
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="company_phone_number" class="col-sm-3 control-label text-red">Số
+                                                điện thoại</label>
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(company_phone_number.touched && !company_phone_number.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.company_phone_number" type="text"
+                                                       class="form-control"
+                                                       #company_phone_number="ngModel"
+                                                       id="company_phone_number" name="company_phone_number"
+                                                       placeholder="Số điện thoại doanh nghiệp" required>
+                                                <div [hidden]="company_phone_number.valid || company_phone_number.untouched">
+                                                    <span *ngIf="company_phone_number.errors && company_phone_number.errors.required"
+                                                          class="help-block">
+                                                        Phải nhập số điện thoại doanh nghiệp!
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="company_name"
+                                                   class="col-sm-3 control-label text-red">Tên</label>
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(company_name.touched && !company_name.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.company_name" type="text"
+                                                       class="form-control"
+                                                       #company_name="ngModel"
+                                                       id="company_name" name="company_name"
+                                                       placeholder="Tên doanh nghiệp" required>
+                                                <div [hidden]="company_name.valid || company_name.untouched">
+                                                    <span *ngIf="company_name.errors && company_name.errors.required"
+                                                          class="help-block">
+                                                        Phải nhập tên doanh nghiệp!
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="company_email"
+                                                   class="col-sm-3 control-label text-red">Email</label>
+                                            <div class="col-sm-9"
+                                                 [ngClass]="(company_email.touched && !company_email.valid)? 'has-error': ''">
+                                                <input [(ngModel)]="detail.company_email" type="text"
+                                                       class="form-control"
+                                                       #company_email="ngModel"
+                                                       id="company_email" name="company_email"
+                                                       placeholder="Email doanh nghiệp" required>
+                                                <div [hidden]="company_email.valid || company_email.untouched">
+                                                    <span *ngIf="company_email.errors && company_email.errors.required"
+                                                          class="help-block">
+                                                        Phải nhập email doanh nghiệp!
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="company_type" class="col-sm-3 control-label">Loại hình</label>
+                                            <div class="col-sm-9">
+                                                <select [(ngModel)]="detail.company_type" class="form-control"
+                                                        id="company_type"
+                                                        name="company_type" title="Loại hình">
+                                                    <option value=""></option>
+                                                    <option value="tnhh">TNHH</option>
+                                                    <option value="cp">Công ty cổ phần</option>
+                                                    <option value="dnnn">Doanh nghiệp nhà nước</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="company_fields" class="col-sm-3 control-label">Lĩnh vực</label>
+                                            <div class="col-sm-9">
+                                                <select [(ngModel)]="detail.company_fields" class="form-control"
+                                                        id="company_fields"
+                                                        name="company_fields" title="Lĩnh vực">
+                                                    <option value=""></option>
+                                                    <option value="xuatban">Xuất bản</option>
+                                                    <option value="cntt">Công nghệ thông tin</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="company_website"
+                                                   class="col-sm-3 control-label">Website</label>
+                                            <div class="col-sm-9">
+                                                <input [(ngModel)]="detail.company_website" type="text"
+                                                       class="form-control"
+                                                       id="company_website" name="company_website"
+                                                       placeholder="Website doanh nghiệp">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="company_address"
+                                                   class="col-sm-3 control-label">Địa chỉ</label>
+                                            <div class="col-sm-9">
+                                                <input [(ngModel)]="detail.company_address" type="text"
+                                                       class="form-control"
+                                                       id="company_address" name="company_address"
+                                                       placeholder="Địa chỉ doanh nghiệp">
                                             </div>
                                         </div>
                                     </div>
@@ -190,122 +316,6 @@
                                                           rows="3" placeholder="Ghi chú"
                                                           maxlength="400"
                                                           #note="ngModel"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label class="title-break">Thông tin doanh nghiệp</label>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="company_type" class="col-sm-3 control-label">Loại hình</label>
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.company_type" class="form-control"
-                                                        id="company_type"
-                                                        name="company_type" title="Loại hình">
-                                                    <option value=""></option>
-                                                    <option value="tnhh">TNHH</option>
-                                                    <option value="cp">Công ty cổ phần</option>
-                                                    <option value="dnnn">Doanh nghiệp nhà nước</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="company_fields" class="col-sm-3 control-label">Lĩnh vực</label>
-                                            <div class="col-sm-9">
-                                                <select [(ngModel)]="detail.company_fields" class="form-control"
-                                                        id="company_fields"
-                                                        name="company_fields" title="Lĩnh vực">
-                                                    <option value=""></option>
-                                                    <option value="xuatban">Xuất bản</option>
-                                                    <option value="cntt">Công nghệ thông tin</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="company_code" class="col-sm-3 control-label text-red">Mã
-                                                số</label>
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(company_code.touched && !company_code.valid)? 'has-error': ''">
-                                                <input [(ngModel)]="detail.company_code" type="text"
-                                                       class="form-control"
-                                                       #company_code="ngModel"
-                                                       id="company_code" name="company_code"
-                                                       placeholder="Mã số doanh nghiệp" required>
-                                                <div [hidden]="company_code.valid || company_code.untouched">
-                                                    <span *ngIf="company_code.errors && company_code.errors.required"
-                                                          class="help-block">
-                                                        Phải nhập mã số doanh nghiệp!
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="company_phone_number" class="col-sm-3 control-label text-red">Số
-                                                điện thoại</label>
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(company_phone_number.touched && !company_phone_number.valid)? 'has-error': ''">
-                                                <input [(ngModel)]="detail.company_phone_number" type="text"
-                                                       class="form-control"
-                                                       #company_phone_number="ngModel"
-                                                       id="company_phone_number" name="company_phone_number"
-                                                       placeholder="Số điện thoại doanh nghiệp" required>
-                                                <div [hidden]="company_phone_number.valid || company_phone_number.untouched">
-                                                    <span *ngIf="company_phone_number.errors && company_phone_number.errors.required"
-                                                          class="help-block">
-                                                        Phải nhập số điện thoại doanh nghiệp!
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="company_name"
-                                                   class="col-sm-3 control-label text-red">Tên</label>
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(company_name.touched && !company_name.valid)? 'has-error': ''">
-                                                <input [(ngModel)]="detail.company_name" type="text"
-                                                       class="form-control"
-                                                       #company_name="ngModel"
-                                                       id="company_name" name="company_name"
-                                                       placeholder="Tên doanh nghiệp" required>
-                                                <div [hidden]="company_name.valid || company_name.untouched">
-                                                    <span *ngIf="company_name.errors && company_name.errors.required"
-                                                          class="help-block">
-                                                        Phải nhập tên doanh nghiệp!
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="company_email"
-                                                   class="col-sm-3 control-label text-red">Email</label>
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(company_email.touched && !company_email.valid)? 'has-error': ''">
-                                                <input [(ngModel)]="detail.company_email" type="text"
-                                                       class="form-control"
-                                                       #company_email="ngModel"
-                                                       id="company_email" name="company_email"
-                                                       placeholder="Email doanh nghiệp" required>
-                                                <div [hidden]="company_email.valid || company_email.untouched">
-                                                    <span *ngIf="company_email.errors && company_email.errors.required"
-                                                          class="help-block">
-                                                        Phải nhập email doanh nghiệp!
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="company_website"
-                                                   class="col-sm-3 control-label">Website</label>
-                                            <div class="col-sm-9">
-                                                <input [(ngModel)]="detail.company_website" type="text"
-                                                       class="form-control"
-                                                       id="company_website" name="company_website"
-                                                       placeholder="Website doanh nghiệp">
                                             </div>
                                         </div>
                                     </div>

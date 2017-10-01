@@ -11,22 +11,22 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-        $faker = Faker\Factory::create();
+        App\Entities\Users::create([
+            'name' => 'Nguyễn Hùng Cường',
+            'email' => 'hungcuongqn86@gmail.com',
+            'password' => '$2y$10$IpvybCDn8hlkQUzZ/4KUHOZ49MMqXaYh.LuP6z8f7rp1ChLI3jlbK',
+            'role' => 'ADMIN',
+            'department_code' => '1',
+            'enabled' => 1
+        ]);
 
-        for($i = 0; $i < 100; $i++) {
-            $email = 'hungcuongqn86@gmail.com';
-            if($i){
-                $email = $faker->unique()->email;
-            }
-            App\Entities\Users::create([
-                'name' => $faker->text(15),
-                'email' => $email,
-                'password'  => '$2y$10$IpvybCDn8hlkQUzZ/4KUHOZ49MMqXaYh.LuP6z8f7rp1ChLI3jlbK',
-                'role' => 'ADMIN',
-                'department_code' => '1',
-                'enabled' => rand(0,1)
-            ]);
-        }
+        App\Entities\Users::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => '$2y$10$o7FxTZ6DG0QHjZHlRpIhjer/tSM.kZVEGBjTH5V7qQHfpQCb2jGSi',
+            'role' => 'ADMIN',
+            'department_code' => 'PKHTH',
+            'enabled' => 1
+        ]);
     }
 }

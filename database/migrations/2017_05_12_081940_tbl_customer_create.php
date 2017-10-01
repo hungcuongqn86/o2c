@@ -22,7 +22,6 @@ class TblCustomerCreate extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('code', 20)->nullable();
             $table->string('type', 20)->nullable();
-            $table->string('title', 20)->nullable();
             $table->string('name', 300)->nullable();
             $table->string('gender', 10)->nullable();
             $table->timestamp('birthday')->nullable();
@@ -38,6 +37,7 @@ class TblCustomerCreate extends Migration
             $table->string('company_name', 300)->nullable();
             $table->string('company_email', 100)->nullable();
             $table->string('company_website', 100)->nullable();
+            $table->string('company_address', 300)->nullable();
             $table->string('group', 20)->nullable();
             $table->string('source', 20)->nullable();
             $table->timestamps();

@@ -11,24 +11,10 @@ class ProducttypesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-        $faker = Faker\Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            $code = 'SACH';
-            $name = 'Sách';
-            if ($i) {
-                $code = $faker->text(20);
-                $name = $faker->text(200);
-            }
-            App\Entities\Producttypes::create([
-                'code' => $code,
-                'name' => $name,
-                'size_config' => 'dai,rong,cao',
-                'element_config' => 'bia,ruot',
-                'image' => '',
-                'enabled' => rand(0, 1),
-            ]);
-        }
+        $sql = "INSERT INTO `tbl_producttypes` (`id`, `code`, `name`, `size_config`, `element_config`, `image`, `enabled`, `created_at`, `updated_at`) VALUES
+(1, 'SACH', 'Sách', 'dai,rong', 'bia,ruot,gay,phu_ban,to_gac', 'product/20170615131719-hinh-nen-quyen-sach-15.jpg', 1, NULL, NULL),
+(2, 'TO_ROI', 'Tờ rơi', 'dai,rong,cao', 'bia,ruot', 'product/20170615131824-tảixuống.jpg', 1, NULL, NULL);";
+        // echo $sql;exit;
+        DB::unprepared($sql);
     }
 }
