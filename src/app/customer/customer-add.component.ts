@@ -22,7 +22,7 @@ export class CustomerAddComponent implements OnInit, AfterViewInit {
     detail: any = {
         id: 0,
         code: '',
-        type: '',
+        type: 'tc',
         name: '',
         gender: '',
         birthday: '',

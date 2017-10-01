@@ -45,7 +45,6 @@
                                                         id="type"
                                                         #type="ngModel"
                                                         name="type" title="Loại cá nhân, tổ chức" required>
-                                                    <option value=""></option>
                                                     <option value="tc">Tổ chức</option>
                                                     <option value="cn">Cá nhân</option>
                                                 </select>
@@ -61,7 +60,8 @@
                                     <label class="title-break">Thông tin doanh nghiệp</label>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="company_code" class="col-sm-3 control-label text-red">Mã
+                                            <label for="company_code" class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='tc')? 'text-red': ''">Mã
                                                 số</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(company_code.touched && !company_code.valid)? 'has-error': ''">
@@ -69,7 +69,8 @@
                                                        class="form-control"
                                                        #company_code="ngModel"
                                                        id="company_code" name="company_code"
-                                                       placeholder="Mã số doanh nghiệp" required>
+                                                       placeholder="Mã số doanh nghiệp"
+                                                       [required]="detail.type==='tc'">
                                                 <div [hidden]="company_code.valid || company_code.untouched">
                                                     <span *ngIf="company_code.errors && company_code.errors.required"
                                                           class="help-block">
@@ -79,7 +80,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="company_phone_number" class="col-sm-3 control-label text-red">Số
+                                            <label for="company_phone_number" class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='tc')? 'text-red': ''">Số
                                                 điện thoại</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(company_phone_number.touched && !company_phone_number.valid)? 'has-error': ''">
@@ -87,7 +89,8 @@
                                                        class="form-control"
                                                        #company_phone_number="ngModel"
                                                        id="company_phone_number" name="company_phone_number"
-                                                       placeholder="Số điện thoại doanh nghiệp" required>
+                                                       placeholder="Số điện thoại doanh nghiệp"
+                                                       [required]="detail.type==='tc'">
                                                 <div [hidden]="company_phone_number.valid || company_phone_number.untouched">
                                                     <span *ngIf="company_phone_number.errors && company_phone_number.errors.required"
                                                           class="help-block">
@@ -100,14 +103,16 @@
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label for="company_name"
-                                                   class="col-sm-3 control-label text-red">Tên</label>
+                                                   class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='tc')? 'text-red': ''">Tên</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(company_name.touched && !company_name.valid)? 'has-error': ''">
                                                 <input [(ngModel)]="detail.company_name" type="text"
                                                        class="form-control"
                                                        #company_name="ngModel"
                                                        id="company_name" name="company_name"
-                                                       placeholder="Tên doanh nghiệp" required>
+                                                       placeholder="Tên doanh nghiệp"
+                                                       [required]="detail.type==='tc'">
                                                 <div [hidden]="company_name.valid || company_name.untouched">
                                                     <span *ngIf="company_name.errors && company_name.errors.required"
                                                           class="help-block">
@@ -118,14 +123,16 @@
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="company_email"
-                                                   class="col-sm-3 control-label text-red">Email</label>
+                                                   class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='tc')? 'text-red': ''">Email</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(company_email.touched && !company_email.valid)? 'has-error': ''">
                                                 <input [(ngModel)]="detail.company_email" type="text"
                                                        class="form-control"
                                                        #company_email="ngModel"
                                                        id="company_email" name="company_email"
-                                                       placeholder="Email doanh nghiệp" required>
+                                                       placeholder="Email doanh nghiệp"
+                                                       [required]="detail.type==='tc'">
                                                 <div [hidden]="company_email.valid || company_email.untouched">
                                                     <span *ngIf="company_email.errors && company_email.errors.required"
                                                           class="help-block">
@@ -187,13 +194,15 @@
                                     <label class="title-break">Thông tin liên hệ</label>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="name" class="col-sm-3 control-label text-red">Họ và tên</label>
+                                            <label for="name" class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='cn')? 'text-red': ''">Họ và tên</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(name.touched && !name.valid)? 'has-error': ''">
                                                 <input [(ngModel)]="detail.name" type="text" class="form-control"
                                                        #name="ngModel"
                                                        id="name" name="name"
-                                                       placeholder="Họ và tên khách hàng" required>
+                                                       placeholder="Họ và tên khách hàng"
+                                                       [required]="detail.type==='cn'">
                                                 <div [hidden]="name.valid || name.untouched">
                                                     <span *ngIf="name.errors && name.errors.required"
                                                           class="help-block">
@@ -203,14 +212,16 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="gender" class="col-sm-3 control-label text-red">Giới
+                                            <label for="gender" class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='cn')? 'text-red': ''">Giới
                                                 tính</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(gender.touched && !gender.valid)? 'has-error': ''">
                                                 <select [(ngModel)]="detail.gender" class="form-control"
                                                         id="gender"
                                                         #gender="ngModel"
-                                                        name="gender" title="Giới tính" required>
+                                                        name="gender" title="Giới tính"
+                                                        [required]="detail.type==='cn'">
                                                     <option value=""></option>
                                                     <option value="nam">Nam</option>
                                                     <option value="nu">Nữ</option>
@@ -235,13 +246,15 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">
-                                            <label for="address" class="col-sm-3 control-label text-red">Địa chỉ</label>
+                                            <label for="address" class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='cn')? 'text-red': ''">Địa chỉ</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(address.touched && !address.valid)? 'has-error': ''">
                                                 <input [(ngModel)]="detail.address" type="text" class="form-control"
                                                        #address="ngModel"
                                                        id="address" name="address"
-                                                       placeholder="Địa chỉ khách hàng" required>
+                                                       placeholder="Địa chỉ khách hàng"
+                                                       [required]="detail.type==='cn'">
                                                 <div [hidden]="address.valid || address.untouched">
                                                     <span *ngIf="address.errors && address.errors.required"
                                                           class="help-block">
@@ -253,7 +266,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="phone_number1" class="col-sm-3 control-label text-red">Số điện
+                                            <label for="phone_number1" class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='cn')? 'text-red': ''">Số điện
                                                 thoại 1</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(phone_number1.touched && !phone_number1.valid)? 'has-error': ''">
@@ -261,7 +275,8 @@
                                                        class="form-control"
                                                        #phone_number1="ngModel"
                                                        id="phone_number1" name="phone_number1"
-                                                       placeholder="Số điện thoại 1" required>
+                                                       placeholder="Số điện thoại 1"
+                                                       [required]="detail.type==='cn'">
                                                 <div [hidden]="phone_number1.valid || phone_number1.untouched">
                                                     <span *ngIf="phone_number1.errors && phone_number1.errors.required"
                                                           class="help-block">
@@ -283,14 +298,15 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="email" class="col-sm-3 control-label text-red">Email</label>
+                                            <label for="email" class="col-sm-3 control-label"
+                                                   [ngClass]="(detail.type==='cn')? 'text-red': ''">Email</label>
                                             <div class="col-sm-9"
                                                  [ngClass]="(email.touched && !email.valid)? 'has-error': ''">
                                                 <input [(ngModel)]="detail.email" type="text"
                                                        class="form-control"
                                                        #email="ngModel"
                                                        id="email" name="email"
-                                                       placeholder="email" required>
+                                                       placeholder="email" [required]="detail.type==='cn'">
                                                 <div [hidden]="email.valid || email.untouched">
                                                     <span *ngIf="email.errors && email.errors.required"
                                                           class="help-block">
