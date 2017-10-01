@@ -4,3 +4,23 @@
     margin-bottom: 0;
     margin-top: 5px;
 }
+
+.data-sw {
+    margin: 5px;
+    white-space:nowrap;
+}
+
+.company-name {
+    color: #0d6aad;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;
+    white-space:nowrap;
+}
+
+.name {
+    color: #00a7d0;
+    padding: 5px;
+    border-radius: 3px;
+    white-space:nowrap;
+}

@@ -59,3 +59,18 @@
 .break-data {
     margin: 0;
 }
+
+.company-name {
+    color: #0d6aad;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 3px;
+    white-space:nowrap;
+}
+
+.name {
+    color: #00a7d0;
+    padding: 5px;
+    border-radius: 3px;
+    white-space:nowrap;
+}

@@ -223,7 +223,7 @@ export class ContractAddComponent implements OnInit, AfterViewInit {
     getCustomersData() {
         this.contractService.getCustomersData().subscribe(
             data => {
-                this.customer = data;
+                this.customer = data.data;
             },
             error => {
                 console.error("Not customer!");

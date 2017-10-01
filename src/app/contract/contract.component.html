@@ -118,7 +118,11 @@
                                                    (change)="checkedItems(item.id)"></td>
                                         <td class="mailbox-name">{{item.code}}</td>
                                         <td class="mailbox-date">{{item.signdate}}</td>
-                                        <td class="mailbox-name">{{item.customers.name}}</td>
+                                        <td class="mailbox-name">
+                                            <span *ngIf="item.customers.company_name&&item.customers.company_name!==''"
+                                                  class="company-name">{{item.customers.company_name}}</span>
+                                            <span *ngIf="item.customers.name&&item.customers.name!==''" class="name">{{item.customers.name}}</span>
+                                        </td>
                                         <td class="mailbox-subject">{{item.content}}</td>
                                         <td class="mailbox-attachment"><i *ngIf="item.image"
                                                                           class="fa fa-paperclip"></i>

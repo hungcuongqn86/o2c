@@ -79,14 +79,31 @@
                                                    [checked]="checklist!='' && checklist.includes(item.id)"
                                                    (change)="checkedItems(item.id)"></td>
                                         <td class="mailbox-name">{{item.code}}</td>
-                                        <td class="mailbox-name" style="color: #00a7d0;font-weight: bold;">
-                                            {{item.company_name}} - {{item.name}}
+                                        <td class="mailbox-name">
+                                            <span *ngIf="item.company_name&&item.company_name!==''"
+                                                  class="company-name">{{item.company_name}}</span>
+                                            <span *ngIf="item.name&&item.name!==''" class="name">{{item.name}}</span>
                                         </td>
-                                        <td class="mailbox-name">{{item.phone_number1}} <span
-                                                *ngIf="item.phone_number2&&item.phone_number2!=''">- {{item.phone_number2}}</span>
+                                        <td class="mailbox-name">
+                                            <span *ngIf="item.phone_number1&&item.phone_number1!==''"
+                                                  class="data-sw">{{item.phone_number1}}</span>
+                                            <span *ngIf="item.phone_number2&&item.phone_number2!==''"
+                                                  class="data-sw">{{item.phone_number2}}</span>
+                                            <span *ngIf="item.company_phone_number&&item.company_phone_number!==''"
+                                                  class="data-sw">{{item.company_phone_number}}</span>
                                         </td>
-                                        <td class="mailbox-name">{{item.email}}</td>
-                                        <td class="mailbox-subject">{{item.address}}</td>
+                                        <td class="mailbox-name">
+                                            <span *ngIf="item.company_email&&item.company_email!==''"
+                                                  class="data-sw">{{item.company_email}}</span>
+                                            <span *ngIf="item.email&&item.email!==''"
+                                                  class="data-sw">{{item.email}}</span>
+                                        </td>
+                                        <td class="mailbox-subject">
+                                            <span *ngIf="item.address&&item.address!==''"
+                                                  class="data-sw">{{item.address}}</span>
+                                            <span *ngIf="item.company_address&&item.company_address!==''"
+                                                  class="data-sw">{{item.company_address}}</span>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

@@ -42,7 +42,7 @@
                                                         name="customer_id" title="Khách hàng" required>
                                                     <option value=""></option>
                                                     <option *ngFor='let item of customer' value="{{item.id}}">
-                                                        {{item.name}}
+                                                        {{item.type&&item.type==='tc'?item.company_name:item.name}}
                                                     </option>
                                                 </select>
                                                 <div [hidden]="customer_id.valid || customer_id.untouched">
