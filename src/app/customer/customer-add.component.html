@@ -30,20 +30,11 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="form-group col-sm-6">
-                                            <label for="code" class="col-sm-3 control-label text-red">Mã khách
+                                            <label for="code" class="col-sm-3 control-label">Mã khách
                                                 hàng</label>
-                                            <div class="col-sm-9"
-                                                 [ngClass]="(code.touched && !code.valid)? 'has-error': ''">
+                                            <div class="col-sm-9">
                                                 <input [(ngModel)]="detail.code" type="text" class="form-control"
-                                                       #code="ngModel"
-                                                       id="code" name="code"
-                                                       placeholder="Mã khách hàng" required>
-                                                <div [hidden]="code.valid || code.untouched">
-                                                    <span *ngIf="code.errors && code.errors.required"
-                                                          class="help-block">
-                                                        Phải nhập mã khách hàng!
-                                                    </span>
-                                                </div>
+                                                       id="code" name="code" disabled>
                                             </div>
                                         </div>
                                         <div class="form-group col-sm-6">

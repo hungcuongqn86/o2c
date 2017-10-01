@@ -92,6 +92,14 @@ class CustomersService extends CommonService implements ICustomerService
                 throw $e;
             }
         } else {
+            $type = $input['type'];
+            $maxrow = Customers::where('type', '=', $type)->max('id');
+            if (!$maxrow) {
+                $maxrow = 0;
+            }
+            $maxrow++;
+            $codenumber = sprintf("%05s", $maxrow);
+            $input['code'] = strtoupper($type) . $codenumber;
             $record = new Customers($input);
             DB::beginTransaction();
             try {
